@@ -51,11 +51,8 @@ class Header extends Component {
         this.rotateCircle = this.rotateCircle.bind(this)
 
         this.state.rotateY.addListener((rotateY) => {
-            //console.log(rotateY)
         })
         this.state.scrollY.addListener((scrollY) => {
-            console.log(this.state.startAnimation)
-            console.log(scrollY)
             if (this.state.startAnimation === false) {
                 let strokeDashoffset = scrollY.value * -6.5
                 strokeDashoffset = Math.min(strokeDashoffset, 377)
@@ -229,8 +226,6 @@ class Header extends Component {
         }
     }
     render() {
-        //console.log('state loading', this.state.loading)
-        //console.log(this.state.scrollY)
         this.opacity = this.state.scrollY.interpolate({
             inputRange: [-60, 0],
             outputRange: [0, 1]

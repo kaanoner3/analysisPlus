@@ -20,10 +20,8 @@ class CustomRefreshControll extends Component {
       this.state.scrollY.removeAllListeners()
    }
    componentWillReceiveProps(nextProps) {
-      //console.log(nextProps)
       if (this.props.isRefreshing !== nextProps.isRefreshing) {
          if (!nextProps.isRefreshing) {
-           // this.refs.PTR_ScrollComponent.scrollToOffset({ x: 0, y: 0, animated: true })
             this.setState({ isScrollFree: true })
          }
       }
@@ -38,19 +36,15 @@ class CustomRefreshControll extends Component {
       }
    }
    onScrollRelease() {
-      console.log('onScroolRelease')
       if (!this.props.isRefreshing && this.state.shouldTriggerRefresh) {
-         //this.refs.PTR_ScrollComponent.scrollToOffset({ y: -this.props.minPullDistance })
          this.setState({ isScrollFree: false })
          this.props.onRefresh()
       }
    }
    render() {
-      //console.log('refs', this.refs.PTR_ScrollComponent.props.ListHeaderComponent)
       const onScroll = this.props.onScroll
       let onScrollEvent = (event) => {
          if (onScroll) {
-            //console.log(event.nativeEvent.contentOffset.y)
             onScroll(event)
          }
          this.state.scrollY.setValue(event.nativeEvent.contentOffset.y)
@@ -69,7 +63,7 @@ class CustomRefreshControll extends Component {
                   {React.cloneElement(this.props.contentComponent, {
                      scrollEnabled: this.state.isScrollFree,
                      onScroll: onScrollEvent,
-                     scrollEventThrottle: 16,
+                     scrollEventThrottle: 1,
                      onResponderRelease: this.onScrollRelease.bind(this),
                      ref: 'PTR_ScrollComponent'
                   })}

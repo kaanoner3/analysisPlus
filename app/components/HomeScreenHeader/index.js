@@ -9,9 +9,10 @@ import {
     Image,
     Dimensions,
     ImageBackground,
-    Animated
+    Animated,
+    TouchableOpacity
 } from 'react-native';
-import {images} from 'resources'
+import { images } from 'resources'
 import * as Progress from 'react-native-progress';
 import Svg, {
     Circle,
@@ -53,11 +54,8 @@ class HomeScreenHeader extends Component {
         this.rotateCircle = this.rotateCircle.bind(this)
 
         this.state.rotateY.addListener((rotateY) => {
-            //console.log(rotateY)
         })
         this.state.scrollY.addListener((scrollY) => {
-            console.log(this.state.startAnimation)
-            console.log(scrollY)
             if (this.state.startAnimation === false) {
                 let strokeDashoffset = scrollY.value * -6.5
                 strokeDashoffset = Math.min(strokeDashoffset, 377)
@@ -153,7 +151,7 @@ class HomeScreenHeader extends Component {
             )
         } else {
             return (
-                <Animated.View style={[{ position: 'absolute', top: 0, left: 0, zIndex: 9, },{opacity: this.opacity}]} >
+                <Animated.View style={[{ position: 'absolute', top: 0, left: 0, zIndex: 9, }, { opacity: this.opacity }]} >
                     <Svg width="124" height="124">
                         <Defs>
                             <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="a">
@@ -191,7 +189,7 @@ class HomeScreenHeader extends Component {
     renderAnimatedPart() {
         if (this.state.startAnimation === false) {
             return (
-                <Animated.View style={{ transform: [{ rotateY: this.rotate }], flexDirection: 'row', marginTop: 74, alignItems: 'center' }}>
+                <Animated.View style={{ transform: [{ rotateY: this.rotate }], flexDirection: 'row', marginTop: 66, alignItems: 'center' }}>
                     <Animated.View style={{ transform: [{ rotateY: this.rotateText }], flexDirection: 'column', paddingRight: 20 }} >
                         <Text style={styles.textStyle}>383</Text>
                         <Text style={styles.textStyle1}>FOLLOWING</Text>
@@ -208,7 +206,7 @@ class HomeScreenHeader extends Component {
             )
         } else {
             return (
-                <Animated.View style={{ flexDirection: 'row', marginTop: 74, alignItems: 'center' }}>
+                <Animated.View style={{ flexDirection: 'row', marginTop: 66, alignItems: 'center' }}>
                     <View style={{ width: 124, height: 124, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{}}>
                             <Progress.Circle
@@ -231,11 +229,13 @@ class HomeScreenHeader extends Component {
         }
     }
     render() {
-        //console.log('state loading', this.state.loading)
-        //console.log(this.state.scrollY)
         this.opacity = this.state.scrollY.interpolate({
             inputRange: [-60, 0],
             outputRange: [0, 1]
+        })
+        const main_opacity = this.state.scrollY.interpolate({
+            inputRange: [0, 80],
+            outputRange: [1, 0.5]
         })
         this.rotate = this.state.rotateY.interpolate({
             inputRange: [0, 1],
@@ -250,7 +250,7 @@ class HomeScreenHeader extends Component {
             outputRange: ['360deg', '360deg', '0deg', '0deg', '0deg']
         })
         return (
-            <View style={{ paddingBottom: 60 }} >
+            <Animated.View style={[{ paddingBottom: 20, opacity: main_opacity }]} >
                 <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                     {this.renderAnimatedPart()}
                     <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 10 }}>
@@ -258,7 +258,7 @@ class HomeScreenHeader extends Component {
                         <Text style={[styles.textStyle1, { marginTop: 4 }]}>@barbaraporter</Text>
                     </View>
                 </View>
-            </View>
+            </Animated.View>
         )
     }
 }
