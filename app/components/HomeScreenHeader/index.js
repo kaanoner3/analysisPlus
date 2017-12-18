@@ -31,7 +31,12 @@ import Svg, {
     Stop
 } from 'react-native-svg';
 
-const width = Dimensions.get('window').width
+const { width, height } = Dimensions.get("window");
+
+let statusbarHeight = 20;
+if (!Platform.isPad && !Platform.isTVOS && height == 812) {
+  statusbarHeight = 44;
+}
 let AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 class HomeScreenHeader extends Component {
@@ -189,7 +194,7 @@ class HomeScreenHeader extends Component {
     renderAnimatedPart() {
         if (this.state.startAnimation === false) {
             return (
-                <Animated.View style={{ transform: [{ rotateY: this.rotate }], flexDirection: 'row', marginTop: 66, alignItems: 'center' }}>
+                <Animated.View style={{ transform: [{ rotateY: this.rotate }], flexDirection: 'row', marginTop: 46, alignItems: 'center' }}>
                     <Animated.View style={{ transform: [{ rotateY: this.rotateText }], flexDirection: 'column', paddingRight: 20 }} >
                         <Text style={styles.textStyle}>383</Text>
                         <Text style={styles.textStyle1}>FOLLOWING</Text>
@@ -206,7 +211,7 @@ class HomeScreenHeader extends Component {
             )
         } else {
             return (
-                <Animated.View style={{ flexDirection: 'row', marginTop: 66, alignItems: 'center' }}>
+                <Animated.View style={{ flexDirection: 'row', marginTop: 46, alignItems: 'center' }}>
                     <View style={{ width: 124, height: 124, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{}}>
                             <Progress.Circle
@@ -251,6 +256,7 @@ class HomeScreenHeader extends Component {
         })
         return (
             <Animated.View style={[{ paddingBottom: 20, opacity: main_opacity }]} >
+                <View style={{height: statusbarHeight}}></View>
                 <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                     {this.renderAnimatedPart()}
                     <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 10 }}>

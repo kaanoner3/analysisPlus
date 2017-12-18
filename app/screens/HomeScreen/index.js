@@ -7,7 +7,7 @@ import {
   Text,
   View,
   FlatList,
-  RefreshControl, Animated, ImageBackground, Dimensions, ScrollView, Image, TouchableOpacity
+  RefreshControl, Animated, ImageBackground, Dimensions, ScrollView, Image, TouchableOpacity,
 } from 'react-native';
 import { HomeScreenHeader, CustomRefreshControll } from "components"
 import { images } from 'resources'
@@ -44,7 +44,7 @@ class HomeScreen extends Component {
   renderList({ item, index }) {
     if (index % 2 === 0) {
       return (
-        <View style={index === 0 ? { backgroundColor: '#152341', borderTopLeftRadius: 15 } : { backgroundColor: '#152341' }} >
+        <View style={index === 0 ? { backgroundColor: '#152341', borderTopLeftRadius: 15,paddingTop:10 } : { backgroundColor: '#152341' }} >
           <View style={styles.contentLeftItem} >
             <Text style={styles.infoText} >{item.text2}</Text>
             <View style={styles.statisticView}>
@@ -59,7 +59,7 @@ class HomeScreen extends Component {
       )
     } else {
       return (
-        <View style={index === 1 ? { backgroundColor: '#152341', borderTopRightRadius: 15 } : { backgroundColor: '#152341' }} >
+        <View style={index === 1 ? { backgroundColor: '#152341', borderTopRightRadius: 15,paddingTop:10 } : { backgroundColor: '#152341' }} >
           <View style={styles.contentRightItem} >
             <Text style={styles.infoText} >{item.text2}</Text>
             <View style={styles.statisticView}>

@@ -6,4 +6,6 @@ export default {
   headerSearchIcon: require("./headerSearchIcon.png"),
   gainArrow: require("./gainArrow.png"),
   lostArrow: require("./arrow-up-10.png"),
+  tabIndex0: require("./tabIndex0.png"),
+
 };

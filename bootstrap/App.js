@@ -6,6 +6,7 @@ import { Navigation } from "react-native-navigation"
 
 // Store instance.
 import store from "store"
+import { images } from 'resources'
 
 // Root-level reducer.
 import { App as AppReducer, User as UserReducer } from "store/reducers"
@@ -69,10 +70,46 @@ export default class App extends Component {
       * Shows the login screen.
       */
     startLogin() {
-        Navigation.startSingleScreenApp({
-            screen: {
-                screen: "HomeScreen"
-            }
+        Navigation.startTabBasedApp({
+            tabs: [
+                {
+                    screen: "HomeScreen",
+                    label: 'Home',
+                    icon: images.tabIndex0,
+                    selectedIcon: images.tabIndex0,
+                },
+                {
+                    screen: "HomeScreen",
+                    label: 'Home',
+                    icon: images.tabIndex0,
+                    selectedIcon: images.tabIndex0,
+                },
+                {
+                    screen: "HomeScreen",
+                    label: 'Home',
+                    icon: images.tabIndex0,
+                    selectedIcon: images.tabIndex0,
+                },
+                {
+                    screen: "HomeScreen",
+                    label: 'Home',
+                    icon: images.tabIndex0,
+                    selectedIcon: images.tabIndex0,
+                },
+            ],
+            tabsStyle: {
+                initialTabIndex: 0,
+                tabBarBackgroundColor: '#111A2C'
+            },
+            appStyle: {
+                orientation: "portrait",
+                statusBarTextColorSchemeSingleScreen: "light",
+                navBarHidden: true,
+                //tabBarHidden: true,
+                drawUnderTabBar: true,
+            },
+            passProps: {},
+            animationType: "slide-down"
         })
     }
 
