@@ -1,0 +1,22 @@
+{
+  "presets": ["react-native"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "app": "./app",
+          "components": "./app/components",
+          "componentWrappers": "./app/componentWrappers",
+          "config": "./config",
+          "store": "./app/store",
+          "ducks": "./app/store/ducks",
+          "resources": "./app/resources",
+          "screens": "./app/screens",
+          "services": "./app/services"
+        }
+      }
+    ]
+  ]
+}
