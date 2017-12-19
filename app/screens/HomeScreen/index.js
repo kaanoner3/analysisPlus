@@ -28,7 +28,7 @@ const statistic_data =
     { text1: 33, text2: 'DENEME 2' },
 
   ];
-const width = Dimensions.get('window').width
+const { width, height } = Dimensions.get('window')
 class HomeScreen extends Component {
   static navigatorStyle = {
     navBarHidden: true
@@ -97,9 +97,15 @@ class HomeScreen extends Component {
     })
     return (
       <View style={styles.container}>
-        <ImageBackground source={images.bgTest} style={{ height: 300, backgroundColor: 'transparent',position:'absolute', top:0,left:0,right:0 }} >
-          <LinearGradient colors={['#5D4ED3','#059ED9' ,'#059ED9']} style={styles.linearGradient}>
-          </LinearGradient>
+        <ImageBackground style={{ height: height, backgroundColor: 'black', position: 'absolute', top: 0, left: 0, right: 0, }} >
+          <Image source={images.bgTest} style={{ backgroundColor: 'transparent', position: 'absolute', top: 0, left: 0, right: 0, resizeMode: 'center' }} />
+          <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: '#152341', zIndex: 1,height: 200 }}></View>
+          <LinearGradient
+            colors={['#5D4ED3', '#059ED9', '#059ED9']}
+            style={styles.linearGradient}
+            startPoint={{ x: 0.0, y: 0.0 }} endPoint={{ x: 0.3, y: 0.3 }}
+            locations={[0, 0.3, 0]}
+          ></LinearGradient>
         </ImageBackground>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, marginTop: 28, paddingHorizontal: 20 }} >
           <TouchableOpacity>
@@ -153,4 +159,6 @@ export default HomeScreen
 /*
         <Animated.Image style={[styles.imageStyle, { height: 280, }]} source={images.backgroundImage} >
         </Animated.Image>
+
+
 */
