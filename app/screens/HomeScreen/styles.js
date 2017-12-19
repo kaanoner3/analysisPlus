@@ -61,7 +61,15 @@ const styles = {
       fontWeight: 'bold',
       marginTop: 15,
       marginLeft: 15
-   }
+   },
+     linearGradient: {
+    flex: 1,
+    opacity:0.9,
+    //position: 'absolute',
+    //top:0,right:0,left:0,    
+    overflow:'visible',
+
+  }
 }
 
 export default styles 

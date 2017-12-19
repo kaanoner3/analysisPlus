@@ -12,6 +12,8 @@ import {
 import { HomeScreenHeader, CustomRefreshControll } from "components"
 import { images } from 'resources'
 import styles from './styles'
+import LinearGradient from 'react-native-linear-gradient';
+
 const statistic_data =
   [
     { text1: 12, text2: 'GAINED FOLLOWERS' },
@@ -44,7 +46,7 @@ class HomeScreen extends Component {
   renderList({ item, index }) {
     if (index % 2 === 0) {
       return (
-        <View style={index === 0 ? { backgroundColor: '#152341', borderTopLeftRadius: 15,paddingTop:10 } : { backgroundColor: '#152341' }} >
+        <View style={index === 0 ? { backgroundColor: '#152341', borderTopLeftRadius: 15, paddingTop: 10 } : { backgroundColor: '#152341' }} >
           <View style={styles.contentLeftItem} >
             <Text style={styles.infoText} >{item.text2}</Text>
             <View style={styles.statisticView}>
@@ -59,7 +61,7 @@ class HomeScreen extends Component {
       )
     } else {
       return (
-        <View style={index === 1 ? { backgroundColor: '#152341', borderTopRightRadius: 15,paddingTop:10 } : { backgroundColor: '#152341' }} >
+        <View style={index === 1 ? { backgroundColor: '#152341', borderTopRightRadius: 15, paddingTop: 10 } : { backgroundColor: '#152341' }} >
           <View style={styles.contentRightItem} >
             <Text style={styles.infoText} >{item.text2}</Text>
             <View style={styles.statisticView}>
@@ -95,7 +97,10 @@ class HomeScreen extends Component {
     })
     return (
       <View style={styles.container}>
-        <Image source={images.backgroundImage} style={{ height: 300, position: 'absolute' }} />
+        <ImageBackground source={images.bgTest} style={{ height: 300, backgroundColor: 'transparent',position:'absolute', top:0,left:0,right:0 }} >
+          <LinearGradient colors={['#5D4ED3','#059ED9' ,'#059ED9']} style={styles.linearGradient}>
+          </LinearGradient>
+        </ImageBackground>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, marginTop: 28, paddingHorizontal: 20 }} >
           <TouchableOpacity>
             <Image source={images.headerSettingsIcon} />
