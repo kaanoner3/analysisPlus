@@ -53,7 +53,7 @@ class HomeScreen extends Component {
     return (
       <ImageBackground style={{ height: height, backgroundColor: 'black', position: 'absolute', top: 0, left: 0, right: 0, }} >
         <Image source={images.bgTest} style={styles.backgroundUserImage} />
-        <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: '#152341', zIndex: 1, height: 200 }}></View>
+        <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: '#152341', zIndex: 1, height: height * 0.35 }}></View>
         <LinearGradient
           colors={['#5D4ED3', '#059ED9', '#059ED9']}
           style={styles.linearGradient}
