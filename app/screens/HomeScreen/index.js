@@ -38,10 +38,48 @@ class HomeScreen extends Component {
     super()
     this.renderList = this.renderList.bind(this)
     this.handleRefresh = this.handleRefresh.bind(this)
+    this.renderBackgroundImage = this.renderBackgroundImage.bind(this)
+    this.renderNavButtons = this.renderNavButtons.bind(this)
 
     this.state = { loading: true, scrollY: new Animated.Value(0) }
     this.state.scrollY.addListener((scrolly) => {
     })
+  }
+  componentDidMount() {
+    this.setState({})
+    this.handleRefresh()
+  }
+  renderBackgroundImage() {
+    return (
+      <ImageBackground style={{ height: height, backgroundColor: 'black', position: 'absolute', top: 0, left: 0, right: 0, }} >
+        <Image source={images.bgTest} style={styles.backgroundUserImage} />
+        <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: '#152341', zIndex: 1, height: 200 }}></View>
+        <LinearGradient
+          colors={['#5D4ED3', '#059ED9', '#059ED9']}
+          style={styles.linearGradient}
+          startPoint={{ x: 0.0, y: 0.0 }} endPoint={{ x: 0.3, y: 0.3 }}
+          locations={[0, 0.3, 0]}
+        ></LinearGradient>
+      </ImageBackground>
+    )
+  }
+  renderNavButtons() {
+    return (
+      <View style={styles.headerButtonView} >
+        <TouchableOpacity style={{ position: 'absolute', top: 8, left: 20 }}>
+          <Image source={images.headerSettingsIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity style={{ position: 'absolute', top: 8, right: 20 }} >
+          <Image source={images.headerSearchIcon} />
+        </TouchableOpacity>
+      </View>
+    )
+  }
+  handleRefresh() {
+    this.setState({ loading: true })
+    setTimeout(() => {
+      this.setState({ loading: false })
+    }, 1500)
   }
   renderList({ item, index }) {
     if (index % 2 === 0) {
@@ -73,50 +111,16 @@ class HomeScreen extends Component {
             </View>
           </View>
         </View>
-
       )
     }
+  }
 
-  }
-  componentWillMount() {
-  }
-  componentDidMount() {
-    this.setState({})
-    this.handleRefresh()
-  }
-  handleRefresh() {
-    this.setState({ loading: true })
-    setTimeout(() => {
-      this.setState({ loading: false })
-    }, 1500)
-  }
   render() {
-    const headerHeight = this.state.scrollY.interpolate({
-      inputRange: [0, 240],
-      outputRange: [280, 76]
-    })
     return (
       <View style={styles.container}>
-        <ImageBackground style={{ height: height, backgroundColor: 'black', position: 'absolute', top: 0, left: 0, right: 0, }} >
-          <Image source={images.bgTest} style={{ backgroundColor: 'transparent', position: 'absolute', top: 0, left: 0, right: 0, resizeMode: 'center' }} />
-          <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: '#152341', zIndex: 1,height: 200 }}></View>
-          <LinearGradient
-            colors={['#5D4ED3', '#059ED9', '#059ED9']}
-            style={styles.linearGradient}
-            startPoint={{ x: 0.0, y: 0.0 }} endPoint={{ x: 0.3, y: 0.3 }}
-            locations={[0, 0.3, 0]}
-          ></LinearGradient>
-        </ImageBackground>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, marginTop: 28, paddingHorizontal: 20 }} >
-          <TouchableOpacity>
-            <Image source={images.headerSettingsIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={images.headerSearchIcon} />
-          </TouchableOpacity>
-        </View>
-        <View style={{ position: 'absolute', top: 0, right: 0, left: 0, bottom: 0 }}>
-          <View style={{ marginTop: 20, flex: 1 }} >
+        {this.renderBackgroundImage()}
+        {this.renderNavButtons()}
+        <View style={styles.absolute}>
             <CustomRefreshControll
               isRefreshing={this.state.loading}
               onRefresh={this.handleRefresh}
@@ -137,9 +141,8 @@ class HomeScreen extends Component {
                   ListHeaderComponent={
                     <HomeScreenHeader ref='header' loading={this.state.loading} />
                   }
-                  style={{ position: 'absolute', right: 0, left: 0, bottom: 0, top: -20, }}
+                  style={styles.flatlist}
                   data={statistic_data}
-                  //  contentContainerStyle={{backgroundColor:'red'}}
                   renderItem={this.renderList}
                   numColumns={2}
                   scrollEventThrottle={1}
@@ -147,7 +150,6 @@ class HomeScreen extends Component {
               }
             />
           </View>
-        </View>
       </View>
     );
   }
