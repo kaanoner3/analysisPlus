@@ -31,15 +31,15 @@ class ShowInstagramUserScreen extends Component {
       });
    }
    renderInstagramUser({ item }) {
-      console.log(item)
       return (
          <InstagramUser />
       )
    }
+
    render() {
       return (
          <View style={{ flex: 1, backgroundColor: '#152341' }} >
-            <StaticHeader title='Header Title' />
+            <StaticHeader title='Header Title' navigator={this.props.navigator}/>
             <FlatList
                renderItem={this.renderInstagramUser}
                data={data}

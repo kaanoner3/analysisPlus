@@ -48,6 +48,12 @@ class HomeScreen extends Component {
     this.setState({})
     this.handleRefresh()
   }
+  showUserScreen(index){
+    this.props.navigator.push({
+      screen: 'ShowInstagramUserScreen',
+      passProps: {serviceIndex: index}
+    })
+  }
   renderBackgroundImage() {
     return (
       <ImageBackground style={styles.imageBackgound} >
@@ -83,21 +89,24 @@ class HomeScreen extends Component {
   renderList({ item, index }) {
     if (index % 2 === 0) {
       return (
-        <View style={index === 0 ? { backgroundColor: '#152341', borderTopLeftRadius: 15, paddingTop: 10 } : { backgroundColor: '#152341' }} >
-          <View style={styles.contentLeftItem} >
-            <Text style={styles.infoText} >{item.text2}</Text>
-            <View style={styles.statisticView}>
-              <Text style={styles.statisticText} >{item.text1}</Text>
-              <View style={styles.arrowView}>
-                <Image source={images.gainArrow} />
-                <Text style={styles.gainText}>2</Text>
+        <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen(index)}>
+          <View style={index === 0 ? { backgroundColor: '#152341', borderTopLeftRadius: 15, paddingTop: 10 } : { backgroundColor: '#152341' }} >
+            <View style={styles.contentLeftItem} >
+              <Text style={styles.infoText} >{item.text2}</Text>
+              <View style={styles.statisticView}>
+                <Text style={styles.statisticText} >{item.text1}</Text>
+                <View style={styles.arrowView}>
+                  <Image source={images.gainArrow} />
+                  <Text style={styles.gainText}>2</Text>
+                </View>
               </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       )
     } else {
       return (
+      <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen(index)}>
         <View style={index === 1 ? { backgroundColor: '#152341', borderTopRightRadius: 15, paddingTop: 10 } : { backgroundColor: '#152341' }} >
           <View style={styles.contentRightItem} >
             <Text style={styles.infoText} >{item.text2}</Text>
@@ -110,6 +119,7 @@ class HomeScreen extends Component {
             </View>
           </View>
         </View>
+      </TouchableOpacity>
       )
     }
   }
@@ -120,35 +130,35 @@ class HomeScreen extends Component {
         {this.renderBackgroundImage()}
         {this.renderNavButtons()}
         <View style={styles.absolute}>
-            <CustomRefreshControll
-              isRefreshing={this.state.loading}
-              onRefresh={this.handleRefresh}
-              onScroll={Animated.event([
-                {
-                  nativeEvent: {
-                    contentOffset: {
-                      y:
-                      this.refs.header === undefined
-                        ? 0
-                        : this.refs.header.state.scrollY
-                    }
+          <CustomRefreshControll
+            isRefreshing={this.state.loading}
+            onRefresh={this.handleRefresh}
+            onScroll={Animated.event([
+              {
+                nativeEvent: {
+                  contentOffset: {
+                    y:
+                    this.refs.header === undefined
+                      ? 0
+                      : this.refs.header.state.scrollY
                   }
                 }
-              ])}
-              contentComponent={
-                <FlatList
-                  ListHeaderComponent={
-                    <HomeScreenHeader ref='header' loading={this.state.loading} />
-                  }
-                  style={styles.flatlist}
-                  data={statistic_data}
-                  renderItem={this.renderList}
-                  numColumns={2}
-                  scrollEventThrottle={1}
-                />
               }
-            />
-          </View>
+            ])}
+            contentComponent={
+              <FlatList
+                ListHeaderComponent={
+                  <HomeScreenHeader ref='header' loading={this.state.loading} />
+                }
+                style={styles.flatlist}
+                data={statistic_data}
+                renderItem={this.renderList}
+                numColumns={2}
+                scrollEventThrottle={1}
+              />
+            }
+          />
+        </View>
       </View>
     );
   }
@@ -159,7 +169,7 @@ export default HomeScreen
 
 /*
         <Animated.Image style={[styles.imageStyle, { height: 280, }]} source={images.backgroundImage} >
-        </Animated.Image>
+          </Animated.Image>
 
 
-*/
+          */

@@ -9,6 +9,8 @@ class StaticHeader extends Component {
     constructor() {
         super()
         this.renderBackButton = this.renderBackButton.bind(this)
+        this.backButtonPress = this.backButtonPress.bind(this)
+
         this.hideBackButton = false
         this.state = { headerX: false }
     }
@@ -19,12 +21,18 @@ class StaticHeader extends Component {
             this.setState({ headerX: false })
         }
     }
+    backButtonPress() {
+        this.props.navigator.pop({
+            animated: true,
+            animationType: 'fade',
+        })
+    }
     renderBackButton() {
         return (
             <TouchableOpacity style={{
                 alignSelf: 'center',
                 width: 35, height: 35,
-            }} onPress={this.props.onPress}>
+            }} onPress={() => this.backButtonPress()}>
                 <Image style={{ height: 35, width: 10, resizeMode: 'contain', }} source={images.headerBackButton} />
             </TouchableOpacity>
         )

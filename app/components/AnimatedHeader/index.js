@@ -41,25 +41,22 @@ class AnimatedHeader extends Component {
     });
     const color = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE],
-      outputRange: ['#151515', '#222222'],
+      outputRange: ['#152341', '#192A4F'],
       extrapolate: "clamp"
     });
     return (
       <Animated.View style={this.state.headerX === false ? [styles.containerView, { height: headerHeight, backgroundColor: color }] : [styles.headerXContainer, { height: headerXHeight, backgroundColor: color }]}>
-        <View style={this.state.headerX === false ? { flexDirection: 'column' }: {flexDirection: 'column', paddingTop: 24}}>
+        <View style={this.state.headerX === false ? { flexDirection: 'column' } : { flexDirection: 'column', paddingTop: 24 }}>
           <TouchableOpacity style={{ width: 50, position: 'absolute', height: 50, marginLeft: 20, }} onPress={this.props.onPress}>
-            <Image style={{ height: 16, width: 10, marginTop: 35, resizeMode: 'contain' }} source={images.green_arrow} />
+            <Image style={{ height: 16, width: 10, marginTop: 35, resizeMode: 'contain' }} source={images.headerBackButton} />
           </TouchableOpacity>
           <Animated.Text style={[styles.animatedText, { opacity: textOpacity, }]}>
             {this.props.title}
           </Animated.Text>
         </View>
         <View style={this.state.headerX === true ? styles.titleXView : styles.titleView}>
-          <Text 
-          style={styles.titleTextStyle}
-          //adjustsFontSizeToFit
-          numberOfLines={2}
-          
+          <Text
+            style={styles.titleTextStyle}
           >{this.props.title}</Text>
         </View>
       </Animated.View>
@@ -69,7 +66,4 @@ class AnimatedHeader extends Component {
 export default AnimatedHeader;
 
 /*
-
-
-
 */

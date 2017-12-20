@@ -79,7 +79,7 @@ export default class App extends Component {
                     selectedIcon: images.tabIndex0Active,
                 },
                 {
-                    screen: "ShowInstagramUserScreen",
+                    screen: "InteractionScreen",
                     label: 'Interaction',
                     icon: images.tabIndex1,
                     selectedIcon: images.tabIndex1Active,
@@ -108,6 +108,7 @@ export default class App extends Component {
                 navBarHidden: true,
                 //tabBarHidden: true,
                 drawUnderTabBar: true,
+                screenBackgroundColor: '#152341'
             },
             passProps: {},
             animationType: "slide-down"
