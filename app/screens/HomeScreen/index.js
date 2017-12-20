@@ -26,7 +26,6 @@ const statistic_data =
     { text1: 33, text2: 'USERS NOT FOLLOWED BY ME' },
     { text1: 33, text2: 'DENEME 1' },
     { text1: 33, text2: 'DENEME 2' },
-
   ];
 const { width, height } = Dimensions.get('window')
 class HomeScreen extends Component {
@@ -51,9 +50,9 @@ class HomeScreen extends Component {
   }
   renderBackgroundImage() {
     return (
-      <ImageBackground style={{ height: height, backgroundColor: 'black', position: 'absolute', top: 0, left: 0, right: 0, }} >
+      <ImageBackground style={styles.imageBackgound} >
         <Image source={images.bgTest} style={styles.backgroundUserImage} />
-        <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: '#152341', zIndex: 1, height: height * 0.35 }}></View>
+        <View style={styles.bottomView} />
         <LinearGradient
           colors={['#5D4ED3', '#059ED9', '#059ED9']}
           style={styles.linearGradient}

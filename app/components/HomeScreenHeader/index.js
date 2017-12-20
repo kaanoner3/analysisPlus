@@ -254,11 +254,11 @@ class HomeScreenHeader extends Component {
             outputRange: ['360deg', '360deg', '0deg', '0deg', '0deg']
         })
         return (
-            <Animated.View style={[{ paddingBottom: 20, opacity: main_opacity }]} >
+            <Animated.View style={[{ paddingBottom: 10, opacity: main_opacity, }]} >
                 <View style={{height: statusbarHeight}}></View>
-                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                <View style={{ flexDirection: 'column', alignItems: 'center', }}>
                     {this.renderAnimatedPart()}
-                    <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 10 }}>
+                    <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 10}}>
                         <Text style={styles.textStyle}>Barbara Porter</Text>
                         <Text style={[styles.textStyle1, { marginTop: 4 }]}>@barbaraporter</Text>
                     </View>

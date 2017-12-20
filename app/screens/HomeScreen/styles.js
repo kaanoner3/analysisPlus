@@ -1,4 +1,5 @@
 import { Dimensions } from 'react-native'
+const { width, height } = Dimensions.get('window')
 
 const styles = {
   container: {
@@ -70,7 +71,7 @@ const styles = {
     overflow: 'visible',
   },
   flatlist: {
-    position: 'absolute', 
+    position: 'absolute',
     right: 0, left: 0, bottom: 0, top: -20,
     marginTop: 20
   },
@@ -91,6 +92,19 @@ const styles = {
   },
   absolute: {
     position: 'absolute', top: 0, right: 0, left: 0, bottom: 0
+  },
+  bottomView: {
+    position: 'absolute',
+    bottom: 0, left: 0, right: 0,
+    backgroundColor: '#152341',
+    zIndex: 1,
+    height: height * 0.40
+  },
+  imageBackgound: {
+    height: height,
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    top: 0, left: 0, right: 0,
   }
 }
 
