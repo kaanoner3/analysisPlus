@@ -10,7 +10,6 @@ const styles = {
   },
   containerView: {
     height: 107,
-    flex: 1,
     flexDirection: "column",
     justifyContent: "flex-start",
     position: "absolute",
@@ -29,7 +28,6 @@ const styles = {
   headerXContainer: {
     height: 127,
     paddingTop: 24,
-    flex: 1,
     flexDirection: "column",
     justifyContent: "flex-start",
     position: "absolute",

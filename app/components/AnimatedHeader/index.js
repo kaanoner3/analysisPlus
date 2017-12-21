@@ -47,9 +47,6 @@ class AnimatedHeader extends Component {
     return (
       <Animated.View style={this.state.headerX === false ? [styles.containerView, { height: headerHeight, backgroundColor: color }] : [styles.headerXContainer, { height: headerXHeight, backgroundColor: color }]}>
         <View style={this.state.headerX === false ? { flexDirection: 'column' } : { flexDirection: 'column', paddingTop: 24 }}>
-          <TouchableOpacity style={{ width: 50, position: 'absolute', height: 50, marginLeft: 20, }} onPress={this.props.onPress}>
-            <Image style={{ height: 16, width: 10, marginTop: 35, resizeMode: 'contain' }} source={images.headerBackButton} />
-          </TouchableOpacity>
           <Animated.Text style={[styles.animatedText, { opacity: textOpacity, }]}>
             {this.props.title}
           </Animated.Text>
@@ -66,4 +63,6 @@ class AnimatedHeader extends Component {
 export default AnimatedHeader;
 
 /*
-*/
+*/     
+ 
+
