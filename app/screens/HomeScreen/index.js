@@ -165,11 +165,3 @@ class HomeScreen extends Component {
 }
 
 export default HomeScreen
-
-
-/*
-        <Animated.Image style={[styles.imageStyle, { height: 280, }]} source={images.backgroundImage} >
-          </Animated.Image>
-
-
-          */

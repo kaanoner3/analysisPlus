@@ -91,7 +91,7 @@ export default class App extends Component {
                     selectedIcon: images.tabIndex2Active,
                 },
                 {
-                    screen: "HomeScreen",
+                    screen: "StatisticChartScreen",
                     label: 'Graphic',
                     icon: images.tabIndex3,
                     selectedIcon: images.tabIndex3Active,
