@@ -21,8 +21,7 @@ const styles = {
         marginTop: 10
     },
     interactionStyle: {
-        marginTop:15,
-        paddingBottom: 15
+        marginTop:15
     }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity,Dimensions } from 'react-native'
 import { images } from 'resources'
 import styles from './styles'
 import { AnimatedHeader } from "components"
@@ -10,8 +10,8 @@ class InteractionContent extends Component {
 
     render() {
         return (
-            <View style={[{ flex: 1,height: 40 ,flexDirection: 'row', alignItems: 'center' },this.props.style]}>
-                <TouchableOpacity style={{ flexDirection: 'row',marginTop:10 }}>
+            <View style={[{  flexDirection: 'column', alignItems: 'flex-start', },this.props.style]}>
+                <TouchableOpacity style={{ flexDirection: 'row'}}>
                     <Image style={contentStyles.contentIcon} source={this.props.contentIcon} />
                     <Text style={contentStyles.contentText} >{this.props.contentText}</Text>
                 </TouchableOpacity>
@@ -51,7 +51,7 @@ const contentStyles = {
         backgroundColor: "white",
         opacity: 0.05,
         marginLeft: 20,
-        width:375
+        width: Dimensions.get('window').width,marginTop:15
     }
 }
 
