@@ -36,6 +36,8 @@ const styles = {
     fontSize: 32,
     marginLeft: 15,
     marginTop: 15,
+    fontFamily: 'Circular'
+
   },
   arrowView: {
     flexDirection: 'row',
@@ -47,13 +49,17 @@ const styles = {
     color: '#5AD24E',
     fontSize: 14,
     fontWeight: 'bold',
-    marginLeft: 5
+    marginLeft: 5,
+    fontFamily: 'Circular'
+
   },
   lostText: {
     color: '#F44336',
     fontSize: 14,
     fontWeight: 'bold',
-    marginLeft: 5
+    marginLeft: 5,
+    fontFamily: 'Circular'
+
   },
   statisticView: {
     flexDirection: 'row',
@@ -63,7 +69,9 @@ const styles = {
     color: 'rgba(255,255,255,0.4)',
     fontWeight: 'bold',
     marginTop: 15,
-    marginLeft: 15
+    marginLeft: 15,
+    fontFamily: 'Circular'
+
   },
   linearGradient: {
     flex: 1,

@@ -21,13 +21,13 @@ const styles = {
         flex: 2,
     },
     nameText: {
-        //fontFamily: 'Circular',
+        fontFamily: 'Circular',
         fontSize: 16,
         color: 'white',
         marginBottom: 5
     },
     usernameText: {
-        //fontFamily: 'Circular',
+        fontFamily: 'Circular',
         fontSize: 14,
         opacity: 0.7,
         color: 'white'
@@ -53,22 +53,22 @@ const styles = {
         borderRadius: 100
     },
     indexFirstText: {
-        //fontFamily: 'Circular',
+        fontFamily: 'Circular',
         color: '#4CAF50',
         alignSelf: 'center',
         marginTop: 6,
         // marginVertical: 8
     },
     indexSecondText: {
-        //fontFamily: 'Circular',
+        fontFamily: 'Circular',
         color: 'white',
         alignSelf: 'center',
         marginTop: 6,
         //flexDrection: 'up'
     },
-    youFollow: { marginLeft: 4,color: '#059ED9', alignSelf: 'center', backgroundColor: 'transparent', //fontFamily: 'Circular' 
+    youFollow: { marginLeft: 4,color: '#059ED9', alignSelf: 'center', backgroundColor: 'transparent', fontFamily: 'Circular' 
    },
-    followsYou: { marginLeft: 4, color: '#5AD24E', alignSelf: 'center', backgroundColor: 'transparent', //fontFamily: 'Circular' 
+    followsYou: { marginLeft: 4, color: '#5AD24E', alignSelf: 'center', backgroundColor: 'transparent', fontFamily: 'Circular' 
    },
     relationshipContainer: { flexDirection: 'row', marginRight: 20, backgroundColor: 'transparent',marginTop: 5 }
 

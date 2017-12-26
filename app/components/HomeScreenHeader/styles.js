@@ -7,6 +7,8 @@ const styles = {
     color: "white",
     position: "absolute",
     marginTop: 30,
+    fontFamily: 'Circular'
+    
   },
   containerView: {
     height: 107,
@@ -56,8 +58,9 @@ const styles = {
     marginLeft: 20,
     fontSize: 30,
     letterSpacing: -1,
-
+    fontFamily: 'Circular'
   },
+
 };
 
 export default styles;

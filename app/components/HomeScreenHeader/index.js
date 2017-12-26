@@ -276,13 +276,15 @@ const styles = {
         fontSize: 22,
         backgroundColor: 'transparent',
         alignSelf: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'Circular'
     },
     textStyle1: {
         color: 'rgba(255,255,255,0.5)',
         fontSize: 14,
         backgroundColor: 'transparent',
-        marginTop: 4
+        marginTop: 4,
+        fontFamily: 'Circular'
 
     }
 }

@@ -6,7 +6,9 @@ const styles = {
     alignSelf: "center",
     color: "white",
     position: "absolute",
-    marginTop: 30,
+    marginTop: 30
+    ,
+    fontFamily: 'Circular'
   },
   containerView: {
     height: 107,
@@ -41,7 +43,7 @@ const styles = {
     flexDirection: "row",
     justifyContent: "flex-start"
   },
-    titleXView: {
+  titleXView: {
     marginTop: 46,
     flexDirection: "row",
     justifyContent: "flex-start"
@@ -52,8 +54,10 @@ const styles = {
     fontWeight: "bold",
     //fontFamily: 'Circular',
     marginLeft: 20,
-    fontSize: 30,
-    letterSpacing: -1,
+    fontSize: 34,
+    letterSpacing: -1
+    ,
+        fontFamily: 'Circular'
 
   },
 };

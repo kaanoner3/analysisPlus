@@ -10,7 +10,7 @@ class InteractionContent extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1,height: 40 ,flexDirection: 'column', alignItems: 'flex-start' }}>
+            <View style={[{ flex: 1,height: 40 ,flexDirection: 'row', alignItems: 'center' },this.props.style]}>
                 <TouchableOpacity style={{ flexDirection: 'row',marginTop:10 }}>
                     <Image style={contentStyles.contentIcon} source={this.props.contentIcon} />
                     <Text style={contentStyles.contentText} >{this.props.contentText}</Text>
@@ -36,7 +36,9 @@ const contentStyles = {
     contentText: {
         color: 'white',
         fontSize: 16,
-        marginLeft: 10
+        marginLeft: 10,
+        fontFamily: 'Circular'
+
     },
     contentIcon: {
         marginLeft: 20,

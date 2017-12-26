@@ -12,8 +12,13 @@ import {
     VictorySelectionContainer,
     VictoryVoroniContainer,
     VictoryGroup,
-    VictoryScatter
+    VictoryScatter,
+    VictoryAnimation,
+    VictoryVoronoiContainer,
+    VictoryArea,
+    VictoryPie
 } from "victory-native";
+import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg";
 
 class StatisticChartScreen extends Component {
     constructor(props) {
@@ -32,43 +37,43 @@ class StatisticChartScreen extends Component {
             this.setState({ ShouldRenderChart: false })
         }
     }
+    componentDidMount() {
+    }
 
     renderChart() {
+        console.log(this.refs.myGradient)
         if (this.state.ShouldRenderChart === true) {
             return (
-                <VictoryChart
-                    theme={VictoryTheme.material}
-                    color='white'
-                    animate={{ duration: 2000 }}
-                >
-                    <VictoryGroup
-                        data={[
-                            { x: 1, y: 2 },
-                            { x: 2, y: 3 },
-                            { x: 3, y: 5 },
-                            { x: 4, y: 4 },
-                            { x: 5, y: 7 }
-                        ]}
-                        color="red"
-
+                <View style={{}}>
+                    <VictoryChart
+                        theme={VictoryTheme.material}
+                        style={{
+                            color:'white'
+                        }}
                     >
-                        <VictoryScatter
-                            size={10}
-                            symbol="diamond"
-                            animate={true}
-
-                        />
-                        <VictoryLine
+                        <Defs>
+                            <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id='a'>
+                                <Stop stopColor="#59D24E" offset="0%" />
+                                <Stop stopColor="#00BCC2" offset="100%" />
+                            </LinearGradient>
+                        </Defs>
+                        <VictoryArea
+                            data={[
+                                { x: 1, y: 2 },
+                                { x: 2, y: 3 },
+                                { x: 3, y: 5 },
+                                { x: 4, y: 4 },
+                                { x: 5, y: 7 }
+                            ]}
                             style={{
-                                data: { stroke: "yellow", strokeWidth: 4, strokeLinecap: "round" },
-                                parent: { border: "1px solid #ccc" }
+                                data: { stroke: 'yellow', fill: 'url(#a)', strokeWidth: 3, strokeLinecap: "round" },
+                                //parent: { border: "1px solid #ccc" }
                             }}
                             interpolation='natural'
-
+                            animate={{ duration: 1000 }}
                         />
-
-                    </VictoryGroup>
-                </VictoryChart>
+                    </VictoryChart>
+                </View>
             )
         } else {
             return <View style={{ flex: 1 }}></View>
@@ -84,3 +89,8 @@ class StatisticChartScreen extends Component {
 }
 
 export default StatisticChartScreen
+
+/*
+
+
+*/

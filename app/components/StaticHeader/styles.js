@@ -29,7 +29,7 @@ const styles = {
   titleTextStyle: {
     color: 'white',
     fontSize: 17,
-//  fontFamily: 'Circular',
+    fontFamily: 'Circular',
     fontWeight: 'bold'
   },
 };

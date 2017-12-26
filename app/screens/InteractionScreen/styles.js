@@ -9,7 +9,9 @@ const styles = {
         color: 'rgba(255,255,255,0.40)',
         fontSize: 12,
         marginTop: 30,
-        marginLeft: 20
+        marginLeft: 20,
+        fontFamily: 'Circular'
+
     },
     sectionView: {
         backgroundColor: '#192A4F',
@@ -19,7 +21,8 @@ const styles = {
         marginTop: 10
     },
     interactionStyle: {
-        alignSelf: 'center',
+        marginTop:15,
+        paddingBottom: 15
     }
 }
 
