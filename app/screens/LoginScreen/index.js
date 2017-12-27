@@ -52,7 +52,7 @@ const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 
 const baseUrl = "";
-let AnimatedPath = Animated.createAnimatedComponent(Path);
+//let AnimatedPath = Animated.createAnimatedComponent(Path);
 
 class LoginScreen extends Component {
   static navigatorStyle = {
@@ -98,7 +98,7 @@ class LoginScreen extends Component {
               </LinearGradient>
             </Defs>
             <G>
-              <AnimatedPath
+              <Path
                 fill="url(#a)"
                 strokeWidth={2}
                 stroke="#00FF72"
