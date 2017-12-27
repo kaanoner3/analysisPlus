@@ -41,16 +41,10 @@ class StatisticChartScreen extends Component {
     }
 
     renderChart() {
-        console.log(this.refs.myGradient)
         if (this.state.ShouldRenderChart === true) {
             return (
-                <View style={{}}>
-                    <VictoryChart
-                        theme={VictoryTheme.material}
-                        style={{
-                            color:'white'
-                        }}
-                    >
+                <View>
+                    <VictoryChart theme={VictoryTheme.material}>
                         <Defs>
                             <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id='a'>
                                 <Stop stopColor="#59D24E" offset="0%" />
@@ -67,7 +61,6 @@ class StatisticChartScreen extends Component {
                             ]}
                             style={{
                                 data: { stroke: 'yellow', fill: 'url(#a)', strokeWidth: 3, strokeLinecap: "round" },
-                                //parent: { border: "1px solid #ccc" }
                             }}
                             interpolation='natural'
                             animate={{ duration: 1000 }}

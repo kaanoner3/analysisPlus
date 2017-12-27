@@ -18,5 +18,9 @@ export default {
   tabIndex1Active: require("./tabIndex1Active.png"),
   tabIndex2Active: require("./tabIndex2Active.png"),
   tabIndex3Active: require("./tabIndex3Active.png"),
+  loginScreenBg: require("./login-screen-bg.png"),
+  logoInstagram: require("./logo-instagram.png"),
+  appLogo: require("./logo.png"),
+  linearGradient: require("./linearGradient.png"),
 
 };
