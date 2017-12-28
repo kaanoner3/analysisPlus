@@ -12,11 +12,16 @@ import axios from "axios";
 import { Dimensions } from "react-native";
 import { images } from "resources";
 
+const {width,height} = Dimensions.get('window')
+  
 class LikeContentScreen extends Component {
   constructor(props) {
     super(props);
     this.renderPhotos = this.renderPhotos.bind(this);
     this.showPhoto = this.showPhoto.bind(this);
+  }
+  componentWillMount() {
+      console.log('test like',height)
   }
   showPhoto() {
     /*
@@ -66,15 +71,14 @@ class LikeContentScreen extends Component {
 export default LikeContentScreen;
 
 const likeStyles = {
-  container: {
-    flex: 1,
-    backgroundColor: "#152341",
-
-    justifyContent: "flex-start",
-    margin: 2
-  },
-  imageStyle: {
-       height: Dimensions.get('window').width / 3,
-       width: Dimensions.get('window').width / 3,
-  }
-};
+    container: {
+      flex: 1,
+      backgroundColor: "#152341",
+      justifyContent: "flex-start",
+      margin: 2
+    },
+    imageStyle: {
+         height: width / 3,
+         width: width / 3,
+    }
+  };

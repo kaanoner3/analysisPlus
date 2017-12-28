@@ -13,7 +13,7 @@ import moment from "moment";
 import Video from "react-native-video";
 import { Dimensions } from "react-native";
 import { images } from "resources";
-
+const {width,height} = Dimensions.get('window')
 class MediaContentScreen extends Component {
   constructor(props) {
     super(props);
@@ -91,14 +91,15 @@ class MediaContentScreen extends Component {
 export default MediaContentScreen;
 
 const mediaStyles = {
-  container: {
-    flex: 1,
-    backgroundColor: "#152341",
-    justifyContent: "flex-start",
-    margin: 2
-  },
-  imageStyle: {
-        height: Dimensions.get('window').width / 3,
-        width: Dimensions.get('window').width / 3,
-  }
-};
+    container: {
+      flex: 1,
+      backgroundColor: "#152341",
+      justifyContent: "flex-start",
+      margin: 2
+    },
+    imageStyle: {
+          height: width / 3,
+          width: width / 3,
+    }
+  };
+  

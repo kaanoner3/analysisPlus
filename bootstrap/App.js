@@ -85,7 +85,7 @@ export default class App extends Component {
                     selectedIcon: images.tabIndex1Active,
                 },
                 {
-                    screen: "UserDetailScreen",
+                    screen: "InteractionScreen",
                     label: 'Engagement',
                     icon: images.tabIndex2,
                     selectedIcon: images.tabIndex2Active,

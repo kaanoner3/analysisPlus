@@ -71,6 +71,22 @@ const styles = {
     alignSelf: "center",
     backgroundColor: "transparent",
     fontFamily: "Circular"
+  },
+  youFollowView: {
+    borderRadius: 100,
+    borderColor: "#5AD24E",
+    marginLeft: 10,
+    flexDirection: "row"
+  },
+  followsYouView: {
+    borderRadius: 100,
+    borderColor: "#059ED9",
+    flexDirection: "row"
+  },
+  profilIstatistic: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginRight: 20
   }
 };
 

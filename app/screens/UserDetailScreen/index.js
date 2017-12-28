@@ -25,7 +25,7 @@ class UserDetailScreen extends Component {
   static navigatorStyle = {
     statusBarTextColorSchemeSingleScreen: "light",
     drawUnderTabBar: true,
-    tabBarHidden: true,
+    // tabBarHidden: true,
     navBarTranslucent: true,
     navBarHidden: true
   };
@@ -231,13 +231,7 @@ class UserDetailScreen extends Component {
           <View style={styles.profileDetailView}>
             <Image style={styles.profile_picture} source={images.avatar} />
             <View style={{ flexDirection: "column", marginLeft: 20, flex: 1 }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginRight: 20
-                }}
-              >
+              <View style={styles.profilIstatistic}>
                 <View style={styles.countsView}>
                   <Text style={styles.countsTextStyle}>123 </Text>
                   <Text style={styles.countStaticStyle}>POSTS</Text>
@@ -262,7 +256,7 @@ class UserDetailScreen extends Component {
                     { backgroundColor: "#059ED9" }
                   ]}
                 >
-                  <Text style={styles.followButtonTextStyle}>Follow</Text>
+                  <Text style={styles.followButtonTextStyle}>FOLLOW</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -272,27 +266,14 @@ class UserDetailScreen extends Component {
 
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <View style={styles.relationshipContainer}>
-                <View
-                  style={{
-                    borderRadius: 100,
-                    borderColor: "#059ED9",
-                    flexDirection: "row"
-                  }}
-                >
+                <View style={styles.followsYouView}>
                   <Image
                     style={{ alignSelf: "center" }}
                     source={images.youFollowOk}
                   />
                   <Text style={styles.youFollow}>Follows You</Text>
                 </View>
-                <View
-                  style={{
-                    borderRadius: 100,
-                    borderColor: "#5AD24E",
-                    marginLeft: 10,
-                    flexDirection: "row"
-                  }}
-                >
+                <View style={styles.youFollowView}>
                   <Image
                     style={{ alignSelf: "center" }}
                     source={images.followsYouOk}
@@ -310,7 +291,10 @@ class UserDetailScreen extends Component {
     if (this.userDetail !== null) {
       return (
         <View style={styles.container}>
-          <StaticHeader title="Barbara Porter" />
+          <StaticHeader
+            title="Barbara Porter"
+            navigator={this.props.navigator}
+          />
           {this.renderProfileDetail()}
           <ScrollableTabView
             activeTab={1}
@@ -328,13 +312,11 @@ class UserDetailScreen extends Component {
             <MediaContentScreen
               navigator={this.props.navigator}
               tabLabel="MEDIA"
-              //token={this.token}
               mediadata={this.mediaData}
             />
             <LikeContentScreen
               navigator={this.props.navigator}
               tabLabel="LIKES"
-              //token={this.token}
               likedata={this.likeData}
             />
           </ScrollableTabView>
@@ -346,7 +328,7 @@ class UserDetailScreen extends Component {
           style={{ flex: 1, backgroundColor: "#152341", alignItems: "center" }}
         >
           <ActivityIndicator
-              style={{ top: Dimensions.get("window").height / 2 }}
+            style={{ top: Dimensions.get("window").height / 2 }}
             color="white"
             size="large"
           />
@@ -360,3 +342,7 @@ const mapStateToProps = ({}) => {
   return {};
 };
 export default connect(mapStateToProps, {})(UserDetailScreen);
+
+/*
+
+*/

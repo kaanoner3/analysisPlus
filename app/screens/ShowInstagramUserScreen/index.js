@@ -24,7 +24,7 @@ class ShowInstagramUserScreen extends Component {
    }
    pushInstagramUserDetail() {
       this.props.navigator.push({
-         screen: "DetailScreen",
+         screen: "UserDetailScreen",
          backButtonTitle: "Back",
          backButtonHidden: false,
          passProps: {}
@@ -32,7 +32,7 @@ class ShowInstagramUserScreen extends Component {
    }
    renderInstagramUser({ item }) {
       return (
-         <InstagramUser />
+         <InstagramUser onPress={() => this.pushInstagramUserDetail()}/>
       )
    }
 

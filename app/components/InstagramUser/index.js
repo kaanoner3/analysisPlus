@@ -20,7 +20,7 @@ class InstagramUser extends Component {
                      alignItems: 'center',
 
                   }}
-               // onPress={this.props.detailPress}
+                onPress={this.props.onPress}
                >
                   <View style={{ flex: 1 }} >
                      <View style={{ flexDirection: 'row' }} >
