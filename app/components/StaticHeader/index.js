@@ -22,7 +22,6 @@ class StaticHeader extends Component {
         }
     }
     backButtonPress() {
-        console.log('asd')
         this.props.navigator.pop({
             animated: true,
             animationType: 'fade',

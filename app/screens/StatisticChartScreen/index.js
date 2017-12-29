@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Dimensions } from 'react-native'
 import {
     VictoryBar,
     VictoryChart,
@@ -19,7 +19,7 @@ import {
     VictoryPie
 } from "victory-native";
 import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg";
-
+const screenWidth = Dimensions.get('window').width
 class StatisticChartScreen extends Component {
     constructor(props) {
         super(props)

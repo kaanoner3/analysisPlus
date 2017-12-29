@@ -149,7 +149,7 @@ class LoginScreen extends Component {
                 id="a"
               >
                 <Stop stopColor="#00FF72" offset="0%" stopOpacity="0" />
-                <Stop stopColor="#00FF72" offset="100%" stopOpacity="0.5" />
+                <Stop stopColor="#44F995" offset="100%" stopOpacity="0.5" />
               </LinearGradient>
             </Defs>
             <AnimatedPath
@@ -180,7 +180,7 @@ class LoginScreen extends Component {
      *
      */
   render() {
-    console.log(this.offset._value);
+    console.log(this.refs)
     return (
       <View style={{ flex: 1, backgroundColor: "#151515" }}>
         <Image source={images.linearGradient} style={styles.linearGradient} />
@@ -193,7 +193,7 @@ class LoginScreen extends Component {
           <Text style={styles.upText}>Start analyzing your profile</Text>
           <TouchableOpacity
             style={{}}
-            onPress={() => this.refs.instagramLogin.show()}
+           // onPress={() => this.refs.instagramLogin.show()}
           >
             <View style={styles.buttonView}>
               <Image

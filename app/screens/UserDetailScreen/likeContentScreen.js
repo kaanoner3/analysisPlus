@@ -21,7 +21,6 @@ class LikeContentScreen extends Component {
     this.showPhoto = this.showPhoto.bind(this);
   }
   componentWillMount() {
-      console.log('test like',height)
   }
   showPhoto() {
     /*
