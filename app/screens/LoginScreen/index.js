@@ -63,7 +63,7 @@ class LoginScreen extends Component {
   static navigatorStyle = {
     statusBarTextColorSchemeSingleScreen: "light",
     navBarHidden: true,
-     tabBarHidden: true
+    //tabBarHidden: true
   };
   constructor(props) {
     super(props);
@@ -73,7 +73,6 @@ class LoginScreen extends Component {
     const properties = svgPathProperties(svgString);
     this.length = properties.getTotalLength();
     this.strokeDashoffset = new Animated.Value(this.length);
-    this.offset = new Animated.Value(100);
 
     this.showSignUpPage = this.showSignUpPage.bind(this);
     this.loginButtonPress = this.loginButtonPress.bind(this);
@@ -85,12 +84,6 @@ class LoginScreen extends Component {
       ShouldRenderChart: false,
       offset: new Animated.Value(0)
     };
-
-    this.offset.addListener(value => {
-       // console.log(Math.ceil(this.offset._value).toString() + "%")
-    });
-
-
   }
   animate = () => {
     this.strokeDashoffset.setValue(this.length);
@@ -121,7 +114,6 @@ class LoginScreen extends Component {
   componentDidMount() {
     this.setState({})
     this.animate();
-    this.animateOffset()
   }
   /*
      *
@@ -156,7 +148,7 @@ class LoginScreen extends Component {
               fill="url(#a)"
               strokeWidth={3}
               stroke="#00FF72"
-              strokeDasharray={[this.length, this.length]}
+            //  strokeDasharray={[this.length, this.length]}
               strokeDashoffset={this.strokeDashoffset}
               d="M-2.49846376,132.521081 L24.1577375,120.312315 C26.3495157,119.308462 28.929268,119.713881 30.7074772,121.341636 L48.6579471,137.773313 C49.9320308,138.939596 51.8108294,139.156315 53.3169812,138.310731 L79.2592909,123.746194 C80.4077228,123.101441 81.7363946,122.85247 83.040349,123.037686 L117.310239,127.905454 C118.692547,128.1018 120.077206,127.563181 120.963493,126.484374 L140.493114,102.712499 C141.868186,101.038731 144.038685,100.236105 146.171902,100.612547 L157.039636,102.530344 C158.090499,102.715787 159.171896,102.473649 160.043336,101.85778 L180.223754,87.5957557 C182.424228,86.0406239 185.391531,86.1431529 187.479416,87.8464602 L193.126912,92.4537161 C194.46448,93.5449113 196.35117,93.6549503 197.806523,92.726649 L205.760164,87.6533964 C208.487878,85.9135161 212.103858,86.6496557 213.934254,89.3174742 L220.982667,99.5905947 C222.232478,101.412206 224.722358,101.875741 226.543969,100.625929 C227.357893,100.067494 227.936594,99.2278323 228.168764,98.2684477 L239.724013,50.519208 C240.108788,48.9292159 241.126096,47.5652717 242.540402,46.7431623 L257.143998,38.2543722 C257.78116,37.8840019 258.303613,37.3448005 258.6537,36.6962723 L276.373495,3.87080041 C277.94759,0.954829087 281.587508,-0.132976564 284.503479,1.44111849 C286.00491,2.25161833 287.090262,3.6630182 287.488016,5.32223327 L299.474636,55.3238571 C299.98963,57.47213 302.148634,58.7961642 304.296907,58.2811704 C305.561454,57.9780273 306.599722,57.0791006 307.080723,55.8709565 L311.527665,44.7014596 C312.753387,41.62278 316.242795,40.1206619 319.321474,41.3463847 C319.978651,41.6080283 320.584386,41.9838168 321.110703,42.4563945 L327.415139,48.1171225 C329.058898,49.5930468 331.587901,49.4569902 333.063825,47.8132315 C333.301735,47.5482676 333.503198,47.2527207 333.662872,46.9344266 L344.027431,26.2737794 C344.798705,24.7363275 346.192726,23.6038251 347.855557,23.1638102 L373.465122,16.3870629 C376.668571,15.5393731 379.952668,17.4490934 380.800358,20.6525425 C380.932894,21.1534031 381,21.6693208 381,22.1874206 L381,403 L-6,403 L-6,137.976141 C-6,135.629507 -4.63196839,133.498244 -2.49846376,132.521081 Z"
             />
@@ -180,7 +172,6 @@ class LoginScreen extends Component {
      *
      */
   render() {
-    console.log(this.refs)
     return (
       <View style={{ flex: 1, backgroundColor: "#151515" }}>
         <Image source={images.linearGradient} style={styles.linearGradient} />
