@@ -1,126 +1,158 @@
-
-
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Platform,
   StyleSheet,
   Text,
   View,
   FlatList,
-  RefreshControl, Animated, ImageBackground, Dimensions, ScrollView, Image, TouchableOpacity,
-} from 'react-native';
-import { HomeScreenHeader, CustomRefreshControll } from "components"
-import { images } from 'resources'
-import styles from './styles'
-import LinearGradient from 'react-native-linear-gradient';
+  RefreshControl,
+  Animated,
+  ImageBackground,
+  Dimensions,
+  ScrollView,
+  Image,
+  TouchableOpacity
+} from "react-native";
+import { HomeScreenHeader, CustomRefreshControll } from "components";
+import { images } from "resources";
+import styles from "./styles";
+import LinearGradient from "react-native-linear-gradient";
 
-const statistic_data =
-  [
-    { text1: 12, text2: 'GAINED FOLLOWERS' },
-    { text1: 29, text2: 'LOSTED FOLLOWERS' },
-    { text1: 245, text2: 'PROFILE VISITORS' },
-    { text1: 4, text2: 'USER BLOCKING ME' },
-    { text1: 57, text2: 'STALKERS' },
-    { text1: 7, text2: 'DELETED COMMENT' },
-    { text1: 33, text2: 'USERS NOT FOLLOWING ME' },
-    { text1: 33, text2: 'USERS NOT FOLLOWED BY ME' },
-    { text1: 33, text2: 'DENEME 1' },
-    { text1: 33, text2: 'DENEME 2' },
-  ];
-const { width, height } = Dimensions.get('window')
+const statistic_data = [
+  { text1: 12, text2: "GAINED FOLLOWERS" },
+  { text1: 29, text2: "LOSTED FOLLOWERS" },
+  { text1: 245, text2: "PROFILE VISITORS" },
+  { text1: 4, text2: "USER BLOCKING ME" },
+  { text1: 57, text2: "STALKERS" },
+  { text1: 7, text2: "DELETED COMMENT" },
+  { text1: 33, text2: "USERS NOT FOLLOWING ME" },
+  { text1: 33, text2: "USERS NOT FOLLOWED BY ME" },
+  { text1: 33, text2: "DENEME 1" },
+  { text1: 33, text2: "DENEME 2" }
+];
+const { width, height } = Dimensions.get("window");
 class HomeScreen extends Component {
   static navigatorStyle = {
     navBarHidden: true
-  }
+  };
 
   constructor() {
-    super()
-    this.renderList = this.renderList.bind(this)
-    this.handleRefresh = this.handleRefresh.bind(this)
-    this.renderBackgroundImage = this.renderBackgroundImage.bind(this)
-    this.renderNavButtons = this.renderNavButtons.bind(this)
+    super();
+    this.renderList = this.renderList.bind(this);
+    this.handleRefresh = this.handleRefresh.bind(this);
+    this.renderBackgroundImage = this.renderBackgroundImage.bind(this);
+    this.renderNavButtons = this.renderNavButtons.bind(this);
 
-    this.state = { loading: true, scrollY: new Animated.Value(0) }
-    this.state.scrollY.addListener((scrolly) => {
-    })
+    this.state = { loading: true, scrollY: new Animated.Value(0) };
+    this.state.scrollY.addListener(scrolly => {});
   }
   componentDidMount() {
-    this.setState({})
-    this.handleRefresh()
+    this.setState({});
+    this.handleRefresh();
   }
-  showUserScreen(index){
+  showUserScreen(index) {
     this.props.navigator.push({
-      screen: 'ShowInstagramUserScreen',
-      passProps: {serviceIndex: index}
-    })
+      screen: "ShowInstagramUserScreen",
+      passProps: { serviceIndex: index }
+    });
   }
   renderBackgroundImage() {
     return (
-      <ImageBackground style={styles.imageBackgound} >
+      <ImageBackground style={styles.imageBackgound}>
         <Image source={images.bgTest} style={styles.backgroundUserImage} />
         <View style={styles.bottomView} />
         <LinearGradient
-          colors={['#5D4ED3', '#059ED9', '#059ED9']}
+          colors={["#5D4ED3", "#059ED9", "#059ED9"]}
           style={styles.linearGradient}
-          startPoint={{ x: 0.0, y: 0.0 }} endPoint={{ x: 0.3, y: 0.3 }}
+          startPoint={{ x: 0.0, y: 0.0 }}
+          endPoint={{ x: 0.3, y: 0.3 }}
           locations={[0, 0.3, 0]}
-        ></LinearGradient>
+        />
       </ImageBackground>
-    )
+    );
   }
   renderNavButtons() {
     return (
-      <View style={styles.headerButtonView} >
-        <TouchableOpacity style={{ position: 'absolute', top: 8, left: 20 }}>
+      <View style={styles.headerButtonView}>
+        <TouchableOpacity style={{ position: "absolute", top: 8, left: 20 }}>
           <Image source={images.headerSettingsIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={{ position: 'absolute', top: 8, right: 20 }} >
+        <TouchableOpacity style={{ position: "absolute", top: 8, right: 20 }}>
           <Image source={images.headerSearchIcon} />
         </TouchableOpacity>
       </View>
-    )
+    );
   }
   handleRefresh() {
-    this.setState({ loading: true })
+    this.setState({ loading: true });
     setTimeout(() => {
-      this.setState({ loading: false })
-    }, 1500)
+      this.setState({ loading: false });
+    }, 1500);
   }
   renderList({ item, index }) {
     if (index % 2 === 0) {
       return (
-        <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen(index)}>
-          <View style={index === 0 ? { backgroundColor: '#152341', borderTopLeftRadius: 15, paddingTop: 10 } : { backgroundColor: '#152341' }} >
-            <View style={styles.contentLeftItem} >
-              <Text style={styles.infoText} >{item.text2}</Text>
+        <View
+          style={
+            index === 0
+              ? {
+                  backgroundColor: "#152341",
+                  borderTopLeftRadius: 15,
+                  paddingTop: 10,
+                  flex:1
+                }
+              : { backgroundColor: "#152341",flex:1 }
+          }
+        >
+          <View style={styles.contentLeftItem}>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => this.showUserScreen(index)}
+            >
+              <Text style={styles.infoText}>{item.text2}</Text>
               <View style={styles.statisticView}>
-                <Text style={styles.statisticText} >{item.text1}</Text>
+                <Text style={styles.statisticText}>{item.text1}</Text>
                 <View style={styles.arrowView}>
                   <Image source={images.gainArrow} />
                   <Text style={styles.gainText}>2</Text>
                 </View>
               </View>
-            </View>
-          </View>
-        </TouchableOpacity>
-      )
-    } else {
-      return (
-      <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen(index)}>
-        <View style={index === 1 ? { backgroundColor: '#152341', borderTopRightRadius: 15, paddingTop: 10 } : { backgroundColor: '#152341' }} >
-          <View style={styles.contentRightItem} >
-            <Text style={styles.infoText} >{item.text2}</Text>
-            <View style={styles.statisticView}>
-              <Text style={styles.statisticText} >{item.text1}</Text>
-              <View style={styles.arrowView}>
-                <Image source={images.lostArrow} />
-                <Text style={styles.lostText}>2</Text>
-              </View>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
-      </TouchableOpacity>
-      )
+      );
+    } else {
+      return (
+        <View
+          style={
+            index === 1
+              ? {
+                  backgroundColor: "#152341",
+                  borderTopRightRadius: 15,
+                  paddingTop: 10,
+                  flex:1
+                }
+              : { backgroundColor: "#152341",flex:1 }
+          }
+        >
+          <View style={styles.contentRightItem}>
+            <TouchableOpacity
+              activeOpacity={1}
+              //style={{ backgroundColor: "red" }}
+              onPress={() => this.showUserScreen(index)}
+            >
+              <Text style={styles.infoText}>{item.text2}</Text>
+              <View style={styles.statisticView}>
+                <Text style={styles.statisticText}>{item.text1}</Text>
+                <View style={styles.arrowView}>
+                  <Image source={images.lostArrow} />
+                  <Text style={styles.lostText}>2</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
     }
   }
 
@@ -138,9 +170,9 @@ class HomeScreen extends Component {
                 nativeEvent: {
                   contentOffset: {
                     y:
-                    this.refs.header === undefined
-                      ? 0
-                      : this.refs.header.state.scrollY
+                      this.refs.header === undefined
+                        ? 0
+                        : this.refs.header.state.scrollY
                   }
                 }
               }
@@ -148,7 +180,7 @@ class HomeScreen extends Component {
             contentComponent={
               <FlatList
                 ListHeaderComponent={
-                  <HomeScreenHeader ref='header' loading={this.state.loading} />
+                  <HomeScreenHeader ref="header" loading={this.state.loading} />
                 }
                 style={styles.flatlist}
                 data={statistic_data}
@@ -164,4 +196,4 @@ class HomeScreen extends Component {
   }
 }
 
-export default HomeScreen
+export default HomeScreen;

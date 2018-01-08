@@ -12,7 +12,6 @@ const styles = {
   contentLeftItem: {
     flex: 1,
     backgroundColor: '#192A4F',
-    width: 163,
     height: 96,
     marginTop: 10,
     marginLeft: 20,
@@ -22,7 +21,6 @@ const styles = {
   contentRightItem: {
     flex: 1,
     backgroundColor: '#192A4F',
-    width: 163,
     height: 96,
     marginTop: 10,
     marginRight: 20,
@@ -79,9 +77,8 @@ const styles = {
     overflow: 'visible',
   },
   flatlist: {
-    position: 'absolute',
-    right: 0, left: 0, bottom: 0, top: -20,
-    marginTop: 20
+    flex:1,
+    marginTop: 20,
   },
   headerButtonView: {
     flexDirection: 'row',
