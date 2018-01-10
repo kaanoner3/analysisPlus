@@ -56,7 +56,7 @@ class HomeScreenHeader extends Component {
         this.renderSvgCircle = this.renderSvgCircle.bind(this)
         this.renderAnimatedPart = this.renderAnimatedPart.bind(this)
         this.rotateCircle = this.rotateCircle.bind(this)
-
+        
         this.state.rotateY.addListener((rotateY) => {
         })
         this.state.scrollY.addListener((scrollY) => {
@@ -66,7 +66,6 @@ class HomeScreenHeader extends Component {
                 strokeDashoffset = Math.max(strokeDashoffset, 0)
                 this._myCircle.setNativeProps({ strokeDashoffset: 377 - strokeDashoffset })
             }
-
         });
     }
     animate() {
@@ -233,6 +232,7 @@ class HomeScreenHeader extends Component {
         }
     }
     render() {
+        //console.log(this._myCircle)
         this.opacity = this.state.scrollY.interpolate({
             inputRange: [-60, 0],
             outputRange: [0, 1]
@@ -285,7 +285,6 @@ const styles = {
         backgroundColor: 'transparent',
         marginTop: 4,
         fontFamily: 'Circular'
-
     }
 }
                 /*

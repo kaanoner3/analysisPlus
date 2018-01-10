@@ -12,6 +12,7 @@ const styles = {
   },
   linearGradient: {
     position: "absolute",
+    width: Dimensions.get('window').width,
     top: 0,
     left: 0,
     right: 0,
@@ -26,6 +27,7 @@ const styles = {
   },
   loginScreenBg: {
     height: Dimensions.get('window').height/2+150,
+    width: Dimensions.get('window').width,
     resizeMode: 'cover',
     top: 0,
     left: 0,
@@ -34,13 +36,14 @@ const styles = {
     
   },
   buttonContent: {
-    flex: 1,
+//flex: 1,
     alignItems: "center",
     flexDirection: "column",
     position: "absolute",
     backgroundColor: "transparent",
     bottom: 70,
     left: 20,
+    right:20
     
   },
   upText: {
@@ -51,13 +54,13 @@ const styles = {
   },
   buttonView: {
     height: 54,
-    width: 335,
     backgroundColor: "white",
     borderRadius: 100,
     alignItems: "center",
     flexDirection: "row",
     alignSelf: "center",
-    paddingLeft: 62
+    paddingHorizontal: 62,
+    
   },
   loginText: {
     fontFamily: "Circular",
