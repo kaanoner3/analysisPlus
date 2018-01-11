@@ -14,6 +14,7 @@ import ShowInstagramUserScreen from './ShowInstagramUserScreen'
 import InteractionScreen from './InteractionScreen'
 import StatisticChartScreen from './StatisticChartScreen'
 import UserDetailScreen from './UserDetailScreen/index'
+import InteractionDetailScreen from "./InteractionDetailScreen"
 
 Navigation.registerComponent('LoginScreen', () => LoginScreen, store, Provider)
 Navigation.registerComponent('HomeScreen', () => HomeScreen, store, Provider)
@@ -21,6 +22,7 @@ Navigation.registerComponent('ShowInstagramUserScreen', () => ShowInstagramUserS
 Navigation.registerComponent('InteractionScreen', () => InteractionScreen, store, Provider)
 Navigation.registerComponent('StatisticChartScreen', () => StatisticChartScreen, store, Provider)
 Navigation.registerComponent('UserDetailScreen', () => UserDetailScreen, store, Provider)
+Navigation.registerComponent('InteractionDetailScreen', () => InteractionDetailScreen, store, Provider)
 
 
 // Export them for ease of import.
@@ -30,5 +32,6 @@ export {
     ShowInstagramUserScreen,
     InteractionScreen,
     StatisticChartScreen,
-    UserDetailScreen
+    UserDetailScreen,
+    InteractionDetailScreen
 }

@@ -22,5 +22,5 @@ export default {
   logoInstagram: require("./logo-instagram.png"),
   appLogo: require("./logo.png"),
   linearGradient: require("./linearGradient.png"),
-
+  bitmap: require("./Bitmap.png"),
 };

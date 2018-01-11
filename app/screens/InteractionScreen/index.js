@@ -19,11 +19,20 @@ class InteractionScreen extends Component {
     this.state = {
       test: true
     };
+
+    this.showInteractionDetail = this.showInteractionDetail.bind(this);
   }
   componentDidMount() {
-    this.setState({})
+    this.setState({});
   }
-
+  showInteractionDetail() {
+    this.props.navigator.push({
+      screen: "InteractionDetailScreen",
+      backButtonTitle: "Back",
+      backButtonHidden: false,
+      passProps: {}
+    });
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -48,14 +57,17 @@ class InteractionScreen extends Component {
             <Text style={styles.sectionText}>MY BEST FOLLOWERS</Text>
             <View style={styles.sectionView}>
               <InteractionContent
+                onPress={this.showInteractionDetail}
                 style={styles.interactionStyle}
                 contentText="Most Likes to Me"
               />
               <InteractionContent
+                onPress={this.showInteractionDetail}
                 style={styles.interactionStyle}
                 contentText="Most Comments to Me"
               />
               <InteractionContent
+                onPress={this.showInteractionDetail}
                 style={styles.interactionStyle}
                 contentText="Most Likes and Comments to Me"
               />
@@ -63,6 +75,7 @@ class InteractionScreen extends Component {
             <Text style={styles.sectionText}>MY BEST FOLLOWERS</Text>
             <View style={styles.sectionView}>
               <InteractionContent
+                onPress={this.showInteractionDetail}
                 style={styles.interactionStyle}
                 contentText="Least Likes Given"
               />
@@ -71,6 +84,7 @@ class InteractionScreen extends Component {
                 contentText="Least Comments Left"
               />
               <InteractionContent
+                onPress={this.showInteractionDetail}
                 style={styles.interactionStyle}
                 contentText="No Comments or Likes"
               />
@@ -78,14 +92,17 @@ class InteractionScreen extends Component {
             <Text style={styles.sectionText}>DISCOVER</Text>
             <View style={styles.sectionView}>
               <InteractionContent
+                onPress={this.showInteractionDetail}
                 style={styles.interactionStyle}
                 contentText="Least Likes Given"
               />
               <InteractionContent
+                onPress={this.showInteractionDetail}
                 style={styles.interactionStyle}
                 contentText="Least Comments Left"
               />
               <InteractionContent
+                onPress={this.showInteractionDetail}
                 style={styles.interactionStyle}
                 contentText="No Comments or Likes"
               />
