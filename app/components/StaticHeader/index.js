@@ -29,11 +29,8 @@ class StaticHeader extends Component {
     }
     renderBackButton() {
         return (
-            <TouchableOpacity style={{
-                alignSelf: 'center',
-                width: 35, height: 35,
-            }} onPress={() => this.backButtonPress()}>
-                <Image style={{ height: 35, width: 10, resizeMode: 'contain', }} source={images.headerBackButton} />
+            <TouchableOpacity style={styles.button} onPress={() => this.backButtonPress()}>
+                <Image style={styles.buttonImage} source={images.headerBackButton} />
             </TouchableOpacity>
         )
 

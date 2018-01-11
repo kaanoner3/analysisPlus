@@ -1,6 +1,5 @@
 import styles from "./styles";
 import React, { Component } from "react";
-import { Group, Shape, Surface, Transform } from "ReactNativeART";
 import { Navigation } from "react-native-navigation";
 import { images, strings } from "resources";
 import axios from "axios";
@@ -32,8 +31,11 @@ import {
   Dimensions,
   TextInput,
   AsyncStorage,
-  Animated
+  Animated,
+  ART
 } from "react-native";
+const { Surface, Group, Shape } = ART;
+let AnimatedShape = Animated.createAnimatedComponent(Shape);
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -42,7 +44,6 @@ const baseUrl = "";
 
 let AnimatedPath = Animated.createAnimatedComponent(Path);
 let AnimatedGradient = Animated.createAnimatedComponent(LinearGradient);
-let AnimatedShape = Animated.createAnimatedComponent(Shape);
 
 class LoginScreen extends Component {
   static navigatorStyle = {
@@ -50,6 +51,10 @@ class LoginScreen extends Component {
     navBarHidden: true
     //tabBarHidden: true
   };
+  setNativeProps = (props) => {
+    this.animated_shape.setNativeProps(props)
+  }
+
   constructor(props) {
     super(props);
 
@@ -57,11 +62,10 @@ class LoginScreen extends Component {
       isLoading: false,
       ShouldRenderChart: false,
       length: this.length,
-      value: 500,
+      value: 0,
       testValue: new Animated.Value(0),
       deneme: false
     };
-
     const svgString =
       "M2.4 130.5L28.2 118.4C30.5 117.3 33.1 117.8 34.9 119.4L52.2 135.7C53.5 136.9 55.4 137.1 56.9 136.2L82 121.8C83.2 121.1 84.5 120.9 85.8 121.1L119 125.9C120.4 126.1 121.8 125.5 122.7 124.4L141.6 100.8C143 99.1 145.2 98.2 147.4 98.6L157.7 100.5C158.8 100.7 159.9 100.5 160.8 99.8L180.3 85.7C182.5 84.1 185.5 84.2 187.6 86L192.9 90.4C194.2 91.5 196.2 91.6 197.7 90.6L205.1 85.8C207.8 84 211.5 84.7 213.4 87.5L219.9 97.3C221.2 99.1 223.6 99.6 225.5 98.4 226.3 97.8 226.9 97 227.2 96L238.3 48.5C238.7 46.9 239.7 45.6 241.1 44.7L255.3 36.3C255.9 35.9 256.4 35.4 256.8 34.7L273.8 2.2C275.4-0.7 279-1.8 281.9-0.3 283.5 0.5 284.6 2 285 3.7L296.5 52.9C297 55.1 299.1 56.4 301.3 55.9 302.6 55.6 303.6 54.7 304.1 53.4L308.2 42.9C309.4 39.8 312.9 38.3 316 39.5 316.7 39.7 317.3 40.1 317.9 40.7L323.6 46C325.2 47.4 327.8 47.3 329.3 45.7 329.5 45.4 329.8 45.1 329.9 44.8L339.9 24.3C340.7 22.8 342.1 21.6 343.7 21.1L368.4 14.4C371.6 13.6 374.9 15.5 375.8 18.7 375.9 19.2 376 19.7 376 20.2L376 401 -1 401 -1 135.9C-1 133.6 0.3 131.5 2.4 130.5Z";
     const properties = svgPathProperties(svgString);
@@ -72,7 +76,7 @@ class LoginScreen extends Component {
     this.strokeDashoffset = new Animated.Value(this.length);
     //this.state.value.addListener((value)=>{console.log(value)})
     this.validHeight = 0;
-    
+
     this.showSignUpPage = this.showSignUpPage.bind(this);
     this.loginButtonPress = this.loginButtonPress.bind(this);
     this.renderChartAnimation = this.renderChartAnimation.bind(this);
@@ -81,7 +85,7 @@ class LoginScreen extends Component {
 
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     this.state.testValue.addListener(testValue => {
-       this.animated_shape.setNativeProps({ strokeDash: testValue.value });
+       //this.animated_shape.getNode().setNativeProps({ strokeDash: testValue.value });
     });
     if (screenHeight / 2 < 400) {
       this.validHeight = 400;
@@ -95,32 +99,10 @@ class LoginScreen extends Component {
       duration: 2500
     }).start(() => {});
 
-    /*
-      this.setState({value: this.state.value + 15});
-      // This is some random number that I guessed to be the length of the Shape
-      if (this.state.value <= 1585) {
-        requestAnimationFrame(this._animateEntrance.bind(this));
-      }
-    
-    this.strokeDashoffset.setValue(this.length);
-
-    Animated.sequence([
-      Animated.delay(100),
-      Animated.timing(this.strokeDashoffset, {
-        toValue: 0,
-        duration: 3500
-      })
-    ]).start(() => {
-      this.animate();
-    })
-    */
   }
 
-  componentDidMount() {
-  }
-  componentDidUpdate(){
-    console.log(this.animated_shape)
-
+  componentDidMount() {}
+  componentDidUpdate() {
     this.animateEntrance();
   }
   loginButtonPress() {}
@@ -148,10 +130,11 @@ class LoginScreen extends Component {
         >
           <Surface width={screenWidth} height={600}>
             <AnimatedShape
-              ref={ref=>  this.animated_shape = ref}
+              ref={ref => (this.animated_shape = ref)}
               d={this.svg}
               stroke="white"
               strokeDash={[this.state.value, 1585]}
+              fill="red"
               strokeWidth={2}
             />
           </Surface>
@@ -186,7 +169,7 @@ class LoginScreen extends Component {
           <Text style={styles.upText}>Start analyzing your profile</Text>
           <TouchableOpacity
             style={{ flex: 1 }}
-            onPress={() => this.setState({ deneme: true })}
+          //  onPress={() => this.setState({ deneme: true })}
           >
             <View style={styles.buttonView}>
               <Image

@@ -338,10 +338,8 @@ class UserDetailScreen extends Component {
   }
 }
 
-const mapStateToProps = ({}) => {
-  return {};
-};
-export default connect(mapStateToProps, {})(UserDetailScreen);
+
+export default (UserDetailScreen);
 
 /*
 

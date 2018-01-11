@@ -43,7 +43,7 @@ class ShowInstagramUserScreen extends Component {
             <FlatList
                renderItem={this.renderInstagramUser}
                data={data}
-               style={{ flex: 1, marginTop: 20 }}
+               style={{ flex: 1,  }}
                ItemSeparatorComponent={() => <View style={styles.itemSepStyle} />}
             />
          </View>
