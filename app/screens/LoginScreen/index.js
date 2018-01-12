@@ -53,9 +53,6 @@ class LoginScreen extends Component {
     navBarHidden: true,
     tabBarHidden: true
   };
-  setNativeProps = props => {
-    this.animated_shape.setNativeProps(props);
-  };
 
   constructor(props) {
     super(props);
@@ -102,7 +99,7 @@ class LoginScreen extends Component {
     //   this.animateEntrance();
   }
   loginButtonPress() {
-    store.dispatch(AppReducer.switchToUser())
+    store.dispatch(AppReducer.switchToUser());
   }
 
   onNavigatorEvent(event) {
@@ -152,10 +149,8 @@ class LoginScreen extends Component {
         {this.renderBottomBackground()}
         <View style={styles.buttonContent}>
           <Text style={styles.upText}>Start analyzing your profile</Text>
-          <TouchableOpacity
-            style={{ flex: 1 }}
-              onPress={this.loginButtonPress}
-          >
+       
+          <TouchableOpacity style={{ flex: 1 }} onPress={this.loginButtonPress}>
             <View style={styles.buttonView}>
               <Image
                 style={{ height: 18, width: 18 }}
@@ -164,6 +159,7 @@ class LoginScreen extends Component {
               <Text style={styles.loginText}>Login with Instagram</Text>
             </View>
           </TouchableOpacity>
+        
           <Text style={styles.botText}>
             We will never post without your permission
           </Text>

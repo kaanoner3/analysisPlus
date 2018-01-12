@@ -24,4 +24,5 @@ export default {
   linearGradient: require("./linearGradient.png"),
   bitmap: require("./Bitmap.png"),
   loginScreeLinearBg: require("./loginScreenBg.png"),
+  premiumLogo: require("./premiumLogo.png"),
 };
