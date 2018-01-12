@@ -29,8 +29,8 @@ export default class App extends Component {
 
     // Get last login state from storage.
     revive((err, result) => {
-        console.log('err',err)
-        console.log('result',result)
+      console.log("err", err);
+      console.log("result", result);
       // If an error occured or client was not signed in,
       // set action to login, or otherwise, set it to user.
       if (err || result === false) {
@@ -68,48 +68,62 @@ export default class App extends Component {
   startLogin() {
     Navigation.startSingleScreenApp({
       screen: {
-        screen: "LoginScreen", 
-        title: "Welcome", 
-        navigatorStyle: {}, 
-        navigatorButtons: {} 
+        screen: "LoginScreen",
+        title: "Welcome",
+        navigatorStyle: {},
+        navigatorButtons: {}
       },
 
-      passProps: {}, 
-      animationType: "slide-down" 
+      passProps: {},
+      animationType: "slide-down"
     });
   }
-
 
   startUser() {
     setImmediate(() =>
       setAxiosConfig({
-       // 'headers.common.Authorization': `Bearer ${store.getState().user.token}`,
+        // 'headers.common.Authorization': `Bearer ${store.getState().user.token}`,
       })
     );
-
     Navigation.startTabBasedApp({
       tabs: [
         {
-          screen: "HomeScreen"
+          screen: "HomeScreen",
+          label: "Home",
+          icon: images.tabIndex0,
+          selectedIcon: images.tabIndex0Active
         },
         {
-          screen: "InteractionScreen"
+          screen: "InteractionScreen",
+          label: "Interaction",
+          icon: images.tabIndex1,
+          selectedIcon: images.tabIndex1Active
         },
         {
-          screen: "HomeScreen"
+          screen: "LoginScreen",
+          label: "Engagement",
+          icon: images.tabIndex2,
+          selectedIcon: images.tabIndex2Active
         },
         {
-          screen: "HomeScreen"
+          screen: "StatisticChartScreen",
+          label: "Graphic",
+          icon: images.tabIndex3,
+          selectedIcon: images.tabIndex3Active
         }
       ],
       tabsStyle: {
-        initialTabIndex: 0
+        initialTabIndex: 0,
+        tabBarBackgroundColor: "#111A2C",
+        tabBarTranslucent: false
       },
       appStyle: {
         orientation: "portrait",
-        statusBarTextColorSchemeSingleScreen: "dark",
+        statusBarTextColorSchemeSingleScreen: "light",
         navBarHidden: true,
-        drawUnderTabBar: true
+        //tabBarHidden: true,
+        drawUnderTabBar: true,
+        screenBackgroundColor: "#152341"
       },
       passProps: {},
       animationType: "slide-down"
