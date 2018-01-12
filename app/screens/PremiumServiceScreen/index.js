@@ -128,7 +128,7 @@ class PremiumServiceScreen extends Component {
         </View>
         <View style={{marginTop:10}}>
         <ScrollView style={{ height:120, }} horizontal={false}>
-            <Text style={styles.subscriptionInfoText} numberOfLines={7}>
+            <Text style={styles.subscriptionInfoText} >
               Payment will be chatged to iTunes Account at confirmation of
               purchase. Subscription automatically renews unless auto-renew is
               turnet off at least 24-hours before the end of the current
