@@ -48,12 +48,12 @@ let AnimatedGradient = Animated.createAnimatedComponent(LinearGradient);
 class LoginScreen extends Component {
   static navigatorStyle = {
     statusBarTextColorSchemeSingleScreen: "light",
-    navBarHidden: true
-    //tabBarHidden: true
+    navBarHidden: true,
+    tabBarHidden: true
   };
-  setNativeProps = (props) => {
-    this.animated_shape.setNativeProps(props)
-  }
+  setNativeProps = props => {
+    this.animated_shape.setNativeProps(props);
+  };
 
   constructor(props) {
     super(props);
@@ -79,13 +79,12 @@ class LoginScreen extends Component {
 
     this.showSignUpPage = this.showSignUpPage.bind(this);
     this.loginButtonPress = this.loginButtonPress.bind(this);
-    this.renderChartAnimation = this.renderChartAnimation.bind(this);
+    this.renderBottomBackground = this.renderBottomBackground.bind(this);
     this.animateEntrance = this.animateEntrance.bind(this);
     this.testClick = this.testClick.bind(this);
-
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     this.state.testValue.addListener(testValue => {
-       //this.animated_shape.getNode().setNativeProps({ strokeDash: testValue.value });
+      //this.animated_shape.getNode().setNativeProps({ strokeDash: testValue.value });
     });
     if (screenHeight / 2 < 400) {
       this.validHeight = 400;
@@ -98,12 +97,11 @@ class LoginScreen extends Component {
       toValue: 1585,
       duration: 2500
     }).start(() => {});
-
   }
-
+  componentWillMount() {}
   componentDidMount() {}
   componentDidUpdate() {
-    this.animateEntrance();
+    //   this.animateEntrance();
   }
   loginButtonPress() {}
 
@@ -115,34 +113,21 @@ class LoginScreen extends Component {
       this.setState({ ShouldRenderChart: false });
     }
   }
-  renderChartAnimation() {
-    if (this.state.ShouldRenderChart === true) {
-      return (
-        <View
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: this.validHeight,
-            backgroundColor: "transparent"
-          }}
-        >
-          <Surface width={screenWidth} height={600}>
-            <AnimatedShape
-              ref={ref => (this.animated_shape = ref)}
-              d={this.svg}
-              stroke="white"
-              strokeDash={[this.state.value, 1585]}
-              fill="red"
-              strokeWidth={2}
-            />
-          </Surface>
-        </View>
-      );
-    } else {
-      return <View style={{}} />;
-    }
+  renderBottomBackground() {
+    return (
+      <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: this.validHeight,
+          backgroundColor: "transparent"
+        }}
+      >
+        <Image source={images.loginScreeLinearBg} />
+      </View>
+    );
   }
 
   showSignUpPage() {
@@ -164,12 +149,12 @@ class LoginScreen extends Component {
         <Image source={images.linearGradient} style={styles.linearGradient} />
         <Image style={styles.appLogo} source={images.appLogo} />
         <Image style={styles.loginScreenBg} source={images.loginScreenBg} />
-        {this.renderChartAnimation()}
+        {this.renderBottomBackground()}
         <View style={styles.buttonContent}>
           <Text style={styles.upText}>Start analyzing your profile</Text>
           <TouchableOpacity
             style={{ flex: 1 }}
-          //  onPress={() => this.setState({ deneme: true })}
+            //  onPress={() => this.setState({ deneme: true })}
           >
             <View style={styles.buttonView}>
               <Image
@@ -226,12 +211,7 @@ export default LoginScreen;
           }}
         >
           <Svg width={screenWidth} height={400}>
-            <Defs>
-              <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="a">
-                <Stop stopColor="#00FF72" offset="0%" stopOpacity="0" />
-                <Stop stopColor="#44F995" offset="100%" stopOpacity="0.5" />
-              </LinearGradient>
-            </Defs>
+      
             <AnimatedPath
               fill="url(#a)"
               strokeWidth={3}

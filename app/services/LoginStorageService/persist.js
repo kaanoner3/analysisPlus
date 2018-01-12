@@ -5,6 +5,7 @@ import { AsyncStorage } from 'react-native'
 import _ from 'lodash'
 
 export default function (data, callback) {
+    console.log('persist', data)
     AsyncStorage.multiSet(
 
         // Prepare data object.

@@ -14,7 +14,7 @@ export default function (callback) {
 
         // Restructure data as an object.
         const data = _.fromPairs(stores)
-
+        console.log('revive', data)
         // Decide if it's an acceptable login data.
         const isSignedIn = Number(data.user_id) > 0 || (data.app_token && data.app_token.length) > 0
 
