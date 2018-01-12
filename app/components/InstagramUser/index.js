@@ -18,7 +18,6 @@ class InstagramUser extends Component {
                      flex: 1,
                      flexDirection: 'row',
                      alignItems: 'center',
-
                   }}
                 onPress={this.props.onPress}
                >

@@ -39,7 +39,11 @@ const styles = {
     height: 35,
     paddingLeft: 20
   },
-  buttonImage: { height: 35, width: 10, resizeMode: "contain" }
+  buttonImage: {
+    height: 35,
+    width: 10,
+    resizeMode: "contain"
+  }
 };
 
 export default styles;
