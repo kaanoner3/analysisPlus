@@ -17,8 +17,8 @@ const { height, width } = Dimensions.get("window");
 class PremiumServiceScreen extends Component {
   static navigatorStyle = {
     statusBarTextColorSchemeSingleScreen: "light",
-    navBarHidden: true,
-   // tabBarHidden: true
+    navBarHidden: true
+    // tabBarHidden: true
   };
   constructor() {
     super();
@@ -34,9 +34,7 @@ class PremiumServiceScreen extends Component {
       this.setState({ headerX: false });
     }
   }
-  componentDidMount(){
-      
-  }
+  componentDidMount() {}
   renderSwiper() {
     return (
       <View style={styles.swiperContainer}>
@@ -44,17 +42,16 @@ class PremiumServiceScreen extends Component {
           style={{
             alignItems: "center",
             alignSelf: "center",
-            marginTop: 10,
-            height: 62,
+            marginTop: 10
           }}
+          autoplay
+          autoplayTimeout={4}
           horizontal
-          autoplay={true}
           dot={<View style={styles.swiperDotView} />}
           activeDot={<View style={styles.swiperActiveDotView} />}
           paginationStyle={{
             top: 60
           }}
-          autoplayTimeout={4}
         >
           <View style={styles.swiperTextView}>
             <Text
@@ -104,8 +101,7 @@ class PremiumServiceScreen extends Component {
           <View
             style={{
               alignItems: "center",
-              flexDirection: "column",
-              
+              flexDirection: "column"
             }}
           >
             <PremiumButton
@@ -129,22 +125,21 @@ class PremiumServiceScreen extends Component {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{marginTop:10}}>
-        <ScrollView style={{ height:120, }} horizontal={false}>
-            <Text style={styles.subscriptionInfoText} >
+        <View style={{ marginTop: 10 }}>
+          <ScrollView style={{ height: 120 }} horizontal={false}>
+            <Text style={styles.subscriptionInfoText}>
               Payment will be chatged to iTunes Account at confirmation of
               purchase. Subscription automatically renews unless auto-renew is
-              turnet off at least 24-hours before the end of the current
-              period. Account will be charged for renewal within 24-hours
-              prior to the end of the current period, and identify the cost of
-              the renewal. Subscriptions may be managed by the user and
-              auto-renewal may be turned off by going to the user’s Account
-              Settings after purchase. Any unused portion of a free trial
-              period, if offered, will be forteited when the user purchases a
-              subscription to that publication, where applicable. Terms of Use
+              turnet off at least 24-hours before the end of the current period.
+              Account will be charged for renewal within 24-hours prior to the
+              end of the current period, and identify the cost of the renewal.
+              Subscriptions may be managed by the user and auto-renewal may be
+              turned off by going to the user’s Account Settings after purchase.
+              Any unused portion of a free trial period, if offered, will be
+              forteited when the user purchases a subscription to that
+              publication, where applicable. Terms of Use
             </Text>
-          
-        </ScrollView>
+          </ScrollView>
         </View>
       </View>
     );
