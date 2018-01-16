@@ -3,12 +3,12 @@ import { Dimensions } from 'react-native'
 const styles = {
     container: {
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
     sectionText: {
         color: 'rgba(255,255,255,0.40)',
         fontSize: 12,
-        marginTop: 30,
+        paddingTop: 30,
         marginLeft: 20,
         fontFamily: 'Circular'
 
@@ -18,10 +18,10 @@ const styles = {
         flexDirection:'column',
         flex: 1,
         justifyContent:'center',
-        marginTop: 10
+        marginTop: 10,
     },
     interactionStyle: {
-        marginTop:15
+        paddingTop:15,
     }
 }
 

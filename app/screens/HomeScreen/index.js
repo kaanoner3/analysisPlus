@@ -43,8 +43,19 @@ class HomeScreen extends Component {
     this.renderBackgroundImage = this.renderBackgroundImage.bind(this);
     this.renderNavButtons = this.renderNavButtons.bind(this);
 
-    this.state = { loading: true, scrollY: new Animated.Value(0) };
+    this.state = {
+      loading: true,
+      scrollY: new Animated.Value(0),
+      headerX: false
+    };
     this.state.scrollY.addListener(scrolly => {});
+  }
+  componentWillMount() {
+    if (height === 812) {
+      this.setState({ headerX: true });
+    } else {
+      this.setState({ headerX: false });
+    }
   }
   componentDidMount() {
     this.setState({});
@@ -73,11 +84,17 @@ class HomeScreen extends Component {
   }
   renderNavButtons() {
     return (
-      <View style={styles.headerButtonView}>
-        <TouchableOpacity style={{ position: "absolute", top: 8, left: 20 }}>
+      <View
+        style={
+          this.state.headerX === false
+            ? styles.headerButtonView
+            : styles.headerButtonXView
+        }
+      >
+        <TouchableOpacity>
           <Image source={images.headerSettingsIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={{ position: "absolute", top: 8, right: 20 }}>
+        <TouchableOpacity>
           <Image source={images.headerSearchIcon} />
         </TouchableOpacity>
       </View>
@@ -99,9 +116,9 @@ class HomeScreen extends Component {
                   backgroundColor: "#152341",
                   borderTopLeftRadius: 15,
                   paddingTop: 10,
-                  flex:1
+                  flex: 1
                 }
-              : { backgroundColor: "#152341",flex:1 }
+              : { backgroundColor: "#152341", flex: 1 }
           }
         >
           <View style={styles.contentLeftItem}>
@@ -109,7 +126,9 @@ class HomeScreen extends Component {
               activeOpacity={1}
               onPress={() => this.showUserScreen(index)}
             >
-              <Text style={styles.infoText}>{item.text2}</Text>
+              <View style={{ height: 96 / 2 }}>
+                <Text style={styles.infoText}>{item.text2}</Text>
+              </View>
               <View style={styles.statisticView}>
                 <Text style={styles.statisticText}>{item.text1}</Text>
                 <View style={styles.arrowView}>
@@ -130,9 +149,9 @@ class HomeScreen extends Component {
                   backgroundColor: "#152341",
                   borderTopRightRadius: 15,
                   paddingTop: 10,
-                  flex:1
+                  flex: 1
                 }
-              : { backgroundColor: "#152341",flex:1 }
+              : { backgroundColor: "#152341", flex: 1 }
           }
         >
           <View style={styles.contentRightItem}>
@@ -141,7 +160,9 @@ class HomeScreen extends Component {
               //style={{ backgroundColor: "red" }}
               onPress={() => this.showUserScreen(index)}
             >
-              <Text style={styles.infoText}>{item.text2}</Text>
+              <View style={{ height: 96 / 2, }}>
+                <Text style={styles.infoText}>{item.text2}</Text>
+              </View>
               <View style={styles.statisticView}>
                 <Text style={styles.statisticText}>{item.text1}</Text>
                 <View style={styles.arrowView}>

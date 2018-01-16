@@ -38,7 +38,7 @@ class InteractionScreen extends Component {
       <View style={styles.container}>
         <AnimatedHeader ref="animated_Header" title="Interactions" />
         <ScrollView
-          style={{ flex: 1, marginTop: 107 }}
+          style={{ flex: 1, paddingTop: 107,}}
           scrollEventThrottle={1}
           onScroll={Animated.event([
             {
@@ -53,7 +53,7 @@ class InteractionScreen extends Component {
             }
           ])}
         >
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 1,paddingBottom:120 }}>
             <Text style={styles.sectionText}>MY BEST FOLLOWERS</Text>
             <View style={styles.sectionView}>
               <InteractionContent

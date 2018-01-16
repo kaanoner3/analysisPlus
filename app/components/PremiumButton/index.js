@@ -13,6 +13,9 @@ class PremiumButton extends Component {
 
     this.buttonPress = this.buttonPress.bind(this);
   }
+  componentWillMount(){
+      this.setState({isActive: this.props.activeButton})
+  }
   componentWillReceiveProps(nextProps) {
       if(nextProps.activeButton === true) {
           this.setState({isActive: true})

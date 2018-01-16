@@ -21,7 +21,34 @@ const styles = {
   bgImage: {
     height,
     width,
-    marginLeft:20
+    position:'absolute',
+    left:0,right:0,bottom:0,top:64
+    //marginLeft:20
+  },
+  buttonStyle: {
+      height: 50,
+      flexDirection:'row',
+      backgroundColor: '#D1B54B',
+      borderRadius: 100,
+      alignItems:'center',
+      paddingHorizontal:30
+  },
+  upgradeText: {
+      fontSize:16,
+      fontWeight: 'bold',
+      backgroundColor:'transparent',
+      marginLeft: 15,
+      
+  },
+  buttonView: {
+    width:  width-124,
+    alignItems :'center',
+    alignSelf: 'center',
+    position:'absolute',top:'50%'
+  },
+  lockStyle: {
+      //marginLeft: 30,
+      resizeMode: 'stretch'
   }
 };
 

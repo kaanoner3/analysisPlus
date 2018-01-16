@@ -18,7 +18,7 @@ class PremiumServiceScreen extends Component {
   static navigatorStyle = {
     statusBarTextColorSchemeSingleScreen: "light",
     navBarHidden: true,
-    tabBarHidden: true
+   // tabBarHidden: true
   };
   constructor() {
     super();
@@ -34,6 +34,9 @@ class PremiumServiceScreen extends Component {
       this.setState({ headerX: false });
     }
   }
+  componentDidMount(){
+      
+  }
   renderSwiper() {
     return (
       <View style={styles.swiperContainer}>
@@ -42,7 +45,7 @@ class PremiumServiceScreen extends Component {
             alignItems: "center",
             alignSelf: "center",
             marginTop: 10,
-            height: 62
+            height: 62,
           }}
           horizontal
           autoplay={true}

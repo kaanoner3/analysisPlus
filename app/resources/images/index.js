@@ -25,4 +25,6 @@ export default {
   bitmap: require("./Bitmap.png"),
   loginScreeLinearBg: require("./loginScreenBg.png"),
   premiumLogo: require("./premiumLogo.png"),
+  lockLogo: require("./lock.png"),
+
 };

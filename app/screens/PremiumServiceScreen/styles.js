@@ -25,6 +25,7 @@ const styles = {
   swiperContainer: {
     height: 70,
     marginTop:10,
+
 },
   premiumText: {
     color: "#D1B54B",

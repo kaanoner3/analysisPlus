@@ -16,7 +16,8 @@ const styles = {
     marginTop: 10,
     marginLeft: 20,
     marginRight: 5,
-    borderRadius: 5
+    borderRadius: 5,
+    
   },
   contentRightItem: {
     flex: 1,
@@ -33,14 +34,14 @@ const styles = {
     alignSelf: 'center',
     fontSize: 32,
     marginLeft: 15,
-    marginTop: 15,
-    fontFamily: 'Circular'
-
+  //  marginTop: 15,
+    fontFamily: 'Circular',
+   
   },
   arrowView: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 12,
+  //  paddingTop: 12,
     marginLeft: 9
   },
   gainText: {
@@ -61,6 +62,7 @@ const styles = {
   },
   statisticView: {
     flexDirection: 'row',
+    height: 96/2,paddingBottom:15
   },
   infoText: {
     fontSize: 12,
@@ -68,7 +70,7 @@ const styles = {
     fontWeight: 'bold',
     marginTop: 15,
     marginLeft: 15,
-    fontFamily: 'Circular'
+    fontFamily: 'Circular',
 
   },
   linearGradient: {
@@ -89,6 +91,15 @@ const styles = {
     top: 0, right: 0, left: 0,
     zIndex: 99
   },
+  headerButtonXView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 52,
+    paddingHorizontal: 20,
+    position: 'absolute',
+    top: 0, right: 0, left: 0,
+    zIndex: 99
+  },
   backgroundUserImage: {
     backgroundColor: 'transparent',
     position: 'absolute',
@@ -96,7 +107,8 @@ const styles = {
     resizeMode: 'center'
   },
   absolute: {
-    position: 'absolute', top: 0, right: 0, left: 0, bottom: 0
+    position: 'absolute', top: 0, right: 0, left: 0, bottom: 0,
+    
   },
   bottomView: {
     position: 'absolute',
