@@ -2,7 +2,7 @@ import axios from 'axios'
 import _ from 'lodash'
 
 export default {
-    baseURL: 'http://analysisplusapp.com/test',
+    baseURL: "http://analysisplusapp.com/",
 }
 
 export function setConfig(config) {

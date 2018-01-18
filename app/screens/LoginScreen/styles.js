@@ -25,6 +25,12 @@ const styles = {
     position: "absolute",
     resizeMode: "contain"
   },
+  appXLogo: {
+    alignSelf: "center",
+    top: 120,
+    position: "absolute",
+    resizeMode: "contain"
+  },
   loginScreenBg: {
     height: Dimensions.get('window').height/2+150,
     width: Dimensions.get('window').width,
