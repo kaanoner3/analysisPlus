@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export default function signInService(token) {
+export default function SignInService(token) {
   let params = new FormData();
   params.append("access_token", token);
-  return axios
+    axios
     .post("api/login", params)
     .then(response => console.log(response));
 }

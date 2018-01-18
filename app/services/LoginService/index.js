@@ -1,5 +1,7 @@
-import signInService from './signInService'
-
+import SignInService from './SignInService'
+export default {
+    SignInService
+}
 export {
-    signInService,
+    SignInService,
 }
