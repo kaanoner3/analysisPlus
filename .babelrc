@@ -14,7 +14,8 @@
           "ducks": "./app/store/ducks",
           "resources": "./app/resources",
           "screens": "./app/screens",
-          "services": "./app/services"
+          "services": "./app/services",
+          "sagas": "./app/redux/sagas",
         }
       }
     ]

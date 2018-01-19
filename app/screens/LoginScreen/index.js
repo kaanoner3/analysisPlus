@@ -10,8 +10,11 @@ import store from "store"
 import { svgPathProperties } from "svg-path-properties"
 import InstagramLogin from "react-native-instagram-login"
 import { App as AppReducer, User as UserReducer } from "store/reducers"
+import  * as auth from "ducks/auth"
+
 import { SignInService } from "services/LoginService"
 import Cookie from "react-native-cookie"
+//import {  }
 import {
     Path,
     G,
@@ -37,16 +40,8 @@ import {
     ART
 } from "react-native"
 
-const { Surface, Group, Shape } = ART
-let AnimatedShape = Animated.createAnimatedComponent(Shape)
-
 const screenWidth = Dimensions.get("window").width
 const screenHeight = Dimensions.get("window").height
-
-const baseURL = "http://analysisplusapp.com"
-
-let AnimatedPath = Animated.createAnimatedComponent(Path)
-let AnimatedGradient = Animated.createAnimatedComponent(LinearGradient)
 
 const instagram = {
     client_id: "65dcfc61b3564f14a9144181b08c6b1a",
@@ -89,6 +84,7 @@ class LoginScreen extends Component {
     }
 
     componentWillMount() {
+        console.log(this.props)
         if (screenHeight === 812) {
             this.validHeight = screenHeight / 2
             this.setState({ headerX: true })
@@ -99,7 +95,7 @@ class LoginScreen extends Component {
         Cookie.clear().then(() => {})
     }
     handleLoginSucces({ token }) {
-      SignInService(token)
+
     }
     loginButtonPress() {
         store.dispatch(AppReducer.switchToUser())
@@ -155,7 +151,8 @@ class LoginScreen extends Component {
 
                     <TouchableOpacity
                         style={{ flex: 1 }}
-                        onPress={() => this.refs.instagramLogin.show()}
+                        onPress={this.loginButtonPress}
+                        //onPress={() => this.refs.instagramLogin.show()}
                     >
                         <View style={styles.buttonView}>
                             <Image
@@ -183,7 +180,7 @@ class LoginScreen extends Component {
                         "relationships",
                         "likes"
                     ]}
-                    onLoginSuccess={token => this.handleLoginSucces({ token })}
+                    onLoginSuccess={token => this.props.doInstagramLogin({ token })}
                 />
             </View>
         )
@@ -196,8 +193,7 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-export default LoginScreen
-/*
+export default connect(mapStateToProps, auth )(LoginScreen)/*
 
   onNavigatorEvent(event) {
     if (event.id === "bottomTabSelected") {

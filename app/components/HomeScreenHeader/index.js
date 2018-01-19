@@ -192,7 +192,7 @@ class HomeScreenHeader extends Component {
     renderAnimatedPart() {
         if (this.state.startAnimation === false) {
             return (
-                <Animated.View style={{ transform: [{ rotateY: this.rotate }], flexDirection: 'row', marginTop: 46, alignItems: 'center' }}>
+                <Animated.View style={{ transform: [{ rotateY: this.rotate }], flexDirection: 'row', marginTop: 26, alignItems: 'center', }}>
                     <Animated.View style={{ transform: [{ rotateY: this.rotateText }], flexDirection: 'column', paddingRight: 20 }} >
                         <Text style={styles.textStyle}>383</Text>
                         <Text style={styles.textStyle1}>FOLLOWING</Text>
@@ -209,7 +209,7 @@ class HomeScreenHeader extends Component {
             )
         } else {
             return (
-                <Animated.View style={{ flexDirection: 'row', marginTop: 46, alignItems: 'center' }}>
+                <Animated.View style={{ flexDirection: 'row', marginTop: 36, alignItems: 'center' }}>
                     <View style={{ width: 124, height: 124, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{}}>
                             <Progress.Circle
@@ -254,13 +254,13 @@ class HomeScreenHeader extends Component {
             outputRange: ['360deg', '360deg', '0deg', '0deg', '0deg']
         })
         return (
-            <Animated.View style={[{ paddingBottom: 10, opacity: main_opacity, }]} >
-                <View style={{height: statusbarHeight}}></View>
-                <View style={{ flexDirection: 'column', alignItems: 'center', }}>
+            <Animated.View style={[{ paddingBottom: 20, opacity: main_opacity, }]} >
+                <View style={{height: statusbarHeight,}}></View>
+                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                     {this.renderAnimatedPart()}
-                    <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 10}}>
+                    <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 10,}}>
                         <Text style={styles.textStyle}>Barbara Porter</Text>
-                        <Text style={[styles.textStyle1, { marginTop: 4 }]}>@barbaraporter</Text>
+                        <Text style={[styles.textStyle1, { marginTop: 4, }]}>@barbaraporter</Text>
                     </View>
                 </View>
             </Animated.View>

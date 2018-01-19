@@ -115,13 +115,14 @@ export default class App extends Component {
       tabsStyle: {
         initialTabIndex: 0,
         tabBarBackgroundColor: "#111A2C",
-        tabBarTranslucent: false
+        tabBarTranslucent: false,
+        tabBarSelectedLabelColor: '#059ED9',
+        tabBarTextFontFamily:'Circular'
       },
       appStyle: {
         orientation: "portrait",
         statusBarTextColorSchemeSingleScreen: "light",
         navBarHidden: true,
-        //tabBarHidden: true,
         drawUnderTabBar: true,
         screenBackgroundColor: "#152341"
       },
