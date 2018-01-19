@@ -10,7 +10,7 @@ import store from "store"
 import { svgPathProperties } from "svg-path-properties"
 import InstagramLogin from "react-native-instagram-login"
 import { App as AppReducer, User as UserReducer } from "store/reducers"
-import  * as auth from "ducks/auth"
+import  * as Auth from "ducks/auth"
 
 import { SignInService } from "services/LoginService"
 import Cookie from "react-native-cookie"
@@ -151,8 +151,7 @@ class LoginScreen extends Component {
 
                     <TouchableOpacity
                         style={{ flex: 1 }}
-                        onPress={this.loginButtonPress}
-                        //onPress={() => this.refs.instagramLogin.show()}
+                        onPress={() => this.refs.instagramLogin.show()}
                     >
                         <View style={styles.buttonView}>
                             <Image
@@ -180,7 +179,7 @@ class LoginScreen extends Component {
                         "relationships",
                         "likes"
                     ]}
-                    onLoginSuccess={token => this.props.doInstagramLogin({ token })}
+                    onLoginSuccess={token => this.props.doInstagramLogin(token)}
                 />
             </View>
         )
@@ -193,7 +192,7 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-export default connect(mapStateToProps, auth )(LoginScreen)/*
+export default connect(mapStateToProps, Auth )(LoginScreen)/*
 
   onNavigatorEvent(event) {
     if (event.id === "bottomTabSelected") {

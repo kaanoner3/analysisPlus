@@ -3,8 +3,7 @@ import { login } from './auth';
 
 export default function* root() {
     yield all([
-      fork(login),
-      
+      login
     ]);
   }
   
