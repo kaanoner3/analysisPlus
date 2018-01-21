@@ -3,7 +3,7 @@ import SignInService from "./LoginService"
 
 export default {
     LoginStorageService,
-    SignInService,
+    SignInService
 }
 
 export { LoginStorageService, SignInService }

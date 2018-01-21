@@ -1,6 +1,4 @@
-import { Dimensions } from 'react native'
+import { Dimensions } from "react native"
 
-const styles = {
-
-}
+const styles = {}
 export default styles

@@ -7,16 +7,16 @@ import createSagaMiddleware from "redux-saga"
 import reducers from "./reducers"
 import sagas from "./sagas"
 
-const sagaMiddleware = createSagaMiddleware()
+//const sagaMiddleware = createSagaMiddleware()
 // Create the glorious store instance.
-const store = createStore(reducers, applyMiddleware(logger, sagaMiddleware))
+const store = createStore(reducers, applyMiddleware(logger))
 
-sagaMiddleware.run(sagas)
+//sagaMiddleware.run(sagas)
 // Hot reloading thing
 if (module.hot) {
-  module.hot.accept(() => {
-    store.replaceReducer(reducers)
-  })
+    module.hot.accept(() => {
+        store.replaceReducer(reducers)
+    })
 }
 
 export default store

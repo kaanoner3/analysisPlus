@@ -1,8 +1,8 @@
-import axios from 'axios'
-import _ from 'lodash'
+import axios from "axios"
+import _ from "lodash"
 
 export default {
-    baseURL: "http://analysisplusapp.com/",
+    baseURL: "http://analysisplusapp.com/"
 }
 
 export function setConfig(config) {
