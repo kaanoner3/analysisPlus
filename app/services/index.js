@@ -1,9 +1,11 @@
-import LoginStorageService from "./LoginStorageService"
-import SignInService from "./LoginService"
+import LoginStorageService from "./LoginStorageService";
+import SignInService from "./LoginService";
+import accessToken from "./accessToken";
 
 export default {
-    LoginStorageService,
-    SignInService,
-}
+  LoginStorageService,
+  SignInService,
+  accessToken
+};
 
-export { LoginStorageService, SignInService }
+export { LoginStorageService, SignInService, accessToken };

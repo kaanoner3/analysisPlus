@@ -1,22 +1,22 @@
 // ACTION TYPES
-export const INSTAGRAM_LOGIN = 'auth/INSTAGRAM_LOGIN';
-export const INSTAGRAM_LOGIN_SUCCESS = 'auth/INSTAGRAM_LOGIN_SUCCESS';
-export const INSTAGRAM_LOGIN_FAIL = 'auth/INSTAGRAM_LOGIN_FAIL';
-export const REFRESH_TOKEN = 'auth/REFRESH_TOKEN';
+export const INSTAGRAM_LOGIN_REQUEST = "auth/INSTAGRAM_LOGIN";
+export const INSTAGRAM_LOGIN_SUCCESS = "auth/INSTAGRAM_LOGIN_SUCCESS";
+export const INSTAGRAM_LOGIN_FAIL = "auth/INSTAGRAM_LOGIN_FAIL";
+export const REFRESH_TOKEN = "auth/REFRESH_TOKEN";
 
 const initialState = {
   accessToken: null,
-  errorMessage: null,
+  errorMessage: null
 };
 
 // REDUCER
-export default function (state = initialState, action = {}) {
+export default function(state = initialState, action = {}) {
   switch (action.type) {
-    case INSTAGRAM_LOGIN: {
+    case INSTAGRAM_LOGIN_REQUEST: {
       return {
         ...state,
-        token,
-        isFetching: true,
+        accessToken: action.token,
+        isFetching: true
       };
     }
     default:
@@ -26,9 +26,8 @@ export default function (state = initialState, action = {}) {
 
 // ACTION CREATORS
 export function doInstagramLogin(token) {
-    console.log('geldi',token)
   return {
-    type: INSTAGRAM_LOGIN,
+    type: INSTAGRAM_LOGIN_REQUEST,
     token
   };
 }
@@ -37,6 +36,6 @@ export function doRefreshToken(accessToken, refreshToken) {
   return {
     type: REFRESH_TOKEN,
     accessToken,
-    refreshToken,
+    refreshToken
   };
 }
