@@ -1,3 +1,5 @@
+import { actionChannel } from "redux-saga/effects";
+
 // ACTION TYPES
 export const INSTAGRAM_LOGIN_REQUEST = "auth/INSTAGRAM_LOGIN";
 export const INSTAGRAM_LOGIN_SUCCESS = "auth/INSTAGRAM_LOGIN_SUCCESS";
@@ -19,6 +21,14 @@ export default function(state = initialState, action = {}) {
         isFetching: true
       };
     }
+    case INSTAGRAM_LOGIN_SUCCESS: {
+      const { data } = action;
+      return {
+        ...state,
+        data,
+        isFetching: false
+      };
+    }
     default:
       return state;
   }
@@ -31,7 +41,9 @@ export function doInstagramLogin(token) {
     token
   };
 }
-
+export function instagramLoginSuccess(data) {
+  return { type: INSTAGRAM_LOGIN_SUCCESS, data };
+}
 export function doRefreshToken(accessToken, refreshToken) {
   return {
     type: REFRESH_TOKEN,

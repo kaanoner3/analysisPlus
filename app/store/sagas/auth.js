@@ -9,6 +9,8 @@ import {
 import { SignInService } from "services/LoginService";
 import { accessToken as accessTokenService } from "services";
 import { INSTAGRAM_LOGIN_REQUEST, instagramLoginSuccess } from "ducks/auth";
+import {startHomeScreen,startLoginScreen} from "services/appStartHelper"
+import {setToken} from '../../../config/axios'
 
 export function* login() {
   while (true) {
@@ -32,7 +34,9 @@ export function* login() {
         clientID: loginResponse.data.client_id,
         clientSecret: loginResponse.data.client_secret
       };
-      yield put(instagramLoginSuccess,succesfullLoginData)
+      yield put(instagramLoginSuccess(succesfullLoginData))
+      yield call(setToken,tokenData.data.access_token)
+      yield call(startHomeScreen)
     } catch (error) {
       console.log(error);
     }
