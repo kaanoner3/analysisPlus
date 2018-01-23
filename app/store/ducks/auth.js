@@ -12,7 +12,7 @@ const initialState = {
 };
 
 // REDUCER
-export default function reducer(state = initialState, action = {}) {
+export default function (state = initialState, action = {}) {
   switch (action.type) {
     case INSTAGRAM_LOGIN_REQUEST: {
       return {

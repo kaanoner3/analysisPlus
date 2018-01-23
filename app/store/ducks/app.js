@@ -14,7 +14,7 @@ const initialState = {
 |------------------------------------------------------------------------------
 */
 
-export default function reducer(state = initialState, action = {}) {
+export default function (state = initialState, action = {}) {
     if (action.type === 'APP_STATE_CHANGED') {
         return {
             appState: action.appState
