@@ -1,13 +1,10 @@
 import { combineReducers } from "redux";
-import * as App from "./ducks/app"
-import * as Auth from "./ducks/auth"
+import { auth, app, user } from './ducks';
+
 
 export default combineReducers({
-  app: App.default,
-  auth: Auth.default
+  app,
+  auth,
+  user
 });
 
-export {
-  App,
-  Auth
-}

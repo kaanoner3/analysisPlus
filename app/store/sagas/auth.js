@@ -9,8 +9,15 @@ import {
 import { SignInService } from "services/LoginService";
 import { accessToken as accessTokenService } from "services";
 import { INSTAGRAM_LOGIN_REQUEST, instagramLoginSuccess } from "ducks/auth";
-import {startHomeScreen,startLoginScreen} from "services/appStartHelper"
-import {setToken} from '../../../config/axios'
+import { startHomeScreen, startLoginScreen } from "services/appStartHelper";
+import { setToken } from "../../../config/axios";
+import { setUserIdentity } from "ducks/user";
+import {switchToUser} from "ducks/app"
+import {
+  revive, //get
+  clear,
+  persist //set
+} from "services/LoginStorageService";
 
 export function* login() {
   while (true) {
@@ -34,9 +41,16 @@ export function* login() {
         clientID: loginResponse.data.client_id,
         clientSecret: loginResponse.data.client_secret
       };
-      yield put(instagramLoginSuccess(succesfullLoginData))
-      yield call(setToken,tokenData.data.access_token)
-      yield call(startHomeScreen)
+      yield put(instagramLoginSuccess(succesfullLoginData));
+
+      const user_id = loginResponse.data.instagram_id.toString();
+      const app_token = tokenData.data.access_token.toString();
+      persist({
+        user_id,
+        app_token
+      });
+      yield put(setUserIdentity(app_token,user_id))
+      yield put(switchToUser());
     } catch (error) {
       console.log(error);
     }

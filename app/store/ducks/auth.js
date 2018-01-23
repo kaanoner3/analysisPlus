@@ -12,7 +12,7 @@ const initialState = {
 };
 
 // REDUCER
-export default function(state = initialState, action = {}) {
+export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case INSTAGRAM_LOGIN_REQUEST: {
       return {
@@ -29,6 +29,14 @@ export default function(state = initialState, action = {}) {
         isFetching: false
       };
     }
+    case REFRESH_TOKEN: {
+      const { accessToken, refreshToken } = action;
+      return {
+        ...state,
+        accessToken,
+        refreshToken
+      };
+    }
     default:
       return state;
   }
@@ -36,10 +44,7 @@ export default function(state = initialState, action = {}) {
 
 // ACTION CREATORS
 export function doInstagramLogin(token) {
-  return {
-    type: INSTAGRAM_LOGIN_REQUEST,
-    token
-  };
+  return { type: INSTAGRAM_LOGIN_REQUEST, token };
 }
 export function instagramLoginSuccess(data) {
   return { type: INSTAGRAM_LOGIN_SUCCESS, data };

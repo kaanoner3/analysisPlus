@@ -1,14 +1,10 @@
 import { Navigation } from "react-native-navigation";
 import { setConfig as setAxiosConfig } from "config/axios";
-import store from '../store'
-export function startHomeScreen() {
-    var test = store.getState()
-    console.log('asd',test)
-  setImmediate(() =>
-    setAxiosConfig({
-      // 'headers.common.Authorization': `Bearer ${store.getState().user.token}`,
-    })
-  );
+import store from "../store";
+import { images } from "resources";
+
+export function startHomeScreen(token) {
+
   Navigation.startTabBasedApp({
     tabs: [
       {

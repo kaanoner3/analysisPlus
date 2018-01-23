@@ -9,13 +9,14 @@ import store from "store";
 import { images } from "resources";
 
 // Root-level reducer.
-import { App as AppReducer, User as UserReducer } from "store/reducers";
-
+import {switchToUser,switchToLogin} from "ducks/app"
+import { setUserIdentity } from "ducks/user";
 // AsyncStorage helper.
 import { revive } from "services/LoginStorageService";
-import {startHomeScreen,startLoginScreen} from "services/appStartHelper"
+import { startHomeScreen, startLoginScreen } from "services/appStartHelper";
 // Config object.
 import { setConfig as setAxiosConfig } from "config/axios";
+import { connect, dispatch } from "react-redux";
 
 export default class App extends Component {
   /*
@@ -23,23 +24,25 @@ export default class App extends Component {
   */
   constructor(props) {
     super(props);
-
+    this.app_token = "";
     // Listen to changes on store.
     store.subscribe(this.onStoreUpdate.bind(this));
-
     // Get last login state from storage.
     revive((err, result) => {
-      console.log("err", err);
-      console.log("result", result);
+      //   console.log("err", err);
+      //   console.log("result", result);
+      this.app_token = result.app_token;
       // If an error occured or client was not signed in,
       // set action to login, or otherwise, set it to user.
       if (err || result === false) {
-        store.dispatch(AppReducer.switchToLogin());
+        store.dispatch(switchToLogin());
       } else {
-        store.dispatch(AppReducer.switchToUser());
-        store.dispatch(
-          UserReducer.setUserIdentity(result.app_token, result.user_id)
-        );
+        store.dispatch({
+          type: "ACTION_SET_USER_IDENTITY",
+          token: result.app_token,
+          id: result.user_id
+        });
+        store.dispatch(switchToUser());
       }
     });
   }
@@ -66,10 +69,19 @@ export default class App extends Component {
   }
 
   startLogin() {
-    startLoginScreen()
+    startLoginScreen();
   }
 
   startUser() {
-    startHomeScreen()
+    startHomeScreen(this.app_token);
   }
 }
+
+/*
+const mapStateToProps = () => {
+  return {}
+}
+export default connect(mapStateToProps, {
+  setUserIdentity
+})(App)
+*/
