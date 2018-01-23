@@ -1,5 +1,4 @@
-
-import React, { Component } from 'react';
+import React, { Component } from "react"
 import {
     Platform,
     StyleSheet,
@@ -10,9 +9,9 @@ import {
     ImageBackground,
     Animated,
     TouchableOpacity
-} from 'react-native';
-import { images } from 'resources'
-import * as Progress from 'react-native-progress';
+} from "react-native"
+import { images } from "resources"
+import * as Progress from "react-native-progress"
 import Svg, {
     Circle,
     Ellipse,
@@ -28,59 +27,62 @@ import Svg, {
     Use,
     Defs,
     Stop
-} from 'react-native-svg';
+} from "react-native-svg"
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window")
 
-let statusbarHeight = 20;
+let statusbarHeight = 20
 if (!Platform.isPad && !Platform.isTVOS && height == 812) {
-  statusbarHeight = 44;
+    statusbarHeight = 44
 }
-let AnimatedCircle = Animated.createAnimatedComponent(Circle);
+let AnimatedCircle = Animated.createAnimatedComponent(Circle)
 
 class HomeScreenHeader extends Component {
     constructor() {
         super()
         this.state = {
             scrollY: new Animated.Value(0),
-            rotateY: new Animated.Value(0), loading: false, startAnimation: false,
+            rotateY: new Animated.Value(0),
+            loading: false,
+            startAnimation: false,
             indeterminate: true,
-            progress: 0,
+            progress: 0
         }
 
-        this.rotate = '0deg'
-        this.rotateText = '0deg'
+        this.rotate = "0deg"
+        this.rotateText = "0deg"
         this.interval
         this.interval2
         this.opacity
         this.renderSvgCircle = this.renderSvgCircle.bind(this)
         this.renderAnimatedPart = this.renderAnimatedPart.bind(this)
         this.rotateCircle = this.rotateCircle.bind(this)
-        
-        this.state.rotateY.addListener((rotateY) => {
-        })
-        this.state.scrollY.addListener((scrollY) => {
+
+        this.state.rotateY.addListener(rotateY => {})
+        this.state.scrollY.addListener(scrollY => {
             if (this.state.startAnimation === false) {
                 let strokeDashoffset = scrollY.value * -6.5
                 strokeDashoffset = Math.min(strokeDashoffset, 377)
                 strokeDashoffset = Math.max(strokeDashoffset, 0)
-                this._myCircle.setNativeProps({ strokeDashoffset: 377 - strokeDashoffset })
+                this._myCircle.setNativeProps({
+                    strokeDashoffset: 377 - strokeDashoffset
+                })
             }
-        });
+        })
     }
     animate() {
         this.setState({ progress: 0 }, () => {
             setTimeout(() => {
                 this.interval = setInterval(() => {
-                    let temp = Math.random() * (10)
+                    let temp = Math.random() * 10
                     if (this.state.progress + temp <= 98) {
-                        this.setState({ progress: this.state.progress + temp });
+                        this.setState({ progress: this.state.progress + temp })
                     } else {
                         this.setState({ progress: 98 })
                     }
-                }, 70);
-            }, 0);
-        });
+                }, 70)
+            }, 0)
+        })
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.loading === true) {
@@ -88,7 +90,7 @@ class HomeScreenHeader extends Component {
                 this.animate()
                 Animated.timing(this.state.rotateY, {
                     toValue: 1,
-                    duration: 500,
+                    duration: 500
                 }).start(() => {
                     this.rotateCircle()
                 })
@@ -99,9 +101,8 @@ class HomeScreenHeader extends Component {
                 clearInterval(this.interval2)
                 Animated.timing(this.state.rotateY, {
                     toValue: 0,
-                    duration: 500,
-                }).start(() => {
-                })
+                    duration: 500
+                }).start(() => {})
             })
         }
     }
@@ -110,19 +111,29 @@ class HomeScreenHeader extends Component {
         let strokeDashoffset = 0
         this.interval2 = setInterval(() => {
             temp += 1
-            strokeDashoffset = (temp) * 6.5
+            strokeDashoffset = temp * 6.5
             strokeDashoffset = Math.min(strokeDashoffset, 377)
             strokeDashoffset = Math.max(strokeDashoffset, 0)
-            this._myCircle.setNativeProps({ strokeDashoffset: 0 + strokeDashoffset });
+            this._myCircle.setNativeProps({
+                strokeDashoffset: 0 + strokeDashoffset
+            })
         }, 1)
     }
     renderSvgCircle() {
         if (this.state.startAnimation === false) {
             return (
-                <View style={{ position: 'absolute', top: 0, left: 0, zIndex: 9, }} >
+                <View
+                    style={{ position: "absolute", top: 0, left: 0, zIndex: 9 }}
+                >
                     <Svg width="124" height="124">
                         <Defs>
-                            <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="a">
+                            <LinearGradient
+                                x1="50%"
+                                y1="100%"
+                                x2="50%"
+                                y2="0%"
+                                id="a"
+                            >
                                 <Stop stopColor="#59D24E" offset="0%" />
                                 <Stop stopColor="#00BCC2" offset="100%" />
                             </LinearGradient>
@@ -143,7 +154,7 @@ class HomeScreenHeader extends Component {
                                 strokeDashoffset="377"
                                 rotation="-90"
                                 origin="60, 60"
-                                ref={ref => this._myCircle = ref}
+                                ref={ref => (this._myCircle = ref)}
                                 cx="58"
                                 cy="62"
                                 r="60"
@@ -154,10 +165,21 @@ class HomeScreenHeader extends Component {
             )
         } else {
             return (
-                <Animated.View style={[{ position: 'absolute', top: 0, left: 0, zIndex: 9, }, { opacity: this.opacity }]} >
+                <Animated.View
+                    style={[
+                        { position: "absolute", top: 0, left: 0, zIndex: 9 },
+                        { opacity: this.opacity }
+                    ]}
+                >
                     <Svg width="124" height="124">
                         <Defs>
-                            <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="a">
+                            <LinearGradient
+                                x1="50%"
+                                y1="100%"
+                                x2="50%"
+                                y2="0%"
+                                id="a"
+                            >
                                 <Stop stopColor="#59D24E" offset="0%" />
                                 <Stop stopColor="#00BCC2" offset="100%" />
                             </LinearGradient>
@@ -178,7 +200,7 @@ class HomeScreenHeader extends Component {
                                 strokeDashoffset=""
                                 rotation="-90"
                                 origin="60, 60"
-                                ref={ref => this._myCircle = ref}
+                                ref={ref => (this._myCircle = ref)}
                                 cx="58"
                                 cy="62"
                                 r="60"
@@ -192,16 +214,49 @@ class HomeScreenHeader extends Component {
     renderAnimatedPart() {
         if (this.state.startAnimation === false) {
             return (
-                <Animated.View style={{ transform: [{ rotateY: this.rotate }], flexDirection: 'row', marginTop: 46, alignItems: 'center' }}>
-                    <Animated.View style={{ transform: [{ rotateY: this.rotateText }], flexDirection: 'column', paddingRight: 20 }} >
+                <Animated.View
+                    style={{
+                        transform: [{ rotateY: this.rotate }],
+                        flexDirection: "row",
+                        marginTop: 26,
+                        alignItems: "center"
+                    }}
+                >
+                    <Animated.View
+                        style={{
+                            transform: [{ rotateY: this.rotateText }],
+                            flexDirection: "column",
+                            paddingRight: 20
+                        }}
+                    >
                         <Text style={styles.textStyle}>383</Text>
                         <Text style={styles.textStyle1}>FOLLOWING</Text>
                     </Animated.View>
-                    <View style={{ width: 124, height: 124, alignItems: 'center', justifyContent: 'center' }}>
-                        <Animated.Image style={{ transform: [{ rotateY: this.rotate }], height: 106, width: 106 }} source={images.profilePic} />
+                    <View
+                        style={{
+                            width: 124,
+                            height: 124,
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}
+                    >
+                        <Animated.Image
+                            style={{
+                                transform: [{ rotateY: this.rotate }],
+                                height: 106,
+                                width: 106
+                            }}
+                            source={images.profilePic}
+                        />
                         {this.renderSvgCircle()}
                     </View>
-                    <Animated.View style={{ transform: [{ rotateY: this.rotateText }], flexDirection: 'column', marginLeft: 20 }}>
+                    <Animated.View
+                        style={{
+                            transform: [{ rotateY: this.rotateText }],
+                            flexDirection: "column",
+                            marginLeft: 20
+                        }}
+                    >
                         <Text style={styles.textStyle}>654</Text>
                         <Text style={styles.textStyle1}>FOLLOWERS</Text>
                     </Animated.View>
@@ -209,20 +264,39 @@ class HomeScreenHeader extends Component {
             )
         } else {
             return (
-                <Animated.View style={{ flexDirection: 'row', marginTop: 46, alignItems: 'center' }}>
-                    <View style={{ width: 124, height: 124, alignItems: 'center', justifyContent: 'center' }}>
+                <Animated.View
+                    style={{
+                        flexDirection: "row",
+                        marginTop: 36,
+                        alignItems: "center"
+                    }}
+                >
+                    <View
+                        style={{
+                            width: 124,
+                            height: 124,
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}
+                    >
                         <View style={{}}>
                             <Progress.Circle
-                                style={{ alignSelf: 'center' }}
+                                style={{ alignSelf: "center" }}
                                 borderWidth={0}
-                                formatText={progress => `${Math.round(this.state.progress)}%`}
-                                borderColor='rgba(255,255,255,0.0)'
+                                formatText={progress =>
+                                    `${Math.round(this.state.progress)}%`
+                                }
+                                borderColor="rgba(255,255,255,0.0)"
                                 size={80}
-                                textStyle={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}
+                                textStyle={{
+                                    color: "white",
+                                    fontSize: 20,
+                                    fontWeight: "bold"
+                                }}
                                 progress={this.state.progress}
                                 showsText={true}
-                                color={'rgba(255,255,255,0)'}
-                                unfilledColor='rgba(255,255,255,0.0)'
+                                color={"rgba(255,255,255,0)"}
+                                unfilledColor="rgba(255,255,255,0.0)"
                             />
                         </View>
                         {this.renderSvgCircle()}
@@ -243,24 +317,34 @@ class HomeScreenHeader extends Component {
         })
         this.rotate = this.state.rotateY.interpolate({
             inputRange: [0, 1],
-            outputRange: ['0deg', '180deg']
+            outputRange: ["0deg", "180deg"]
         })
         this.rotateText = this.state.rotateY.interpolate({
             inputRange: [0, 1],
-            outputRange: ['0deg', '180deg']
+            outputRange: ["0deg", "180deg"]
         })
         const spin = this.state.scrollY.interpolate({
             inputRange: [-60, -60, 0, 0, 0],
-            outputRange: ['360deg', '360deg', '0deg', '0deg', '0deg']
+            outputRange: ["360deg", "360deg", "0deg", "0deg", "0deg"]
         })
         return (
-            <Animated.View style={[{ paddingBottom: 10, opacity: main_opacity, }]} >
-                <View style={{height: statusbarHeight}}></View>
-                <View style={{ flexDirection: 'column', alignItems: 'center', }}>
+            <Animated.View
+                style={[{ paddingBottom: 20, opacity: main_opacity }]}
+            >
+                <View style={{ height: statusbarHeight }} />
+                <View style={{ flexDirection: "column", alignItems: "center" }}>
                     {this.renderAnimatedPart()}
-                    <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 10}}>
+                    <View
+                        style={{
+                            flexDirection: "column",
+                            alignItems: "center",
+                            marginTop: 10
+                        }}
+                    >
                         <Text style={styles.textStyle}>Barbara Porter</Text>
-                        <Text style={[styles.textStyle1, { marginTop: 4 }]}>@barbaraporter</Text>
+                        <Text style={[styles.textStyle1, { marginTop: 4 }]}>
+                            @barbaraporter
+                        </Text>
                     </View>
                 </View>
             </Animated.View>
@@ -272,22 +356,22 @@ export default HomeScreenHeader
 
 const styles = {
     textStyle: {
-        color: 'white',
+        color: "white",
         fontSize: 22,
-        backgroundColor: 'transparent',
-        alignSelf: 'center',
-        fontWeight: 'bold',
-        fontFamily: 'Circular'
+        backgroundColor: "transparent",
+        alignSelf: "center",
+        fontWeight: "bold",
+        fontFamily: "Circular"
     },
     textStyle1: {
-        color: 'rgba(255,255,255,0.5)',
+        color: "rgba(255,255,255,0.5)",
         fontSize: 14,
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
         marginTop: 4,
-        fontFamily: 'Circular'
+        fontFamily: "Circular"
     }
 }
-                /*
+/*
                 let strokeDashoffset = scrollY.value * -6.5
                 strokeDashoffset = Math.min(strokeDashoffset, 377)
                 strokeDashoffset = Math.max(strokeDashoffset, 0)

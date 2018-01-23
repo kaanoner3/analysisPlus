@@ -1,11 +1,9 @@
 const styles = {
-       itemSepStyle: {
+    itemSepStyle: {
         height: 1,
         backgroundColor: "white",
         opacity: 0.05,
-        marginLeft: 20,
-        
- 
+        marginLeft: 20
     }
 }
 

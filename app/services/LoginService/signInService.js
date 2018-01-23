@@ -1,9 +1,12 @@
-import axios from "axios";
+import axios from "axios"
 
-export default function SignInService(token) {
+async function SignInService(token) {
+  console.log('service',token)
   let params = new FormData();
   params.append("access_token", token);
-    axios
-    .post("api/login", params)
-    .then(response => console.log(response));
+  const response = axios.post("api/login", params);
+
+  return response
 }
+
+export default SignInService;

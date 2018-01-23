@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Text, View, Image, Dimensions, TouchableOpacity } from "react-native";
-import styles from './styles';
-import { images } from 'resources';
+import React, { Component } from "react"
+import { Text, View, Image, Dimensions, TouchableOpacity } from "react-native"
+import styles from "./styles"
+import { images } from "resources"
 
-const height = Dimensions.get('window').height
+const height = Dimensions.get("window").height
 
 class StaticHeader extends Component {
     constructor() {
@@ -24,28 +24,41 @@ class StaticHeader extends Component {
     backButtonPress() {
         this.props.navigator.pop({
             animated: true,
-            animationType: 'fade',
+            animationType: "fade"
         })
     }
     renderBackButton() {
         return (
-            <TouchableOpacity style={styles.button} onPress={() => this.backButtonPress()}>
-                <Image style={styles.buttonImage} source={images.headerBackButton} />
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => this.backButtonPress()}
+            >
+                <Image
+                    style={styles.buttonImage}
+                    source={images.headerBackButton}
+                />
             </TouchableOpacity>
         )
-
     }
     render() {
         return (
-            <View style={this.state.headerX === false ? styles.containerView : styles.headerXcontainer}>
+            <View
+                style={
+                    this.state.headerX === false
+                        ? styles.containerView
+                        : styles.headerXcontainer
+                }
+            >
                 {this.renderBackButton()}
                 <View style={styles.titleView}>
-                    <Text style={styles.titleTextStyle}>{this.props.title}</Text>
+                    <Text style={styles.titleTextStyle}>
+                        {this.props.title}
+                    </Text>
                 </View>
-                <View style={{ height: 35, width: 35 }}></View>
+                <View style={{ height: 35, width: 35 }} />
             </View>
-        );
+        )
     }
 }
 
-export default StaticHeader;
+export default StaticHeader

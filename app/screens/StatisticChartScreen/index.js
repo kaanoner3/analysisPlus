@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { View, Text, Dimensions } from 'react-native'
+import React, { Component } from "react"
+import { View, Text, Dimensions } from "react-native"
 import {
     VictoryBar,
     VictoryChart,
@@ -17,28 +17,29 @@ import {
     VictoryVoronoiContainer,
     VictoryArea,
     VictoryPie
-} from "victory-native";
-import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg";
-const screenWidth = Dimensions.get('window').width
+} from "victory-native"
+import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg"
+const screenWidth = Dimensions.get("window").width
 class StatisticChartScreen extends Component {
     constructor(props) {
         super(props)
-        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+        this.props.navigator.setOnNavigatorEvent(
+            this.onNavigatorEvent.bind(this)
+        )
         this.renderChart = this.renderChart.bind(this)
 
         this.state = { ShouldRenderChart: false }
     }
 
     onNavigatorEvent(event) {
-        if (event.id === 'bottomTabSelected') {
+        if (event.id === "bottomTabSelected") {
             this.setState({ ShouldRenderChart: true })
         }
-        if (event.id === 'willDisappear') {
+        if (event.id === "willDisappear") {
             this.setState({ ShouldRenderChart: false })
         }
     }
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     renderChart() {
         if (this.state.ShouldRenderChart === true) {
@@ -46,7 +47,13 @@ class StatisticChartScreen extends Component {
                 <View>
                     <VictoryChart theme={VictoryTheme.material}>
                         <Defs>
-                            <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id='a'>
+                            <LinearGradient
+                                x1="50%"
+                                y1="100%"
+                                x2="50%"
+                                y2="0%"
+                                id="a"
+                            >
                                 <Stop stopColor="#59D24E" offset="0%" />
                                 <Stop stopColor="#00BCC2" offset="100%" />
                             </LinearGradient>
@@ -60,24 +67,25 @@ class StatisticChartScreen extends Component {
                                 { x: 5, y: 7 }
                             ]}
                             style={{
-                                data: { stroke: 'yellow', fill: 'url(#a)', strokeWidth: 3, strokeLinecap: "round" },
+                                data: {
+                                    stroke: "yellow",
+                                    fill: "url(#a)",
+                                    strokeWidth: 3,
+                                    strokeLinecap: "round"
+                                }
                             }}
-                            interpolation='natural'
+                            interpolation="natural"
                             animate={{ duration: 1000 }}
                         />
                     </VictoryChart>
                 </View>
             )
         } else {
-            return <View style={{ flex: 1 }}></View>
+            return <View style={{ flex: 1 }} />
         }
     }
     render() {
-        return (
-            <View style={{ flex: 1 }} >
-                {this.renderChart()}
-            </View>
-        )
+        return <View style={{ flex: 1 }}>{this.renderChart()}</View>
     }
 }
 
