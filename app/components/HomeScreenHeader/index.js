@@ -365,7 +365,8 @@ const styles = {
     },
     textStyle1: {
         color: "rgba(255,255,255,0.5)",
-        fontSize: 14,
+        fontSize: 12,
+        fontWeight:'bold',
         backgroundColor: "transparent",
         marginTop: 4,
         fontFamily: "Circular"
