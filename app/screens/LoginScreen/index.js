@@ -10,7 +10,7 @@ import store from "store"
 import { svgPathProperties } from "svg-path-properties"
 import InstagramLogin from "react-native-instagram-login"
 import { App as AppReducer, User as UserReducer } from "store/reducers"
-import  * as Auth from "ducks/auth"
+import * as Auth from "ducks/auth"
 
 import { SignInService } from "services/LoginService"
 import Cookie from "react-native-cookie"
@@ -45,7 +45,7 @@ const screenHeight = Dimensions.get("window").height
 
 const instagram = {
     client_id: "65dcfc61b3564f14a9144181b08c6b1a",
-    redirect_url:"http://localhost:8005/login"
+    redirect_url: "http://localhost:8005/login"
 }
 
 class LoginScreen extends Component {
@@ -94,9 +94,7 @@ class LoginScreen extends Component {
         }
         Cookie.clear().then(() => {})
     }
-    handleLoginSucces({ token }) {
-
-    }
+    handleLoginSucces({ token }) {}
     loginButtonPress() {
         store.dispatch(AppReducer.switchToUser())
     }
@@ -192,7 +190,9 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-export default connect(mapStateToProps, Auth )(LoginScreen)/*
+export default connect(mapStateToProps, Auth)(
+    LoginScreen
+) /*
 
   onNavigatorEvent(event) {
     if (event.id === "bottomTabSelected") {

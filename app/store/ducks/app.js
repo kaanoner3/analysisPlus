@@ -5,7 +5,7 @@
 */
 
 const initialState = {
-    appState: null,
+    appState: null
 }
 
 /*
@@ -14,8 +14,8 @@ const initialState = {
 |------------------------------------------------------------------------------
 */
 
-export default function (state = initialState, action = {}) {
-    if (action.type === 'APP_STATE_CHANGED') {
+export default function(state = initialState, action = {}) {
+    if (action.type === "APP_STATE_CHANGED") {
         return {
             appState: action.appState
         }
@@ -32,8 +32,8 @@ export default function (state = initialState, action = {}) {
 
 export function changeAppState(appState) {
     return {
-        type: 'APP_STATE_CHANGED',
-        appState,
+        type: "APP_STATE_CHANGED",
+        appState
     }
 }
 
@@ -44,9 +44,9 @@ export function changeAppState(appState) {
 */
 
 export function switchToLogin() {
-    return changeAppState('login')
+    return changeAppState("login")
 }
 
 export function switchToUser() {
-    return changeAppState('user')
+    return changeAppState("user")
 }

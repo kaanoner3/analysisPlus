@@ -1,11 +1,11 @@
-import moment from 'moment'
-import 'moment/locale/tr'
+import moment from "moment"
+import "moment/locale/tr"
 
-moment.locale('tr', {
+moment.locale("tr", {
     relativeTime: {
         past: "%s önce",
-        s: 'şimdi',
-        ss: '%d sn',
+        s: "şimdi",
+        ss: "%d sn",
         m: "1d",
         mm: "%dd",
         h: "1sa",
@@ -19,4 +19,4 @@ moment.locale('tr', {
     }
 })
 
-moment.locale('tr')
+moment.locale("tr")

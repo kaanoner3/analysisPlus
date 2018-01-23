@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   call,
   put,
@@ -55,4 +56,17 @@ export function* login() {
       console.log(error);
     }
   }
+=======
+import { call, put, takeEvery, takeLatest, all } from "redux-saga/effects"
+import { SignInService } from "services/LoginService"
+import { INSTAGRAM_LOGIN } from "ducks/auth"
+export function* login() {
+    while (true) {
+        try {
+            const { token } = yield take(INSTAGRAM_LOGIN)
+            const loginResponse = yield call(SignInService(token))
+            console.log(loginResponse)
+        } catch (error) {}
+    }
+>>>>>>> 4793eb0842ac953cb2149b947f407f53e2dd2cde
 }
