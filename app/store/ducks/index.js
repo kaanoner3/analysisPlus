@@ -2,11 +2,13 @@
 import app from "./app";
 import auth from "./auth";
 import user from "./user";
+import profile from "./profile";
 
 module.exports = {
   auth,
   app,
-  user
+  user,
+  profile
 };
 
 

@@ -51,7 +51,6 @@ export default class App extends Component {
     // TODO: make sure 'restarting' does not cause memory leaks.
     if (this.currentAppState != appState) {
       this.currentAppState = appState;
-      console.log(appState);
       this.startApp(appState);
     }
   }

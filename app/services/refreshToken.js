@@ -3,7 +3,6 @@ import store from '../store';
 
 async function refreshTokenService() {
   const currentStore = store.getState();
-    console.log(currentStore)
   const params = {
     grant_type: 'refresh_token',
     client_id: currentStore.auth.clientID,

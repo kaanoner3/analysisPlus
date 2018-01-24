@@ -84,7 +84,6 @@ class LoginScreen extends Component {
     }
 
     componentWillMount() {
-        console.log(this.props)
         if (screenHeight === 812) {
             this.validHeight = screenHeight / 2
             this.setState({ headerX: true })

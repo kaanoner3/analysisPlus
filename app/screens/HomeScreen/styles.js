@@ -130,7 +130,14 @@ const styles = {
         top: 0,
         left: 0,
         right: 0
-    }
+    },
+    flatlistContainerView:{
+        backgroundColor: "#152341",
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
+        paddingTop: 10,
+        flex: 1
+     }
 }
 
 export default styles

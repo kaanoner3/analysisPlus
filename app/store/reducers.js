@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
-import { auth, app, user } from './ducks';
+import { auth, app, user,profile } from './ducks';
 
 
 export default combineReducers({
   app,
   auth,
-  user
+  user,
+  profile
 });
 
