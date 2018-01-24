@@ -5,7 +5,7 @@ async function  getProfileData(token) {
         access_token: token
     }
  return axios.get('api/user/base-detail',{params})
- .then(response =>{return( response.data)})
+ .then(response =>{return response.data})
 }
 
 export default getProfileData

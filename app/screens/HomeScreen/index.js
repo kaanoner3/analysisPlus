@@ -53,8 +53,10 @@ class HomeScreen extends Component {
     this.state.scrollY.addListener(scrolly => {});
   }
   componentWillMount() {
-    const test = getProfileData(this.props.token);
-    console.log(test)
+    getProfileData(this.props.token).then(data => {
+      console.log(data)
+    });
+
     if (height === 812) {
       this.setState({ headerX: true });
     } else {

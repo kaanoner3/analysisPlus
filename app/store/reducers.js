@@ -7,4 +7,3 @@ export default combineReducers({
   auth,
   user
 });
-
