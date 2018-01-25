@@ -16,6 +16,7 @@ import StatisticChartScreen from './StatisticChartScreen'
 import UserDetailScreen from './UserDetailScreen/index'
 import InteractionDetailScreen from "./InteractionDetailScreen"
 import PremiumServiceScreen from "./PremiumServiceScreen"
+
 Navigation.registerComponent('LoginScreen', () => LoginScreen, store, Provider)
 Navigation.registerComponent('HomeScreen', () => HomeScreen, store, Provider)
 Navigation.registerComponent('ShowInstagramUserScreen', () => ShowInstagramUserScreen, store, Provider)

@@ -20,9 +20,7 @@ import LinearGradient from "react-native-linear-gradient"
 import { connect } from "react-redux"
 import { getProfileDataRequest } from "ducks/profile"
 import FlatlistItem from "./FlatlistItem"
-const flatlistData = [
-    {flData: 1}
-]
+const flatlistData = [{ flData: 1 }]
 const statistic_data = [
    { text1: 12, text2: "GAINED FOLLOWERS" },
    { text1: 29, text2: "LOSTED FOLLOWERS" },
@@ -105,10 +103,11 @@ class HomeScreen extends Component {
       )
    }
    handleRefresh() {
-       this.props.getProfileDataRequest(this.props.token)
+       console.log('tık')
+      this.props.getProfileDataRequest(this.props.token)
    }
    renderList() {
-      return <FlatlistItem  navigator={this.props.navigator} />
+      return <FlatlistItem navigator={this.props.navigator} />
    }
 
    render() {
@@ -118,7 +117,7 @@ class HomeScreen extends Component {
             {this.renderNavButtons()}
             <View style={styles.absolute}>
                <CustomRefreshControll
-                  isRefreshing={this.state.loading}
+                  isRefreshing={this.props.isFetching}
                   onRefresh={this.handleRefresh}
                   onScroll={Animated.event([
                      {

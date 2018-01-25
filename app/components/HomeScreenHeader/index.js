@@ -85,15 +85,13 @@ class HomeScreenHeader extends Component {
       })
    }
    componentWillReceiveProps(nextProps) {
-      console.log("loadinggggggggggg", nextProps.loading)
-      console.log("owwwwn", this.props.loading)
       if (this.props.loading !== nextProps.loading) {
          if (nextProps.loading === true) {
             this.setState({ startAnimation: true }, () => {
                this.animate()
                Animated.timing(this.state.rotateY, {
                   toValue: 1,
-                  duration: 500
+                  duration: 250
                }).start(() => {
                   this.rotateCircle()
                })
@@ -116,7 +114,7 @@ class HomeScreenHeader extends Component {
       this.interval2 = setInterval(() => {
          temp += 1
          strokeDashoffset = temp * 6.5
-         strokeDashoffset = Math.min(strokeDashoffset, 377)
+         strokeDashoffset = Math.min(strokeDashoffset, 10000)
          strokeDashoffset = Math.max(strokeDashoffset, 0)
          this._myCircle.setNativeProps({
             strokeDashoffset: 0 + strokeDashoffset

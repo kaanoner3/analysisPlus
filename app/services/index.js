@@ -12,4 +12,10 @@ export default {
   getProfileData
 };
 
-export { LoginStorageService, SignInService, accessToken, refreshTokenService,getProfileData };
+export {
+  LoginStorageService,
+  SignInService,
+  accessToken,
+  refreshTokenService,
+  getProfileData
+};
