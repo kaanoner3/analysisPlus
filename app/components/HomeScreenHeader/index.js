@@ -85,7 +85,6 @@ class HomeScreenHeader extends Component {
       })
    }
    componentWillReceiveProps(nextProps) {
-       console.log('HAYYYDİİİİİİ',nextProps.userData)
       if (this.props.loading !== nextProps.loading) {
          if (nextProps.loading === true) {
             this.setState({ startAnimation: true }, () => {

@@ -4,13 +4,16 @@ import accessToken from "./accessToken";
 import refreshTokenService from "./refreshToken";
 import getProfileData from "./getProfileData";
 import renderDiffArrow from "./renderDiffArrow"
+import getUsers from "./getUsers"
+
 export default {
   LoginStorageService,
   SignInService,
   accessToken,
   refreshTokenService,
   getProfileData,
-  renderDiffArrow
+  renderDiffArrow,
+  getUsers
 };
 
 export {
@@ -19,5 +22,6 @@ export {
   accessToken,
   refreshTokenService,
   getProfileData,
-  renderDiffArrow
+  renderDiffArrow,
+  getUsers
 };

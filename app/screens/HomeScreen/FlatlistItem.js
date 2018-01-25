@@ -16,7 +16,9 @@ import {
 import styles from "./styles"
 import { images } from "resources"
 import { connect } from "react-redux"
-import { renderDiffArrow } from 'services'
+import { renderDiffArrow } from "services"
+import { getUserDataRequest } from "ducks/instagramUsers"
+
 const statistic_data = { text1: 12, text2: "GAINED FOLLOWERS" }
 
 class FlatlistItem extends Component {
@@ -26,25 +28,60 @@ class FlatlistItem extends Component {
       this.gainedFollowersDiff = this.gainedFollowersDiff.bind(this)
    }
 
-   showUserScreen() {
+   showUserScreen(serviceType) {
+      this.props.getUserDataRequest(this.props.token, serviceType)
       this.props.navigator.push({
          screen: "ShowInstagramUserScreen",
-         passProps: {}
+         passProps: { serviceType }
       })
    }
-   gainedFollowersDiff() {
-
-   }
+   gainedFollowersDiff() {}
 
    renderItem() {
       return (
-         <View style={styles.flatlistContainerView}>
+         <View style={[styles.flatlistContainerView, { paddingBottom: 100 }]}>
             <View style={{ flexDirection: "row" }}>
                <View style={styles.contentLeftItem}>
                   <TouchableOpacity
                      activeOpacity={1}
                      //style={{ backgroundColor: "red" }}
-                     onPress={() => this.showUserScreen()}
+                     onPress={() => this.showUserScreen("not_follow_me" )}
+                  >
+                     <View style={{ height: 96 / 2 }}>
+                        <Text style={styles.infoText}>USERS NOT FOLLOW ME</Text>
+                     </View>
+                     <View style={styles.statisticView}>
+                        <Text style={styles.statisticText}>
+                           {this.props.profileData.statistic.not_follow_me}
+                        </Text>
+                        {renderDiffArrow(this.props.statisticDiff.not_follow_me)}
+                     </View>
+                  </TouchableOpacity>
+               </View>
+               <View style={styles.contentRightItem}>
+                  <TouchableOpacity
+                     activeOpacity={1}
+                     //style={{ backgroundColor: "red" }}
+                     onPress={() => this.showUserScreen("not_follow_by_me" )}
+                  >
+                     <View style={{ height: 96 / 2 }}>
+                        <Text style={styles.infoText}>USERS NOT FOLLOWED BY ME</Text>
+                     </View>
+                     <View style={styles.statisticView}>
+                        <Text style={styles.statisticText}>
+                           {this.props.profileData.statistic.not_follow_by_me}
+                        </Text>
+                        {renderDiffArrow(this.props.statisticDiff.not_follow_by_me)}
+                     </View>
+                  </TouchableOpacity>
+               </View>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+               <View style={styles.contentLeftItem}>
+                  <TouchableOpacity
+                     activeOpacity={1}
+                     //style={{ backgroundColor: "red" }}
+                     onPress={() => this.showUserScreen("gained_followers" )}
                   >
                      <View style={{ height: 96 / 2 }}>
                         <Text style={styles.infoText}>GAINED FALLOWERS</Text>
@@ -61,7 +98,7 @@ class FlatlistItem extends Component {
                   <TouchableOpacity
                      activeOpacity={1}
                      //style={{ backgroundColor: "red" }}
-                     onPress={() => this.showUserScreen()}
+                     onPress={() => this.showUserScreen("losted_followers" )}
                   >
                      <View style={{ height: 96 / 2 }}>
                         <Text style={styles.infoText}>LOSTED FOLLOWERS}</Text>
@@ -81,7 +118,7 @@ class FlatlistItem extends Component {
                   <TouchableOpacity
                      activeOpacity={1}
                      //style={{ backgroundColor: "red" }}
-                     onPress={() => this.showUserScreen()}
+                     onPress={() => this.showUserScreen("profile_visitors" )}
                   >
                      <View style={{ height: 96 / 2 }}>
                         <Text style={styles.infoText}>PROFILE VISITORS</Text>
@@ -91,7 +128,6 @@ class FlatlistItem extends Component {
                            {this.props.profileData.statistic.profile_visitors}
                         </Text>
                         {renderDiffArrow(this.props.statisticDiff.profile_visitors)}
-
                      </View>
                   </TouchableOpacity>
                </View>
@@ -99,7 +135,7 @@ class FlatlistItem extends Component {
                   <TouchableOpacity
                      activeOpacity={1}
                      //style={{ backgroundColor: "red" }}
-                     onPress={() => this.showUserScreen()}
+                     onPress={() => this.showUserScreen("user_blocking_me" )}
                   >
                      <View style={{ height: 96 / 2 }}>
                         <Text style={styles.infoText}>USER BLOCKING ME</Text>
@@ -109,7 +145,6 @@ class FlatlistItem extends Component {
                            {this.props.profileData.statistic.user_blocking_me}
                         </Text>
                         {renderDiffArrow(this.props.statisticDiff.user_blocking_me)}
-
                      </View>
                   </TouchableOpacity>
                </View>
@@ -119,7 +154,7 @@ class FlatlistItem extends Component {
                   <TouchableOpacity
                      activeOpacity={1}
                      //style={{ backgroundColor: "red" }}
-                     onPress={() => this.showUserScreen()}
+                     onPress={() => this.showUserScreen("stalkers" )}
                   >
                      <View style={{ height: 96 / 2 }}>
                         <Text style={styles.infoText}>STALKERS</Text>
@@ -129,7 +164,6 @@ class FlatlistItem extends Component {
                            {this.props.profileData.statistic.stalkers}
                         </Text>
                         {renderDiffArrow(this.props.statisticDiff.stalkers)}
-
                      </View>
                   </TouchableOpacity>
                </View>
@@ -137,7 +171,7 @@ class FlatlistItem extends Component {
                   <TouchableOpacity
                      activeOpacity={1}
                      //style={{ backgroundColor: "red" }}
-                     onPress={() => this.showUserScreen()}
+                     onPress={() => this.showUserScreen("deleted_comment" )}
                   >
                      <View style={{ height: 96 / 2 }}>
                         <Text style={styles.infoText}>DELETED COMMENT</Text>
@@ -147,44 +181,6 @@ class FlatlistItem extends Component {
                            {this.props.profileData.statistic.deleted_comments}
                         </Text>
                         {renderDiffArrow(this.props.statisticDiff.deleted_comments)}
-                     </View>
-                  </TouchableOpacity>
-               </View>
-            </View>
-            <View style={{ flexDirection: "row" }}>
-               <View style={styles.contentLeftItem}>
-                  <TouchableOpacity
-                     activeOpacity={1}
-                     //style={{ backgroundColor: "red" }}
-                     onPress={() => this.showUserScreen()}
-                  >
-                     <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>{statistic_data.text2}</Text>
-                     </View>
-                     <View style={styles.statisticView}>
-                        <Text style={styles.statisticText}>{statistic_data.text1}</Text>
-                        <View style={styles.arrowView}>
-                           <Image source={images.lostArrow} />
-                           <Text style={styles.lostText}>2</Text>
-                        </View>
-                     </View>
-                  </TouchableOpacity>
-               </View>
-               <View style={styles.contentRightItem}>
-                  <TouchableOpacity
-                     activeOpacity={1}
-                     //style={{ backgroundColor: "red" }}
-                     onPress={() => this.showUserScreen()}
-                  >
-                     <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>{statistic_data.text2}</Text>
-                     </View>
-                     <View style={styles.statisticView}>
-                        <Text style={styles.statisticText}>{statistic_data.text1}</Text>
-                        <View style={styles.arrowView}>
-                           <Image source={images.lostArrow} />
-                           <Text style={styles.lostText}>2</Text>
-                        </View>
                      </View>
                   </TouchableOpacity>
                </View>
@@ -204,4 +200,4 @@ const mapStateToProps = (state, ownProps) => {
       statisticDiff: state.profile.diff
    }
 }
-export default connect(mapStateToProps, {})(FlatlistItem)
+export default connect(mapStateToProps, {getUserDataRequest})(FlatlistItem)
