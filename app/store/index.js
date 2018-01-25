@@ -17,7 +17,6 @@ const persist = persistStore(store, { storage: AsyncStorage }, onRehydrate);
 
 function onRehydrate() {
     const currentState = store.getState();
-    console.log('current state',currentState)
     /*
     if (currentState.auth.accessToken) {
       // Eğer access tokenı varsa

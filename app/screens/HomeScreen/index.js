@@ -103,7 +103,6 @@ class HomeScreen extends Component {
       )
    }
    handleRefresh() {
-       console.log('tık')
       this.props.getProfileDataRequest(this.props.token)
    }
    renderList() {
