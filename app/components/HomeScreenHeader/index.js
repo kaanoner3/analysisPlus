@@ -85,6 +85,7 @@ class HomeScreenHeader extends Component {
       })
    }
    componentWillReceiveProps(nextProps) {
+       console.log('HAYYYDİİİİİİ',nextProps.userData)
       if (this.props.loading !== nextProps.loading) {
          if (nextProps.loading === true) {
             this.setState({ startAnimation: true }, () => {
@@ -217,7 +218,7 @@ class HomeScreenHeader extends Component {
                      paddingRight: 20
                   }}
                >
-                  <Text style={styles.textStyle}>383</Text>
+                  <Text style={styles.textStyle}>{this.props.userData.counts.follows}</Text>
                   <Text style={styles.textStyle1}>FOLLOWING</Text>
                </Animated.View>
                <View
@@ -232,9 +233,10 @@ class HomeScreenHeader extends Component {
                      style={{
                         transform: [{ rotateY: this.rotate }],
                         height: 106,
-                        width: 106
+                        width: 106,
+                        borderRadius: 53
                      }}
-                     source={images.profilePic}
+                     source={{ uri: this.props.userData.profile_picture}}
                   />
                   {this.renderSvgCircle()}
                </View>
@@ -245,7 +247,7 @@ class HomeScreenHeader extends Component {
                      marginLeft: 20
                   }}
                >
-                  <Text style={styles.textStyle}>654</Text>
+                  <Text style={styles.textStyle}>{this.props.userData.counts.followed_by}</Text>
                   <Text style={styles.textStyle1}>FOLLOWERS</Text>
                </Animated.View>
             </Animated.View>
@@ -324,8 +326,8 @@ class HomeScreenHeader extends Component {
                      marginTop: 10
                   }}
                >
-                  <Text style={styles.textStyle}>Barbara Porter</Text>
-                  <Text style={[styles.textStyle1, { marginTop: 4 }]}>@barbaraporter</Text>
+                  <Text style={styles.textStyle}>{this.props.userData.full_name}</Text>
+                  <Text style={[styles.textStyle1, { marginTop: 4 }]}>@{this.props.userData.username}</Text>
                </View>
             </View>
          </Animated.View>

@@ -130,7 +130,7 @@ class HomeScreen extends Component {
                   contentComponent={
                      <FlatList
                         ListHeaderComponent={
-                           <HomeScreenHeader ref="header" loading={this.props.isFetching} />
+                           <HomeScreenHeader ref="header" loading={this.props.isFetching} userData={this.props.userData}/>
                         }
                         style={styles.flatlist}
                         data={flatlistData}
@@ -148,76 +148,8 @@ class HomeScreen extends Component {
 const mapStateToProps = (state, ownProps) => {
    return {
       token: state.user.token,
-      profileData: state.profile.profileData,
+      userData: state.profile.profileData.user,
       isFetching: state.profile.isFetching
    }
 }
 export default connect(mapStateToProps, { getProfileDataRequest })(HomeScreen)
-
-/*
-      if (index % 2 === 0) {
-         return (
-            <View
-               style={
-                  index === 0
-                     ? {
-                          backgroundColor: "#152341",
-                          borderTopLeftRadius: 15,
-                          paddingTop: 10,
-                          flex: 1
-                       }
-                     : { backgroundColor: "#152341", flex: 1 }
-               }
-            >
-               <View style={styles.contentLeftItem}>
-                  <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen(index)}>
-                     <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>{item.text2}</Text>
-                     </View>
-                     <View style={styles.statisticView}>
-                        <Text style={styles.statisticText}>{item.text1}</Text>
-                        <View style={styles.arrowView}>
-                           <Image source={images.gainArrow} />
-                           <Text style={styles.gainText}>2</Text>
-                        </View>
-                     </View>
-                  </TouchableOpacity>
-               </View>
-            </View>
-         )
-      } else {
-         return (
-            <View
-               style={
-                  index === 1
-                     ? {
-                          backgroundColor: "#152341",
-                          borderTopRightRadius: 15,
-                          paddingTop: 10,
-                          flex: 1
-                       }
-                     : { backgroundColor: "#152341", flex: 1 }
-               }
-            >
-               <View style={styles.contentRightItem}>
-                  <TouchableOpacity
-                     activeOpacity={1}
-                     //style={{ backgroundColor: "red" }}
-                     onPress={() => this.showUserScreen(index)}
-                  >
-                     <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>{item.text2}</Text>
-                     </View>
-                     <View style={styles.statisticView}>
-                        <Text style={styles.statisticText}>{item.text1}</Text>
-                        <View style={styles.arrowView}>
-                           <Image source={images.lostArrow} />
-                           <Text style={styles.lostText}>2</Text>
-                        </View>
-                     </View>
-                  </TouchableOpacity>
-               </View>
-            </View>
-         )
-      }
-*/
