@@ -23,7 +23,7 @@ export default function(state = initialState, action = {}) {
           console.log('reduceeeeer',action.data)
          return {
             ...state,
-            userList: [...action.data],
+            userList: action.data,
             isFetching: false
          }
       }

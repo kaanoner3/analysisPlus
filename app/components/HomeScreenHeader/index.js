@@ -70,6 +70,9 @@ class HomeScreenHeader extends Component {
          }
       })
    }
+   componentDidMount(){
+     //  this.setState({})
+   }
    animate() {
       this.setState({ progress: 0 }, () => {
          setTimeout(() => {
@@ -116,7 +119,7 @@ class HomeScreenHeader extends Component {
          strokeDashoffset = temp * 6.5
          strokeDashoffset = Math.min(strokeDashoffset, 10000)
          strokeDashoffset = Math.max(strokeDashoffset, 0)
-         this._myCircle.setNativeProps({
+         this._myCircle2.setNativeProps({
             strokeDashoffset: 0 + strokeDashoffset
          })
       }, 1)
@@ -159,6 +162,7 @@ class HomeScreenHeader extends Component {
          )
       } else {
          return (
+             
             <Animated.View
                style={[
                   { position: "absolute", top: 0, left: 0, zIndex: 9 },
@@ -188,7 +192,7 @@ class HomeScreenHeader extends Component {
                         strokeDashoffset=""
                         rotation="-90"
                         origin="60, 60"
-                        ref={ref => (this._myCircle = ref)}
+                        ref={ref => (this._myCircle2 = ref)}
                         cx="58"
                         cy="62"
                         r="60"
@@ -196,6 +200,7 @@ class HomeScreenHeader extends Component {
                   </G>
                </Svg>
             </Animated.View>
+            
          )
       }
    }
@@ -217,7 +222,7 @@ class HomeScreenHeader extends Component {
                      paddingRight: 20
                   }}
                >
-                  <Text style={styles.textStyle}>{this.props.userData.counts.follows}</Text>
+                  <Text style={styles.textStyle}>{this.props.userData.user.counts.follows}</Text>
                   <Text style={styles.textStyle1}>FOLLOWING</Text>
                </Animated.View>
                <View
@@ -235,7 +240,7 @@ class HomeScreenHeader extends Component {
                         width: 106,
                         borderRadius: 53
                      }}
-                     source={{ uri: this.props.userData.profile_picture}}
+                     source={{ uri: this.props.userData.user.profile_picture}}
                   />
                   {this.renderSvgCircle()}
                </View>
@@ -246,7 +251,7 @@ class HomeScreenHeader extends Component {
                      marginLeft: 20
                   }}
                >
-                  <Text style={styles.textStyle}>{this.props.userData.counts.followed_by}</Text>
+                  <Text style={styles.textStyle}>{this.props.userData.user.counts.followed_by}</Text>
                   <Text style={styles.textStyle1}>FOLLOWERS</Text>
                </Animated.View>
             </Animated.View>
@@ -293,6 +298,8 @@ class HomeScreenHeader extends Component {
       }
    }
    render() {
+    console.log("HEEEADEEEEER", this.props.userData)
+
       this.opacity = this.state.scrollY.interpolate({
          inputRange: [-60, 0],
          outputRange: [0, 1]
@@ -325,8 +332,8 @@ class HomeScreenHeader extends Component {
                      marginTop: 10
                   }}
                >
-                  <Text style={styles.textStyle}>{this.props.userData.full_name}</Text>
-                  <Text style={[styles.textStyle1, { marginTop: 4 }]}>@{this.props.userData.username}</Text>
+                  <Text style={styles.textStyle}>{this.props.userData.user.full_name}</Text>
+                  <Text style={[styles.textStyle1, { marginTop: 4 }]}>@{this.props.userData.user.username}</Text>
                </View>
             </View>
          </Animated.View>

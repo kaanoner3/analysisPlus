@@ -5,23 +5,31 @@
 */
 
 const initialState = {
-    appState: null
+   appState: null
 }
+export const APP_SWITCH_TOLOGIN = "app/APP_SWITCH_TOLOGIN"
+export const APP_SWITCH_TOUSER = "app/APP_SWITCH_TOUSER"
 
 /*
 |------------------------------------------------------------------------------
 | Reducer.
 |------------------------------------------------------------------------------
 */
-
 export default function(state = initialState, action = {}) {
-    if (action.type === "APP_STATE_CHANGED") {
-        return {
-            appState: action.appState
-        }
-    }
-
-    return state
+   switch (action.type) {
+      case APP_SWITCH_TOLOGIN: {
+         return {
+            appState: "login"
+         }
+      }
+      case APP_SWITCH_TOUSER: {
+         return {
+            appState: "user"
+         }
+      }
+      default:
+         return state
+   }
 }
 
 /*
@@ -30,13 +38,6 @@ export default function(state = initialState, action = {}) {
 |------------------------------------------------------------------------------
 */
 
-export function changeAppState(appState) {
-    return {
-        type: "APP_STATE_CHANGED",
-        appState
-    }
-}
-
 /*
 |------------------------------------------------------------------------------
 | Actions.
@@ -44,9 +45,9 @@ export function changeAppState(appState) {
 */
 
 export function switchToLogin() {
-    return changeAppState("login")
+   return { type: APP_SWITCH_TOLOGIN }
 }
 
 export function switchToUser() {
-    return changeAppState("user")
+   return { type: APP_SWITCH_TOUSER }
 }

@@ -1,22 +1,18 @@
 import React, { Component } from "react"
-import { View, Text, Image, TouchableOpacity, FlatList } from "react-native"
+import {
+   View,
+   Text,
+   Image,
+   TouchableOpacity,
+   FlatList,
+   ActivityIndicator,
+   Dimensions
+} from "react-native"
 import { StaticHeader, InstagramUser } from "components"
 import styles from "./styles"
 import { getUserDataRequest } from "ducks/instagramUsers"
 import { connect } from "react-redux"
 
-const data = [
-   { text1: 12, text2: "GAINED FOLLOWERS" },
-   { text1: 29, text2: "LOSTED FOLLOWERS" },
-   { text1: 245, text2: "PROFILE VISITORS" },
-   { text1: 4, text2: "USER BLOCKING ME" },
-   { text1: 57, text2: "STALKERS" },
-   { text1: 7, text2: "DELETED COMMENT" },
-   { text1: 33, text2: "USERS NOT FOLLOWING ME" },
-   { text1: 33, text2: "USERS NOT FOLLOWED BY ME" },
-   { text1: 33, text2: "DENEME 1" },
-   { text1: 33, text2: "DENEME 2" }
-]
 class ShowInstagramUserScreen extends Component {
    constructor() {
       super()
@@ -30,32 +26,44 @@ class ShowInstagramUserScreen extends Component {
          passProps: {}
       })
    }
-   componentWillMount() {
-   }
+   componentWillMount() {}
    renderInstagramUser({ item }) {
-      return <InstagramUser onPress={() => this.pushInstagramUserDetail()} />
+      return <InstagramUser data={item} onPress={() => this.pushInstagramUserDetail()} />
    }
 
    render() {
-      return (
-         <View style={{ flex: 1, backgroundColor: "#152341" }}>
-            <StaticHeader title={this.props.serviceType.type} navigator={this.props.navigator} />
-            <FlatList
-               renderItem={this.renderInstagramUser}
-               data={data}
-               style={{ flex: 1 }}
-               ItemSeparatorComponent={() => <View style={styles.itemSepStyle} />}
-            />
-         </View>
-      )
+      console.log("CONTROL FETCH", this.props.isFetching)
+      if (this.props.isFetching === false) {
+         return (
+            <View style={{ flex: 1, backgroundColor: "#152341" }}>
+               <StaticHeader title={this.props.serviceType.type} navigator={this.props.navigator} />
+               <FlatList
+                  renderItem={this.renderInstagramUser}
+                  data={this.props.userList}
+                  style={{ flex: 1 }}
+                  ItemSeparatorComponent={() => <View style={styles.itemSepStyle} />}
+               />
+            </View>
+         )
+      } else {
+         return (
+            <View style={{ flex: 1, backgroundColor: "#152341", alignItems: "center" }}>
+               <ActivityIndicator
+                  style={{ top: Dimensions.get("window").height / 2 }}
+                  color="white"
+                  size="large"
+               />
+            </View>
+         )
+      }
    }
 }
 const mapStateToProps = (state, ownProps) => {
-    console.log('state neymis bakalım',state)
-    return {
-       token: state.user.token,
-      // userList: state.instagramUser.profileData.user,
-       isFetching: state.instagramUsers.isFetching
-    }
- }
+   console.log("state neymis bakalım", state)
+   return {
+      token: state.user.token,
+      userList: state.instagramUsers.userList,
+      isFetching: state.instagramUsers.isFetching
+   }
+}
 export default connect(mapStateToProps, { getUserDataRequest })(ShowInstagramUserScreen)

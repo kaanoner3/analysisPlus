@@ -31,14 +31,14 @@ class InstagramUser extends Component {
                             <View style={{ flexDirection: "row" }}>
                                 <Image
                                     style={styles.imageStyle}
-                                    source={images.avatar}
+                                    source={{uri: this.props.data.profile_picture}}
                                 />
                                 <View style={styles.textView}>
                                     <Text style={styles.nameText}>
-                                        Barbara Porter
+                                        {this.props.data.full_name}
                                     </Text>
                                     <Text style={styles.usernameText}>
-                                        @barbaraporter
+                                        {this.props.data.username}
                                     </Text>
                                     <View style={styles.relationshipContainer}>
                                         <View

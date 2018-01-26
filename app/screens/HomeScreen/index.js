@@ -21,18 +21,7 @@ import { connect } from "react-redux"
 import { getProfileDataRequest } from "ducks/profile"
 import FlatlistItem from "./FlatlistItem"
 const flatlistData = [{ flData: 1 }]
-const statistic_data = [
-   { text1: 12, text2: "GAINED FOLLOWERS" },
-   { text1: 29, text2: "LOSTED FOLLOWERS" },
-   { text1: 245, text2: "PROFILE VISITORS" },
-   { text1: 4, text2: "USER BLOCKING ME" },
-   { text1: 57, text2: "STALKERS" },
-   { text1: 7, text2: "DELETED COMMENT" },
-   { text1: 33, text2: "USERS NOT FOLLOWING ME" },
-   { text1: 33, text2: "USERS NOT FOLLOWED BY ME" },
-   { text1: 33, text2: "DENEME 1" },
-   { text1: 33, text2: "DENEME 2" }
-]
+
 const { width, height } = Dimensions.get("window")
 class HomeScreen extends Component {
    static navigatorStyle = {
@@ -110,6 +99,7 @@ class HomeScreen extends Component {
    }
 
    render() {
+      console.log("HomeScreenUSerData", this.props.userData)
       return (
          <View style={styles.container}>
             {this.renderBackgroundImage()}
@@ -130,7 +120,11 @@ class HomeScreen extends Component {
                   contentComponent={
                      <FlatList
                         ListHeaderComponent={
-                           <HomeScreenHeader ref="header" loading={this.props.isFetching} userData={this.props.userData}/>
+                           <HomeScreenHeader
+                              ref="header"
+                              loading={this.props.isFetching}
+                              userData={this.props.userData}
+                           />
                         }
                         style={styles.flatlist}
                         data={flatlistData}
@@ -148,7 +142,7 @@ class HomeScreen extends Component {
 const mapStateToProps = (state, ownProps) => {
    return {
       token: state.user.token,
-      userData: state.profile.profileData.user,
+      userData: state.profile.profileData,
       isFetching: state.profile.isFetching
    }
 }

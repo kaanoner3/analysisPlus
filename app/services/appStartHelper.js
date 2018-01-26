@@ -1,6 +1,5 @@
 import { Navigation } from "react-native-navigation";
 import { setConfig as setAxiosConfig } from "config/axios";
-import store from "../store";
 import { images } from "resources";
 
 export function startHomeScreen(token) {

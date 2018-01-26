@@ -25,12 +25,13 @@ export default class App extends Component {
     store.subscribe(this.onStoreUpdate.bind(this));
 
     revive((err, result) => {
-      //   console.log("err", err);
-      //   console.log("result", result);
+     //    console.log("err", err);
+    //     console.log("result", result);
       this.app_token = result.app_token;
       // If an error occured or client was not signed in,
       // set action to login, or otherwise, set it to user.
       if (err || result === false) {
+    //    console.log('constructor revive')
         store.dispatch(switchToLogin());
       } else {
         store.dispatch({
@@ -45,11 +46,15 @@ export default class App extends Component {
 
   onStoreUpdate() {
     // Get the decided
-    let { appState } = store.getState().app;
+ //   console.log('STORE.GETSTATE',store.getState().app)
+    const { appState } = store.getState().app;
 
     // If new app state is different from the previous one, restart.
     // TODO: make sure 'restarting' does not cause memory leaks.
+//    console.log('currentappstate',this.currentAppState)
+//    console.log('app state nezamangircek',appState)
     if (this.currentAppState != appState) {
+      console.log('ife girdi onstoreupdate')
       this.currentAppState = appState;
       this.startApp(appState);
     }
@@ -57,15 +62,18 @@ export default class App extends Component {
 
   startApp(appState) {
     let action = appState.substr(0, 1).toUpperCase() + appState.substr(1);
-
+//    console.log([`start${action}`],'appState',action)
+    
     return this[`start${action}`]();
   }
 
   startLogin() {
+  //  console.log('START LOOOGIN')
     startLoginScreen();
   }
 
   startUser() {
+ //   console.log('START USEEEEER')
     startHomeScreen(this.app_token);
   }
 }
