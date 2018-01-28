@@ -20,21 +20,8 @@ import LinearGradient from "react-native-linear-gradient"
 import { connect } from "react-redux"
 import { getProfileDataRequest } from "ducks/profile"
 import FlatlistItem from "./FlatlistItem"
-const flatlistData = [
-    {flData: 1}
-]
-const statistic_data = [
-   { text1: 12, text2: "GAINED FOLLOWERS" },
-   { text1: 29, text2: "LOSTED FOLLOWERS" },
-   { text1: 245, text2: "PROFILE VISITORS" },
-   { text1: 4, text2: "USER BLOCKING ME" },
-   { text1: 57, text2: "STALKERS" },
-   { text1: 7, text2: "DELETED COMMENT" },
-   { text1: 33, text2: "USERS NOT FOLLOWING ME" },
-   { text1: 33, text2: "USERS NOT FOLLOWED BY ME" },
-   { text1: 33, text2: "DENEME 1" },
-   { text1: 33, text2: "DENEME 2" }
-]
+const flatlistData = [{ flData: 1 }]
+
 const { width, height } = Dimensions.get("window")
 class HomeScreen extends Component {
    static navigatorStyle = {
@@ -105,13 +92,14 @@ class HomeScreen extends Component {
       )
    }
    handleRefresh() {
-       this.props.getProfileDataRequest(this.props.token)
+      this.props.getProfileDataRequest(this.props.token)
    }
    renderList() {
-      return <FlatlistItem  navigator={this.props.navigator} />
+      return <FlatlistItem navigator={this.props.navigator} />
    }
 
    render() {
+      console.log("HomeScreenUSerData", this.props.userData)
       return (
          <View style={styles.container}>
             {this.renderBackgroundImage()}
@@ -132,7 +120,11 @@ class HomeScreen extends Component {
                   contentComponent={
                      <FlatList
                         ListHeaderComponent={
-                           <HomeScreenHeader ref="header" loading={this.props.isFetching} />
+                           <HomeScreenHeader
+                              ref="header"
+                              loading={this.props.isFetching}
+                              userData={this.props.userData}
+                           />
                         }
                         style={styles.flatlist}
                         data={flatlistData}
@@ -150,76 +142,8 @@ class HomeScreen extends Component {
 const mapStateToProps = (state, ownProps) => {
    return {
       token: state.user.token,
-      profileData: state.profile.profileData,
+      userData: state.profile.profileData,
       isFetching: state.profile.isFetching
    }
 }
 export default connect(mapStateToProps, { getProfileDataRequest })(HomeScreen)
-
-/*
-      if (index % 2 === 0) {
-         return (
-            <View
-               style={
-                  index === 0
-                     ? {
-                          backgroundColor: "#152341",
-                          borderTopLeftRadius: 15,
-                          paddingTop: 10,
-                          flex: 1
-                       }
-                     : { backgroundColor: "#152341", flex: 1 }
-               }
-            >
-               <View style={styles.contentLeftItem}>
-                  <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen(index)}>
-                     <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>{item.text2}</Text>
-                     </View>
-                     <View style={styles.statisticView}>
-                        <Text style={styles.statisticText}>{item.text1}</Text>
-                        <View style={styles.arrowView}>
-                           <Image source={images.gainArrow} />
-                           <Text style={styles.gainText}>2</Text>
-                        </View>
-                     </View>
-                  </TouchableOpacity>
-               </View>
-            </View>
-         )
-      } else {
-         return (
-            <View
-               style={
-                  index === 1
-                     ? {
-                          backgroundColor: "#152341",
-                          borderTopRightRadius: 15,
-                          paddingTop: 10,
-                          flex: 1
-                       }
-                     : { backgroundColor: "#152341", flex: 1 }
-               }
-            >
-               <View style={styles.contentRightItem}>
-                  <TouchableOpacity
-                     activeOpacity={1}
-                     //style={{ backgroundColor: "red" }}
-                     onPress={() => this.showUserScreen(index)}
-                  >
-                     <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>{item.text2}</Text>
-                     </View>
-                     <View style={styles.statisticView}>
-                        <Text style={styles.statisticText}>{item.text1}</Text>
-                        <View style={styles.arrowView}>
-                           <Image source={images.lostArrow} />
-                           <Text style={styles.lostText}>2</Text>
-                        </View>
-                     </View>
-                  </TouchableOpacity>
-               </View>
-            </View>
-         )
-      }
-*/

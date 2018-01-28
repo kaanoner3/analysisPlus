@@ -70,6 +70,9 @@ class HomeScreenHeader extends Component {
          }
       })
    }
+   componentDidMount(){
+     //  this.setState({})
+   }
    animate() {
       this.setState({ progress: 0 }, () => {
          setTimeout(() => {
@@ -92,7 +95,7 @@ class HomeScreenHeader extends Component {
                this.animate()
                Animated.timing(this.state.rotateY, {
                   toValue: 1,
-                  duration: 500
+                  duration: 250
                }).start(() => {
                   this.rotateCircle()
                })
@@ -115,9 +118,9 @@ class HomeScreenHeader extends Component {
       this.interval2 = setInterval(() => {
          temp += 1
          strokeDashoffset = temp * 6.5
-         strokeDashoffset = Math.min(strokeDashoffset, 11677)
+         strokeDashoffset = Math.min(strokeDashoffset, 10000)
          strokeDashoffset = Math.max(strokeDashoffset, 0)
-         this._myCircle.setNativeProps({
+         this._myCircle2.setNativeProps({
             strokeDashoffset: 0 + strokeDashoffset
          })
       }, 1)
@@ -160,6 +163,7 @@ class HomeScreenHeader extends Component {
          )
       } else {
          return (
+
             <Animated.View
                style={[
                   { position: "absolute", top: 0, left: 0, zIndex: 9 },
@@ -189,7 +193,7 @@ class HomeScreenHeader extends Component {
                         strokeDashoffset=""
                         rotation="-90"
                         origin="60, 60"
-                        ref={ref => (this._myCircle = ref)}
+                        ref={ref => (this._myCircle2 = ref)}
                         cx="58"
                         cy="62"
                         r="60"
@@ -197,6 +201,7 @@ class HomeScreenHeader extends Component {
                   </G>
                </Svg>
             </Animated.View>
+
          )
       }
    }
@@ -218,7 +223,7 @@ class HomeScreenHeader extends Component {
                      paddingRight: 20
                   }}
                >
-                  <Text style={styles.textStyle}>383</Text>
+                  <Text style={styles.textStyle}>{this.props.userData.user.counts.follows}</Text>
                   <Text style={styles.textStyle1}>FOLLOWING</Text>
                </Animated.View>
                <View
@@ -233,9 +238,10 @@ class HomeScreenHeader extends Component {
                      style={{
                         transform: [{ rotateY: this.rotate }],
                         height: 106,
-                        width: 106
+                        width: 106,
+                        borderRadius: 53
                      }}
-                     source={images.profilePic}
+                     source={{ uri: this.props.userData.user.profile_picture}}
                   />
                   {this.renderSvgCircle()}
                </View>
@@ -246,7 +252,7 @@ class HomeScreenHeader extends Component {
                      marginLeft: 20
                   }}
                >
-                  <Text style={styles.textStyle}>654</Text>
+                  <Text style={styles.textStyle}>{this.props.userData.user.counts.followed_by}</Text>
                   <Text style={styles.textStyle1}>FOLLOWERS</Text>
                </Animated.View>
             </Animated.View>
@@ -293,7 +299,8 @@ class HomeScreenHeader extends Component {
       }
    }
    render() {
-      //interpolate classı ac
+    console.log("HEEEADEEEEER", this.props.userData)
+
       this.opacity = this.state.scrollY.interpolate({
          inputRange: [-60, 0],
          outputRange: [0, 1]
@@ -326,8 +333,8 @@ class HomeScreenHeader extends Component {
                      marginTop: 10
                   }}
                >
-                  <Text style={styles.textStyle}>Barbara Porter</Text>
-                  <Text style={[styles.textStyle1, { marginTop: 4 }]}>@barbaraporter</Text>
+                  <Text style={styles.textStyle}>{this.props.userData.user.full_name}</Text>
+                  <Text style={[styles.textStyle1, { marginTop: 4 }]}>@{this.props.userData.user.username}</Text>
                </View>
             </View>
          </Animated.View>

@@ -11,6 +11,8 @@ import { accessToken as accessTokenService } from "services";
 import { INSTAGRAM_LOGIN_REQUEST, instagramLoginSuccess } from "ducks/auth";
 import { startHomeScreen, startLoginScreen } from "services/appStartHelper";
 import { setUserIdentity } from "ducks/user";
+import { switchToUser } from "ducks/app";
+
 //import { switchToUser, changeAppState } from "ducks/app";
 import {
   revive, //get
@@ -22,9 +24,7 @@ export function* login() {
   while (true) {
     try {
       const { token } = yield take(INSTAGRAM_LOGIN_REQUEST);
-      console.log(token)
       const loginResponse = yield call(SignInService, token);
-      console.log("responsee", loginResponse);
       const tokenData = yield call(
         accessTokenService,
         loginResponse.data.grant_type,
@@ -50,7 +50,8 @@ export function* login() {
         app_token
       });
       yield put(setUserIdentity(app_token, user_id));
-      yield call(startHomeScreen);
+      yield put(switchToUser())
+      yield call(startHomeScreen,tokenData.data.access_token);
     } catch (error) {
       console.log(error);
     }
