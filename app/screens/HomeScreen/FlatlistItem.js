@@ -25,7 +25,6 @@ class FlatlistItem extends Component {
    constructor() {
       super()
       this.renderItem = this.renderItem.bind(this)
-      this.gainedFollowersDiff = this.gainedFollowersDiff.bind(this)
    }
 
    showUserScreen(serviceType) {
@@ -35,16 +34,17 @@ class FlatlistItem extends Component {
          passProps: { serviceType }
       })
    }
-   gainedFollowersDiff() {}
-
+   componentWillReceiveProps(nextProps) {
+         console.log('RECEİVE PROPS',nextProps)
+   }
    renderItem() {
+         console.log('RENDER ITEM', this.props.profileData)
       return (
          <View style={[styles.flatlistContainerView, { paddingBottom: 100 }]}>
             <View style={{ flexDirection: "row" }}>
                <View style={styles.contentLeftItem}>
                   <TouchableOpacity
                      activeOpacity={1}
-                     //style={{ backgroundColor: "red" }}
                      onPress={() => this.showUserScreen("not_follow_me")}
                   >
                      <View style={{ height: 96 / 2 }}>
@@ -54,7 +54,7 @@ class FlatlistItem extends Component {
                         <Text style={styles.statisticText}>
                            {this.props.profileData === null ? 0 : this.props.profileData.statistic.not_follow_me}
                         </Text>
-                        {renderDiffArrow(this.props.statisticDiff.not_follow_me)}
+                        {this.props.statisticDiff === null ? <View></View> : renderDiffArrow(this.props.statisticDiff.not_follow_me)}
                      </View>
                   </TouchableOpacity>
                </View>
@@ -71,7 +71,7 @@ class FlatlistItem extends Component {
                         <Text style={styles.statisticText}>
                            {this.props.profileData === null ? 0 : this.props.profileData.statistic.not_follow_by_me}
                         </Text>
-                        {renderDiffArrow(this.props.statisticDiff.not_follow_by_me)}
+                        {this.props.statisticDiff === null ? <View></View> : renderDiffArrow(this.props.statisticDiff.not_follow_by_me)}
                      </View>
                   </TouchableOpacity>
                </View>
@@ -90,7 +90,7 @@ class FlatlistItem extends Component {
                         <Text style={styles.statisticText}>
                            {this.props.profileData === null ? 0 : this.props.profileData.statistic.gained_followers}
                         </Text>
-                        {renderDiffArrow(this.props.statisticDiff.gained_followers)}
+                        {this.props.statisticDiff === null ? <View></View> : renderDiffArrow(this.props.statisticDiff.gained_followers)}
                      </View>
                   </TouchableOpacity>
                </View>
@@ -107,7 +107,7 @@ class FlatlistItem extends Component {
                         <Text style={styles.statisticText}>
                            {this.props.profileData === null ? 0 : this.props.profileData.statistic.losted_followers}
                         </Text>
-                        {renderDiffArrow(this.props.statisticDiff.losted_followers)}
+                        {this.props.statisticDiff === null ? <View></View> : renderDiffArrow(this.props.statisticDiff.losted_followers)}
                      </View>
                   </TouchableOpacity>
                </View>
@@ -127,7 +127,7 @@ class FlatlistItem extends Component {
                         <Text style={styles.statisticText}>
                            {this.props.profileData === null ? 0 : this.props.profileData.statistic.profile_visitors}
                         </Text>
-                        {renderDiffArrow(this.props.statisticDiff.profile_visitors)}
+                        {this.props.statisticDiff === null ? <View></View> : renderDiffArrow(this.props.statisticDiff.profile_visitors)}
                      </View>
                   </TouchableOpacity>
                </View>
@@ -144,7 +144,7 @@ class FlatlistItem extends Component {
                         <Text style={styles.statisticText}>
                            {this.props.profileData === null ? 0 : this.props.profileData.statistic.user_blocking_me}
                         </Text>
-                        {renderDiffArrow(this.props.statisticDiff.user_blocking_me)}
+                        {this.props.statisticDiff === null ? <View></View> : renderDiffArrow(this.props.statisticDiff.user_blocking_me)}
                      </View>
                   </TouchableOpacity>
                </View>
@@ -163,7 +163,7 @@ class FlatlistItem extends Component {
                         <Text style={styles.statisticText}>
                            {this.props.profileData === null ? 0 : this.props.profileData.statistic.stalkers}
                         </Text>
-                        {renderDiffArrow(this.props.statisticDiff.stalkers)}
+                        {this.props.statisticDiff === null ? <View></View> : renderDiffArrow(this.props.statisticDiff.stalkers)}
                      </View>
                   </TouchableOpacity>
                </View>
@@ -180,7 +180,7 @@ class FlatlistItem extends Component {
                         <Text style={styles.statisticText}>
                            {this.props.profileData === null ? 0 : this.props.profileData.statistic.deleted_comments}
                         </Text>
-                        {renderDiffArrow(this.props.statisticDiff.deleted_comments)}
+                        {this.props.statisticDiff === null ? <View></View> : renderDiffArrow(this.props.statisticDiff.deleted_comments)}
                      </View>
                   </TouchableOpacity>
                </View>
@@ -189,8 +189,7 @@ class FlatlistItem extends Component {
       )
    }
    render() {
-      console.log("FLATLİİİST", this.props.profileData)
-
+         console.log('FLAAATLİST' , this.props.profileData)
       return <View style={{ flex: 1 }}>{this.renderItem()}</View>
    }
 }

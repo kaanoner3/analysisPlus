@@ -46,7 +46,8 @@ class HomeScreenHeader extends Component {
          loading: false,
          startAnimation: false,
          indeterminate: true,
-         progress: 0
+         progress: 0,
+         offset: 0
       }
 
       this.rotate = "0deg"
@@ -57,21 +58,22 @@ class HomeScreenHeader extends Component {
       this.renderSvgCircle = this.renderSvgCircle.bind(this)
       this.renderAnimatedPart = this.renderAnimatedPart.bind(this)
       this.rotateCircle = this.rotateCircle.bind(this)
-
+      this._myCircle2 = null
       this.state.rotateY.addListener(rotateY => {})
       this.state.scrollY.addListener(scrollY => {
          if (this.state.startAnimation === false) {
             let strokeDashoffset = scrollY.value * -6.5
             strokeDashoffset = Math.min(strokeDashoffset, 377)
             strokeDashoffset = Math.max(strokeDashoffset, 0)
+            //     console.log("SEETNATİVE PROOOPSS", this._myCircle)
             this._myCircle.setNativeProps({
                strokeDashoffset: 377 - strokeDashoffset
             })
          }
       })
    }
-   componentDidMount(){
-     //  this.setState({})
+   componentDidMount() {
+      //  this.setState({})
    }
    animate() {
       this.setState({ progress: 0 }, () => {
@@ -97,7 +99,11 @@ class HomeScreenHeader extends Component {
                   toValue: 1,
                   duration: 250
                }).start(() => {
-                  this.rotateCircle()
+                  console.log("buraya girmesi lazım zaen", this._myCircle2)
+                  if (this._myCircle2 !== null) {
+                     console.log("rotate circle nasıl girdi aq")
+                     this.rotateCircle()
+                  }
                })
             })
          } else {
@@ -115,11 +121,14 @@ class HomeScreenHeader extends Component {
    rotateCircle() {
       let temp = 1
       let strokeDashoffset = 0
+      console.log("SEETNATİVE PROOOPSS rotateeeee", this._myCircle2)
       this.interval2 = setInterval(() => {
          temp += 1
          strokeDashoffset = temp * 6.5
          strokeDashoffset = Math.min(strokeDashoffset, 10000)
          strokeDashoffset = Math.max(strokeDashoffset, 0)
+         // this.setState({ offset: 0 + strokeDashoffset })
+
          this._myCircle2.setNativeProps({
             strokeDashoffset: 0 + strokeDashoffset
          })
@@ -163,7 +172,6 @@ class HomeScreenHeader extends Component {
          )
       } else {
          return (
-
             <Animated.View
                style={[
                   { position: "absolute", top: 0, left: 0, zIndex: 9 },
@@ -201,7 +209,6 @@ class HomeScreenHeader extends Component {
                   </G>
                </Svg>
             </Animated.View>
-
          )
       }
    }
@@ -223,7 +230,9 @@ class HomeScreenHeader extends Component {
                      paddingRight: 20
                   }}
                >
-                  <Text style={styles.textStyle}>{this.props.userData.user.counts.follows}</Text>
+                  <Text style={styles.textStyle}>
+                     {this.props.userData === null ? 0 : this.props.userData.user.counts.follows}
+                  </Text>
                   <Text style={styles.textStyle1}>FOLLOWING</Text>
                </Animated.View>
                <View
@@ -241,7 +250,11 @@ class HomeScreenHeader extends Component {
                         width: 106,
                         borderRadius: 53
                      }}
-                     source={{ uri: this.props.userData.user.profile_picture}}
+                     source={
+                        this.props.userData === null
+                           ? { uri: "" }
+                           : { uri: this.props.userData.user.profile_picture }
+                     }
                   />
                   {this.renderSvgCircle()}
                </View>
@@ -252,7 +265,11 @@ class HomeScreenHeader extends Component {
                      marginLeft: 20
                   }}
                >
-                  <Text style={styles.textStyle}>{this.props.userData.user.counts.followed_by}</Text>
+                  <Text style={styles.textStyle}>
+                     {this.props.userData === null
+                        ? 0
+                        : this.props.userData.user.counts.followed_by}
+                  </Text>
                   <Text style={styles.textStyle1}>FOLLOWERS</Text>
                </Animated.View>
             </Animated.View>
@@ -299,7 +316,15 @@ class HomeScreenHeader extends Component {
       }
    }
    render() {
-    console.log("HEEEADEEEEER", this.props.userData)
+      console.log(
+         "HEEEADEEEEER",
+         this._myCircle,
+         "     cirecle2    ",
+         this._myCircle2,
+         "     state",
+         this.state.startAnimation,
+         "         data of proooops", this.props.userData
+      )
 
       this.opacity = this.state.scrollY.interpolate({
          inputRange: [-60, 0],
@@ -333,8 +358,12 @@ class HomeScreenHeader extends Component {
                      marginTop: 10
                   }}
                >
-                  <Text style={styles.textStyle}>{this.props.userData.user.full_name}</Text>
-                  <Text style={[styles.textStyle1, { marginTop: 4 }]}>@{this.props.userData.user.username}</Text>
+                  <Text style={styles.textStyle}>
+                     {this.props.userData === null ? "" : this.props.userData.user.full_name}
+                  </Text>
+                  <Text style={[styles.textStyle1, { marginTop: 4 }]}>
+                     @{this.props.userData === null ? "" : this.props.userData.user.username}
+                  </Text>
                </View>
             </View>
          </Animated.View>

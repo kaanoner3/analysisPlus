@@ -19,12 +19,12 @@ export default function(state = initialState, action = {}) {
    switch (action.type) {
       case APP_SWITCH_TOLOGIN: {
          return {
-            appState: "login"
+            appState: action.data,
          }
       }
       case APP_SWITCH_TOUSER: {
          return {
-            appState: "user"
+            appState: action.data,
          }
       }
       default:
@@ -45,9 +45,9 @@ export default function(state = initialState, action = {}) {
 */
 
 export function switchToLogin() {
-   return { type: APP_SWITCH_TOLOGIN }
+   return { type: APP_SWITCH_TOLOGIN,data: 'login' }
 }
 
 export function switchToUser() {
-   return { type: APP_SWITCH_TOUSER }
+   return { type: APP_SWITCH_TOUSER, data: 'user' }
 }
