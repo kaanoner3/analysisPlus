@@ -71,7 +71,7 @@ class HomeScreenHeader extends Component {
       })
    }
    componentDidMount(){
-     //  this.setState({})
+       this.setState({})
    }
    animate() {
       this.setState({ progress: 0 }, () => {
@@ -222,7 +222,7 @@ class HomeScreenHeader extends Component {
                      paddingRight: 20
                   }}
                >
-                  <Text style={styles.textStyle}>{this.props.userData.user.counts.follows}</Text>
+                  <Text style={styles.textStyle}>{this.props.userData===null ?0:this.props.userData.user.counts.follows}</Text>
                   <Text style={styles.textStyle1}>FOLLOWING</Text>
                </Animated.View>
                <View
@@ -240,7 +240,7 @@ class HomeScreenHeader extends Component {
                         width: 106,
                         borderRadius: 53
                      }}
-                     source={{ uri: this.props.userData.user.profile_picture}}
+                     source={this.props.userData===null ?{uri:""}:{ uri: this.props.userData.user.profile_picture}}
                   />
                   {this.renderSvgCircle()}
                </View>
@@ -251,7 +251,7 @@ class HomeScreenHeader extends Component {
                      marginLeft: 20
                   }}
                >
-                  <Text style={styles.textStyle}>{this.props.userData.user.counts.followed_by}</Text>
+                  <Text style={styles.textStyle}>{this.props.userData===null ?0:this.props.userData.user.counts.followed_by}</Text>
                   <Text style={styles.textStyle1}>FOLLOWERS</Text>
                </Animated.View>
             </Animated.View>
@@ -299,7 +299,7 @@ class HomeScreenHeader extends Component {
    }
    render() {
     console.log("HEEEADEEEEER", this.props.userData)
-
+    console.log(this._myCircle2)
       this.opacity = this.state.scrollY.interpolate({
          inputRange: [-60, 0],
          outputRange: [0, 1]
@@ -332,8 +332,8 @@ class HomeScreenHeader extends Component {
                      marginTop: 10
                   }}
                >
-                  <Text style={styles.textStyle}>{this.props.userData.user.full_name}</Text>
-                  <Text style={[styles.textStyle1, { marginTop: 4 }]}>@{this.props.userData.user.username}</Text>
+                  <Text style={styles.textStyle}>{this.props.userData===null ?"":this.props.userData.user.full_name}</Text>
+                  <Text style={[styles.textStyle1, { marginTop: 4 }]}>@{this.props.userData===null ?"":this.props.userData.user.username}</Text>
                </View>
             </View>
          </Animated.View>
