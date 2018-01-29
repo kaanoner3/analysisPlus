@@ -99,7 +99,6 @@ class HomeScreen extends Component {
    }
 
    render() {
-      console.log("HomeScreenUSerData", this.props.userData)
       return (
          <View style={styles.container}>
             {this.renderBackgroundImage()}

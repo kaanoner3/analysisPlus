@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 async function accessToken(grantType, clientID, clientSecret, accessToken) {
-  console.log('hatagrant type',grantType)
   const params = {
     grant_type: grantType,
     client_id: clientID,

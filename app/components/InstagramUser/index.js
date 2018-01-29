@@ -14,7 +14,9 @@ class InstagramUser extends Component {
     constructor(props) {
         super(props)
     }
-
+    componentWillMount(){
+        
+    }
     render() {
         return (
             <View style={styles.containerView}>

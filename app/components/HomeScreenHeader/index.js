@@ -65,21 +65,13 @@ class HomeScreenHeader extends Component {
             let strokeDashoffset = scrollY.value * -6.5
             strokeDashoffset = Math.min(strokeDashoffset, 377)
             strokeDashoffset = Math.max(strokeDashoffset, 0)
-            //     console.log("SEETNATİVE PROOOPSS", this._myCircle)
             this._myCircle.setNativeProps({
                strokeDashoffset: 377 - strokeDashoffset
             })
          }
       })
    }
-<<<<<<< HEAD
-   componentDidMount(){
-       this.setState({})
-=======
-   componentDidMount() {
-      //  this.setState({})
->>>>>>> fd789b289bbc67b35ad2652fe412919b7ff3d026
-   }
+
    animate() {
       this.setState({ progress: 0 }, () => {
          setTimeout(() => {
@@ -104,9 +96,7 @@ class HomeScreenHeader extends Component {
                   toValue: 1,
                   duration: 250
                }).start(() => {
-                  console.log("buraya girmesi lazım zaen", this._myCircle2)
                   if (this._myCircle2 !== null) {
-                     console.log("rotate circle nasıl girdi aq")
                      this.rotateCircle()
                   }
                })
@@ -126,7 +116,6 @@ class HomeScreenHeader extends Component {
    rotateCircle() {
       let temp = 1
       let strokeDashoffset = 0
-      console.log("SEETNATİVE PROOOPSS rotateeeee", this._myCircle2)
       this.interval2 = setInterval(() => {
          temp += 1
          strokeDashoffset = temp * 6.5
@@ -235,13 +224,9 @@ class HomeScreenHeader extends Component {
                      paddingRight: 20
                   }}
                >
-<<<<<<< HEAD
-                  <Text style={styles.textStyle}>{this.props.userData===null ?0:this.props.userData.user.counts.follows}</Text>
-=======
                   <Text style={styles.textStyle}>
                      {this.props.userData === null ? 0 : this.props.userData.user.counts.follows}
                   </Text>
->>>>>>> fd789b289bbc67b35ad2652fe412919b7ff3d026
                   <Text style={styles.textStyle1}>FOLLOWING</Text>
                </Animated.View>
                <View
@@ -259,15 +244,11 @@ class HomeScreenHeader extends Component {
                         width: 106,
                         borderRadius: 53
                      }}
-<<<<<<< HEAD
-                     source={this.props.userData===null ?{uri:""}:{ uri: this.props.userData.user.profile_picture}}
-=======
                      source={
                         this.props.userData === null
                            ? { uri: "" }
                            : { uri: this.props.userData.user.profile_picture }
                      }
->>>>>>> fd789b289bbc67b35ad2652fe412919b7ff3d026
                   />
                   {this.renderSvgCircle()}
                </View>
@@ -278,15 +259,11 @@ class HomeScreenHeader extends Component {
                      marginLeft: 20
                   }}
                >
-<<<<<<< HEAD
-                  <Text style={styles.textStyle}>{this.props.userData===null ?0:this.props.userData.user.counts.followed_by}</Text>
-=======
                   <Text style={styles.textStyle}>
                      {this.props.userData === null
                         ? 0
                         : this.props.userData.user.counts.followed_by}
                   </Text>
->>>>>>> fd789b289bbc67b35ad2652fe412919b7ff3d026
                   <Text style={styles.textStyle1}>FOLLOWERS</Text>
                </Animated.View>
             </Animated.View>
@@ -333,21 +310,6 @@ class HomeScreenHeader extends Component {
       }
    }
    render() {
-<<<<<<< HEAD
-    console.log("HEEEADEEEEER", this.props.userData)
-    console.log(this._myCircle2)
-=======
-      console.log(
-         "HEEEADEEEEER",
-         this._myCircle,
-         "     cirecle2    ",
-         this._myCircle2,
-         "     state",
-         this.state.startAnimation,
-         "         data of proooops", this.props.userData
-      )
-
->>>>>>> fd789b289bbc67b35ad2652fe412919b7ff3d026
       this.opacity = this.state.scrollY.interpolate({
          inputRange: [-60, 0],
          outputRange: [0, 1]
@@ -380,17 +342,12 @@ class HomeScreenHeader extends Component {
                      marginTop: 10
                   }}
                >
-<<<<<<< HEAD
-                  <Text style={styles.textStyle}>{this.props.userData===null ?"":this.props.userData.user.full_name}</Text>
-                  <Text style={[styles.textStyle1, { marginTop: 4 }]}>@{this.props.userData===null ?"":this.props.userData.user.username}</Text>
-=======
                   <Text style={styles.textStyle}>
                      {this.props.userData === null ? "" : this.props.userData.user.full_name}
                   </Text>
                   <Text style={[styles.textStyle1, { marginTop: 4 }]}>
                      @{this.props.userData === null ? "" : this.props.userData.user.username}
                   </Text>
->>>>>>> fd789b289bbc67b35ad2652fe412919b7ff3d026
                </View>
             </View>
          </Animated.View>
@@ -418,11 +375,3 @@ const styles = {
       fontFamily: "Circular"
    }
 }
-/*
-                let strokeDashoffset = scrollY.value * -6.5
-                strokeDashoffset = Math.min(strokeDashoffset, 377)
-                strokeDashoffset = Math.max(strokeDashoffset, 0)
-                this._myCircle.setNativeProps({ strokeDashoffset: 377 - strokeDashoffset });
-
-
-                */

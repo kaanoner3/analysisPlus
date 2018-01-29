@@ -39,7 +39,6 @@ export default function(state = initialState, action = {}) {
       }
       case PROFILE_DATA_DIFF_STATISTIC: {
          if (state.profileData === null) {
-            console.log('REDUCER İFİNE GİRDİ')
             return {
                ...state,
                diff: {

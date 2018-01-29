@@ -4,6 +4,8 @@ import { actionChannel } from "redux-saga/effects"
 export const USER_DATA_FETCH_REQUEST = "instagramUser/USER_DATA_FETCH_REQUEST"
 export const USER_DATA_FETCH_SUCCESS = "instagramUser/USER_DATA_FETCH_SUCCESS"
 export const USER_DATA_FETCH_FAIL = "instagramUser/USER_DATA_FETCH_FAIL"
+export const USER_RELATIONSHIP_TO_OTHER_REQUEST = "instagramUser/USER_RELATIONSHIP_TO_OTHER_REQUEST"
+export const USER_RELATIONSHIP_TO_OTHER_SUCCESS = "instagramUser/USER_RELATIONSHIP_TO_OTHER_SUCCESS"
 
 const initialState = {
    errorMessage: null,
@@ -20,7 +22,6 @@ export default function(state = initialState, action = {}) {
          }
       }
       case USER_DATA_FETCH_SUCCESS: {
-          console.log('reduceeeeer',action.data)
          return {
             ...state,
             userList: action.data,
@@ -32,6 +33,17 @@ export default function(state = initialState, action = {}) {
             ...state,
             errorMessage: action.errorMessage
          }
+      }
+      case USER_RELATIONSHIP_TO_OTHER_REQUEST: {
+          return {
+              ...state,
+              relationFetch: true
+          }
+      }
+      case USER_RELATIONSHIP_TO_OTHER_SUCCESS: {
+          return {
+              ...state
+          }
       }
       default:
          return state
@@ -51,4 +63,7 @@ export function getUserDataFail(errorMessage) {
       type: USER_DATA_FETCH_FAIL,
       error: errorMessage
    }
+}
+export function ralationshipRequest(token,id){
+    
 }

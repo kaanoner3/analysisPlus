@@ -32,7 +32,6 @@ class ShowInstagramUserScreen extends Component {
    }
 
    render() {
-      console.log("CONTROL FETCH", this.props.isFetching)
       if (this.props.isFetching === false) {
          return (
             <View style={{ flex: 1, backgroundColor: "#152341" }}>
@@ -59,7 +58,6 @@ class ShowInstagramUserScreen extends Component {
    }
 }
 const mapStateToProps = (state, ownProps) => {
-   console.log("state neymis bakalım", state)
    return {
       token: state.user.token,
       userList: state.instagramUsers.userList,

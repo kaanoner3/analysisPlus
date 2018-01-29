@@ -35,7 +35,6 @@ async function getUsers(token, type) {
       case "not_follow_me": {
          this.response = axios.get("api/user/not-follow-me", { params })
          return this.response
-
       }
       case "not_follow_by_me": {
          this.response = axios.get("api/user/not-follow-by-me", { params })
