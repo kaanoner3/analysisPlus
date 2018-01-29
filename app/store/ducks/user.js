@@ -1,6 +1,5 @@
 // Axios
 // Login service
-import { LoginStorageService } from "services";
 
 const ACTION_SET_USER_IDENTITY = "ACTION_SET_USER_IDENTITY";
 

@@ -38,19 +38,35 @@ export default function(state = initialState, action = {}) {
          }
       }
       case PROFILE_DATA_DIFF_STATISTIC: {
-         const copyState = Object.assign({}, state.profileData.statistic)
-
-         return {
-            ...state,
-            diff: {
-               not_follow_by_me: copyState.not_follow_by_me - action.newData.not_follow_by_me,
-               not_follow_me: copyState.not_follow_me - action.newData.not_follow_me,
-               gained_followers: copyState.gained_followers - action.newData.gained_followers,
-               losted_followers: copyState.losted_followers - action.newData.losted_followers,
-               deleted_comments: copyState.deleted_comments - action.newData.deleted_comments,
-               profile_visitors: copyState.profile_visitors - action.newData.profile_visitors,
-               stalkers: copyState.stalkers - action.newData.stalkers,
-               user_blocking_me: copyState.user_blocking_me - action.newData.user_blocking_me
+         if (state.profileData === null) {
+            console.log('REDUCER İFİNE GİRDİ')
+            return {
+               ...state,
+               diff: {
+                  not_follow_by_me: 0,
+                  not_follow_me: 0,
+                  gained_followers: 0,
+                  losted_followers: 0,
+                  deleted_comments: 0,
+                  profile_visitors: 0,
+                  stalkers: 0,
+                  user_blocking_me: 0
+               }
+            }
+         } else {
+            const copyState = Object.assign({}, state.profileData)
+            return {
+               ...state,
+               diff: {
+                  not_follow_by_me: copyState.statistic.not_follow_by_me - action.newData.not_follow_by_me,
+                  not_follow_me: copyState.statistic.not_follow_me - action.newData.not_follow_me,
+                  gained_followers: copyState.statistic.gained_followers - action.newData.gained_followers,
+                  losted_followers: copyState.statistic.losted_followers - action.newData.losted_followers,
+                  deleted_comments: copyState.statistic.deleted_comments - action.newData.deleted_comments,
+                  profile_visitors: copyState.statistic.profile_visitors - action.newData.profile_visitors,
+                  stalkers: copyState.statistic.stalkers - action.newData.stalkers,
+                  user_blocking_me: copyState.statistic.user_blocking_me - action.newData.user_blocking_me
+               }
             }
          }
       }

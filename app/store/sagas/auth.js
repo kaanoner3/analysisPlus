@@ -9,8 +9,9 @@ import {
 import { SignInService } from "services/LoginService";
 import { accessToken as accessTokenService } from "services";
 import { INSTAGRAM_LOGIN_REQUEST, instagramLoginSuccess } from "ducks/auth";
-import { startHomeScreen, startLoginScreen } from "services/appStartHelper";
+//import { startHomeScreen, startLoginScreen } from "./../../../bootstrap/App";
 import { setUserIdentity } from "ducks/user";
+import { startHomeScreen, startLoginScreen } from "services/appStartHelper";
 import { switchToUser } from "ducks/app";
 
 //import { switchToUser, changeAppState } from "ducks/app";
@@ -50,8 +51,7 @@ export function* login() {
         app_token
       });
       yield put(setUserIdentity(app_token, user_id));
-      yield put(switchToUser())
-      yield call(startHomeScreen,tokenData.data.access_token);
+      yield call(startHomeScreen);
     } catch (error) {
       console.log(error);
     }

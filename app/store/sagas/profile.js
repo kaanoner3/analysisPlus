@@ -12,6 +12,7 @@ export function* getProfileData() {
     try {
       const { token } = yield take(PROFILE_DATA_FETCH_REQEUST);
       const responseData = yield call(getProfileDataService, token);
+      console.log('SAAAGAAA',responseData)
       yield put(calculateDiff(responseData.data.statistic))
       yield put(getProfileDataSuccess(responseData.data));
     } catch (error) {
