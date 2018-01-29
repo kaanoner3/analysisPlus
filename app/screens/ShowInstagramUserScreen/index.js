@@ -26,16 +26,18 @@ class ShowInstagramUserScreen extends Component {
          passProps: {}
       })
    }
-   componentWillMount() {}
+   componentWillMount() {
+       console.log(this.props)
+   }
    renderInstagramUser({ item }) {
-      return <InstagramUser data={item} onPress={() => this.pushInstagramUserDetail()} />
+      return <InstagramUser data={item} userType={this.props.serviceType} onPress={() => this.pushInstagramUserDetail()} />
    }
 
    render() {
       if (this.props.isFetching === false) {
          return (
             <View style={{ flex: 1, backgroundColor: "#152341" }}>
-               <StaticHeader title={this.props.serviceType.type} navigator={this.props.navigator} />
+               <StaticHeader title={this.props.serviceType} navigator={this.props.navigator} />
                <FlatList
                   renderItem={this.renderInstagramUser}
                   data={this.props.userList}

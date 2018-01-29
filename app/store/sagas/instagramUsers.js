@@ -8,7 +8,7 @@ export function* getUserList() {
       try {
          const action = yield take(USER_DATA_FETCH_REQUEST)
          const responseData = yield call(getUserDataService, action.token, action.serviceType)
-         yield put(getUserDataSuccess(responseData.data.result))
+         yield put(getUserDataSuccess(responseData.data))
       } catch (error) {
          console.log(error)
          yield put(getUserDataFail(error))

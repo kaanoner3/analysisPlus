@@ -19,7 +19,9 @@ async function getUsers(token, type) {
          console.log("visitors bos")
       }
       case "user_blocking_me": {
+            console.log('tııık')
          this.response = axios.get("api/user/blocked-me", { params })
+         console.log(response)
          return this.response
       }
 

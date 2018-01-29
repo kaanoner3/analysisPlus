@@ -5,6 +5,7 @@ import refreshTokenService from "./refreshToken";
 import getProfileData from "./getProfileData";
 import renderDiffArrow from "./renderDiffArrow"
 import getUsers from "./getUsers"
+import getRelationshipStatus from "./getRelationshipStatus"
 
 export default {
   LoginStorageService,
@@ -13,7 +14,8 @@ export default {
   refreshTokenService,
   getProfileData,
   renderDiffArrow,
-  getUsers
+  getUsers,
+  getRelationshipStatus
 };
 
 export {
@@ -23,5 +25,6 @@ export {
   refreshTokenService,
   getProfileData,
   renderDiffArrow,
-  getUsers
+  getUsers,
+  getRelationshipStatus
 };

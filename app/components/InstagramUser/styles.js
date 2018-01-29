@@ -84,7 +84,8 @@ const styles = {
         flexDirection: "row",
         marginRight: 20,
         backgroundColor: "transparent",
-        marginTop: 5
+        marginTop: 5,
+        
     }
 }
 export default styles
