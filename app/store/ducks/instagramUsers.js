@@ -38,7 +38,6 @@ export default function(state = initialState, action = {}) {
          const copyFlatlistData = Object.assign([], state.flatlistData)
          const extraData = copyUserList.slice(page * 20, (page+1) * 20)
          const newflatlistData = copyFlatlistData.concat(extraData)
-         console.log("userlist", copyUserList, "copyFlatlistData", copyFlatlistData, 'extradata',extraData)
          return {
             ...state,
             flatlistData: newflatlistData

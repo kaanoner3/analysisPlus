@@ -19,11 +19,8 @@ class InstagramUser extends Component {
       this.state = { relationStyle: null }
    }
    componentWillMount() {
-       /*
       getRelationshipStatus(this.props.token, this.props.data.id).then(response => {
-         console.log("will mount", response.data.data)
          const data = response.data.data
-
          if (data.outgoing_status === "none" && data.incoming_status === "followed_by") {
             this.setState({ relationStyle: 0 })
          } else if (data.outgoing_status === "follows" && data.incoming_status === "none") {
@@ -45,7 +42,6 @@ class InstagramUser extends Component {
             this.setState({ relationStyle: 7 })
          }
       })
-      */
    }
    renderRelationship() {
       if (this.props.userType === "not_follow_me") {
@@ -234,7 +230,7 @@ class InstagramUser extends Component {
                         >
                            <Image style={{ alignSelf: "center" }} source={images.followsYouOk} />
                            <Text style={[styles.followsYou, { color: "rgba(255,255,255,0.4)" }]}>
-                             Follows You
+                              Follows You
                            </Text>
                         </View>
                         <View
@@ -299,30 +295,4 @@ const mapStateToProps = (state, ownProps) => {
    }
 }
 export default connect(mapStateToProps, { ralationshipAnalysis })(InstagramUser)
-/*
-        return (
-            <View style={styles.relationshipContainer}>
-               <View
-                  style={{
-                     borderRadius: 100,
-                     borderColor: "#059ED9",
-                     flexDirection: "row"
-                  }}
-               >
-                  <Image style={{ alignSelf: "center" }} source={images.youFollowOk} />
-                  <Text style={styles.youFollow}>Follows You</Text>
-               </View>
-               <View
-                  style={{
-                     borderRadius: 100,
-                     borderColor: "#5AD24E",
-                     marginLeft: 10,
-                     flexDirection: "row"
-                  }}
-               >
-                  <Image style={{ alignSelf: "center" }} source={images.followsYouOk} />
-                  <Text style={styles.followsYou}>You Follow</Text>
-               </View>
-            </View>
-         )
-*/
+

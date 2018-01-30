@@ -10,7 +10,7 @@ export default {
   headerBackButton: require("./headerBackButton.png"),
   followsYouOk: require("./followsYouOk.png"),
   youFollowOk: require("./youFollowOk.png"),
-  tabIndex0: require("./tabIndex0.png"),
+  tabIndex0: require("./tab1.png"),
   tabIndex1: require("./tabIndex1.png"),
   tabIndex2: require("./tabIndex2.png"),
   tabIndex3: require("./tabIndex3.png"),
@@ -26,5 +26,10 @@ export default {
   loginScreeLinearBg: require("./loginScreenBg.png"),
   premiumLogo: require("./premiumLogo.png"),
   lockLogo: require("./lock.png"),
-
+  ghost1: require("./ghost-1.png"),
+  ghost2: require("./ghost-2.png"),
+  ghost3: require("./ghost-3.png"),
+  discover1: require("./discover-1.png"),
+  discover2: require("./discover-2.png"),
+  discover3: require("./discover-3.png"),
 };
