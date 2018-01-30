@@ -49,15 +49,10 @@ export default class App extends Component {
 
   onStoreUpdate() {
     // Get the decided
-    console.log('STORE.GETSTATE',store.getState().app)
     const { startLogin,startHome,appState } = store.getState().app;
     // If new app state is different from the previous one, restart.
     // TODO: make sure 'restarting' does not cause memory leaks.
-//    console.log('currentappstate',this.currentAppState)
-//    console.log('app state nezamangircek',appState)
     if (this.currentAppState != appState) {
-      console.log('ife girdi onstoreupdate',startHome, '    start login ',startLogin, 'appstate ', appState)
-
       this.currentAppState = appState;
       this.startApp(appState);
     }
@@ -65,18 +60,14 @@ export default class App extends Component {
 
   startApp(appState) {
     let action = appState.substr(0, 1).toUpperCase() + appState.substr(1);
-    console.log([`start${action}`],'appState',action)
-
     return this[`start${action}`]();
   }
 
   startLogin() {
-    console.log('START LOOOGIN')
     startLoginScreen();
   }
 
   startUser() {
-    console.log('START USEEEEER')
     startHomeScreen(this.app_token);
   }
 }

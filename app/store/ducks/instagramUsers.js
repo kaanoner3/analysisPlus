@@ -22,7 +22,6 @@ export default function(state = initialState, action = {}) {
          }
       }
       case USER_DATA_FETCH_SUCCESS: {
-         console.log("IPAJSDJIPADGSIJPAGDAJPGIS", action.data)
          return {
             ...state,
             userList: action.data,
@@ -48,7 +47,6 @@ export default function(state = initialState, action = {}) {
          const index = copyUserList.findIndex(u => u.id == user_id)
          const currentUser = copyUserList[index]
          const newUserList = state.userList.slice(0)
-         console.log("CURRENT USER", currentUser, '     action data', action,  data.incoming_status)
          if (data.outgoing_status === "none" && data.incoming_status === "followed_by") {
             currentUser["relationship"] = "none_followed_by"
             newUserList.splice(index, 1, currentUser)
@@ -79,7 +77,7 @@ export default function(state = initialState, action = {}) {
          }
          return {
             ...state,
-            userList: newUserList 
+            userList: newUserList
          }
       }
       default:

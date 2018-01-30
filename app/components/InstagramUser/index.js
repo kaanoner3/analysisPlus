@@ -18,7 +18,6 @@ class InstagramUser extends Component {
       this.renderRelationship = this.renderRelationship.bind(this)
    }
    componentWillMount() {
-      console.log(this.props)
       getRelationshipStatus(this.props.token, this.props.data.id).then(response => {
          this.props.ralationshipAnalysis(response.data, this.props.data.id)
       })
@@ -59,10 +58,8 @@ class InstagramUser extends Component {
          )
       } else {
          if (this.props.userList.relationship !== undefined) {
-            console.log("hadi bakalııım", this.props.userList.relationship)
             switch (this.props.userList.relationship) {
                case "none_follewd_by": {
-                   console.log('asd')
                   return (
                      <View style={styles.relationshipContainer}>
                         <View
@@ -211,7 +208,6 @@ class InstagramUser extends Component {
       }
    }
    render() {
-       console.log('MAAAAIIIIN STATE',this.props.userList, '   relationship',this.props.userList.relationship)
       return (
          <View style={styles.containerView}>
             <View style={styles.dataView}>
@@ -243,7 +239,6 @@ class InstagramUser extends Component {
    }
 }
 const mapStateToProps = (state, ownProps) => {
-   console.log(state)
    return {
       token: state.auth.accessToken,
       userList: state.instagramUsers.userList

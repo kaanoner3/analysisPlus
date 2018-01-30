@@ -6,17 +6,17 @@ function renderDiffArrow(diffValue) {
     if (diffValue < 0) {
         return (
            <View style={styles.arrowView}>
-              <Image source={images.lostArrow} />
-              <Text style={styles.lostText}>
-                 {diffValue + diffValue * -2}
+              <Image source={images.gainText} />
+              <Text style={styles.gainText}>
+                 {diffValue + (diffValue * -2)}
               </Text>
            </View>
         )
      } else if (diffValue > 0) {
         return (
            <View style={styles.arrowView}>
-              <Image source={images.gainArrow} />
-              <Text style={styles.gainText}>{diffValue}</Text>
+              <Image source={images.lostArrow} />
+              <Text style={styles.lostText}>{diffValue}</Text>
            </View>
         )
      } else {

@@ -27,7 +27,6 @@ class ShowInstagramUserScreen extends Component {
       })
    }
    componentWillMount() {
-       console.log(this.props)
    }
    renderInstagramUser({ item }) {
       return <InstagramUser data={item} userType={this.props.serviceType} onPress={() => this.pushInstagramUserDetail()} />
