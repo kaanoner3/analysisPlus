@@ -6,7 +6,7 @@ function renderDiffArrow(diffValue) {
     if (diffValue < 0) {
         return (
            <View style={styles.arrowView}>
-              <Image source={images.gainText} />
+              <Image source={images.gainArrow} />
               <Text style={styles.gainText}>
                  {diffValue + (diffValue * -2)}
               </Text>

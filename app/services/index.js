@@ -6,7 +6,7 @@ import getProfileData from "./getProfileData";
 import renderDiffArrow from "./renderDiffArrow"
 import getUsers from "./getUsers"
 import getRelationshipStatus from "./getRelationshipStatus"
-
+import addRelationToObject from "./addRelationToObject"
 export default {
   LoginStorageService,
   SignInService,
@@ -15,7 +15,8 @@ export default {
   getProfileData,
   renderDiffArrow,
   getUsers,
-  getRelationshipStatus
+  getRelationshipStatus,
+  addRelationToObject
 };
 
 export {
@@ -26,5 +27,6 @@ export {
   getProfileData,
   renderDiffArrow,
   getUsers,
-  getRelationshipStatus
+  getRelationshipStatus,
+  addRelationToObject
 };

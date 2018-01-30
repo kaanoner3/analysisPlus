@@ -54,7 +54,6 @@ export default function(state = initialState, action = {}) {
             }
          } else {
             const copyState = Object.assign({}, state.profileData)
-            console.log('copyState',copyState.statistic.profile_visitors, "   newData",action.newData.profile_visitors)
             return {
                ...state,
                diff: {

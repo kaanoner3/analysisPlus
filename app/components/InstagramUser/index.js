@@ -16,13 +16,34 @@ class InstagramUser extends Component {
    constructor(props) {
       super(props)
       this.renderRelationship = this.renderRelationship.bind(this)
+      this.state = { relationStyle: null }
    }
    componentWillMount() {
       getRelationshipStatus(this.props.token, this.props.data.id).then(response => {
-         this.props.ralationshipAnalysis(response.data, this.props.data.id)
+         console.log("will mount", response.data.data)
+         const data = response.data.data
+
+         if (data.outgoing_status === "none" && data.incoming_status === "followed_by") {
+            this.setState({ relationStyle: 0 })
+         } else if (data.outgoing_status === "follows" && data.incoming_status === "none") {
+            this.setState({ relationStyle: 1 })
+         } else if (data.outgoing_status === "follows" && data.incoming_status === "followed_by") {
+            this.setState({ relationStyle: 2 })
+         } else if (data.outgoing_status === "requested" && data.incoming_status === "none") {
+            this.setState({ relationStyle: 3 })
+         } else if (data.outgoing_status === "follows" && data.incoming_status === "requsted_by") {
+            this.setState({ relationStyle: 4 })
+         } else if (
+            data.outgoing_status === "requested" &&
+            data.incoming_status === "followed_by"
+         ) {
+            this.setState({ relationStyle: 5 })
+         } else if (data.outgoing_status === "follows" && data.incoming_status === "requsted_by") {
+            this.setState({ relationStyle: 6 })
+         } else if (data.outgoing_status === "none" && data.incoming_status === "none") {
+            this.setState({ relationStyle: 7 })
+         }
       })
-      if (this.props.userType !== "not_follow_me " || this.props.userType !== "not_follow_by_me") {
-      }
    }
    renderRelationship() {
       if (this.props.userType === "not_follow_me") {
@@ -57,9 +78,9 @@ class InstagramUser extends Component {
             </View>
          )
       } else {
-         if (this.props.userList.relationship !== undefined) {
-            switch (this.props.userList.relationship) {
-               case "none_follewd_by": {
+         if (this.state.relationStyle !== null) {
+            switch (this.state.relationStyle) {
+               case 0: {
                   return (
                      <View style={styles.relationshipContainer}>
                         <View
@@ -75,7 +96,7 @@ class InstagramUser extends Component {
                      </View>
                   )
                }
-               case "follows_none": {
+               case 1: {
                   return (
                      <View style={styles.relationshipContainer}>
                         <View
@@ -92,7 +113,7 @@ class InstagramUser extends Component {
                      </View>
                   )
                }
-               case "follows_followed_by": {
+               case 2: {
                   return (
                      <View style={styles.relationshipContainer}>
                         <View
@@ -119,7 +140,7 @@ class InstagramUser extends Component {
                      </View>
                   )
                }
-               case "requested_none": {
+               case 3: {
                   return (
                      <View style={styles.relationshipContainer}>
                         <View
@@ -138,7 +159,7 @@ class InstagramUser extends Component {
                      </View>
                   )
                }
-               case "follows_requested_by": {
+               case 4: {
                   return (
                      <View style={styles.relationshipContainer}>
                         <View
@@ -167,7 +188,7 @@ class InstagramUser extends Component {
                      </View>
                   )
                }
-               case "requested_followed_by": {
+               case 5: {
                   return (
                      <View style={styles.relationshipContainer}>
                         <View
@@ -198,7 +219,38 @@ class InstagramUser extends Component {
                      </View>
                   )
                }
-               case "none_none": {
+               case 6: {
+                  return (
+                     <View style={styles.relationshipContainer}>
+                        <View
+                           style={{
+                              borderRadius: 100,
+                              borderColor: "#5AD24E",
+                              marginLeft: 10,
+                              flexDirection: "row"
+                           }}
+                        >
+                           <Image style={{ alignSelf: "center" }} source={images.followsYouOk} />
+                           <Text style={[styles.followsYou, { color: "rgba(255,255,255,0.4)" }]}>
+                             Follows You
+                           </Text>
+                        </View>
+                        <View
+                           style={{
+                              borderRadius: 100,
+                              borderColor: "#059ED9",
+                              flexDirection: "row"
+                           }}
+                        >
+                           <Image style={{ alignSelf: "center" }} source={images.youFollowOk} />
+                           <Text style={[styles.followsYou, { color: "rgba(255,255,255,0.4)" }]}>
+                              Requested
+                           </Text>
+                        </View>
+                     </View>
+                  )
+               }
+               case 7: {
                   return <View />
                }
                default:
