@@ -19,6 +19,7 @@ class InstagramUser extends Component {
       this.state = { relationStyle: null }
    }
    componentWillMount() {
+       /*
       getRelationshipStatus(this.props.token, this.props.data.id).then(response => {
          console.log("will mount", response.data.data)
          const data = response.data.data
@@ -44,6 +45,7 @@ class InstagramUser extends Component {
             this.setState({ relationStyle: 7 })
          }
       })
+      */
    }
    renderRelationship() {
       if (this.props.userType === "not_follow_me") {

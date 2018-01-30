@@ -10,13 +10,14 @@ import {
 } from "react-native"
 import { StaticHeader, InstagramUser } from "components"
 import styles from "./styles"
-import { getUserDataRequest } from "ducks/instagramUsers"
+import { getUserDataRequest, addDataToUserlist } from "ducks/instagramUsers"
 import { connect } from "react-redux"
 
 class ShowInstagramUserScreen extends Component {
    constructor() {
       super()
       this.renderInstagramUser = this.renderInstagramUser.bind(this)
+      this.page = 0
    }
    pushInstagramUserDetail() {
       this.props.navigator.push({
@@ -26,10 +27,15 @@ class ShowInstagramUserScreen extends Component {
          passProps: {}
       })
    }
-   componentWillMount() {
-   }
+   componentWillMount() {}
    renderInstagramUser({ item }) {
-      return <InstagramUser data={item} userType={this.props.serviceType} onPress={() => this.pushInstagramUserDetail()} />
+      return (
+         <InstagramUser
+            data={item}
+            userType={this.props.serviceType}
+            onPress={() => this.pushInstagramUserDetail()}
+         />
+      )
    }
 
    render() {
@@ -37,12 +43,26 @@ class ShowInstagramUserScreen extends Component {
          return (
             <View style={{ flex: 1, backgroundColor: "#152341" }}>
                <StaticHeader title={this.props.serviceType} navigator={this.props.navigator} />
-               <FlatList
-                  renderItem={this.renderInstagramUser}
-                  data={this.props.userList}
-                  style={{ flex: 1 }}
-                  ItemSeparatorComponent={() => <View style={styles.itemSepStyle} />}
-               />
+               <View style={{ flex: 1 }}>
+                  <FlatList
+                     renderItem={this.renderInstagramUser}
+                     data={this.props.flatlistData}
+                     style={{ flex: 1 }}
+                     ItemSeparatorComponent={() => <View style={styles.itemSepStyle} />}
+                     onEndReachedThreshold={0.5}
+                     onEndReached={() => {
+                        console.log("OOON REAC ENNND")
+                        this.page = this.page + 1
+                        let temp = Math.floor(this.props.userList.length / 20)
+                        if (20 * temp < this.props.userList.length) {
+                           temp = temp + 1
+                        }
+                        if (this.page < temp) {
+                            this.props.addDataToUserlist(this.page)
+                        }
+                     }}
+                  />
+               </View>
             </View>
          )
       } else {
@@ -59,10 +79,14 @@ class ShowInstagramUserScreen extends Component {
    }
 }
 const mapStateToProps = (state, ownProps) => {
+   console.log(state)
    return {
       token: state.user.token,
+      flatlistData: state.instagramUsers.flatlistData,
       userList: state.instagramUsers.userList,
       isFetching: state.instagramUsers.isFetching
    }
 }
-export default connect(mapStateToProps, { getUserDataRequest })(ShowInstagramUserScreen)
+export default connect(mapStateToProps, { getUserDataRequest, addDataToUserlist })(
+   ShowInstagramUserScreen
+)
