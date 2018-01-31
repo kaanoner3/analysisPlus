@@ -12,10 +12,13 @@ import { images } from "resources"
 import { connect } from "react-redux"
 import { getRelationshipStatus } from "services"
 import { ralationshipAnalysis } from "ducks/instagramUsers"
+import { userDetailRequest } from "ducks/userDetail"
+
 class InstagramUser extends Component {
    constructor(props) {
       super(props)
       this.renderRelationship = this.renderRelationship.bind(this)
+      this.pushInstagramUserDetail = this.pushInstagramUserDetail.bind(this)
       this.state = { relationStyle: null }
    }
    componentWillMount() {
@@ -41,6 +44,15 @@ class InstagramUser extends Component {
          } else if (data.outgoing_status === "none" && data.incoming_status === "none") {
             this.setState({ relationStyle: 7 })
          }
+      })
+   }
+   pushInstagramUserDetail(user_id) {
+      this.props.userDetailRequest(user_id,this.props.token)
+      this.props.navigator.push({
+         screen: "UserDetailScreen",
+         backButtonTitle: "Back",
+         backButtonHidden: false,
+         passProps: {}
       })
    }
    renderRelationship() {
@@ -267,7 +279,7 @@ class InstagramUser extends Component {
                      flexDirection: "row",
                      alignItems: "center"
                   }}
-                  onPress={this.props.onPress}
+                  onPress={() => this.pushInstagramUserDetail(this.props.data.id)}
                >
                   <View style={{ flex: 1 }}>
                      <View style={{ flexDirection: "row" }}>
@@ -294,5 +306,5 @@ const mapStateToProps = (state, ownProps) => {
       userList: state.instagramUsers.userList
    }
 }
-export default connect(mapStateToProps, { ralationshipAnalysis })(InstagramUser)
+export default connect(mapStateToProps, { ralationshipAnalysis,userDetailRequest })(InstagramUser)
 

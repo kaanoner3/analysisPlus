@@ -1,12 +1,5 @@
 import React, { Component } from "react"
-import {
-    View,
-    Text,
-    Image,
-    FlatList,
-    TouchableOpacity,
-    ListView
-} from "react-native"
+import { View, Text, Image, FlatList, TouchableOpacity, ListView } from "react-native"
 import styles from "./styles"
 import axios from "axios"
 import moment from "moment"
@@ -15,17 +8,19 @@ import { Dimensions } from "react-native"
 import { images } from "resources"
 const { width, height } = Dimensions.get("window")
 class MediaContentScreen extends Component {
-    constructor(props) {
-        super(props)
-        this.renderPhotos = this.renderPhotos.bind(this)
-        this.showPhoto = this.showPhoto.bind(this)
-        this.renderDate = this.renderDate.bind(this)
+   constructor(props) {
+      super(props)
+      this.renderPhotos = this.renderPhotos.bind(this)
+      this.showPhoto = this.showPhoto.bind(this)
+      this.renderDate = this.renderDate.bind(this)
 
-        this.convertedDate
-    }
-    componentWillMount() {}
-    showPhoto() {
-        /*
+      this.convertedDate
+   }
+   componentWillMount() {
+      console.log("will mount", this.props.mediaData)
+   }
+   showPhoto() {
+      /*
         axios
             .get("https://api.instagram.com/v1/media/" + id + "?access_token=" + this.props.token)
             .then(response => {
@@ -47,9 +42,9 @@ class MediaContentScreen extends Component {
                 console.log(error)
             })
             */
-    }
-    renderDate() {
-        /*
+   }
+   renderDate() {
+      /*
         if (this.props.mediadata !== null) {
             var time = new Date(this.props.mediadata[0].created_time * 1000)
             var temp = moment(time, "YYYYMMDD").fromNow();
@@ -64,47 +59,42 @@ class MediaContentScreen extends Component {
             )
         }
         */
-    }
-    renderPhotos() {
-        return (
-            <TouchableOpacity style={{}} onPress={() => this.showPhoto()}>
-                <View style={mediaStyles.container}>
-                    <Image
-                        style={mediaStyles.imageStyle}
-                        source={{
-                            uri:
-                                "https://scontent-frx5-1.cdninstagram.com/t51.2885-15/e35/25038373_317331842096007_5339085132831653888_n.jpg"
-                        }}
-                    />
-                </View>
-            </TouchableOpacity>
-        )
-    }
-
-    render() {
-        return (
-            <View style={{ flex: 1, backgroundColor: "#152341", marginTop: 1 }}>
-                <FlatList
-                    data={this.props.mediadata}
-                    renderItem={this.renderPhotos}
-                    numColumns={3}
-                />
+   }
+   renderPhotos({ item }) {
+      return (
+         <TouchableOpacity style={{}} onPress={() => this.showPhoto()}>
+            <View style={mediaStyles.container}>
+               <Image
+                  style={mediaStyles.imageStyle}
+                  source={{
+                     uri: item.images.thumbnail.url
+                  }}
+               />
             </View>
-        )
-    }
+         </TouchableOpacity>
+      )
+   }
+
+   render() {
+      return (
+         <View style={{ flex: 1, backgroundColor: "#152341", marginTop: 1 }}>
+            <FlatList data={this.props.mediaData} renderItem={this.renderPhotos} numColumns={3} />
+         </View>
+      )
+   }
 }
 
 export default MediaContentScreen
 
 const mediaStyles = {
-    container: {
-        flex: 1,
-        backgroundColor: "#152341",
-        justifyContent: "flex-start",
-        margin: 2
-    },
-    imageStyle: {
-        height: width / 3,
-        width: width / 3
-    }
+   container: {
+      flex: 1,
+      backgroundColor: "#152341",
+      justifyContent: "flex-start",
+      margin: 2
+   },
+   imageStyle: {
+      height: width / 3,
+      width: width / 3
+   }
 }

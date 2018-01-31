@@ -33,7 +33,8 @@ class ShowInstagramUserScreen extends Component {
          <InstagramUser
             data={item}
             userType={this.props.serviceType}
-            onPress={() => this.pushInstagramUserDetail()}
+            //onPress={() => this.pushInstagramUserDetail()}
+            navigator={this.props.navigator}
          />
       )
    }
@@ -51,7 +52,6 @@ class ShowInstagramUserScreen extends Component {
                      ItemSeparatorComponent={() => <View style={styles.itemSepStyle} />}
                      onEndReachedThreshold={0.5}
                      onEndReached={() => {
-                        console.log("OOON REAC ENNND")
                         this.page = this.page + 1
                         let temp = Math.floor(this.props.userList.length / 20)
                         if (20 * temp < this.props.userList.length) {
@@ -79,7 +79,6 @@ class ShowInstagramUserScreen extends Component {
    }
 }
 const mapStateToProps = (state, ownProps) => {
-   console.log(state)
    return {
       token: state.user.token,
       flatlistData: state.instagramUsers.flatlistData,
