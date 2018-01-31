@@ -63,16 +63,19 @@ class InteractionScreen extends Component {
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
                                 contentText="Most Likes to Me"
+                                contentIcon={images.ghost1}                 
                             />
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
                                 contentText="Most Comments to Me"
+                                contentIcon={images.ghost2}                 
                             />
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
                                 contentText="Most Likes and Comments to Me"
+                                contentIcon={images.ghost3}                 
                             />
                         </View>
                         <Text style={styles.sectionText}>
@@ -83,15 +86,19 @@ class InteractionScreen extends Component {
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
                                 contentText="Least Likes Given"
+                                contentIcon={images.ghost1}                 
+
                             />
                             <InteractionContent
                                 style={styles.interactionStyle}
                                 contentText="Least Comments Left"
+                                contentIcon={images.ghost2}                 
                             />
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
                                 contentText="No Comments or Likes"
+                                contentIcon={images.ghost3}                 
                             />
                         </View>
                         <Text style={styles.sectionText}>DISCOVER</Text>
@@ -100,16 +107,19 @@ class InteractionScreen extends Component {
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
                                 contentText="Least Likes Given"
+                                contentIcon={images.discover1}
                             />
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
                                 contentText="Least Comments Left"
+                                contentIcon={images.discover2}
                             />
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
                                 contentText="No Comments or Likes"
+                                contentIcon={images.discover3}                 
                             />
                         </View>
                     </View>
