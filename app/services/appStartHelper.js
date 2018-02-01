@@ -36,7 +36,8 @@ export function startHomeScreen(token) {
       tabBarBackgroundColor: "#111A2C",
       tabBarTranslucent: false,
       tabBarSelectedLabelColor: "#059ED9",
-      tabBarTextFontFamily: "Circular"
+      tabBarTextFontFamily: "Circular",
+      tabBarLabelColor:'rgba(255,255,255,0.3)'
     },
     appStyle: {
       orientation: "portrait",

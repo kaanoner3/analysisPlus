@@ -11,6 +11,7 @@ import getUserBaseDetail from "./getUserBaseDetail"
 import getUserMediaData from "./getUserMediaData"
 import getExtraMediaData from "./getExtraMediaData"
 import getMediaLikesData from "./getMediaLikesData"
+import getInteractionDetail from "./getInteractionDetail"
 
 export default {
    LoginStorageService,
@@ -25,7 +26,8 @@ export default {
    getUserBaseDetail,
    getUserMediaData,
    getExtraMediaData,
-   getMediaLikesData
+   getMediaLikesData,
+   getInteractionDetail
 }
 
 export {
@@ -41,5 +43,6 @@ export {
    getUserBaseDetail,
    getUserMediaData,
    getExtraMediaData,
-   getMediaLikesData
+   getMediaLikesData,
+   getInteractionDetail
 }

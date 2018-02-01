@@ -8,9 +8,11 @@ const styles = {
     sectionText: {
         color: "rgba(255,255,255,0.40)",
         fontSize: 12,
-        paddingTop: 30,
+        paddingTop: 20,
         marginLeft: 20,
-        fontFamily: "Circular"
+        fontFamily: "Circular",
+        fontWeight:'bold',
+        //marginBottom: 10
     },
     sectionView: {
         backgroundColor: "#192A4F",

@@ -13,6 +13,7 @@ import styles from "./styles"
 import { getUserDataRequest, addDataToUserlist } from "ducks/instagramUsers"
 import { connect } from "react-redux"
 
+
 class ShowInstagramUserScreen extends Component {
    constructor() {
       super()

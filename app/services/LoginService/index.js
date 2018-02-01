@@ -1,4 +1,4 @@
-import SignInService from "./SignInService"
+import SignInService from "./signInService"
 export default {
     SignInService
 }

@@ -17,7 +17,6 @@ class MediaContentScreen extends Component {
       this.convertedDate
    }
    componentWillMount() {
-      console.log("will mount", this.props.mediaData)
    }
    showPhoto() {
       /*

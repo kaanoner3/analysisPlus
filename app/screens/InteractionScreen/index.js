@@ -63,19 +63,25 @@ class InteractionScreen extends Component {
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
                                 contentText="Most Likes to Me"
-                                contentIcon={images.ghost1}                 
+                                contentIcon={images.ghost1}
+                                navigator={this.props.navigator} 
+                                serviceType="most-likes-to-me"                                                                                               
                             />
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
                                 contentText="Most Comments to Me"
-                                contentIcon={images.ghost2}                 
+                                contentIcon={images.ghost2}
+                                navigator={this.props.navigator}
+                                serviceType="most-comments-to-me"                                                                                                
                             />
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
                                 contentText="Most Likes and Comments to Me"
-                                contentIcon={images.ghost3}                 
+                                contentIcon={images.ghost3}
+                                navigator={this.props.navigator}
+                                serviceType="most-likes-and-comments-to-me"                                                                                                                 
                             />
                         </View>
                         <Text style={styles.sectionText}>
@@ -87,18 +93,23 @@ class InteractionScreen extends Component {
                                 style={styles.interactionStyle}
                                 contentText="Least Likes Given"
                                 contentIcon={images.ghost1}                 
-
+                                navigator={this.props.navigator} 
+                                serviceType="least-likes-given"                                                                               
                             />
                             <InteractionContent
                                 style={styles.interactionStyle}
                                 contentText="Least Comments Left"
-                                contentIcon={images.ghost2}                 
+                                contentIcon={images.ghost2}  
+                                navigator={this.props.navigator}
+                                serviceType="least-comments-left"                                                                               
                             />
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
                                 contentText="No Comments or Likes"
-                                contentIcon={images.ghost3}                 
+                                contentIcon={images.ghost3}  
+                                navigator={this.props.navigator} 
+                                serviceType="no-comments-or-likes"                                                                                                                               
                             />
                         </View>
                         <Text style={styles.sectionText}>DISCOVER</Text>
@@ -106,20 +117,26 @@ class InteractionScreen extends Component {
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
-                                contentText="Least Likes Given"
+                                contentText="My Recent Favourite Users"
                                 contentIcon={images.discover1}
+                                navigator={this.props.navigator} 
+                                serviceType="my-recent-favourite-users"                                               
                             />
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
-                                contentText="Least Comments Left"
+                                contentText="My Best Friends"
                                 contentIcon={images.discover2}
+                                navigator={this.props.navigator}
+                                serviceType="my-best-friends"                                                
                             />
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
-                                contentText="No Comments or Likes"
-                                contentIcon={images.discover3}                 
+                                contentText="Users I Like But Don't Follow"
+                                contentIcon={images.discover3}   
+                                navigator={this.props.navigator}
+                                serviceType="user-i-like-but-dont-follow"                               
                             />
                         </View>
                     </View>

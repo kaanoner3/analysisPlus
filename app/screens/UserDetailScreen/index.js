@@ -57,7 +57,6 @@ class UserDetailScreen extends Component {
       this.setState({})
    }
    componentWillMount() {
-      console.log("USER DETAIL PROPS", this.props)
       if (height === 812) {
          this.setState({ headerX: true })
       } else {
@@ -349,7 +348,6 @@ class UserDetailScreen extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-   console.log("detay", state)
    return {
       isFetching: state.userDetail.isFetching,
       mediaData: state.userDetail.userMediaData,

@@ -10,7 +10,8 @@ export const USER_LIKES_DATA_SUCCESS = "userDetail/USER_LIKES_DATA_SUCCESS"
 
 const initialState = {
    errorMessage: null,
-   isFetching: null
+   isFetching: null,
+   relationshipToSelf: null
 }
 export default function(state = initialState, action = {}) {
    switch (action.type) {

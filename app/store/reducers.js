@@ -1,5 +1,5 @@
 import { combineReducers } from "redux"
-import { auth, app, user, profile, instagramUsers, userDetail } from "./ducks"
+import { auth, app, user, profile, instagramUsers, userDetail,interactions } from "./ducks"
 
 export default combineReducers({
    app,
@@ -7,5 +7,6 @@ export default combineReducers({
    user,
    profile,
    instagramUsers,
-   userDetail
+   userDetail,
+   interactions
 })
