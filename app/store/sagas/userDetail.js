@@ -17,14 +17,11 @@ export function* userDetail() {
       try {
          const { id, token } = yield take(USER_DETAIL_REQUEST)
          const userBaseDetailResponse = yield call(getUserBaseDetail, token, id)
-         console.log('sagaaa',userBaseDetailResponse)
 
          const relationShipStatus = yield call(getRelationshipStatus,token,id)
-         console.log('sagaaa2',relationShipStatus)
 
          yield put(userBaseDetailSuccess(userBaseDetailResponse.data.data,relationShipStatus.data.data))
          const userMediaResponse = yield call(getUserMediaData, token, id)
-         console.log('sagaa3',userMediaResponse)
          yield put(userMediaDataSuccess(userMediaResponse.data.data,userMediaResponse.data.pagination))
          
          //alttaki call hazır degil
