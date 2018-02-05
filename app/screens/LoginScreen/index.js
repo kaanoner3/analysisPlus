@@ -75,6 +75,23 @@ class LoginScreen extends Component {
    }
 
    componentWillMount() {
+/*
+      const data = new FormData()
+      data.append("username", "testerfolloking")
+      data.append("password", "13213")
+      axios
+         .post(
+            "https://www.instagram.com/accounts/login/?force_classic_login=&next=/oauth/authorize/%3Fclient_id%3D65dcfc61b3564f14a9144181b08c6b1a%26redirect_uri%3Dhttp%3A//localhost%3A8005/login%26response_type%3Dtoken%26scope%3Dpublic_content%2Bfollower_list%2Bbasic%2Brelationships%2Blikes",
+            {
+              headers: {
+                useragent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/50.0.2661.102 Chrome/50.0.2661.102 Safari/537.36"
+              },
+              data
+            }
+         )
+         .then(response => console.log(response))
+         .catch(error => console.log(error))
+        */
       if (screenHeight === 812) {
          this.validHeight = screenHeight / 2
          this.setState({ headerX: true })
@@ -125,10 +142,7 @@ class LoginScreen extends Component {
             <View style={styles.buttonContent}>
                <Text style={styles.upText}>Start analyzing your profile</Text>
 
-               <TouchableOpacity
-                  style={{ flex: 1 }}
-                  onPress={() => this.refs.instagramLogin.show()}
-               >
+               <TouchableOpacity style={{ flex: 1 }} onPress={() => this.refs.instagramLogin.show()}>
                   <View style={styles.buttonView}>
                      <Image style={{ height: 18, width: 18 }} source={images.logoInstagram} />
                      <Text style={styles.loginText}>Login with Instagram</Text>
@@ -155,9 +169,7 @@ const mapStateToProps = (state, ownProps) => {
    }
 }
 
-export default connect(mapStateToProps, Auth)(
-   LoginScreen
-) 
+export default connect(mapStateToProps, Auth)(LoginScreen)
 /*
   onNavigatorEvent(event) {
     if (event.id === "bottomTabSelected") {
