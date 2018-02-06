@@ -75,7 +75,7 @@ class LoginScreen extends Component {
    }
 
    componentWillMount() {
-/*
+      /*
       const data = new FormData()
       data.append("username", "testerfolloking")
       data.append("password", "13213")
@@ -156,7 +156,10 @@ class LoginScreen extends Component {
                clientId={instagram.client_id}
                redirectUrl={instagram.redirect_url}
                scopes={["public_content", "follower_list", "basic", "relationships", "likes"]}
-               onLoginSuccess={token => this.props.doInstagramLogin(token)}
+               onLoginSuccess={(token, result) => {
+                 //fatihe idleri gonder
+                  this.props.doInstagramLogin(token)
+               }}
             />
          </View>
       )
