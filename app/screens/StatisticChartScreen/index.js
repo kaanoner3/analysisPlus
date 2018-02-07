@@ -16,7 +16,8 @@ import {
    VictoryAnimation,
    VictoryVoronoiContainer,
    VictoryArea,
-   VictoryPie
+   VictoryPie,
+   VictoryAxis
 } from "victory-native"
 import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg"
 import { connect } from "react-redux"
@@ -68,6 +69,13 @@ class StatisticChartScreen extends Component {
                      interpolation="natural"
                      animate={{ duration: 1000 }}
                   />
+                  <VictoryAxis
+               /*      tickValues={[2,4,5,7,8,8]} //tarih arrayi
+                     tickFormat={t => {
+                        console.log(t)
+                        t
+                     }} // gun yıl ay gelicek aya gore Nov yazdır gun kalsın*/
+                  />
                </VictoryChart>
             </View>
          )
@@ -82,7 +90,8 @@ class StatisticChartScreen extends Component {
 
 const mapStateToProps = (state, ownProps) => {
    return {
-      token: state.user.token
+      token: state.user.token,
+      chartData: state.chart.chartData
    }
 }
 

@@ -1,8 +1,3 @@
-/*
-|------------------------------------------------------------------------------
-| Initial state.
-|------------------------------------------------------------------------------
-*/
 const initialState = {
    errorMessage: null,
    isFetching: false,
@@ -13,15 +8,10 @@ export const FOLLOWERS_CHART_STATISTIC_REQUEST = "chart/FOLLOWERS_CHART_STATISTI
 export const FOLLOWERS_CHART_STATISTIC_FAIL = "chart/FOLLOWERS_CHART_STATISTIC_FAIL"
 export const FOLLOWERS_CHART_STATISTIC_SUCCESS = "chart/FOLLOWERS_CHART_STATISTIC_SUCCESS"
 
-/*
-  |------------------------------------------------------------------------------
-  | Reducer.
-  |------------------------------------------------------------------------------
-  */
+
 export default function(state = initialState, action = {}) {
    switch (action.type) {
       case FOLLOWERS_CHART_STATISTIC_REQUEST: {
-        console.log("reducer")
          return {
             ...state,
             isFetching: true
@@ -33,9 +23,12 @@ export default function(state = initialState, action = {}) {
          }
       }
       case FOLLOWERS_CHART_STATISTIC_SUCCESS: {
+         const data = action.formattedData
+         const dateArray = []
          return {
             ...state,
-            chartStatisticData: action.data,
+            chartData: data,
+            //dateData: action.formattedData,
             isFetching: false
          }
       }
@@ -44,20 +37,7 @@ export default function(state = initialState, action = {}) {
    }
 }
 
-/*
-  |------------------------------------------------------------------------------
-  | Action creators.
-  |------------------------------------------------------------------------------
-  */
-
-/*
-  |------------------------------------------------------------------------------
-  | Actions.
-  |------------------------------------------------------------------------------
-  */
-
 export function chartStatisticRequest(token, serviceType) {
-    console.log("action")
    return { type: FOLLOWERS_CHART_STATISTIC_REQUEST, token, serviceType }
 }
 
@@ -65,6 +45,6 @@ export function chartStatisticFail(errorMessage) {
    return { type: FOLLOWERS_CHART_STATISTIC_FAIL, errorMessage }
 }
 
-export function chartStatisticSuccess(data) {
-   return { type: FOLLOWERS_CHART_STATISTIC_SUCCESS, data }
+export function chartStatisticSuccess(formattedData) {
+   return { type: FOLLOWERS_CHART_STATISTIC_SUCCESS, formattedData }
 }
