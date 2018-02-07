@@ -12,7 +12,7 @@ import getUserMediaData from "./getUserMediaData"
 import getExtraMediaData from "./getExtraMediaData"
 import getMediaLikesData from "./getMediaLikesData"
 import getInteractionDetail from "./getInteractionDetail"
-
+import getChartStatisticFollowersData from "./getChartStatisticFollowersData"
 export default {
    LoginStorageService,
    SignInService,
@@ -27,7 +27,8 @@ export default {
    getUserMediaData,
    getExtraMediaData,
    getMediaLikesData,
-   getInteractionDetail
+   getInteractionDetail,
+   getChartStatisticFollowersData
 }
 
 export {
@@ -44,5 +45,6 @@ export {
    getUserMediaData,
    getExtraMediaData,
    getMediaLikesData,
-   getInteractionDetail
+   getInteractionDetail,
+   getChartStatisticFollowersData
 }

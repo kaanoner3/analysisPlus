@@ -5,6 +5,7 @@ import profile from "./profile"
 import instagramUsers from "./instagramUsers"
 import userDetail from "./userDetail"
 import interactions from "./interactions"
+import chart from "./chart"
 
 module.exports = {
    auth,
@@ -13,5 +14,6 @@ module.exports = {
    profile,
    instagramUsers,
    userDetail,
-   interactions
+   interactions,
+   chart
 }

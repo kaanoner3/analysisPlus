@@ -42,8 +42,8 @@ export default function (state = initialState, action = {}) {
 }
 }
 // ACTION CREATORS
-export function doInstagramLogin(token) {
-  return { type: INSTAGRAM_LOGIN_REQUEST, token };
+export function doInstagramLogin(token,result) {
+  return { type: INSTAGRAM_LOGIN_REQUEST, token,result };
 }
 export function instagramLoginSuccess(data) {
   return { type: INSTAGRAM_LOGIN_SUCCESS, data };

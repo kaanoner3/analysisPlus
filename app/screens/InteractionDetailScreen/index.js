@@ -40,7 +40,6 @@ class InteractionDetailScreen extends Component {
       })
    }
    renderFlatlistItem({ item, index }) {
-      console.log("render")
       return <InteractionUser data={item} index={index} navigator={this.props.navigator} />
    }
 
