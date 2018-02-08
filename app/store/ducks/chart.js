@@ -28,7 +28,6 @@ export default function(state = initialState, action = {}) {
          return {
             ...state,
             chartData: data,
-            //dateData: action.formattedData,
             isFetching: false
          }
       }
