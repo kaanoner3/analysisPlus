@@ -24,6 +24,8 @@ import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg"
 import { connect } from "react-redux"
 import { chartStatisticRequest } from "ducks/chart"
 
+const testData = [34, 54, 7, 72]
+const testDataReverse = [86, 72, 67, 54]
 const screenWidth = Dimensions.get("window").width
 class StatisticChartScreen extends Component {
    constructor(props) {
@@ -53,77 +55,116 @@ class StatisticChartScreen extends Component {
                <Svg
                   viewBox={"170 -30 20 350"}
                   style={{
-                     backgroundColor: "#ccdee8",
+                     backgroundColor: "#192A4F",
                      padding: 0,
                      width: screenWidth,
-                     height: '40%'
+                     height: "60%"
                   }}
                >
-                  <Defs>
-                     <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="a">
-                        <Stop stopColor="#00FF72" offset="100%" stopOpacity="0.5" />
-                        <Stop stopColor="#00FF72" offset="0%" stopOpacity="0" />
-                     </LinearGradient>
-                  </Defs>
+                  <VictoryChart
+                     domain={{
+                        x: [
+                           this.props.chartData.day[0],
+                           this.props.chartData.day[this.props.chartData.day.length - 1]
+                        ],
+                        y: [this.props.chartData.domainY.minValue, this.props.chartData.domainY.maxValue]
+                     }}
+                     domainPadding={{ x: [0, 10], y: [0, 10] }}
+                  >
+                     <VictoryLabel
+                        dx={20}
+                        dy={30}
+                        name="myCountLabel"
+                        style={{ fontSize: 28, fontFamily: "Circular", fill: "white" }}
+                        text={245}
+                        data={this.props.chartData.followersChartData}
+                     />
+                     <Defs>
+                        <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="myGradient">
+                           <Stop stopColor="#00FF72" offset="100%" stopOpacity="0.5" />
+                           <Stop stopColor="#00FF72" offset="0%" stopOpacity="0" />
+                        </LinearGradient>
+                     </Defs>
 
-                  <G>
                      <VictoryArea
                         data={this.props.chartData.followersChartData}
+                        name="area"
                         style={{
                            data: {
                               stroke: "#00FF72",
-                              fill: "url(#a)",
+                              fill: "url(#myGradient)",
                               strokeWidth: 3,
                               strokeLinecap: "round"
                            }
                         }}
                         animate={{ duration: 1000 }}
+                        events={[
+                           {
+                              target: "parent",
+                              eventHandlers: {
+                                 onClick: () => {
+                                    return [
+                                       {
+                                          target: "data",
+                                          eventKey: "all",
+                                          mutation: props => {
+                                             const fill = props.style && props.style.fill
+                                             return fill === "black" ? null : { style: { fill: "black" } }
+                                          }
+                                       },
+                                       {
+                                          target: "myCountLabel",
+                                          eventKey: 2,
+                                          mutation: props => {
+                                             return props.text ?  { text: "clicked" } : { text: "clicked" }
+                                          }
+                                       }
+                                    ]
+                                 }
+                              }
+                           }
+                        ]}
                      />
                      <VictoryAxis
                         dependentAxis
                         standalone={false}
-                        domain={{
-                           x: [2, 6],
-                           y: [1678, 5919]
-                        }}
-                        tickValues={this.props.chartData.followersChartData}
+                        tickValues={this.props.chartData.followersChartData.y}
                         tickFormat={t => {
-                           console.log(t.y)
-                           return t.y
+                           return t
                         }}
                         style={{
-                           ticks: { size: 10 },
-                           grid: { stroke: "black" }
+                           ticks: { size: 5 },
+                           grid: { stroke: "rgba(255,255,255,0.05)" },
+                           axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
+                           tickLabels: {
+                              fill: "rgba(255,255,255,0.4)",
+                              fontFamily: "Circular",
+                              fontSize: 13
+                           }
                         }}
                      />
                      <VictoryAxis
-                        //scale="time"
                         standalone={false}
-                        domain={{
-                           x: [2, 6],
-                           y: [1678, 5919]
-                        }}
                         style={{
                            grid: {
                               stroke: "transparent"
                            },
-                           axis: { stroke: "black", strokeWidth: 1 },
+                           axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
                            ticks: {
                               size: 0
                            },
                            tickLabels: {
-                              fill: "purple",
+                              fill: "rgba(255,255,255,0.4)",
                               fontFamily: "Circular",
-                              fontSize: 12
+                              fontSize: 13
                            }
                         }}
                         tickValues={this.props.chartData.day}
                         tickFormat={x => {
                            return x + " Feb"
                         }}
-                        orian
                      />
-                  </G>
+                  </VictoryChart>
                </Svg>
             </View>
          )
@@ -180,4 +221,8 @@ export default connect(mapStateToProps, { chartStatisticRequest })(StatisticChar
                      //interpolation="natural"
                      animate={{ duration: 1000 }}
                   />
+
+
+
+
 */

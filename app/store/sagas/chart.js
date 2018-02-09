@@ -13,14 +13,17 @@ export function* chartStatistic() {
          const dates = responseData.data
          const arrayLength = dates.length
          const formattedData = []
+         var domainYMax = null
+         var domainYMin = null
+
          if (serviceType === "weekly") {
-            // varaibles for reducers
             var day = []
             var month = []
             var year = []
             var count = []
             var indexArray = []
             var followersChartData = []
+
             formattedData = dates.map((value, index) => {
                var date = value.date
                var splitValue = date.split(".")
@@ -36,7 +39,17 @@ export function* chartStatistic() {
                   month.reverse()
                   year.reverse()
                   count.reverse()
+
+                  domainYMax = count[0]
+                  domainYMin = count[0]
+
                   for (var i = 0; i < arrayLength; i++) {
+                     if (domainYMax < count[i + 1]) {
+                        domainYMax = count[i + 1]
+                     }
+                     if (domainYMin > count[i + 1]) {
+                        domainYMin = count[i + 1]
+                     }
                      followersChartData.push({
                         x: day[i],
                         y: count[i]
@@ -48,7 +61,8 @@ export function* chartStatistic() {
                   day,
                   month,
                   year,
-                  followersChartData
+                  followersChartData,
+                  domainY: { maxValue: domainYMax, minValue: domainYMin }
                }
                return formattedValues
             })
