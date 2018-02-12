@@ -18,7 +18,8 @@ import {
    VictoryArea,
    VictoryPie,
    VictoryAxis,
-   VictoryLabel
+   VictoryLabel,
+   VictoryTooltip
 } from "victory-native"
 import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg"
 import { connect } from "react-redux"
@@ -31,25 +32,24 @@ class StatisticChartScreen extends Component {
    constructor(props) {
       super(props)
       this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
-      this.renderChart = this.renderChart.bind(this)
+      this.renderFollowerChart = this.renderFollowerChart.bind(this)
 
-      this.state = { ShouldRenderChart: false }
+      this.state = { ShouldrenderFollowerChart: false }
    }
 
    onNavigatorEvent(event) {
       if (event.id === "bottomTabSelected") {
-         this.setState({ ShouldRenderChart: true })
+         this.setState({ ShouldrenderFollowerChart: true })
       }
       if (event.id === "willDisappear") {
-         this.setState({ ShouldRenderChart: false })
+         this.setState({ ShouldrenderFollowerChart: false })
       }
    }
    componentWillMount() {
       this.props.chartStatisticRequest(this.props.token, "weekly")
    }
-
-   renderChart() {
-      if (this.state.ShouldRenderChart === true) {
+   renderGainedFollowersChart() {
+      if (this.state.ShouldrenderFollowerChart === true) {
          return (
             <View style={{ flex: 1 }}>
                <Svg
@@ -58,7 +58,88 @@ class StatisticChartScreen extends Component {
                      backgroundColor: "#192A4F",
                      padding: 0,
                      width: screenWidth,
-                     height: "60%"
+                     height: "45%"
+                  }}
+               >
+                  <VictoryChart
+                     domain={{
+                        x: [
+                           this.props.gainedData.day[0],
+                           this.props.gainedData.day[this.props.gainedData.day.length - 1]
+                        ],
+                        y: [this.props.gainedData.domainY.minValue, this.props.gainedData.domainY.maxValue]
+                     }}
+                     domainPadding={{ x: [0, 10], y: [0, 10] }}
+                  >
+                     <VictoryBar
+                        data={this.props.gainedData.gainedChartData}
+                        name="bar"
+                        style={{
+                           data: {
+                              stroke: "#00FF72",
+                              fill: "url(#myGradient)",
+                              strokeWidth: 3,
+                              strokeLinecap: "round"
+                           }
+                        }}
+                        animate={{ duration: 1000 }}
+                     />
+                     <VictoryAxis
+                        dependentAxis
+                        standalone={false}
+                        tickValues={this.props.gainedData.gainedChartData.y}
+                        tickFormat={t => {
+                           return t
+                        }}
+                        style={{
+                           ticks: { size: 5 },
+                           grid: { stroke: "rgba(255,255,255,0.05)" },
+                           axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
+                           tickLabels: {
+                              fill: "rgba(255,255,255,0.4)",
+                              fontFamily: "Circular",
+                              fontSize: 13
+                           }
+                        }}
+                     />
+                     <VictoryAxis
+                        standalone={false}
+                        style={{
+                           grid: {
+                              stroke: "transparent"
+                           },
+                           axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
+                           ticks: {
+                              size: 0
+                           },
+                           tickLabels: {
+                              fill: "rgba(255,255,255,0.4)",
+                              fontFamily: "Circular",
+                              fontSize: 13
+                           }
+                        }}
+                        tickValues={this.props.gainedData.day}
+                        tickFormat={x => {
+                           return x + " Feb"
+                        }}
+                     />
+                  </VictoryChart>
+               </Svg>
+            </View>
+         )
+      }
+   }
+   renderFollowerChart() {
+      if (this.state.ShouldrenderFollowerChart === true) {
+         return (
+            <View style={{ flex: 1 }}>
+               <Svg
+                  viewBox={"170 -30 20 350"}
+                  style={{
+                     backgroundColor: "#192A4F",
+                     padding: 0,
+                     width: screenWidth,
+                     height: "45%"
                   }}
                >
                   <VictoryChart
@@ -77,7 +158,7 @@ class StatisticChartScreen extends Component {
                         name="myCountLabel"
                         style={{ fontSize: 28, fontFamily: "Circular", fill: "white" }}
                         text={245}
-                        data={this.props.chartData.followersChartData}
+                        data={this.props.chartData.followersChartData.y}
                      />
                      <Defs>
                         <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="myGradient">
@@ -98,32 +179,6 @@ class StatisticChartScreen extends Component {
                            }
                         }}
                         animate={{ duration: 1000 }}
-                        events={[
-                           {
-                              target: "parent",
-                              eventHandlers: {
-                                 onClick: () => {
-                                    return [
-                                       {
-                                          target: "data",
-                                          eventKey: "all",
-                                          mutation: props => {
-                                             const fill = props.style && props.style.fill
-                                             return fill === "black" ? null : { style: { fill: "black" } }
-                                          }
-                                       },
-                                       {
-                                          target: "myCountLabel",
-                                          eventKey: 2,
-                                          mutation: props => {
-                                             return props.text ?  { text: "clicked" } : { text: "clicked" }
-                                          }
-                                       }
-                                    ]
-                                 }
-                              }
-                           }
-                        ]}
                      />
                      <VictoryAxis
                         dependentAxis
@@ -173,14 +228,15 @@ class StatisticChartScreen extends Component {
       }
    }
    render() {
-      return <View style={{ flex: 1 }}>{this.renderChart()}</View>
+      return <View style={{ flex: 1 }}>{this.renderFollowerChart()}</View>
    }
 }
 
 const mapStateToProps = (state, ownProps) => {
    return {
       token: state.user.token,
-      chartData: state.chart.chartData
+      chartData: state.chart.chartData,
+      gainedData: state.chart.gainedData
    }
 }
 
