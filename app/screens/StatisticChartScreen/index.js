@@ -3,23 +3,13 @@ import { View, Text, Dimensions } from "react-native"
 import {
    VictoryBar,
    VictoryChart,
-   VictoryLine,
-   VictoryTheme,
-   VictoryClipContainer,
-   VictoryBrushContainer,
-   VictoryContainer,
-   VictoryCursorContainer,
-   VictorySelectionContainer,
-   VictoryVoroniContainer,
-   VictoryGroup,
-   VictoryScatter,
    VictoryAnimation,
-   VictoryVoronoiContainer,
    VictoryArea,
-   VictoryPie,
    VictoryAxis,
    VictoryLabel,
-   VictoryTooltip
+   VictoryTooltip,
+   VictorySharedEvents,
+   Bar
 } from "victory-native"
 import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg"
 import { connect } from "react-redux"
@@ -33,6 +23,8 @@ class StatisticChartScreen extends Component {
       super(props)
       this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
       this.renderFollowerChart = this.renderFollowerChart.bind(this)
+      this.renderGainedFollowersChart = this.renderGainedFollowersChart.bind(this)
+      this.renderOrnek = this.renderOrnek.bind(this)
 
       this.state = { ShouldrenderFollowerChart: false }
    }
@@ -53,96 +45,87 @@ class StatisticChartScreen extends Component {
       if (this.state.ShouldrenderFollowerChart === true) {
          return (
             <View style={{ flex: 1 }}>
-               <Svg
-                  viewBox={"170 -30 20 350"}
-                  style={{
-                     backgroundColor: "#192A4F",
-                     padding: 0,
-                     width: screenWidth,
-                     height: "45%"
+               <VictoryChart
+                  domain={{
+                     x: [
+                        this.props.gainedData.day[0],
+                        this.props.gainedData.day[this.props.gainedData.day.length - 1]
+                     ],
+                     y: [this.props.gainedData.domainY.minValue, this.props.gainedData.domainY.maxValue]
                   }}
+                  domainPadding={{ x: [15, 10], y: [25, 20] }}
                >
-                  <VictoryChart
-                     domain={{
-                        x: [
-                           this.props.gainedData.day[0],
-                           this.props.gainedData.day[this.props.gainedData.day.length - 1]
-                        ],
-                        y: [this.props.gainedData.domainY.minValue, this.props.gainedData.domainY.maxValue]
+                  <Defs>
+                     <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="myGradient">
+                        <Stop stopColor="#059ED9" offset="100%" stopOpacity="1" />
+                        <Stop stopColor="#5D4ED3" offset="0%" stopOpacity="1" />
+                     </LinearGradient>
+                  </Defs>
+                  <VictoryBar
+                     data={this.props.gainedData.gainedChartData}
+                     name="bar"
+                     style={{
+                        data: {
+                           stroke: "transparent",
+                           fill: "url(#myGradient)",
+                           strokeWidth: 0,
+                           strokeLinecap: "round"
+                        }
                      }}
-                     domainPadding={{ x: [0, 10], y: [0, 10] }}
-                  >
-                     <VictoryBar
-                        data={this.props.gainedData.gainedChartData}
-                        name="bar"
-                        style={{
-                           data: {
-                              stroke: "#00FF72",
-                              fill: "url(#myGradient)",
-                              strokeWidth: 3,
-                              strokeLinecap: "round"
-                           }
-                        }}
-                        animate={{ duration: 1000 }}
-                     />
-                     <VictoryAxis
-                        dependentAxis
-                        standalone={false}
-                        tickValues={this.props.gainedData.gainedChartData.y}
-                        tickFormat={t => {
-                           return t
-                        }}
-                        style={{
-                           ticks: { size: 5 },
-                           grid: { stroke: "rgba(255,255,255,0.05)" },
-                           axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
-                           tickLabels: {
-                              fill: "rgba(255,255,255,0.4)",
-                              fontFamily: "Circular",
-                              fontSize: 13
-                           }
-                        }}
-                     />
-                     <VictoryAxis
-                        standalone={false}
-                        style={{
-                           grid: {
-                              stroke: "transparent"
-                           },
-                           axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
-                           ticks: {
-                              size: 0
-                           },
-                           tickLabels: {
-                              fill: "rgba(255,255,255,0.4)",
-                              fontFamily: "Circular",
-                              fontSize: 13
-                           }
-                        }}
-                        tickValues={this.props.gainedData.day}
-                        tickFormat={x => {
-                           return x + " Feb"
-                        }}
-                     />
-                  </VictoryChart>
-               </Svg>
+                     dataComponent={<Bar events={{ onClick: console.log('HOOVER') }} />}
+                     animate={{ duration: 1000 }}
+                  />
+                  <VictoryAxis
+                     dependentAxis
+                     standalone={false}
+                     tickValues={this.props.gainedData.gainedChartData.y}
+                     tickFormat={t => {
+                        return t
+                     }}
+                     style={{
+                        ticks: { size: 5 },
+                        grid: { stroke: "rgba(255,255,255,0.05)" },
+                        axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
+                        tickLabels: {
+                           fill: "rgba(255,255,255,0.4)",
+                           fontFamily: "Circular",
+                           fontSize: 13
+                        }
+                     }}
+                  />
+                  <VictoryAxis
+                     standalone={false}
+                     style={{
+                        grid: {
+                           stroke: "transparent"
+                        },
+                        axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
+                        ticks: {
+                           size: 0
+                        },
+                        tickLabels: {
+                           fill: "rgba(255,255,255,0.4)",
+                           fontFamily: "Circular",
+                           fontSize: 13
+                        }
+                     }}
+                     tickValues={this.props.gainedData.day}
+                     tickFormat={x => {
+                        return x + " Feb"
+                     }}
+                  />
+               </VictoryChart>
             </View>
          )
+      } else {
+         return <View style={{ flex: 1 }} />
       }
    }
    renderFollowerChart() {
       if (this.state.ShouldrenderFollowerChart === true) {
          return (
             <View style={{ flex: 1 }}>
-               <Svg
-                  viewBox={"170 -30 20 350"}
-                  style={{
-                     backgroundColor: "#192A4F",
-                     padding: 0,
-                     width: screenWidth,
-                     height: "45%"
-                  }}
-               >
+               <Svg viewBox="0 0 450 350">
                   <VictoryChart
                      domain={{
                         x: [
@@ -151,7 +134,7 @@ class StatisticChartScreen extends Component {
                         ],
                         y: [this.props.chartData.domainY.minValue, this.props.chartData.domainY.maxValue]
                      }}
-                     domainPadding={{ x: [0, 10], y: [0, 10] }}
+                     domainPadding={{ x: [0, 10], y: [10, 20] }}
                   >
                      <VictoryLabel
                         dx={20}
@@ -175,7 +158,7 @@ class StatisticChartScreen extends Component {
                            data: {
                               stroke: "#00FF72",
                               fill: "url(#myGradient)",
-                              strokeWidth: 3,
+                              strokeWidth: 2,
                               strokeLinecap: "round"
                            }
                         }}
@@ -228,8 +211,58 @@ class StatisticChartScreen extends Component {
          return <View style={{ flex: 1 }} />
       }
    }
+   renderOrnek() {
+      return (
+         <View style={{ flex: 1 }}>
+            <VictoryBar
+               data={[
+                  { x: 1, y: 2, label: "A" },
+                  { x: 2, y: 4, label: "B" },
+                  { x: 3, y: 7, label: "C" },
+                  { x: 4, y: 3, label: "D" },
+                  { x: 5, y: 5, label: "E" }
+               ]}
+               eventKey={datum => datum.label}
+               events={[
+                  {
+                     target: "data",
+                     eventKey: ["A", "B"],
+                     eventHandlers: {
+                        onClick: () => {
+                           console.log("click")
+                           return [
+                              {
+                                 eventKey: "D",
+                                 mutation: props => {
+                                    return {
+                                       style: assign(props.style, { fill: "green" })
+                                    }
+                                 }
+                              },
+                              {
+                                 eventKey: "E",
+                                 mutation: props => {
+                                    return {
+                                       style: assign(props.style, { fill: "red" })
+                                    }
+                                 }
+                              }
+                           ]
+                        }
+                     }
+                  }
+               ]}
+            />
+         </View>
+      )
+   }
    render() {
-      return <View style={{ flex: 1 }}>{this.renderFollowerChart()}</View>
+      return (
+         <View style={{ flex: 1 }}>
+            {this.renderFollowerChart()}
+            {this.renderGainedFollowersChart()}
+         </View>
+      )
    }
 }
 
@@ -246,6 +279,49 @@ export default connect(mapStateToProps, { chartStatisticRequest, gainedChartStat
 )
 
 /*
+   
+          <VictoryBar
+                     data={[
+                        { x: 1, y: 2, label: "A" },
+                        { x: 2, y: 4, label: "B" },
+                        { x: 3, y: 7, label: "C" },
+                        { x: 4, y: 3, label: "D" },
+                        { x: 5, y: 5, label: "E" }
+                     ]}
+                     eventKey={datum => datum.label}
+                     events={[
+                        {
+                           target: "data",
+                           eventKey: ["A", "B"],
+                           eventHandlers: {
+                              onClick: () => {
+                                 return [
+                                    {
+                                       eventKey: "D",
+                                       mutation: props => {
+                                          return {
+                                             style: assign(props.style, { fill: "green" })
+                                          }
+                                       }
+                                    },
+                                    {
+                                       eventKey: "E",
+                                       mutation: props => {
+                                          return {
+                                             style: assign(props.style, { fill: "red" })
+                                          }
+                                       }
+                                    }
+                                 ]
+                              }
+                           }
+                        }
+                     ]}
+                  />
+
+
+
+
                   <VictoryAxis
                    tickValues={this.props.chartData.day} //tarih arrayi
                    tickFormat={t => {
@@ -281,7 +357,44 @@ export default connect(mapStateToProps, { chartStatisticRequest, gainedChartStat
                      animate={{ duration: 1000 }}
                   />
 
-
+  <VictoryBar
+    data={[
+      {x: 1, y: 2, label: "A"},
+      {x: 2, y: 4, label: "B"},
+      {x: 3, y: 7, label: "C"},
+      {x: 4, y: 3, label: "D"},
+      {x: 5, y: 5, label: "E"},
+    ]}
+    eventKey={(datum) => datum.label}
+    events={[
+      {
+        target: "data",
+        eventKey: ["A", "B"],
+        eventHandlers: {
+          onClick: () => {
+            return [
+              {
+                eventKey: "D",
+                mutation: (props) => {
+                  return {
+                    style: assign(props.style, {fill: "green"})
+                  }
+                }
+              },
+              {
+                eventKey: "E",
+                mutation: (props) => {
+                  return {
+                    style: assign(props.style, {fill: "red"})
+                  }
+                }
+              }
+            ];
+          }
+        }
+      }
+    ]}
+  />
 
 
 */
