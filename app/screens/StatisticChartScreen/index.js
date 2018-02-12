@@ -23,7 +23,7 @@ import {
 } from "victory-native"
 import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg"
 import { connect } from "react-redux"
-import { chartStatisticRequest } from "ducks/chart"
+import { chartStatisticRequest, gainedChartStatisticRequest } from "ducks/chart"
 
 const testData = [34, 54, 7, 72]
 const testDataReverse = [86, 72, 67, 54]
@@ -47,6 +47,7 @@ class StatisticChartScreen extends Component {
    }
    componentWillMount() {
       this.props.chartStatisticRequest(this.props.token, "weekly")
+      this.props.gainedChartStatisticRequest(this.props.token, "weekly")
    }
    renderGainedFollowersChart() {
       if (this.state.ShouldrenderFollowerChart === true) {
@@ -158,7 +159,7 @@ class StatisticChartScreen extends Component {
                         name="myCountLabel"
                         style={{ fontSize: 28, fontFamily: "Circular", fill: "white" }}
                         text={245}
-                        data={this.props.chartData.followersChartData.y}
+                        data={this.props.chartData.followersChartData}
                      />
                      <Defs>
                         <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="myGradient">
@@ -240,7 +241,9 @@ const mapStateToProps = (state, ownProps) => {
    }
 }
 
-export default connect(mapStateToProps, { chartStatisticRequest })(StatisticChartScreen)
+export default connect(mapStateToProps, { chartStatisticRequest, gainedChartStatisticRequest })(
+   StatisticChartScreen
+)
 
 /*
                   <VictoryAxis

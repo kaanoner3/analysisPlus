@@ -9,6 +9,7 @@ export const CHART_STATISTIC_REQUEST = "chart/CHART_STATISTIC_REQUEST"
 export const FOLLOWERS_CHART_STATISTIC_FAIL = "chart/FOLLOWERS_CHART_STATISTIC_FAIL"
 export const FOLLOWERS_CHART_STATISTIC_SUCCESS = "chart/FOLLOWERS_CHART_STATISTIC_SUCCESS"
 
+export const GAINED_CHART_STATISTIC_REQUEST = "chart/GAINED_CHART_STATISTIC_REQUEST"
 export const GAINED_CHART_STATISTIC_SUCCESS = "chart/GAINED_CHART_STATISTIC_SUCCESS"
 export const GAINED_CHART_STATISTIC_FAIL = "chart/GAINED_CHART_STATISTIC_FAIL"
 
@@ -56,6 +57,9 @@ export function chartStatisticRequest(token, serviceType) {
    return { type: CHART_STATISTIC_REQUEST, token, serviceType }
 }
 
+export function gainedChartStatisticRequest(token, serviceType) {
+   return { type: GAINED_CHART_STATISTIC_REQUEST, token, serviceType }
+}
 export function chartStatisticFail(errorMessage) {
    return { type: FOLLOWERS_CHART_STATISTIC_FAIL, errorMessage }
 }
