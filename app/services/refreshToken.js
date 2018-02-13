@@ -1,16 +1,16 @@
-import axios from 'axios'
-import store from '../store';
+import axios  from "utils/axios"
+import store from "../store"
 
 async function refreshTokenService() {
-  const currentStore = store.getState();
-  const params = {
-    grant_type: 'refresh_token',
-    client_id: currentStore.auth.clientID,
-    client_secret: currentStore.auth.clientSecret,
-    refresh_token: currentStore.auth.refreshToken,
-  };
-
-  return axios.get('/oauth/v2/token', { params });
+   const currentStore = store.getState()
+   const params = {
+      grant_type: "refresh_token",
+      client_id: currentStore.auth.data.clientID,
+      client_secret: currentStore.auth.data.clientSecret,
+      refresh_token: currentStore.auth.data.refresh_token
+   }
+   const response =  axios.get("/oauth/v2/token", { params })
+   return response
 }
 
-export default refreshTokenService;
+export default refreshTokenService

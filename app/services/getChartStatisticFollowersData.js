@@ -1,8 +1,8 @@
-import axios from "axios"
+import axios  from "utils/axios"
 
 async function getChartStatisticFollowersData(token, type) {
-   const params = { access_token: token }
-   const response = axios.get("api/user/statistic/followers/" + type, { params })
+   
+   const response = axios.get("api/user/statistic/followers/" + type)
    return response
 }
 

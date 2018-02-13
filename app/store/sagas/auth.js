@@ -27,6 +27,7 @@ export function* login() {
       const { token,result } = yield take(INSTAGRAM_LOGIN_REQUEST);
       
       const loginResponse = yield call(SignInService, token,result);
+      console.log('loginresponse',loginResponse)
       const tokenData = yield call(
         accessTokenService,
         loginResponse.data.grant_type,
@@ -34,6 +35,7 @@ export function* login() {
         loginResponse.data.client_secret,
         token
       );
+      console.log(tokenData)
 
       const succesfullLoginData = {
         instagram_token: token, //instagrama istek atarken

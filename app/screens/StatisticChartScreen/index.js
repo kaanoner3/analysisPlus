@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, Text, Dimensions } from "react-native"
+import { View, Text, Dimensions, ScrollView } from "react-native"
 import {
    VictoryBar,
    VictoryChart,
@@ -9,7 +9,8 @@ import {
    VictoryLabel,
    VictoryTooltip,
    VictorySharedEvents,
-   Bar
+   Bar,
+   Area
 } from "victory-native"
 import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg"
 import { connect } from "react-redux"
@@ -18,15 +19,15 @@ import { chartStatisticRequest, gainedChartStatisticRequest } from "ducks/chart"
 const testData = [34, 54, 7, 72]
 const testDataReverse = [86, 72, 67, 54]
 const screenWidth = Dimensions.get("window").width
+
 class StatisticChartScreen extends Component {
    constructor(props) {
       super(props)
       this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
       this.renderFollowerChart = this.renderFollowerChart.bind(this)
       this.renderGainedFollowersChart = this.renderGainedFollowersChart.bind(this)
-      this.renderOrnek = this.renderOrnek.bind(this)
 
-      this.state = { ShouldrenderFollowerChart: false }
+      this.state = { ShouldrenderFollowerChart: false, gainedChartCount: 0, followersChartCount: 0 }
    }
 
    onNavigatorEvent(event) {
@@ -37,14 +38,31 @@ class StatisticChartScreen extends Component {
          this.setState({ ShouldrenderFollowerChart: false })
       }
    }
+   componentDidMount() {
+      if (this.props.isFetching === false) {
+         this.setState({
+            gainedChartCount: this.props.gainedData.gainedChartData[this.props.gainedData.day.length - 1].y,
+            followersChartCount: this.props.chartData.followersChartData[this.props.chartData.day.length - 1]
+               .y
+         })
+      }
+   }
    componentWillMount() {
       this.props.chartStatisticRequest(this.props.token, "weekly")
       this.props.gainedChartStatisticRequest(this.props.token, "weekly")
    }
    renderGainedFollowersChart() {
-      if (this.state.ShouldrenderFollowerChart === true) {
+      if (this.state.ShouldrenderFollowerChart === true && this.props.isFetching === false) {
          return (
             <View style={{ flex: 1 }}>
+               <View style={{ flexDirection: "column", marginLeft: 20 }}>
+                  <Text style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "Circular" }}>
+                     GAINED FOLLOWERS
+                  </Text>
+                  <Text style={{ fontSize: 28, color: "white", fontFamily: "Circular" }}>
+                     {this.state.gainedChartCount}
+                  </Text>
+               </View>
                <VictoryChart
                   domain={{
                      x: [
@@ -72,8 +90,25 @@ class StatisticChartScreen extends Component {
                            strokeLinecap: "round"
                         }
                      }}
-                     dataComponent={<Bar events={{ onClick: console.log('HOOVER') }} />}
+                     // dataComponent={<Bar events={{ onPressIn: console.log('HOOVER') }} />}
                      animate={{ duration: 1000 }}
+                     events={[
+                        {
+                           target: "data",
+                           eventHandlers: {
+                              onPress: () => {
+                                 return {
+                                    target: "data",
+                                    mutation: props => {
+                                       console.log(props)
+                                       this.setState({ gainedChartCount: props.datum.y })
+                                       return null
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     ]}
                   />
                   <VictoryAxis
                      dependentAxis
@@ -118,11 +153,12 @@ class StatisticChartScreen extends Component {
             </View>
          )
       } else {
+         console.log("chart screen else girid")
          return <View style={{ flex: 1 }} />
       }
    }
    renderFollowerChart() {
-      if (this.state.ShouldrenderFollowerChart === true) {
+      if (this.state.ShouldrenderFollowerChart === true && this.props.isFetching === false) {
          return (
             <View style={{ flex: 1 }}>
                <Svg viewBox="0 0 450 350">
@@ -136,14 +172,6 @@ class StatisticChartScreen extends Component {
                      }}
                      domainPadding={{ x: [0, 10], y: [10, 20] }}
                   >
-                     <VictoryLabel
-                        dx={20}
-                        dy={30}
-                        name="myCountLabel"
-                        style={{ fontSize: 28, fontFamily: "Circular", fill: "white" }}
-                        text={245}
-                        data={this.props.chartData.followersChartData}
-                     />
                      <Defs>
                         <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="myGradient">
                            <Stop stopColor="#00FF72" offset="100%" stopOpacity="0.5" />
@@ -162,6 +190,7 @@ class StatisticChartScreen extends Component {
                               strokeLinecap: "round"
                            }
                         }}
+                        dataComponent={<Area events={{ onPress: console.log("tık") }} />}
                         animate={{ duration: 1000 }}
                      />
                      <VictoryAxis
@@ -211,56 +240,14 @@ class StatisticChartScreen extends Component {
          return <View style={{ flex: 1 }} />
       }
    }
-   renderOrnek() {
-      return (
-         <View style={{ flex: 1 }}>
-            <VictoryBar
-               data={[
-                  { x: 1, y: 2, label: "A" },
-                  { x: 2, y: 4, label: "B" },
-                  { x: 3, y: 7, label: "C" },
-                  { x: 4, y: 3, label: "D" },
-                  { x: 5, y: 5, label: "E" }
-               ]}
-               eventKey={datum => datum.label}
-               events={[
-                  {
-                     target: "data",
-                     eventKey: ["A", "B"],
-                     eventHandlers: {
-                        onClick: () => {
-                           console.log("click")
-                           return [
-                              {
-                                 eventKey: "D",
-                                 mutation: props => {
-                                    return {
-                                       style: assign(props.style, { fill: "green" })
-                                    }
-                                 }
-                              },
-                              {
-                                 eventKey: "E",
-                                 mutation: props => {
-                                    return {
-                                       style: assign(props.style, { fill: "red" })
-                                    }
-                                 }
-                              }
-                           ]
-                        }
-                     }
-                  }
-               ]}
-            />
-         </View>
-      )
-   }
+
    render() {
       return (
          <View style={{ flex: 1 }}>
-            {this.renderFollowerChart()}
-            {this.renderGainedFollowersChart()}
+            <ScrollView>
+               {this.renderFollowerChart()}
+               {this.renderGainedFollowersChart()}
+            </ScrollView>
          </View>
       )
    }
@@ -268,6 +255,7 @@ class StatisticChartScreen extends Component {
 
 const mapStateToProps = (state, ownProps) => {
    return {
+      isFetching: state.chart.isFetching,
       token: state.user.token,
       chartData: state.chart.chartData,
       gainedData: state.chart.gainedData

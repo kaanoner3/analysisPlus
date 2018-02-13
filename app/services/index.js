@@ -31,7 +31,8 @@ export default {
    getMediaLikesData,
    getInteractionDetail,
    getChartStatisticFollowersData,
-   getChartStatisticGainedData
+   getChartStatisticGainedData,
+   
 }
 
 export {
@@ -50,5 +51,6 @@ export {
    getMediaLikesData,
    getInteractionDetail,
    getChartStatisticFollowersData,
-   getChartStatisticGainedData
+   getChartStatisticGainedData,
+   
 }

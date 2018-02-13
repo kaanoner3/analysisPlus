@@ -8,7 +8,8 @@ export const REFRESH_TOKEN = "auth/REFRESH_TOKEN";
 
 const initialState = {
   accessToken: null,
-  errorMessage: null
+  errorMessage: null,
+  main_token: null
 };
 
 // REDUCER
@@ -17,15 +18,17 @@ export default function (state = initialState, action = {}) {
     case INSTAGRAM_LOGIN_REQUEST: {
       return {
         ...state,
-        accessToken: action.token,
         isFetching: true
       };
     }
     case INSTAGRAM_LOGIN_SUCCESS: {
       const { data } = action;
+      console.log('reducer',data)
+      const {main_token} = data
       return {
         ...state,
         data,
+        main_token,
         isFetching: false
       };
     }

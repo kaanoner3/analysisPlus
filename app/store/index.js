@@ -5,28 +5,30 @@ import reducers from "./reducers"
 import sagas from "./sagas"
 import { persistStore, autoRehydrate } from "redux-persist"
 import { AsyncStorage } from "react-native"
-import { startLoginScreen, startHomeScreen } from "./../../bootstrap/App"
+import { startLoginScreen, startHomeScreen } from "services/appStartHelper"
+import { setToken } from "./../../bootstrap/axios"
 
 const sagaMiddleware = createSagaMiddleware()
 // Create the glorious store instance.
 const store = createStore(reducers, applyMiddleware(logger, sagaMiddleware), autoRehydrate())
+sagaMiddleware.run(sagas)
 
 function onRehydrate() {
    const currentState = store.getState()
-   /*
-   if (currentState.auth.accessToken) {
+
+   if (currentState.user.token) {
       // Eğer access tokenı varsa
-      //setToken(currentState.auth.accessToken)
+      console.log("persssis hidreyt", currentState.user.token)
+      setToken(currentState.user.token)
       startHomeScreen()
    } else {
+      console.log("persssis else", currentState.user.token)
+
       // Eğer login değilse
       startLoginScreen()
    }
-   */
 }
 const persist = persistStore(store, { blacklist: ["app"], storage: AsyncStorage }, onRehydrate)
-
-sagaMiddleware.run(sagas)
 
 // Hot reloading thing
 if (module.hot) {

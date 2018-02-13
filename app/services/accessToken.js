@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios  from "utils/axios"
 
 async function accessToken(grantType, clientID, clientSecret, accessToken) {
   const params = {

@@ -8,7 +8,9 @@ import {
    chartStatisticRequest,
    followersChartStatisticSuccess,
    gainedChartStatisticSuccess,
-   GAINED_CHART_STATISTIC_REQUEST
+   GAINED_CHART_STATISTIC_REQUEST,
+   followersChartStatisticFail,
+   gainedChartStatisticFail
 } from "ducks/chart"
 import store from "store"
 //import { switchToUser, changeAppState } from "ducks/app";
@@ -18,6 +20,7 @@ export function* chartStatistic() {
       try {
          const { token, serviceType } = yield take(CHART_STATISTIC_REQUEST)
          const responseData = yield call(followersStatistic, token, serviceType)
+         console.log('RESPONSEDATA FOLLOWERS',responseData)
          const dates = responseData.data
          const arrayLength = dates.length
          const formattedData = []
@@ -36,7 +39,7 @@ export function* chartStatistic() {
                var date = value.date
                var splitValue = date.split(".")
                //reverse  olayını optimize etmeye çalış
-            
+
                day.push(parseInt(splitValue[0]))
                month.push(parseInt(splitValue[1]))
                year.push(parseInt(splitValue[2]))
@@ -78,7 +81,9 @@ export function* chartStatistic() {
          }
          yield put(followersChartStatisticSuccess(formattedData[dates.length - 1]))
       } catch (error) {
+         console.log("errrooor geldi")
          console.log(error)
+         yield put(followersChartStatisticFail(error))
       }
    }
 }
@@ -88,7 +93,8 @@ export function* gainedFollowersStatistic() {
       try {
          const { token, serviceType } = yield take(GAINED_CHART_STATISTIC_REQUEST)
          const responseData = yield call(gainedStatistic, token, serviceType)
-
+        console.log('gained chaaart')
+         console.log(responseData)
          const dates = responseData.data
          const arrayLength = dates.length
          const formattedData = []
@@ -147,7 +153,9 @@ export function* gainedFollowersStatistic() {
          }
          yield put(gainedChartStatisticSuccess(gainedFormatted[dates.length - 1]))
       } catch (error) {
+         console.log("errrooor geldi")
          console.log(error)
+         yield put(gainedChartStatisticFail(error))
       }
    }
 }

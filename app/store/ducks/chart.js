@@ -1,7 +1,9 @@
 const initialState = {
    errorMessage: null,
-   isFetching: false,
-   chartStatisticData: null
+   isFetching: null,
+   chartStatisticData: null,
+   chartData: [],
+   gainedData: []
 }
 
 export const CHART_STATISTIC_REQUEST = "chart/CHART_STATISTIC_REQUEST"
@@ -60,7 +62,7 @@ export function chartStatisticRequest(token, serviceType) {
 export function gainedChartStatisticRequest(token, serviceType) {
    return { type: GAINED_CHART_STATISTIC_REQUEST, token, serviceType }
 }
-export function chartStatisticFail(errorMessage) {
+export function followersChartStatisticFail(errorMessage) {
    return { type: FOLLOWERS_CHART_STATISTIC_FAIL, errorMessage }
 }
 

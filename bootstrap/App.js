@@ -64,11 +64,11 @@ export default class App extends Component {
   }
 
   startLogin() {
-    startLoginScreen();
+  //  startLoginScreen();
   }
 
   startUser() {
-    startHomeScreen(this.app_token);
+ //   startHomeScreen(this.app_token);
   }
 }
 
