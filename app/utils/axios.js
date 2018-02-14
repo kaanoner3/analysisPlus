@@ -6,7 +6,6 @@ import store from "store"
 import { refreshTokenService } from "services"
 import { Navigation } from "react-native-navigation"
 
-//axios.defaults.baseURL = config.axios.baseURL
 const instance = axios.create({
    baseURL: "http://analysisplusapp.com/",
    timeout: 10000
@@ -23,15 +22,12 @@ instance.interceptors.response.use(undefined, error => {
          originalRequest._retry = true
          return refreshTokenService()
             .then(({ data }) => {
-               console.log("data aq", data)
                store.dispatch(doRefreshToken(data.access_token, data.refresh_token))
                instance.defaults.headers.common.Authorization = `Bearer ${data.access_token}`
-               console.log(`Bearer ${data.access_token}`)
                originalRequest.headers.Authorization = `Bearer ${data.access_token}`
                return axios(originalRequest)
             })
             .catch(err => {
-               console.log("burası catch burdan cıkıs yok",err)
                persist.purge()
                Navigation.startSingleScreenApp({
                   screen: {
@@ -39,11 +35,9 @@ instance.interceptors.response.use(undefined, error => {
                      navigatorStyle: {
                         statusBarTextColorScheme: "light",
                         navBarHidden: true
-                        //screenBackgroundColor: colors.mainColor,
                      }
                   }
                })
-               // console.warn(err);
             })
       }
    }

@@ -39,11 +39,13 @@ class StatisticChartScreen extends Component {
       }
    }
    componentDidMount() {
-      console.log("DID MOUUNT", this.props.gainedData.length)
       this.props.chartStatisticRequest(this.props.token, "weekly")
       this.props.gainedChartStatisticRequest(this.props.token, "weekly")
       if (this.props.gainedData.length === 0) {
-        this.setState({gainedChartCount: 'Kazandığınız takipcileri gormek icin grafikteki bir sütuna tıklayınız',followersChartCount: 'Takipçi sayınızı gormek icin grafige tıklayınız'})
+         this.setState({
+            gainedChartCount: "Kazandığınız takipcileri gormek icin grafikteki bir sütuna tıklayınız",
+            followersChartCount: "Takipçi sayınızı gormek icin grafige tıklayınız"
+         })
       } else {
          this.setState({
             gainedChartCount: this.props.gainedData.gainedChartData[this.props.gainedData.day.length - 1].y,
