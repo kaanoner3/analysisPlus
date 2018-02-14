@@ -5,7 +5,7 @@ import App from "./App"
 import "screens"
 
 // Apply Axios bootstrap.
-import "./axios"
+
 
 // Apply Moment.js bootstrap.
 import "./moment"

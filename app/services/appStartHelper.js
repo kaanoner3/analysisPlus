@@ -3,7 +3,6 @@ import { setConfig as setAxiosConfig } from "config/axios";
 import { images } from "resources";
 
 export function startHomeScreen(token) {
-  console.log('STAAART HOME SCREEEEN')
   Navigation.startTabBasedApp({
     tabs: [
       {

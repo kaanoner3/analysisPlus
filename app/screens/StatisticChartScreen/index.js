@@ -39,6 +39,8 @@ class StatisticChartScreen extends Component {
       }
    }
    componentDidMount() {
+      this.props.chartStatisticRequest(this.props.token, "weekly")
+      this.props.gainedChartStatisticRequest(this.props.token, "weekly")
       if (this.props.isFetching === false) {
          this.setState({
             gainedChartCount: this.props.gainedData.gainedChartData[this.props.gainedData.day.length - 1].y,
@@ -47,10 +49,7 @@ class StatisticChartScreen extends Component {
          })
       }
    }
-   componentWillMount() {
-      this.props.chartStatisticRequest(this.props.token, "weekly")
-      this.props.gainedChartStatisticRequest(this.props.token, "weekly")
-   }
+   componentWillMount() {}
    renderGainedFollowersChart() {
       if (this.state.ShouldrenderFollowerChart === true && this.props.isFetching === false) {
          return (
@@ -100,7 +99,6 @@ class StatisticChartScreen extends Component {
                                  return {
                                     target: "data",
                                     mutation: props => {
-                                       console.log(props)
                                        this.setState({ gainedChartCount: props.datum.y })
                                        return null
                                     }
@@ -153,7 +151,6 @@ class StatisticChartScreen extends Component {
             </View>
          )
       } else {
-         console.log("chart screen else girid")
          return <View style={{ flex: 1 }} />
       }
    }

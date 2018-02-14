@@ -1,6 +1,6 @@
 import axios  from "utils/axios"
 
-async function getUsers(token, type) {
+async function getUsers(type) {
    this.response = {}
    switch (type) {
       case "losted_followers": {

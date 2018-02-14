@@ -24,8 +24,6 @@ instance.interceptors.response.use(undefined, error => {
          return refreshTokenService()
             .then(({ data }) => {
                console.log("data aq", data)
-               console.log("refresh_token", data.refresh_token)
-               console.log("access_token", data.access_token)
                store.dispatch(doRefreshToken(data.access_token, data.refresh_token))
                instance.defaults.headers.common.Authorization = `Bearer ${data.access_token}`
                console.log(`Bearer ${data.access_token}`)
@@ -33,7 +31,7 @@ instance.interceptors.response.use(undefined, error => {
                return axios(originalRequest)
             })
             .catch(err => {
-               console.log("burası catch burdan cıkıs yok")
+               console.log("burası catch burdan cıkıs yok",err)
                persist.purge()
                Navigation.startSingleScreenApp({
                   screen: {

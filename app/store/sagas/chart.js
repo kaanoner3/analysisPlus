@@ -13,14 +13,13 @@ import {
    gainedChartStatisticFail
 } from "ducks/chart"
 import store from "store"
-//import { switchToUser, changeAppState } from "ducks/app";
+import { setToken } from "utils/axios"
 
 export function* chartStatistic() {
    while (true) {
       try {
          const { token, serviceType } = yield take(CHART_STATISTIC_REQUEST)
          const responseData = yield call(followersStatistic, token, serviceType)
-         console.log('RESPONSEDATA FOLLOWERS',responseData)
          const dates = responseData.data
          const arrayLength = dates.length
          const formattedData = []
@@ -79,10 +78,9 @@ export function* chartStatistic() {
                return formattedValues
             })
          }
+         
          yield put(followersChartStatisticSuccess(formattedData[dates.length - 1]))
       } catch (error) {
-         console.log("errrooor geldi")
-         console.log(error)
          yield put(followersChartStatisticFail(error))
       }
    }
@@ -93,8 +91,6 @@ export function* gainedFollowersStatistic() {
       try {
          const { token, serviceType } = yield take(GAINED_CHART_STATISTIC_REQUEST)
          const responseData = yield call(gainedStatistic, token, serviceType)
-        console.log('gained chaaart')
-         console.log(responseData)
          const dates = responseData.data
          const arrayLength = dates.length
          const formattedData = []
@@ -153,8 +149,6 @@ export function* gainedFollowersStatistic() {
          }
          yield put(gainedChartStatisticSuccess(gainedFormatted[dates.length - 1]))
       } catch (error) {
-         console.log("errrooor geldi")
-         console.log(error)
          yield put(gainedChartStatisticFail(error))
       }
    }

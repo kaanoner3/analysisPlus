@@ -38,13 +38,16 @@ export default class App extends Component {
         store.dispatch(switchToLogin());
       } else {
         store.dispatch(switchToUser());
+        /*
         store.dispatch({
           type: "ACTION_SET_USER_IDENTITY",
           token: result.app_token,
           id: result.user_id
         });
+        */
       }
     });
+    
   }
 
   onStoreUpdate() {

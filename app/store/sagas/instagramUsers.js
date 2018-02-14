@@ -9,7 +9,7 @@ export function* getUserList() {
    while (true) {
       try {
          const action = yield take(USER_DATA_FETCH_REQUEST)
-         const responseData = yield call(getUserDataService, action.token, action.serviceType)
+         const responseData = yield call(getUserDataService, action.serviceType)
          //servis ekle relationship datasını koy sonra putla.
          /*
          console.log("saga data", responseData.data, "   serviceType", action.serviceType)
