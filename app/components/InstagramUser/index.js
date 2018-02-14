@@ -1,12 +1,5 @@
 import React, { Component } from "react"
-import {
-   View,
-   Image,
-   Text,
-   AsyncStorage,
-   TouchableOpacity,
-   TouchableWithoutFeedback
-} from "react-native"
+import { View, Image, Text, AsyncStorage, TouchableOpacity, TouchableWithoutFeedback } from "react-native"
 import styles from "./styles"
 import { images } from "resources"
 import { connect } from "react-redux"
@@ -34,10 +27,7 @@ class InstagramUser extends Component {
             this.setState({ relationStyle: 3 })
          } else if (data.outgoing_status === "follows" && data.incoming_status === "requsted_by") {
             this.setState({ relationStyle: 4 })
-         } else if (
-            data.outgoing_status === "requested" &&
-            data.incoming_status === "followed_by"
-         ) {
+         } else if (data.outgoing_status === "requested" && data.incoming_status === "followed_by") {
             this.setState({ relationStyle: 5 })
          } else if (data.outgoing_status === "follows" && data.incoming_status === "requsted_by") {
             this.setState({ relationStyle: 6 })
@@ -47,7 +37,7 @@ class InstagramUser extends Component {
       })
    }
    pushInstagramUserDetail(user_id) {
-      this.props.userDetailRequest(user_id,this.props.token)
+      this.props.userDetailRequest(user_id, this.props.token)
       this.props.navigator.push({
          screen: "UserDetailScreen",
          backButtonTitle: "Back",
@@ -283,12 +273,13 @@ class InstagramUser extends Component {
                >
                   <View style={{ flex: 1 }}>
                      <View style={{ flexDirection: "row" }}>
-                        <Image
-                           style={styles.imageStyle}
-                           source={{ uri: this.props.data.profile_picture }}
-                        />
+                        <Image style={styles.imageStyle} source={{ uri: this.props.data.profile_picture }} />
                         <View style={styles.textView}>
-                           <Text style={styles.nameText}>{this.props.data.full_name}</Text>
+                           <Text style={styles.nameText}>
+                              {this.props.data.full_name !== ""
+                                 ? this.props.data.full_name
+                                 : this.props.data.username}
+                           </Text>
                            <Text style={styles.usernameText}>{this.props.data.username}</Text>
                            {this.renderRelationship()}
                         </View>
@@ -306,5 +297,4 @@ const mapStateToProps = (state, ownProps) => {
       userList: state.instagramUsers.userList
    }
 }
-export default connect(mapStateToProps, { ralationshipAnalysis,userDetailRequest })(InstagramUser)
-
+export default connect(mapStateToProps, { ralationshipAnalysis, userDetailRequest })(InstagramUser)

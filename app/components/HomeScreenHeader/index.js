@@ -96,6 +96,7 @@ class HomeScreenHeader extends Component {
                   toValue: 1,
                   duration: 250
                }).start(() => {
+                     console.log('HOOOME SCREEN HEADER',this._myCircle2)
                   if (this._myCircle2 !== null) {
                      this.rotateCircle()
                   }
