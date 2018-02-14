@@ -96,7 +96,7 @@ class HomeScreenHeader extends Component {
                   toValue: 1,
                   duration: 250
                }).start(() => {
-                     console.log('HOOOME SCREEN HEADER',this._myCircle2)
+                  console.log("HOOOME SCREEN HEADER", this._myCircle2)
                   if (this._myCircle2 !== null) {
                      this.rotateCircle()
                   }
@@ -141,14 +141,7 @@ class HomeScreenHeader extends Component {
                      </LinearGradient>
                   </Defs>
                   <G fill="none" fillRule="evenodd" strokeLinecap="round">
-                     <Circle
-                        strokeOpacity=".1"
-                        stroke="#FFF"
-                        strokeWidth="4"
-                        cx="62"
-                        cy="62"
-                        r="60"
-                     />
+                     <Circle strokeOpacity=".1" stroke="#FFF" strokeWidth="4" cx="62" cy="62" r="60" />
                      <AnimatedCircle
                         stroke="url(#a)"
                         strokeWidth="4"
@@ -168,10 +161,7 @@ class HomeScreenHeader extends Component {
       } else {
          return (
             <Animated.View
-               style={[
-                  { position: "absolute", top: 0, left: 0, zIndex: 9 },
-                  { opacity: this.opacity }
-               ]}
+               style={[{ position: "absolute", top: 0, left: 0, zIndex: 9 }, { opacity: this.opacity }]}
             >
                <Svg width="124" height="124">
                   <Defs>
@@ -181,14 +171,7 @@ class HomeScreenHeader extends Component {
                      </LinearGradient>
                   </Defs>
                   <G fill="none" fillRule="evenodd" strokeLinecap="round">
-                     <Circle
-                        strokeOpacity=".1"
-                        stroke="#FFF"
-                        strokeWidth="4"
-                        cx="62"
-                        cy="62"
-                        r="60"
-                     />
+                     <Circle strokeOpacity=".1" stroke="#FFF" strokeWidth="4" cx="62" cy="62" r="60" />
                      <AnimatedCircle
                         stroke="url(#a)"
                         strokeWidth="4"
@@ -261,9 +244,7 @@ class HomeScreenHeader extends Component {
                   }}
                >
                   <Text style={styles.textStyle}>
-                     {this.props.userData === null
-                        ? 0
-                        : this.props.userData.user.counts.followed_by}
+                     {this.props.userData === null ? 0 : this.props.userData.user.counts.followed_by}
                   </Text>
                   <Text style={styles.textStyle1}>FOLLOWERS</Text>
                </Animated.View>

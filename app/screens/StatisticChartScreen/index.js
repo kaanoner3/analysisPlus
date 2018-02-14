@@ -9,6 +9,7 @@ import {
    VictoryLabel,
    VictoryTooltip,
    VictorySharedEvents,
+   VictoryScatter,
    Bar,
    Area
 } from "victory-native"
@@ -43,7 +44,7 @@ class StatisticChartScreen extends Component {
       this.props.gainedChartStatisticRequest(this.props.token, "weekly")
       if (this.props.gainedData.length === 0) {
          this.setState({
-            gainedChartCount: "Kazandığınız takipcileri gormek icin grafikteki bir sütuna tıklayınız",
+            gainedChartCount: "Click The Gained Followers Chart to See information",
             followersChartCount: "Takipçi sayınızı gormek icin grafige tıklayınız"
          })
       } else {
@@ -100,7 +101,7 @@ class StatisticChartScreen extends Component {
                         {
                            target: "data",
                            eventHandlers: {
-                              onPress: () => {
+                              onPressIn: () => {
                                  return {
                                     target: "data",
                                     mutation: props => {
@@ -180,7 +181,28 @@ class StatisticChartScreen extends Component {
                            <Stop stopColor="#00FF72" offset="0%" stopOpacity="0" />
                         </LinearGradient>
                      </Defs>
-
+                     <VictoryScatter
+                           style={{ data: { fill: "#c43a31" } }}
+                           size={5}
+                           data={this.props.chartData.followersChartData}
+                           events={[
+                              {
+                                 target: "data",
+                                 eventHandlers: {
+                                    onPressIn: () => {
+                                       return {
+                                          target: "data",
+                                          mutation: props => {
+                                             console.log("click")
+                                             console.log(props)
+                                             return null
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           ]}
+                        />
                      <VictoryArea
                         data={this.props.chartData.followersChartData}
                         name="area"
@@ -192,9 +214,9 @@ class StatisticChartScreen extends Component {
                               strokeLinecap: "round"
                            }
                         }}
-                        dataComponent={<Area events={{ onPress: console.log("tık") }} />}
                         animate={{ duration: 1000 }}
                      />
+            
                      <VictoryAxis
                         dependentAxis
                         standalone={false}
