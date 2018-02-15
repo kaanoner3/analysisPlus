@@ -38,7 +38,7 @@ class InteractionScreen extends Component {
             <View style={styles.container}>
                 <AnimatedHeader ref="animated_Header" title="Interactions" />
                 <ScrollView
-                    style={{ flex: 1, paddingTop: 107 }}
+                    style={{ flex: 1, paddingTop: 20 }}
                     scrollEventThrottle={1}
                     onScroll={Animated.event([
                         {
