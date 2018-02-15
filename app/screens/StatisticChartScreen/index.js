@@ -29,7 +29,7 @@ class StatisticChartScreen extends Component {
       this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
       this.renderFollowerChart = this.renderFollowerChart.bind(this)
       this.renderGainedFollowersChart = this.renderGainedFollowersChart.bind(this)
-
+      this.serviceType = "weekly"
       this.state = { ShouldrenderFollowerChart: false, gainedChartCount: 0, followersChartCount: 0 }
    }
 
@@ -42,7 +42,7 @@ class StatisticChartScreen extends Component {
       }
    }
    componentDidMount() {
-      this.props.chartStatisticRequest(this.props.token, "weekly")
+      this.props.chartStatisticRequest(this.props.token, "monthly")
       this.props.gainedChartStatisticRequest(this.props.token, "weekly")
       if (this.props.gainedData.length === 0) {
          this.setState({
@@ -122,7 +122,7 @@ class StatisticChartScreen extends Component {
                         return t
                      }}
                      style={{
-                        ticks: { size: 5 },
+                        ticks: { size: 7 },
                         grid: { stroke: "rgba(255,255,255,0.05)" },
                         axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
                         tickLabels: {
@@ -172,100 +172,147 @@ class StatisticChartScreen extends Component {
                      {this.state.followersChartCount}
                   </Text>
                </View>
-               <VictoryChart
-                  domain={{
-                     x: [
-                        this.props.chartData.day[0],
-                        this.props.chartData.day[this.props.chartData.day.length - 1]
-                     ],
-                     y: [this.props.chartData.domainY.minValue, this.props.chartData.domainY.maxValue]
-                  }}
-                  domainPadding={{ x: [0, 10], y: [10, 20] }}
-               >
-                  <Defs>
-                     <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="myGradient">
-                        <Stop stopColor="#00FF72" offset="100%" stopOpacity="0.5" />
-                        <Stop stopColor="#00FF72" offset="0%" stopOpacity="0" />
-                     </LinearGradient>
-                  </Defs>
-                  <VictoryGroup
-                     data={this.props.chartData.followersChartData}
-                     animate={{
-                        duration: 1000
+               <View style={{}}>
+                  <VictoryChart
+                     domain={{
+                        x: [
+                           this.props.chartData.followersChartData[0].x,
+                           this.props.chartData.followersChartData[this.props.chartData.day.length - 1].x
+                        ],
+                        y: [this.props.chartData.domainY.minValue, this.props.chartData.domainY.maxValue]
                      }}
-                     events={[
-                        {
-                           childName: "scatter",
-                           target: "data",
-                           eventHandlers: {
-                              onPressIn: () => {
-                                 return [
-                                    {
-                                       childName: "scatter",
-                                       target: "data",
-                                       mutation: props => {
-                                          this.setState({ followersChartCount: props.datum.y })
+                     domainPadding={{ x: [0, 10], y: [10, 20] }}
+                  >
+                     <Defs>
+                        <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="myGradient">
+                           <Stop stopColor="#00FF72" offset="100%" stopOpacity="0.5" />
+                           <Stop stopColor="#00FF72" offset="0%" stopOpacity="0" />
+                        </LinearGradient>
+                     </Defs>
+                     <VictoryGroup
+                        data={this.props.chartData.followersChartData}
+                        animate={{
+                           duration: 1000
+                        }}
+                        events={[
+                           {
+                              childName: "scatter",
+                              target: "data",
+                              eventHandlers: {
+                                 onPressIn: () => {
+                                    return [
+                                       {
+                                          childName: "scatter",
+                                          target: "data",
+                                          mutation: props => {
+                                             this.setState({ followersChartCount: props.datum.y })
+                                          }
                                        }
-                                    }
-                                 ]
+                                    ]
+                                 }
                               }
                            }
-                        }
-                     ]}
-                  >
-                     <VictoryArea
-                        name="area"
+                        ]}
+                     >
+                        <VictoryArea
+                           name="area"
+                           style={{
+                              data: {
+                                 stroke: "#00FF72",
+                                 fill: "url(#myGradient)",
+                                 strokeWidth: 2,
+                                 strokeLinecap: "round"
+                              }
+                           }}
+                        />
+                        <VictoryScatter style={{ data: { fill: "#00FF72" } }} size={5} name="scatter" />
+                     </VictoryGroup>
+                     <VictoryAxis
+                        dependentAxis
+                        standalone={false}
+                        tickValues={this.props.chartData.followersChartData.y}
+                        tickFormat={t => {
+                           console.log(t)
+                           return t
+                        }}
                         style={{
-                           data: {
-                              stroke: "#00FF72",
-                              fill: "url(#myGradient)",
-                              strokeWidth: 2,
-                              strokeLinecap: "round"
+                           ticks: { size: 5 },
+                           grid: { stroke: "rgba(255,255,255,0.05)" },
+                           axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
+                           tickLabels: {
+                              fill: "rgba(255,255,255,0.4)",
+                              fontFamily: "Circular",
+                              fontSize: 13
                            }
                         }}
                      />
-                     <VictoryScatter style={{ data: { fill: "#00FF72" } }} size={5} name="scatter" />
-                  </VictoryGroup>
-                  <VictoryAxis
-                     dependentAxis
-                     standalone={false}
-                     tickValues={this.props.chartData.followersChartData.y}
-                     tickFormat={t => {
-                        return t
-                     }}
-                     style={{
-                        ticks: { size: 5 },
-                        grid: { stroke: "rgba(255,255,255,0.05)" },
-                        axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
-                        tickLabels: {
-                           fill: "rgba(255,255,255,0.4)",
-                           fontFamily: "Circular",
-                           fontSize: 13
-                        }
-                     }}
-                  />
-                  <VictoryAxis
-                     standalone={false}
-                     style={{
-                        grid: {
-                           stroke: "transparent"
-                        },
-                        axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
-                        ticks: {
-                           size: 0
-                        },
-                        tickLabels: {
-                           fill: "rgba(255,255,255,0.4)",
-                           fontFamily: "Circular",
-                           fontSize: 13
-                        }
-                     }}
-                     tickValues={this.props.chartData.day}
-                     tickFormat={x => {
-                        return x + " Feb"
-                     }}
-                  />
-               </VictoryChart>
+                     <VictoryAxis
+                        standalone={false}
+                        style={{
+                           grid: {
+                              stroke: "transparent"
+                           },
+                           axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
+                           ticks: {
+                              size: 0
+                           },
+
+                           tickLabels: {
+                              fill: "rgba(255,255,255,0.4)",
+                              fontFamily: "Circular",
+                              fontSize: 13
+                           }
+                        }}
+                        tickValues={this.props.chartData.followersChartData.x}
+                        tickFormat={x => {
+                           if (Number.isInteger(x)) {
+                              const month = this.props.chartData.month[x - 1]
+                              const day = this.props.chartData.day[x - 1]
+                              switch (month) {
+                                 case 1: {
+                                    return day + " Jan"
+                                 }
+                                 case 2: {
+                                    return day + " Feb"
+                                 }
+                                 case 3: {
+                                    return day + " Mar"
+                                 }
+                                 case 4: {
+                                    return day + " Apr"
+                                 }
+                                 case 5: {
+                                    return day + " May"
+                                 }
+                                 case 6: {
+                                    return day + " June"
+                                 }
+                                 case 7: {
+                                    return day + " July"
+                                 }
+                                 case 8: {
+                                    return day + " Aug"
+                                 }
+                                 case 9: {
+                                    return day + " Sep"
+                                 }
+                                 case 10: {
+                                    return day + " Oct"
+                                 }
+                                 case 11: {
+                                    return day + "Nov"
+                                 }
+                                 case 12: {
+                                    return day + "Dec"
+                                 }
+                                 default:
+                                    return ""
+                              }
+                           }
+                        }}
+                     />
+                  </VictoryChart>
+               </View>
             </View>
          )
       } else {
