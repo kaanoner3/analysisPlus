@@ -10,6 +10,7 @@ import {
    VictoryTooltip,
    VictorySharedEvents,
    VictoryScatter,
+   VictoryGroup,
    Bar,
    Area
 } from "victory-native"
@@ -44,8 +45,8 @@ class StatisticChartScreen extends Component {
       this.props.gainedChartStatisticRequest(this.props.token, "weekly")
       if (this.props.gainedData.length === 0) {
          this.setState({
-            gainedChartCount: "Click The Gained Followers Chart to See information",
-            followersChartCount: "Takipçi sayınızı gormek icin grafige tıklayınız"
+            gainedChartCount: "Click The Chart",
+            followersChartCount: "Click The Chart"
          })
       } else {
          this.setState({
@@ -55,7 +56,6 @@ class StatisticChartScreen extends Component {
          })
       }
    }
-   componentWillMount() {}
    renderGainedFollowersChart() {
       if (this.state.ShouldrenderFollowerChart === true && this.props.isFetching === false) {
          return (
@@ -164,47 +164,57 @@ class StatisticChartScreen extends Component {
       if (this.state.ShouldrenderFollowerChart === true && this.props.isFetching === false) {
          return (
             <View style={{ flex: 1 }}>
-               <Svg viewBox="0 0 450 350">
-                  <VictoryChart
-                     domain={{
-                        x: [
-                           this.props.chartData.day[0],
-                           this.props.chartData.day[this.props.chartData.day.length - 1]
-                        ],
-                        y: [this.props.chartData.domainY.minValue, this.props.chartData.domainY.maxValue]
+               <View style={{ flexDirection: "column", marginLeft: 20 }}>
+                  <Text style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "Circular" }}>
+                     GAINED FOLLOWERS
+                  </Text>
+                  <Text style={{ fontSize: 28, color: "white", fontFamily: "Circular" }}>
+                     {this.state.followersChartCount}
+                  </Text>
+               </View>
+               <VictoryChart
+                  domain={{
+                     x: [
+                        this.props.chartData.day[0],
+                        this.props.chartData.day[this.props.chartData.day.length - 1]
+                     ],
+                     y: [this.props.chartData.domainY.minValue, this.props.chartData.domainY.maxValue]
+                  }}
+                  domainPadding={{ x: [0, 10], y: [10, 20] }}
+               >
+                  <Defs>
+                     <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="myGradient">
+                        <Stop stopColor="#00FF72" offset="100%" stopOpacity="0.5" />
+                        <Stop stopColor="#00FF72" offset="0%" stopOpacity="0" />
+                     </LinearGradient>
+                  </Defs>
+                  <VictoryGroup
+                     data={this.props.chartData.followersChartData}
+                     animate={{
+                        duration: 1000
+                        //  onLoad: { duration: 1000 }
                      }}
-                     domainPadding={{ x: [0, 10], y: [10, 20] }}
-                  >
-                     <Defs>
-                        <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="myGradient">
-                           <Stop stopColor="#00FF72" offset="100%" stopOpacity="0.5" />
-                           <Stop stopColor="#00FF72" offset="0%" stopOpacity="0" />
-                        </LinearGradient>
-                     </Defs>
-                     <VictoryScatter
-                           style={{ data: { fill: "#c43a31" } }}
-                           size={5}
-                           data={this.props.chartData.followersChartData}
-                           events={[
-                              {
-                                 target: "data",
-                                 eventHandlers: {
-                                    onPressIn: () => {
-                                       return {
-                                          target: "data",
-                                          mutation: props => {
-                                             console.log("click")
-                                             console.log(props)
-                                             return null
-                                          }
+                     events={[
+                        {
+                           childName: "all",
+                           target: "data",
+                           eventHandlers: {
+                              onPressIn: () => {
+                                 return [
+                                    {
+                                       childName: "scatter",
+                                       target: "data",
+                                       mutation: props => {
+                                          this.setState({ followersChartCount: props.datum.y })
                                        }
                                     }
-                                 }
+                                 ]
                               }
-                           ]}
-                        />
+                           }
+                        }
+                     ]}
+                  >
                      <VictoryArea
-                        data={this.props.chartData.followersChartData}
                         name="area"
                         style={{
                            data: {
@@ -214,50 +224,54 @@ class StatisticChartScreen extends Component {
                               strokeLinecap: "round"
                            }
                         }}
-                        animate={{ duration: 1000 }}
                      />
-            
-                     <VictoryAxis
-                        dependentAxis
-                        standalone={false}
-                        tickValues={this.props.chartData.followersChartData.y}
-                        tickFormat={t => {
-                           return t
-                        }}
-                        style={{
-                           ticks: { size: 5 },
-                           grid: { stroke: "rgba(255,255,255,0.05)" },
-                           axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
-                           tickLabels: {
-                              fill: "rgba(255,255,255,0.4)",
-                              fontFamily: "Circular",
-                              fontSize: 13
-                           }
-                        }}
+                     <VictoryScatter
+                        style={{ data: { fill: "#00FF72" } }}
+                        size={5}
+                        symbol="star"
+                        name="scatter"
                      />
-                     <VictoryAxis
-                        standalone={false}
-                        style={{
-                           grid: {
-                              stroke: "transparent"
-                           },
-                           axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
-                           ticks: {
-                              size: 0
-                           },
-                           tickLabels: {
-                              fill: "rgba(255,255,255,0.4)",
-                              fontFamily: "Circular",
-                              fontSize: 13
-                           }
-                        }}
-                        tickValues={this.props.chartData.day}
-                        tickFormat={x => {
-                           return x + " Feb"
-                        }}
-                     />
-                  </VictoryChart>
-               </Svg>
+                  </VictoryGroup>
+                  <VictoryAxis
+                     dependentAxis
+                     standalone={false}
+                     tickValues={this.props.chartData.followersChartData.y}
+                     tickFormat={t => {
+                        return t
+                     }}
+                     style={{
+                        ticks: { size: 5 },
+                        grid: { stroke: "rgba(255,255,255,0.05)" },
+                        axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
+                        tickLabels: {
+                           fill: "rgba(255,255,255,0.4)",
+                           fontFamily: "Circular",
+                           fontSize: 13
+                        }
+                     }}
+                  />
+                  <VictoryAxis
+                     standalone={false}
+                     style={{
+                        grid: {
+                           stroke: "transparent"
+                        },
+                        axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
+                        ticks: {
+                           size: 0
+                        },
+                        tickLabels: {
+                           fill: "rgba(255,255,255,0.4)",
+                           fontFamily: "Circular",
+                           fontSize: 13
+                        }
+                     }}
+                     tickValues={this.props.chartData.day}
+                     tickFormat={x => {
+                        return x + " Feb"
+                     }}
+                  />
+               </VictoryChart>
             </View>
          )
       } else {
