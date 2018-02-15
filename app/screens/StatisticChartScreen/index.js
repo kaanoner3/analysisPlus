@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, Text, Dimensions, ScrollView } from "react-native"
+import { View, Text, Dimensions, ScrollView, Animated } from "react-native"
 import {
    VictoryBar,
    VictoryChart,
@@ -17,6 +17,7 @@ import {
 import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg"
 import { connect } from "react-redux"
 import { chartStatisticRequest, gainedChartStatisticRequest } from "ducks/chart"
+import { AnimatedHeader } from "components"
 
 const testData = [34, 54, 7, 72]
 const testDataReverse = [86, 72, 67, 54]
@@ -59,8 +60,8 @@ class StatisticChartScreen extends Component {
    renderGainedFollowersChart() {
       if (this.state.ShouldrenderFollowerChart === true && this.props.isFetching === false) {
          return (
-            <View style={{ flex: 1 }}>
-               <View style={{ flexDirection: "column", marginLeft: 20 }}>
+            <View style={{ flex: 1, paddingLeft: 20, marginTop: 20, backgroundColor: "#192A4F" }}>
+               <View style={{ flexDirection: "column", marginTop: 20 }}>
                   <Text style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "Circular" }}>
                      GAINED FOLLOWERS
                   </Text>
@@ -95,7 +96,6 @@ class StatisticChartScreen extends Component {
                            strokeLinecap: "round"
                         }
                      }}
-                     // dataComponent={<Bar events={{ onPressIn: console.log('HOOVER') }} />}
                      animate={{ duration: 1000 }}
                      events={[
                         {
@@ -163,10 +163,10 @@ class StatisticChartScreen extends Component {
    renderFollowerChart() {
       if (this.state.ShouldrenderFollowerChart === true && this.props.isFetching === false) {
          return (
-            <View style={{ flex: 1 }}>
-               <View style={{ flexDirection: "column", marginLeft: 20 }}>
+            <View style={{ flex: 1, paddingLeft: 20, backgroundColor: "#192A4F" }}>
+               <View style={{ flexDirection: "column", marginTop: 20 }}>
                   <Text style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "Circular" }}>
-                     GAINED FOLLOWERS
+                     TOTAL FOLLOWERS
                   </Text>
                   <Text style={{ fontSize: 28, color: "white", fontFamily: "Circular" }}>
                      {this.state.followersChartCount}
@@ -192,11 +192,10 @@ class StatisticChartScreen extends Component {
                      data={this.props.chartData.followersChartData}
                      animate={{
                         duration: 1000
-                        //  onLoad: { duration: 1000 }
                      }}
                      events={[
                         {
-                           childName: "all",
+                           childName: "scatter",
                            target: "data",
                            eventHandlers: {
                               onPressIn: () => {
@@ -225,12 +224,7 @@ class StatisticChartScreen extends Component {
                            }
                         }}
                      />
-                     <VictoryScatter
-                        style={{ data: { fill: "#00FF72" } }}
-                        size={5}
-                        symbol="star"
-                        name="scatter"
-                     />
+                     <VictoryScatter style={{ data: { fill: "#00FF72" } }} size={5} name="scatter" />
                   </VictoryGroup>
                   <VictoryAxis
                      dependentAxis
@@ -281,8 +275,25 @@ class StatisticChartScreen extends Component {
 
    render() {
       return (
-         <View style={{ flex: 1 }}>
-            <ScrollView>
+         <View style={{ flex: 1, backgroundColor: "#152341" }}>
+            <AnimatedHeader ref="animated_Header" title="Graphics" />
+
+            <ScrollView
+               style={{ flex: 1, paddingTop: 20 }}
+               scrollEventThrottle={1}
+               onScroll={Animated.event([
+                  {
+                     nativeEvent: {
+                        contentOffset: {
+                           y:
+                              this.refs.animated_Header === undefined
+                                 ? 0
+                                 : this.refs.animated_Header.state.scrollY
+                        }
+                     }
+                  }
+               ])}
+            >
                {this.renderFollowerChart()}
                {this.renderGainedFollowersChart()}
             </ScrollView>
@@ -303,124 +314,3 @@ const mapStateToProps = (state, ownProps) => {
 export default connect(mapStateToProps, { chartStatisticRequest, gainedChartStatisticRequest })(
    StatisticChartScreen
 )
-
-/*
-   
-          <VictoryBar
-                     data={[
-                        { x: 1, y: 2, label: "A" },
-                        { x: 2, y: 4, label: "B" },
-                        { x: 3, y: 7, label: "C" },
-                        { x: 4, y: 3, label: "D" },
-                        { x: 5, y: 5, label: "E" }
-                     ]}
-                     eventKey={datum => datum.label}
-                     events={[
-                        {
-                           target: "data",
-                           eventKey: ["A", "B"],
-                           eventHandlers: {
-                              onClick: () => {
-                                 return [
-                                    {
-                                       eventKey: "D",
-                                       mutation: props => {
-                                          return {
-                                             style: assign(props.style, { fill: "green" })
-                                          }
-                                       }
-                                    },
-                                    {
-                                       eventKey: "E",
-                                       mutation: props => {
-                                          return {
-                                             style: assign(props.style, { fill: "red" })
-                                          }
-                                       }
-                                    }
-                                 ]
-                              }
-                           }
-                        }
-                     ]}
-                  />
-
-
-
-
-                  <VictoryAxis
-                   tickValues={this.props.chartData.day} //tarih arrayi
-                   tickFormat={t => {
-                      t + " Feb"
-                   }} 
-                     style={{
-                        axis: { stroke: "#756f6a" },
-                        axisLabel: { fontSize: 20, padding: 30 },
-                        grid: { stroke: t => (t > 4 ? "red" : "grey") },
-                        ticks: { stroke: "grey", size: 5 },
-                        tickLabels: { fontSize: 15, padding: 5 }
-                     }}
-                    
-                  />
-                  <Defs>
-                     <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="a">
-                        <Stop stopColor="#00FF72" offset="100%" stopOpacity="0.5" />
-                        <Stop stopColor="#00FF72" offset="0%" stopOpacity="0" />
-                     </LinearGradient>
-                  </Defs>
-    
-                                    <VictoryArea
-                     data={this.props.chartData.followersChartData}
-                     style={{
-                        data: {
-                           stroke: "#00FF72",
-                           fill: "url(#a)",
-                           strokeWidth: 3,
-                           strokeLinecap: "round"
-                        }
-                     }}
-                     //interpolation="natural"
-                     animate={{ duration: 1000 }}
-                  />
-
-  <VictoryBar
-    data={[
-      {x: 1, y: 2, label: "A"},
-      {x: 2, y: 4, label: "B"},
-      {x: 3, y: 7, label: "C"},
-      {x: 4, y: 3, label: "D"},
-      {x: 5, y: 5, label: "E"},
-    ]}
-    eventKey={(datum) => datum.label}
-    events={[
-      {
-        target: "data",
-        eventKey: ["A", "B"],
-        eventHandlers: {
-          onClick: () => {
-            return [
-              {
-                eventKey: "D",
-                mutation: (props) => {
-                  return {
-                    style: assign(props.style, {fill: "green"})
-                  }
-                }
-              },
-              {
-                eventKey: "E",
-                mutation: (props) => {
-                  return {
-                    style: assign(props.style, {fill: "red"})
-                  }
-                }
-              }
-            ];
-          }
-        }
-      }
-    ]}
-  />
-
-
-*/

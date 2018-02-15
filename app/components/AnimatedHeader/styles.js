@@ -13,10 +13,9 @@ const styles = {
         height: 107,
         flexDirection: "column",
         justifyContent: "flex-start",
-        position: "absolute",
+        //position: "absolute",
         zIndex: 1,
         overflow: "hidden",
-        backgroundColor: "#152341",
         width: Dimensions.get("window").width
     },
     headerXtitleView: {
