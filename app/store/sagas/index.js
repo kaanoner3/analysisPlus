@@ -4,7 +4,7 @@ import { getProfileData } from "./profile"
 import { getUserList } from "./instagramUsers"
 import { userDetail } from "./userDetail"
 import { interactionDetail } from "./interactions"
-import { chartStatistic, gainedFollowersStatistic } from "./chart"
+import { chartStatistic, gainedFollowersStatistic,lostedFollowersStatistic } from "./chart"
 
 export default function* root() {
    yield all([
@@ -14,6 +14,7 @@ export default function* root() {
       fork(userDetail),
       fork(interactionDetail),
       fork(chartStatistic),
-      fork(gainedFollowersStatistic)
+      fork(gainedFollowersStatistic),
+      fork(lostedFollowersStatistic)
    ])
 }

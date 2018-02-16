@@ -3,17 +3,20 @@ const initialState = {
    isFetching: null,
    chartStatisticData: null,
    chartData: [],
-   gainedData: []
+   gainedData: []
 }
 
 export const CHART_STATISTIC_REQUEST = "chart/CHART_STATISTIC_REQUEST"
-
 export const FOLLOWERS_CHART_STATISTIC_FAIL = "chart/FOLLOWERS_CHART_STATISTIC_FAIL"
 export const FOLLOWERS_CHART_STATISTIC_SUCCESS = "chart/FOLLOWERS_CHART_STATISTIC_SUCCESS"
 
 export const GAINED_CHART_STATISTIC_REQUEST = "chart/GAINED_CHART_STATISTIC_REQUEST"
 export const GAINED_CHART_STATISTIC_SUCCESS = "chart/GAINED_CHART_STATISTIC_SUCCESS"
 export const GAINED_CHART_STATISTIC_FAIL = "chart/GAINED_CHART_STATISTIC_FAIL"
+
+export const LOSTED_CHART_STATISTIC_REQUEST = "chart/LOSTED_CHART_STATISTIC_REQUEST"
+export const LOSTED_CHART_STATISTIC_SUCCESS = "chart/LOSTED_CHART_STATISTIC_SUCCESS"
+export const LOSTED_CHART_STATISTIC_FAIL = "chart/LOSTED_CHART_STATISTIC_FAIL"
 
 export default function(state = initialState, action = {}) {
    switch (action.type) {
@@ -25,7 +28,8 @@ export default function(state = initialState, action = {}) {
       }
       case FOLLOWERS_CHART_STATISTIC_FAIL: {
          return {
-            ...state
+            ...state,
+            followersFlag: true
          }
       }
       case FOLLOWERS_CHART_STATISTIC_SUCCESS: {
@@ -33,7 +37,8 @@ export default function(state = initialState, action = {}) {
          return {
             ...state,
             chartData: data,
-            isFetching: false
+            isFetching: false,
+            followersFlag: false
          }
       }
       case GAINED_CHART_STATISTIC_SUCCESS: {
@@ -41,13 +46,31 @@ export default function(state = initialState, action = {}) {
          return {
             ...state,
             gainedData: data,
-            isFetching: false
+            isFetching: false,
+            gainedFlag: false
          }
       }
       case GAINED_CHART_STATISTIC_FAIL: {
          return {
             ...state,
-            errorMessage: action.errorMessage
+            errorMessage: action.errorMessage,
+            gainedFlag: true
+         }
+      }
+      case LOSTED_CHART_STATISTIC_SUCCESS: {
+         const data = action.formattedData
+         return {
+            ...state,
+            lostedData: data,
+            isFetching: false,
+            lostedFlag: false
+         }
+      }
+      case LOSTED_CHART_STATISTIC_FAIL: {
+         return {
+            ...state,
+            errorMessage: action.errorMessage,
+            lostedFlag: true
          }
       }
       default:
@@ -55,12 +78,12 @@ export default function(state = initialState, action = {}) {
    }
 }
 
-export function chartStatisticRequest(token, serviceType) {
-   return { type: CHART_STATISTIC_REQUEST, token, serviceType }
+export function chartStatisticRequest(serviceType) {
+   return { type: CHART_STATISTIC_REQUEST, serviceType }
 }
 
-export function gainedChartStatisticRequest(token, serviceType) {
-   return { type: GAINED_CHART_STATISTIC_REQUEST, token, serviceType }
+export function gainedChartStatisticRequest(serviceType) {
+   return { type: GAINED_CHART_STATISTIC_REQUEST, serviceType }
 }
 export function followersChartStatisticFail(errorMessage) {
    return { type: FOLLOWERS_CHART_STATISTIC_FAIL, errorMessage }
@@ -75,4 +98,13 @@ export function gainedChartStatisticFail(errorMessage) {
 
 export function gainedChartStatisticSuccess(formattedData) {
    return { type: GAINED_CHART_STATISTIC_SUCCESS, formattedData }
+}
+export function lostedChartStatisticRequest(serviceType) {
+   return { type: LOSTED_CHART_STATISTIC_REQUEST, serviceType }
+}
+export function lostedChartStatisticFail(errorMessage) {
+   return { type: LOSTED_CHART_STATISTIC_FAIL, errorMessage }
+}
+export function lostedChartStatisticSuccess(formattedData) {
+   return { type: LOSTED_CHART_STATISTIC_SUCCESS, formattedData }
 }

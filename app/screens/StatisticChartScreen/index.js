@@ -16,7 +16,7 @@ import {
 } from "victory-native"
 import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg"
 import { connect } from "react-redux"
-import { chartStatisticRequest, gainedChartStatisticRequest } from "ducks/chart"
+import { chartStatisticRequest, gainedChartStatisticRequest, lostedChartStatisticRequest } from "ducks/chart"
 import { AnimatedHeader } from "components"
 
 const testData = [34, 54, 7, 72]
@@ -42,8 +42,9 @@ class StatisticChartScreen extends Component {
       }
    }
    componentDidMount() {
-      this.props.chartStatisticRequest(this.props.token, "monthly")
-      this.props.gainedChartStatisticRequest(this.props.token, "weekly")
+      this.props.chartStatisticRequest("monthly")
+      this.props.gainedChartStatisticRequest("monthly")
+      this.props.lostedChartStatisticRequest("monthly")
       if (this.props.gainedData.length === 0) {
          this.setState({
             gainedChartCount: "Click The Chart",
@@ -72,8 +73,8 @@ class StatisticChartScreen extends Component {
                <VictoryChart
                   domain={{
                      x: [
-                        this.props.gainedData.day[0],
-                        this.props.gainedData.day[this.props.gainedData.day.length - 1]
+                        this.props.gainedData.gainedChartData[0].x,
+                        this.props.gainedData.gainedChartData[this.props.gainedData.day.length - 1].x
                      ],
                      y: [this.props.gainedData.domainY.minValue, this.props.gainedData.domainY.maxValue]
                   }}
@@ -148,9 +149,52 @@ class StatisticChartScreen extends Component {
                            fontSize: 13
                         }
                      }}
-                     tickValues={this.props.gainedData.day}
+                     tickValues={this.props.gainedData.gainedChartData.x}
                      tickFormat={x => {
-                        return x + " Feb"
+                        if (Number.isInteger(x)) {
+                           const month = this.props.chartData.month[x - 1]
+                           const day = this.props.chartData.day[x - 1]
+                           switch (month) {
+                              case 1: {
+                                 return day + " Jan"
+                              }
+                              case 2: {
+                                 return day + " Feb"
+                              }
+                              case 3: {
+                                 return day + " Mar"
+                              }
+                              case 4: {
+                                 return day + " Apr"
+                              }
+                              case 5: {
+                                 return day + " May"
+                              }
+                              case 6: {
+                                 return day + " June"
+                              }
+                              case 7: {
+                                 return day + " July"
+                              }
+                              case 8: {
+                                 return day + " Aug"
+                              }
+                              case 9: {
+                                 return day + " Sep"
+                              }
+                              case 10: {
+                                 return day + " Oct"
+                              }
+                              case 11: {
+                                 return day + "Nov"
+                              }
+                              case 12: {
+                                 return day + "Dec"
+                              }
+                              default:
+                                 return ""
+                           }
+                        }
                      }}
                   />
                </VictoryChart>
@@ -358,6 +402,8 @@ const mapStateToProps = (state, ownProps) => {
    }
 }
 
-export default connect(mapStateToProps, { chartStatisticRequest, gainedChartStatisticRequest })(
-   StatisticChartScreen
-)
+export default connect(mapStateToProps, {
+   chartStatisticRequest,
+   gainedChartStatisticRequest,
+   lostedChartStatisticRequest
+})(StatisticChartScreen)
