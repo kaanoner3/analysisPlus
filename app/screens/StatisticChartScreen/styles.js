@@ -16,9 +16,20 @@ const styles = {
       marginHorizontal: 12,
       marginVertical: 8
    },
-   infoView:{ flexDirection: "column", marginTop: 20 },
-   infoText:{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "Circular" },
-   infoValue:{ fontSize: 28, color: "white", fontFamily: "Circular" },
+   infoView: {
+      flexDirection: "column",
+      marginTop: 20
+   },
+   infoText: {
+      fontSize: 12,
+      color: "rgba(255,255,255,0.4)",
+      fontFamily: "Circular"
+   },
+   infoValue: {
+      fontSize: 28,
+      color: "white",
+      fontFamily: "Circular"
+   },
    buttonStyle: {
       borderRadius: 100,
       borderWidth: 1,

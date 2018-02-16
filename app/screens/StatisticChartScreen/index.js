@@ -75,7 +75,7 @@ class StatisticChartScreen extends Component {
    renderLostedFollowersChart() {
       if (this.state.ShouldrenderFollowerChart === true && this.props.lostedFetching === false) {
          return (
-            <View style={styles.chartContainer}>
+            <View style={styles.chartContainer} >
                <View style={styles.infoView}>
                   <Text style={styles.infoText}>LOSTED FOLLOWERS</Text>
                   <Text style={styles.infoValue}>{this.state.lostedChartCount}</Text>
