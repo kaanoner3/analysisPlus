@@ -20,8 +20,6 @@ import { chartStatisticRequest, gainedChartStatisticRequest, lostedChartStatisti
 import { AnimatedHeader } from "components"
 import styles from "./styles"
 
-const testData = [34, 54, 7, 72]
-const testDataReverse = [86, 72, 67, 54]
 const screenWidth = Dimensions.get("window").width
 
 class StatisticChartScreen extends Component {
