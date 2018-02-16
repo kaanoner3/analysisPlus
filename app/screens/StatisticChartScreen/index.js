@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, Text, Dimensions, ScrollView, Animated } from "react-native"
+import { View, Text, Dimensions, ScrollView, Animated, TouchableOpacity } from "react-native"
 import {
    VictoryBar,
    VictoryChart,
@@ -18,6 +18,7 @@ import { Path, G, LinearGradient, Stop, Defs, Svg } from "react-native-svg"
 import { connect } from "react-redux"
 import { chartStatisticRequest, gainedChartStatisticRequest, lostedChartStatisticRequest } from "ducks/chart"
 import { AnimatedHeader } from "components"
+import styles from "./styles"
 
 const testData = [34, 54, 7, 72]
 const testDataReverse = [86, 72, 67, 54]
@@ -29,8 +30,18 @@ class StatisticChartScreen extends Component {
       this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
       this.renderFollowerChart = this.renderFollowerChart.bind(this)
       this.renderGainedFollowersChart = this.renderGainedFollowersChart.bind(this)
+      this.renderLostedFollowersChart = this.renderLostedFollowersChart.bind(this)
+
       this.serviceType = "weekly"
-      this.state = { ShouldrenderFollowerChart: false, gainedChartCount: 0, followersChartCount: 0 }
+      this.state = {
+         ShouldrenderFollowerChart: false,
+         gainedChartCount: 0,
+         followersChartCount: 0,
+         lostedChartCount: 0,
+         gainedActiveChart: 1,
+         lostedActiveChart: 1,
+         followersActiveChart: 1
+      }
    }
 
    onNavigatorEvent(event) {
@@ -45,30 +56,229 @@ class StatisticChartScreen extends Component {
       this.props.chartStatisticRequest("monthly")
       this.props.gainedChartStatisticRequest("monthly")
       this.props.lostedChartStatisticRequest("monthly")
+
       if (this.props.gainedData.length === 0) {
          this.setState({
             gainedChartCount: "Click The Chart",
-            followersChartCount: "Click The Chart"
+            followersChartCount: "Click The Chart",
+            lostedChartCount: "Click The Chart"
          })
       } else {
          this.setState({
             gainedChartCount: this.props.gainedData.gainedChartData[this.props.gainedData.day.length - 1].y,
             followersChartCount: this.props.chartData.followersChartData[this.props.chartData.day.length - 1]
-               .y
+               .y,
+            lostedChartCount: this.props.lostedData.lostedChartData[this.props.lostedData.day.length - 1].y
          })
       }
    }
-   renderGainedFollowersChart() {
-      if (this.state.ShouldrenderFollowerChart === true && this.props.isFetching === false) {
+   renderLostedFollowersChart() {
+      if (this.state.ShouldrenderFollowerChart === true && this.props.lostedFetching === false) {
          return (
-            <View style={{ flex: 1, paddingLeft: 20, marginTop: 20, backgroundColor: "#192A4F" }}>
-               <View style={{ flexDirection: "column", marginTop: 20 }}>
-                  <Text style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "Circular" }}>
-                     GAINED FOLLOWERS
-                  </Text>
-                  <Text style={{ fontSize: 28, color: "white", fontFamily: "Circular" }}>
-                     {this.state.gainedChartCount}
-                  </Text>
+            <View style={styles.chartContainer}>
+               <View style={styles.infoView}>
+                  <Text style={styles.infoText}>LOSTED FOLLOWERS</Text>
+                  <Text style={styles.infoValue}>{this.state.lostedChartCount}</Text>
+               </View>
+               <VictoryChart
+                  domain={{
+                     x: [
+                        this.props.lostedData.lostedChartData[0].x,
+                        this.props.lostedData.lostedChartData[this.props.lostedData.day.length - 1].x
+                     ],
+                     y: [this.props.lostedData.domainY.minValue, this.props.lostedData.domainY.maxValue]
+                  }}
+                  domainPadding={{ x: [15, 10], y: [25, 20] }}
+               >
+                  <Defs>
+                     <LinearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="myGradient">
+                        <Stop stopColor="#059ED9" offset="100%" stopOpacity="1" />
+                        <Stop stopColor="#5D4ED3" offset="0%" stopOpacity="1" />
+                     </LinearGradient>
+                  </Defs>
+                  <VictoryBar
+                     data={this.props.lostedData.lostedChartData}
+                     name="bar"
+                     style={{
+                        data: {
+                           stroke: "transparent",
+                           fill: "url(#myGradient)",
+                           strokeWidth: 0,
+                           strokeLinecap: "round"
+                        }
+                     }}
+                     animate={{ duration: 1000 }}
+                     events={[
+                        {
+                           target: "data",
+                           eventHandlers: {
+                              onPressIn: () => {
+                                 return {
+                                    target: "data",
+                                    mutation: props => {
+                                       this.setState({ lostedChartCount: props.datum.y })
+                                       return null
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     ]}
+                  />
+                  <VictoryAxis
+                     dependentAxis
+                     standalone={false}
+                     tickValues={this.props.lostedData.lostedChartData.y}
+                     tickFormat={t => {
+                        return t
+                     }}
+                     style={{
+                        ticks: { size: 7 },
+                        grid: { stroke: "rgba(255,255,255,0.05)" },
+                        axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
+                        tickLabels: {
+                           fill: "rgba(255,255,255,0.4)",
+                           fontFamily: "Circular",
+                           fontSize: 13
+                        }
+                     }}
+                  />
+                  <VictoryAxis
+                     standalone={false}
+                     style={{
+                        grid: {
+                           stroke: "transparent"
+                        },
+                        axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
+                        ticks: {
+                           size: 0
+                        },
+                        tickLabels: {
+                           fill: "rgba(255,255,255,0.4)",
+                           fontFamily: "Circular",
+                           fontSize: 13
+                        }
+                     }}
+                     tickValues={this.props.lostedData.lostedChartData.x}
+                     tickFormat={x => {
+                        if (Number.isInteger(x)) {
+                           const month = this.props.lostedData.month[x - 1]
+                           const day = this.props.lostedData.day[x - 1]
+                           switch (month) {
+                              case 1: {
+                                 return day + " Jan"
+                              }
+                              case 2: {
+                                 return day + " Feb"
+                              }
+                              case 3: {
+                                 return day + " Mar"
+                              }
+                              case 4: {
+                                 return day + " Apr"
+                              }
+                              case 5: {
+                                 return day + " May"
+                              }
+                              case 6: {
+                                 return day + " June"
+                              }
+                              case 7: {
+                                 return day + " July"
+                              }
+                              case 8: {
+                                 return day + " Aug"
+                              }
+                              case 9: {
+                                 return day + " Sep"
+                              }
+                              case 10: {
+                                 return day + " Oct"
+                              }
+                              case 11: {
+                                 return day + "Nov"
+                              }
+                              case 12: {
+                                 return day + "Dec"
+                              }
+                              default:
+                                 return ""
+                           }
+                        }
+                     }}
+                  />
+               </VictoryChart>
+               <View style={{ flexDirection: "column", alignItems: "center" }}>
+                  <View style={{ flexDirection: "row", marginTop: 10, alignSelf: "center", flex: 1 }}>
+                     <TouchableOpacity
+                        onPress={() => {
+                           this.setState({ lostedActiveChart: 0 })
+                           this.props.lostedChartStatisticRequest("weekly")
+                        }}
+                        style={
+                           this.state.lostedActiveChart !== 0 ? styles.buttonStyle : styles.activeButtonStyle
+                        }
+                     >
+                        <Text
+                           style={
+                              this.state.lostedActiveChart !== 0
+                                 ? styles.typeButtonText
+                                 : styles.activeTextStyle
+                           }
+                        >
+                           WEEKLY
+                        </Text>
+                     </TouchableOpacity>
+                     <TouchableOpacity
+                        onPress={() => {
+                           this.setState({ lostedActiveChart: 1 })
+                           this.props.lostedChartStatisticRequest("monthly")
+                        }}
+                        style={
+                           this.state.lostedActiveChart !== 1 ? styles.buttonStyle : styles.activeButtonStyle
+                        }
+                     >
+                        <Text
+                           style={
+                              this.state.lostedActiveChart !== 1
+                                 ? styles.typeButtonText
+                                 : styles.activeTextStyle
+                           }
+                        >
+                           MONTHLY
+                        </Text>
+                     </TouchableOpacity>
+                     <TouchableOpacity
+                        //onPress={this.props.lostedChartStatisticRequest('yearly')}
+                        style={
+                           this.state.lostedActiveChart !== 2 ? styles.buttonStyle : styles.activeButtonStyle
+                        }
+                     >
+                        <Text
+                           style={
+                              this.state.lostedActiveChart !== 2
+                                 ? styles.typeButtonText
+                                 : styles.activeTextStyle
+                           }
+                        >
+                           YEARLY
+                        </Text>
+                     </TouchableOpacity>
+                  </View>
+               </View>
+            </View>
+         )
+      } else {
+         return <View style={{ flex: 1 }} />
+      }
+   }
+   renderGainedFollowersChart() {
+      if (this.state.ShouldrenderFollowerChart === true && this.props.gainedFetching === false) {
+         return (
+            <View style={styles.chartContainer}>
+               <View style={styles.infoView}>
+                  <Text style={styles.infoText}>GAINED FOLLOWERS</Text>
+                  <Text style={styles.infoValue}>{this.state.gainedChartCount}</Text>
                </View>
                <VictoryChart
                   domain={{
@@ -198,6 +408,64 @@ class StatisticChartScreen extends Component {
                      }}
                   />
                </VictoryChart>
+               <View style={{ flexDirection: "column", alignItems: "center" }}>
+                  <View style={{ flexDirection: "row", marginTop: 10, alignSelf: "center", flex: 1 }}>
+                     <TouchableOpacity
+                        onPress={() => {
+                           this.setState({ gainedActiveChart: 0 })
+                           this.props.gainedChartStatisticRequest("weekly")
+                        }}
+                        style={
+                           this.state.gainedActiveChart !== 0 ? styles.buttonStyle : styles.activeButtonStyle
+                        }
+                     >
+                        <Text
+                           style={
+                              this.state.gainedActiveChart !== 0
+                                 ? styles.typeButtonText
+                                 : styles.activeTextStyle
+                           }
+                        >
+                           WEEKLY
+                        </Text>
+                     </TouchableOpacity>
+                     <TouchableOpacity
+                        onPress={() => {
+                           this.setState({ gainedActiveChart: 1 })
+                           this.props.gainedChartStatisticRequest("monthly")
+                        }}
+                        style={
+                           this.state.gainedActiveChart !== 1 ? styles.buttonStyle : styles.activeButtonStyle
+                        }
+                     >
+                        <Text
+                           style={
+                              this.state.gainedActiveChart !== 1
+                                 ? styles.typeButtonText
+                                 : styles.activeTextStyle
+                           }
+                        >
+                           MONTHLY
+                        </Text>
+                     </TouchableOpacity>
+                     <TouchableOpacity
+                        //onPress={this.props.gainedChartStatisticRequest('yearly')}
+                        style={
+                           this.state.gainedActiveChart !== 2 ? styles.buttonStyle : styles.activeButtonStyle
+                        }
+                     >
+                        <Text
+                           style={
+                              this.state.gainedActiveChart !== 2
+                                 ? styles.typeButtonText
+                                 : styles.activeTextStyle
+                           }
+                        >
+                           YEARLY
+                        </Text>
+                     </TouchableOpacity>
+                  </View>
+               </View>
             </View>
          )
       } else {
@@ -205,16 +473,12 @@ class StatisticChartScreen extends Component {
       }
    }
    renderFollowerChart() {
-      if (this.state.ShouldrenderFollowerChart === true && this.props.isFetching === false) {
+      if (this.state.ShouldrenderFollowerChart === true && this.props.followersFetching === false) {
          return (
-            <View style={{ flex: 1, paddingLeft: 20, backgroundColor: "#192A4F" }}>
-               <View style={{ flexDirection: "column", marginTop: 20 }}>
-                  <Text style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontFamily: "Circular" }}>
-                     TOTAL FOLLOWERS
-                  </Text>
-                  <Text style={{ fontSize: 28, color: "white", fontFamily: "Circular" }}>
-                     {this.state.followersChartCount}
-                  </Text>
+            <View style={styles.chartContainer}>
+               <View style={styles.infoView}>
+                  <Text style={styles.infoText}>TOTAL FOLLOWERS</Text>
+                  <Text style={styles.infoValue}>{this.state.followersChartCount}</Text>
                </View>
                <View style={{}}>
                   <VictoryChart
@@ -276,7 +540,6 @@ class StatisticChartScreen extends Component {
                         standalone={false}
                         tickValues={this.props.chartData.followersChartData.y}
                         tickFormat={t => {
-                           console.log(t)
                            return t
                         }}
                         style={{
@@ -357,6 +620,70 @@ class StatisticChartScreen extends Component {
                      />
                   </VictoryChart>
                </View>
+               <View style={{ flexDirection: "column", alignItems: "center" }}>
+                  <View style={{ flexDirection: "row", marginTop: 10, alignSelf: "center", flex: 1 }}>
+                     <TouchableOpacity
+                        onPress={() => {
+                           this.setState({ followersActiveChart: 0 })
+                           this.props.chartStatisticRequest("weekly")
+                        }}
+                        style={
+                           this.state.followersActiveChart !== 0
+                              ? styles.buttonStyle
+                              : styles.activeButtonStyle
+                        }
+                     >
+                        <Text
+                           style={
+                              this.state.followersActiveChart !== 0
+                                 ? styles.typeButtonText
+                                 : styles.activeTextStyle
+                           }
+                        >
+                           WEEKLY
+                        </Text>
+                     </TouchableOpacity>
+                     <TouchableOpacity
+                        onPress={() => {
+                           this.setState({ followersActiveChart: 1 })
+                           this.props.chartStatisticRequest("monthly")
+                        }}
+                        style={
+                           this.state.followersActiveChart !== 1
+                              ? styles.buttonStyle
+                              : styles.activeButtonStyle
+                        }
+                     >
+                        <Text
+                           style={
+                              this.state.followersActiveChart !== 1
+                                 ? styles.typeButtonText
+                                 : styles.activeTextStyle
+                           }
+                        >
+                           MONTHLY
+                        </Text>
+                     </TouchableOpacity>
+                     <TouchableOpacity
+                        // onPress={this.props.chartStatisticRequest('yearly')}
+                        style={
+                           this.state.followersActiveChart !== 2
+                              ? styles.buttonStyle
+                              : styles.activeButtonStyle
+                        }
+                     >
+                        <Text
+                           style={
+                              this.state.followersActiveChart !== 2
+                                 ? styles.typeButtonText
+                                 : styles.activeTextStyle
+                           }
+                        >
+                           YEARLY
+                        </Text>
+                     </TouchableOpacity>
+                  </View>
+               </View>
             </View>
          )
       } else {
@@ -387,6 +714,7 @@ class StatisticChartScreen extends Component {
             >
                {this.renderFollowerChart()}
                {this.renderGainedFollowersChart()}
+               {this.renderLostedFollowersChart()}
             </ScrollView>
          </View>
       )
@@ -398,7 +726,11 @@ const mapStateToProps = (state, ownProps) => {
       isFetching: state.chart.isFetching,
       token: state.user.token,
       chartData: state.chart.chartData,
-      gainedData: state.chart.gainedData
+      gainedData: state.chart.gainedData,
+      lostedData: state.chart.lostedData,
+      lostedFetching: state.chart.lostedFetching,
+      gainedFetching: state.chart.gainedFetching,
+      followersFetching: state.chart.followersFetching
    }
 }
 

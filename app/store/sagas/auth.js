@@ -44,7 +44,6 @@ export function* login() {
             user_id,
             app_token
          })
-         console.log('sagaa',tokenData.data.access_token)
          yield call(setToken, tokenData.data.access_token)
        //  yield put(setUserIdentity(app_token, user_id))
          yield call(startHomeScreen)

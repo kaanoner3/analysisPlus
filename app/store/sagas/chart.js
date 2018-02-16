@@ -220,10 +220,8 @@ export function* lostedFollowersStatistic() {
    while (true) {
       try {
          const { serviceType } = yield take(LOSTED_CHART_STATISTIC_REQUEST)
-         console.log('deneme')
          const responseData = yield call(lostedStatistic, serviceType)
          const dates = responseData.data.reverse()
-         console.log("chart sagaa", dates)
          const arrayLength = dates.length
          const formattedData = []
          var domainYMax = null
@@ -309,7 +307,6 @@ export function* lostedFollowersStatistic() {
                return formattedValues
             })
          }
-         console.log("gained chart data", lostedFormatted[dates.length - 1])
          yield put(lostedChartStatisticSuccess(lostedFormatted[dates.length - 1]))
       } catch (error) {
          yield put(lostedChartStatisticFail(error))

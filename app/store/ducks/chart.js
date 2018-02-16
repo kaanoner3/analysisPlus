@@ -23,7 +23,8 @@ export default function(state = initialState, action = {}) {
       case CHART_STATISTIC_REQUEST: {
          return {
             ...state,
-            isFetching: true
+            isFetching: true,
+            followersFetching: true
          }
       }
       case FOLLOWERS_CHART_STATISTIC_FAIL: {
@@ -38,7 +39,14 @@ export default function(state = initialState, action = {}) {
             ...state,
             chartData: data,
             isFetching: false,
-            followersFlag: false
+            followersFlag: false,
+            followersFetching: false
+         }
+      }
+      case GAINED_CHART_STATISTIC_REQUEST: {
+         return {
+            ...state,
+            gainedFetching: true
          }
       }
       case GAINED_CHART_STATISTIC_SUCCESS: {
@@ -47,7 +55,8 @@ export default function(state = initialState, action = {}) {
             ...state,
             gainedData: data,
             isFetching: false,
-            gainedFlag: false
+            gainedFlag: false,
+            gainedFetching: false
          }
       }
       case GAINED_CHART_STATISTIC_FAIL: {
@@ -57,12 +66,19 @@ export default function(state = initialState, action = {}) {
             gainedFlag: true
          }
       }
+      case LOSTED_CHART_STATISTIC_REQUEST: {
+         return {
+            ...state,
+            lostedFetching: true
+         }
+      }
       case LOSTED_CHART_STATISTIC_SUCCESS: {
          const data = action.formattedData
          return {
             ...state,
             lostedData: data,
             isFetching: false,
+            lostedFetching: false,
             lostedFlag: false
          }
       }
