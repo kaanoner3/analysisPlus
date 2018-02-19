@@ -3,7 +3,7 @@ import { SignInService } from "services/LoginService"
 import { accessToken as accessTokenService } from "services"
 import { INSTAGRAM_LOGIN_REQUEST, instagramLoginSuccess } from "ducks/auth"
 //import { startHomeScreen, startLoginScreen } from "./../../../bootstrap/App";
-import { setUserIdentity } from "ducks/user"
+import { setUser } from "ducks/user"
 import { startHomeScreen, startLoginScreen } from "services/appStartHelper"
 import { switchToUser } from "ducks/app"
 import {setToken} from "utils/axios"
@@ -45,7 +45,6 @@ export function* login() {
             app_token
          })
          yield call(setToken, tokenData.data.access_token)
-       //  yield put(setUserIdentity(app_token, user_id))
          yield call(startHomeScreen)
       } catch (error) {
          console.log(error)

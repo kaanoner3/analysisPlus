@@ -29,7 +29,6 @@ export function* chartStatistic() {
          const formattedData = []
          var domainYMax = null
          var domainYMin = null
-         console.log(dates)
          if (serviceType === "weekly") {
             var day = []
             var month = []
@@ -128,7 +127,6 @@ export function* gainedFollowersStatistic() {
          const formattedData = []
          var domainYMax = null
          var domainYMin = null
-         console.log(dates)
          if (serviceType === "weekly") {
             var day = []
             var month = []
@@ -226,7 +224,6 @@ export function* lostedFollowersStatistic() {
          const formattedData = []
          var domainYMax = null
          var domainYMin = null
-         console.log(dates)
          if (serviceType === "weekly") {
             var day = []
             var month = []
@@ -307,7 +304,6 @@ export function* lostedFollowersStatistic() {
                return formattedValues
             })
          }
-         console.log(lostedFormatted[dates.length - 1])
 
          yield put(lostedChartStatisticSuccess(lostedFormatted[dates.length - 1]))
       } catch (error) {

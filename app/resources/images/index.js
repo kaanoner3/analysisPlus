@@ -32,4 +32,7 @@ export default {
   discover1: require("./discover-1.png"),
   discover2: require("./discover-2.png"),
   discover3: require("./discover-3.png"),
+  addAcc: require("./addAcc.png"),
+  selectedAcc: require("./selectedAcc.png"),
+  nonSelectedAcc: require("./nonSelectAcc.png"),
 };

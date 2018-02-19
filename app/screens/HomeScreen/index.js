@@ -20,6 +20,7 @@ import LinearGradient from "react-native-linear-gradient"
 import { connect } from "react-redux"
 import { getProfileDataRequest } from "ducks/profile"
 import FlatlistItem from "./FlatlistItem"
+
 const flatlistData = [{ flData: 1 }]
 
 const { width, height } = Dimensions.get("window")
@@ -34,7 +35,7 @@ class HomeScreen extends Component {
       this.handleRefresh = this.handleRefresh.bind(this)
       this.renderBackgroundImage = this.renderBackgroundImage.bind(this)
       this.renderNavButtons = this.renderNavButtons.bind(this)
-
+        this.settingButtonPress = this.settingButtonPress.bind(this)
       this.state = {
          loading: true,
          scrollY: new Animated.Value(0),
@@ -75,6 +76,12 @@ class HomeScreen extends Component {
          </ImageBackground>
       )
    }
+   settingButtonPress() {
+    this.props.navigator.push({
+        screen: "SettingScreen",
+        passProps: {  }
+     })
+   }
    renderNavButtons() {
       return (
          <View
@@ -82,7 +89,7 @@ class HomeScreen extends Component {
                this.state.headerX === false ? styles.headerButtonView : styles.headerButtonXView
             }
          >
-            <TouchableOpacity>
+            <TouchableOpacity onPress={this.settingButtonPress}>
                <Image source={images.headerSettingsIcon} />
             </TouchableOpacity>
             <TouchableOpacity>

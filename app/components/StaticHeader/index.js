@@ -22,6 +22,7 @@ class StaticHeader extends Component {
         }
     }
     backButtonPress() {
+        console.log('Tık',this.props.navigator.pop)
         this.props.navigator.pop({
             animated: true,
             animationType: "fade"

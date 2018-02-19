@@ -17,6 +17,7 @@ import UserDetailScreen from "./UserDetailScreen/index"
 import InteractionDetailScreen from "./InteractionDetailScreen"
 import PremiumServiceScreen from "./PremiumServiceScreen"
 import App from "../../bootstrap/App"
+import SettingScreen from  "./SettingScreen"
 
 export default function registerScreens(store = null, Provider = null) {
    Navigation.registerComponent("LoginScreen", () => LoginScreen, store, Provider)
@@ -37,7 +38,7 @@ export default function registerScreens(store = null, Provider = null) {
       Provider
    )
    Navigation.registerComponent("PremiumServiceScreen", () => PremiumServiceScreen, store, Provider)
-   //Navigation.registerComponent('App', () => App, store, Provider)
+   Navigation.registerComponent('SettingScreen', () => SettingScreen, store, Provider)
 }
 
 // Export them for ease of import.
@@ -49,6 +50,7 @@ export {
    StatisticChartScreen,
    UserDetailScreen,
    InteractionDetailScreen,
-   PremiumServiceScreen
+   PremiumServiceScreen,
+   SettingScreen
    // App
 }
