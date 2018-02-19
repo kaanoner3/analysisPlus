@@ -5,6 +5,7 @@ export const INSTAGRAM_LOGIN_REQUEST = "auth/INSTAGRAM_LOGIN"
 export const INSTAGRAM_LOGIN_SUCCESS = "auth/INSTAGRAM_LOGIN_SUCCESS"
 export const INSTAGRAM_LOGIN_FAIL = "auth/INSTAGRAM_LOGIN_FAIL"
 export const REFRESH_TOKEN = "auth/REFRESH_TOKEN"
+export const CHANGE_USER = "auth/CHANGE_USER"
 
 const initialState = {
    errorMessage: null,
@@ -15,6 +16,12 @@ const initialState = {
 export default function(state = initialState, action = {}) {
    switch (action.type) {
       case INSTAGRAM_LOGIN_REQUEST: {
+         return {
+            ...state,
+            isFetching: true
+         }
+      }
+      case CHANGE_USER: {
          return {
             ...state,
             isFetching: true
@@ -56,4 +63,7 @@ export function doRefreshToken(accessToken, refreshToken) {
       accessToken,
       refreshToken
    }
+}
+export function changeUser(instagram_token, username, password) {
+   return { type: CHANGE_USER, instagram_token, username, password }
 }

@@ -1,10 +1,10 @@
 import { fork, all } from "redux-saga/effects"
-import { login } from "./auth"
+import { login, changeUser } from "./auth"
 import { getProfileData } from "./profile"
 import { getUserList } from "./instagramUsers"
 import { userDetail } from "./userDetail"
 import { interactionDetail } from "./interactions"
-import { chartStatistic, gainedFollowersStatistic,lostedFollowersStatistic } from "./chart"
+import { chartStatistic, gainedFollowersStatistic, lostedFollowersStatistic } from "./chart"
 
 export default function* root() {
    yield all([
@@ -15,6 +15,7 @@ export default function* root() {
       fork(interactionDetail),
       fork(chartStatistic),
       fork(gainedFollowersStatistic),
-      fork(lostedFollowersStatistic)
+      fork(lostedFollowersStatistic),
+      fork(changeUser)
    ])
 }

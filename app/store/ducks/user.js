@@ -7,9 +7,9 @@ const initialState = {
 export default function(state = initialState, action = {}) {
    switch (action.type) {
       case ACTION_SET_USER_IDENTITY:
-         const { instagram_token, instagram_id, access_token, username } = action
+         const { instagram_token, instagram_id, access_token, username,password } = action
          const userList = Object.assign([], state.existingUsers)
-          console.log('userlist',userList)
+         console.log("userlist", userList)
          const user = userList.find(x => x.instagram_id == instagram_id)
          console.log("reduuuuuucer", user)
          if (user === undefined) {
@@ -17,9 +17,10 @@ export default function(state = initialState, action = {}) {
                instagram_id,
                instagram_token,
                access_token,
-               username
+               username,
+               password
             }
-            console.log('asdasdasdsa',newUser)
+            console.log("asdasdasdsa", newUser)
             return {
                ...state,
                existingUsers: [...state.existingUsers, newUser]
@@ -36,6 +37,6 @@ export default function(state = initialState, action = {}) {
    }
 }
 
-export function setUser(instagram_token, instagram_id, access_token, username) {
-   return { type: ACTION_SET_USER_IDENTITY, instagram_token, instagram_id, access_token, username }
+export function setUser(instagram_id, instagram_token, access_token, username,password) {
+   return { type: ACTION_SET_USER_IDENTITY, instagram_id, instagram_token, access_token, username,password }
 }
