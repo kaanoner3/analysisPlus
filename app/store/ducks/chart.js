@@ -3,7 +3,11 @@ const initialState = {
    isFetching: null,
    chartStatisticData: null,
    chartData: [],
-   gainedData: []
+   gainedData: [],
+   lostedData: [],
+   lostedFetching: false,
+   gainedFetching: false,
+   followersFetching:false 
 }
 
 export const CHART_STATISTIC_REQUEST = "chart/CHART_STATISTIC_REQUEST"

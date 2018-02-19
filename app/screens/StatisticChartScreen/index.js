@@ -84,7 +84,7 @@ class StatisticChartScreen extends Component {
                         this.props.lostedData.lostedChartData[0].x,
                         this.props.lostedData.lostedChartData[this.props.lostedData.day.length - 1].x
                      ],
-                     y: [this.props.lostedData.domainY.minValue, this.props.lostedData.domainY.maxValue]
+                     y: [0, this.props.lostedData.domainY.maxValue]
                   }}
                   domainPadding={{ x: [15, 10], y: [25, 20] }}
                >
@@ -284,7 +284,7 @@ class StatisticChartScreen extends Component {
                         this.props.gainedData.gainedChartData[0].x,
                         this.props.gainedData.gainedChartData[this.props.gainedData.day.length - 1].x
                      ],
-                     y: [this.props.gainedData.domainY.minValue, this.props.gainedData.domainY.maxValue]
+                     y: [0, this.props.gainedData.domainY.maxValue]
                   }}
                   domainPadding={{ x: [15, 10], y: [25, 20] }}
                >
@@ -331,7 +331,7 @@ class StatisticChartScreen extends Component {
                         return t
                      }}
                      style={{
-                        ticks: { size: 7 },
+                        ticks: { size: 5 },
                         grid: { stroke: "rgba(255,255,255,0.05)" },
                         axis: { stroke: "rgba(255,255,255,0.05)", strokeWidth: 1 },
                         tickLabels: {
@@ -485,7 +485,7 @@ class StatisticChartScreen extends Component {
                            this.props.chartData.followersChartData[0].x,
                            this.props.chartData.followersChartData[this.props.chartData.day.length - 1].x
                         ],
-                        y: [this.props.chartData.domainY.minValue, this.props.chartData.domainY.maxValue]
+                        y: [0, this.props.chartData.domainY.maxValue]
                      }}
                      domainPadding={{ x: [0, 10], y: [10, 20] }}
                   >
