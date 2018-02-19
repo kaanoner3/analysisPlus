@@ -73,7 +73,7 @@ class StatisticChartScreen extends Component {
    renderLostedFollowersChart() {
       if (this.state.ShouldrenderFollowerChart === true && this.props.lostedFetching === false) {
          return (
-            <View style={styles.chartContainer} >
+            <View style={styles.chartContainer}>
                <View style={styles.infoView}>
                   <Text style={styles.infoText}>LOSTED FOLLOWERS</Text>
                   <Text style={styles.infoValue}>{this.state.lostedChartCount}</Text>
@@ -497,9 +497,6 @@ class StatisticChartScreen extends Component {
                      </Defs>
                      <VictoryGroup
                         data={this.props.chartData.followersChartData}
-                        animate={{
-                           duration: 1000
-                        }}
                         events={[
                            {
                               childName: "scatter",
@@ -522,6 +519,9 @@ class StatisticChartScreen extends Component {
                      >
                         <VictoryArea
                            name="area"
+                           animate={{
+                              duration: 1000
+                           }}
                            style={{
                               data: {
                                  stroke: "#00FF72",
@@ -531,7 +531,14 @@ class StatisticChartScreen extends Component {
                               }
                            }}
                         />
-                        <VictoryScatter style={{ data: { fill: "#00FF72" } }} size={5} name="scatter" />
+                        <VictoryScatter
+                           style={{ data: { fill: "#00FF72" } }}
+                           size={5}
+                           name="scatter"
+                           animate={{
+                              delay: 2000
+                           }}
+                        />
                      </VictoryGroup>
                      <VictoryAxis
                         dependentAxis

@@ -14,16 +14,17 @@ const styles = {
       fontFamily: "Circular",
       color: "rgba(255,255,255,0.2)",
       marginHorizontal: 12,
-      marginVertical: 8
+      
    },
    infoView: {
       flexDirection: "column",
-      marginTop: 20
+      marginTop: 20,
    },
    infoText: {
       fontSize: 12,
       color: "rgba(255,255,255,0.4)",
-      fontFamily: "Circular"
+      fontFamily: "Circular",
+      fontWeight:'bold',
    },
    infoValue: {
       fontSize: 28,
@@ -37,7 +38,8 @@ const styles = {
       marginLeft: 10,
       height: 31,
       alignItems: "center",
-      marginBottom: 20
+      marginBottom: 20,
+      flexDirection:'row',
    },
    activeButtonStyle: {
       borderRadius: 100,
@@ -46,7 +48,8 @@ const styles = {
       marginLeft: 10,
       height: 31,
       alignItems: "center",
-      marginBottom: 20
+      marginBottom: 20,
+      flexDirection:'row'
    },
    activeTextStyle: {
       backgroundColor: "transparent",
@@ -55,7 +58,7 @@ const styles = {
       fontFamily: "Circular",
       color: "#059ED9",
       marginHorizontal: 12,
-      marginVertical: 8
+      alignSelf: 'center'  
    }
 }
 export default styles
