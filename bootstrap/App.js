@@ -15,7 +15,6 @@ import { setUserIdentity } from "ducks/user"
 import { revive } from "services/LoginStorageService"
 import registerScreens from "../app/screens"
 // Config object.
-import { setConfig as setAxiosConfig } from "config/axios"
 import { Provider, dispatch } from "react-redux"
 import { startHomeScreen, startLoginScreen } from "services/appStartHelper";
 
