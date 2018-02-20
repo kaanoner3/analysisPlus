@@ -1,4 +1,5 @@
 import axios from "axios"
+import config from "config"
 import { doRefreshToken } from "ducks/auth"
 import { persist } from "./../store"
 import store from "store"

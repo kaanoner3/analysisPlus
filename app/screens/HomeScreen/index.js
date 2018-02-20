@@ -35,7 +35,7 @@ class HomeScreen extends Component {
       this.handleRefresh = this.handleRefresh.bind(this)
       this.renderBackgroundImage = this.renderBackgroundImage.bind(this)
       this.renderNavButtons = this.renderNavButtons.bind(this)
-        this.settingButtonPress = this.settingButtonPress.bind(this)
+      this.settingButtonPress = this.settingButtonPress.bind(this)
       this.state = {
          loading: true,
          scrollY: new Animated.Value(0),
@@ -77,18 +77,14 @@ class HomeScreen extends Component {
       )
    }
    settingButtonPress() {
-    this.props.navigator.push({
-        screen: "SettingScreen",
-        passProps: {  }
-     })
+      this.props.navigator.push({
+         screen: "SettingScreen",
+         passProps: {}
+      })
    }
    renderNavButtons() {
       return (
-         <View
-            style={
-               this.state.headerX === false ? styles.headerButtonView : styles.headerButtonXView
-            }
-         >
+         <View style={this.state.headerX === false ? styles.headerButtonView : styles.headerButtonXView}>
             <TouchableOpacity onPress={this.settingButtonPress}>
                <Image source={images.headerSettingsIcon} />
             </TouchableOpacity>

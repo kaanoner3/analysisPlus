@@ -35,6 +35,7 @@ const styles = {
       height: 24,
       width: 24
    },
+   
 }
 
 export default styles
