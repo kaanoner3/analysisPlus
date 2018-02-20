@@ -16,7 +16,8 @@
           "screens": "./app/screens",
           "services": "./app/services",
           "sagas": "./app/redux/sagas",
-          "utils": "./app/utils"
+          "utils": "./app/utils",
+          "newServices": "./app/new_services"
         }
       }
     ]

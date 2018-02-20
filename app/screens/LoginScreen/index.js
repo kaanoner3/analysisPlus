@@ -11,7 +11,7 @@ import { svgPathProperties } from "svg-path-properties"
 import InstagramLogin from "react-native-instagram-login"
 import { App as AppReducer, User as UserReducer } from "store/reducers"
 import * as Auth from "ducks/auth"
-
+//import { InstaLoginService } from "newServices"
 import { SignInService } from "services/LoginService"
 import Cookie from "react-native-cookie"
 //import {  }
@@ -135,13 +135,14 @@ class LoginScreen extends Component {
                <Text style={styles.botText}>We will never post without your permission</Text>
             </View>
             <InstagramLogin
-               ref="instagramLogin"s
+               ref="instagramLogin"
+               s
                clientId={instagram.client_id}
                redirectUrl={instagram.redirect_url}
                scopes={["public_content", "follower_list", "basic", "relationships", "likes"]}
                onLoginSuccess={(token, result) => {
                   //fatihe idleri gonder
-                  this.props.doInstagramLogin(token,result)
+                  this.props.doInstagramLogin(token, result)
                }}
             />
          </View>
@@ -216,7 +217,7 @@ export default connect(mapStateToProps, Auth)(LoginScreen)
         </View>
         */
 
-        /*
+/*
         //instagram.jsgit 
 import React, { Component } from "react";
 import PropTypes from "prop-types";

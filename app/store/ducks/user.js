@@ -9,9 +9,7 @@ export default function(state = initialState, action = {}) {
       case ACTION_SET_USER_IDENTITY:
          const { instagram_token, instagram_id, access_token, username,password } = action
          const userList = Object.assign([], state.existingUsers)
-         console.log("userlist", userList)
          const user = userList.find(x => x.instagram_id == instagram_id)
-         console.log("reduuuuuucer", user)
          if (user === undefined) {
             const newUser = {
                instagram_id,
@@ -20,7 +18,6 @@ export default function(state = initialState, action = {}) {
                username,
                password
             }
-            console.log("asdasdasdsa", newUser)
             return {
                ...state,
                existingUsers: [...state.existingUsers, newUser]

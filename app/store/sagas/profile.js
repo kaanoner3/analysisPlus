@@ -13,7 +13,6 @@ export function* getProfileData() {
 
          yield put(calculateDiff(responseData.data.statistic))
          yield put(getProfileDataSuccess(responseData.data))
-
       } catch (error) {
          console.log(error)
          yield put(getProfileDataFail(error))
