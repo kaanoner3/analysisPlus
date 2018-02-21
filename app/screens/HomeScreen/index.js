@@ -11,7 +11,9 @@ import {
    Dimensions,
    ScrollView,
    Image,
-   TouchableOpacity
+   TouchableOpacity,
+   Linking,
+   LinkingIOS
 } from "react-native"
 import { HomeScreenHeader, CustomRefreshControll } from "components"
 import { images } from "resources"
@@ -36,6 +38,8 @@ class HomeScreen extends Component {
       this.renderBackgroundImage = this.renderBackgroundImage.bind(this)
       this.renderNavButtons = this.renderNavButtons.bind(this)
       this.settingButtonPress = this.settingButtonPress.bind(this)
+      this.linkingPress = this.linkingPress.bind(this)
+
       this.state = {
          loading: true,
          scrollY: new Animated.Value(0),
@@ -76,6 +80,9 @@ class HomeScreen extends Component {
          </ImageBackground>
       )
    }
+   linkingPress() {
+      Linking.openURL('instagram://user?username=fatihkahveci35').catch(err => console.error("An error occurred", err))
+   }
    settingButtonPress() {
       this.props.navigator.push({
          screen: "SettingScreen",
@@ -88,7 +95,7 @@ class HomeScreen extends Component {
             <TouchableOpacity onPress={this.settingButtonPress}>
                <Image source={images.headerSettingsIcon} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={this.linkingPress}>
                <Image source={images.headerSearchIcon} />
             </TouchableOpacity>
          </View>

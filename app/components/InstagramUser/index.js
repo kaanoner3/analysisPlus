@@ -1,5 +1,13 @@
 import React, { Component } from "react"
-import { View, Image, Text, AsyncStorage, TouchableOpacity, TouchableWithoutFeedback } from "react-native"
+import {
+   View,
+   Image,
+   Text,
+   AsyncStorage,
+   TouchableOpacity,
+   TouchableWithoutFeedback,
+   Linking
+} from "react-native"
 import styles from "./styles"
 import { images } from "resources"
 import { connect } from "react-redux"
@@ -15,28 +23,37 @@ class InstagramUser extends Component {
       this.state = { relationStyle: null }
    }
    componentWillMount() {
-      getRelationshipStatus(this.props.token, this.props.data.id).then(response => {
-         const data = response.data.data
-         if (data.outgoing_status === "none" && data.incoming_status === "followed_by") {
-            this.setState({ relationStyle: 0 })
-         } else if (data.outgoing_status === "follows" && data.incoming_status === "none") {
-            this.setState({ relationStyle: 1 })
-         } else if (data.outgoing_status === "follows" && data.incoming_status === "followed_by") {
-            this.setState({ relationStyle: 2 })
-         } else if (data.outgoing_status === "requested" && data.incoming_status === "none") {
-            this.setState({ relationStyle: 3 })
-         } else if (data.outgoing_status === "follows" && data.incoming_status === "requsted_by") {
-            this.setState({ relationStyle: 4 })
-         } else if (data.outgoing_status === "requested" && data.incoming_status === "followed_by") {
-            this.setState({ relationStyle: 5 })
-         } else if (data.outgoing_status === "follows" && data.incoming_status === "requsted_by") {
-            this.setState({ relationStyle: 6 })
-         } else if (data.outgoing_status === "none" && data.incoming_status === "none") {
-            this.setState({ relationStyle: 7 })
-         }
-      })
+      getRelationshipStatus(this.props.token, this.props.data.id)
+         .then(response => {
+            const data = response.data.data
+            if (data.outgoing_status === "none" && data.incoming_status === "followed_by") {
+               this.setState({ relationStyle: 0 })
+            } else if (data.outgoing_status === "follows" && data.incoming_status === "none") {
+               this.setState({ relationStyle: 1 })
+            } else if (data.outgoing_status === "follows" && data.incoming_status === "followed_by") {
+               this.setState({ relationStyle: 2 })
+            } else if (data.outgoing_status === "requested" && data.incoming_status === "none") {
+               this.setState({ relationStyle: 3 })
+            } else if (data.outgoing_status === "follows" && data.incoming_status === "requsted_by") {
+               this.setState({ relationStyle: 4 })
+            } else if (data.outgoing_status === "requested" && data.incoming_status === "followed_by") {
+               this.setState({ relationStyle: 5 })
+            } else if (data.outgoing_status === "follows" && data.incoming_status === "requsted_by") {
+               this.setState({ relationStyle: 6 })
+            } else if (data.outgoing_status === "none" && data.incoming_status === "none") {
+               this.setState({ relationStyle: 7 })
+            }
+         })
+         .catch(error => {
+            console.log('realationshi',error)
+         })
    }
-   pushInstagramUserDetail(user_id) {
+   pushInstagramUserDetail(username) {
+      Linking.openURL("instagram://user?username=" + username).catch(err =>
+         console.error("An error occurred", err)
+      )
+
+      /*
       this.props.userDetailRequest(user_id, this.props.token)
       this.props.navigator.push({
          screen: "UserDetailScreen",
@@ -44,6 +61,7 @@ class InstagramUser extends Component {
          backButtonHidden: false,
          passProps: {}
       })
+      */
    }
    renderRelationship() {
       if (this.props.userType === "not_follow_me") {
@@ -269,7 +287,7 @@ class InstagramUser extends Component {
                      flexDirection: "row",
                      alignItems: "center"
                   }}
-                  onPress={() => this.pushInstagramUserDetail(this.props.data.id)}
+                  onPress={() => this.pushInstagramUserDetail(this.props.data.username)}
                >
                   <View style={{ flex: 1 }}>
                      <View style={{ flexDirection: "row" }}>
@@ -293,7 +311,7 @@ class InstagramUser extends Component {
 }
 const mapStateToProps = (state, ownProps) => {
    return {
-      token: state.auth.accessToken,
+      token: state.auth.data.instagram_token,
       userList: state.instagramUsers.userList
    }
 }

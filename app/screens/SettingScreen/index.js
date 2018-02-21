@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, Text, Image, TouchableOpacity } from "react-native"
+import { View, Text, Image, TouchableOpacity, Switch } from "react-native"
 import styles from "./styles"
 import { connect } from "react-redux"
 import { StaticHeader } from "components"
@@ -20,19 +20,16 @@ class SettingScreen extends Component {
       this.changeUser = this.changeUser.bind(this)
    }
    changeUser(instagram_token, username, password) {
-      this.props.changeUser(instagram_token,username,password)
+      this.props.changeUser(instagram_token, username, password)
    }
    renderAccounts() {
       if (this.props.userList.length > 0) {
          return this.props.userList.map((data, index) => {
-             console.log('mamamamamamamamaammama ',data)
             return (
                <TouchableOpacity
-                  style={styles.addAccButton}
+                  style={styles.accComponent}
                   key={data.instagram_id}
-                  onPress={() =>
-                     this.changeUser( data.instagram_token, data.username, data.password)
-                  }
+                  onPress={() => this.changeUser(data.instagram_token, data.username, data.password)}
                >
                   {this.props.currentUserId === data.instagram_id ? (
                      <Image style={styles.addAccImage} source={images.selectedAcc} />
@@ -63,6 +60,29 @@ class SettingScreen extends Component {
                   <Image style={styles.addAccImage} source={images.addAcc} />
                   <Text style={styles.addAccText}>Add Account</Text>
                </TouchableOpacity>
+            </View>
+            <Text style={styles.sectionHeaderText}>NOTIFICATIONS</Text>
+            <View style={styles.accContainer}>
+               <View style={styles.notificationView}>
+                  <Text style={styles.addAccText}>When someone unfollows me</Text>
+                  <Switch />
+               </View>
+               <View style={styles.notificationView}>
+                  <Text style={styles.addAccText}>When someone blocks me</Text>
+                  <Switch />
+               </View>
+            </View>
+            <Text style={styles.sectionHeaderText}>ANALYSIS+</Text>
+            <View style={styles.accContainer}>
+               <View style={styles.notificationView}>
+                  <Text style={styles.addAccText}>Review us on Appstore</Text>
+               </View>
+               <View style={styles.notificationView}>
+                  <Text style={styles.addAccText}>Report a problem</Text>
+               </View>
+               <View style={styles.notificationView}>
+                  <Text style={styles.addAccText}>Term of use</Text>
+               </View>
             </View>
             <InstagramLogin
                ref="instagramLogin"

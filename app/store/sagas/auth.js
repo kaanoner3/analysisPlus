@@ -18,9 +18,7 @@ export function* login() {
    while (true) {
       try {
          const { token, result } = yield take(INSTAGRAM_LOGIN_REQUEST)
-         console.log("saaagaaaa")
          const loginResponse = yield call(SignInService, token, result)
-         console.log("saaagaaaa", loginResponse)
          const tokenData = yield call(
             accessTokenService,
             loginResponse.data.grant_type,
