@@ -33,6 +33,7 @@ const styles = {
       paddingLeft: 20,
       alignItems: "center",
       height: 53,
+      
       borderBottomWidth: 1,
       borderColor: "rgba(255,255,255,0.05)"
    },
@@ -50,7 +51,7 @@ const styles = {
       fontFamily: "Circular",
       fontSize: 16,
       marginLeft: 10,
-      fontWeight:'300'
+      fontWeight: "300"
    },
    addAccImage: {
       height: 24,
@@ -60,6 +61,18 @@ const styles = {
       marginTop: 15,
       borderBottomWidth: 1,
       borderColor: "rgba(255,255,255,0.5)"
+   },
+   logoutText: {
+      fontFamily: "Circular",
+      color: "rgba(255,255,255,0.4)",
+      fontSize: 16,
+      position:'absolute',
+      right: 20
+   },
+   logoutButton: {
+       flex:1,
+       flexDirection:'row',
+       alignItems:'center'
    }
 }
 

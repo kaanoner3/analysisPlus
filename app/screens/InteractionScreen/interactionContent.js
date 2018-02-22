@@ -60,7 +60,8 @@ const contentStyles = {
       marginLeft: 20,
       height: 24,
       width: 24,
-      alignSelf: "center"
+      alignSelf: "center",
+      resizeMode: 'contain'
    },
    itemSepStyle: {
       height: 1,

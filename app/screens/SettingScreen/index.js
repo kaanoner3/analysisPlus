@@ -37,6 +37,9 @@ class SettingScreen extends Component {
                      <Image style={styles.addAccImage} source={images.nonSelectedAcc} />
                   )}
                   <Text style={styles.addAccText}>{data.username}</Text>
+                  <TouchableOpacity style={styles.logoutButton}>
+                     <Text style={styles.logoutText}>Logout</Text>
+                  </TouchableOpacity>
                </TouchableOpacity>
             )
          })
