@@ -44,6 +44,9 @@ class StatisticChartScreen extends Component {
 
    onNavigatorEvent(event) {
       if (event.id === "bottomTabSelected") {
+         this.props.chartStatisticRequest("monthly")
+         this.props.gainedChartStatisticRequest("monthly")
+         this.props.lostedChartStatisticRequest("monthly")
          this.setState({ ShouldrenderFollowerChart: true })
       }
       if (event.id === "willDisappear") {
@@ -51,10 +54,6 @@ class StatisticChartScreen extends Component {
       }
    }
    componentDidMount() {
-      this.props.chartStatisticRequest("monthly")
-      this.props.gainedChartStatisticRequest("monthly")
-      this.props.lostedChartStatisticRequest("monthly")
-
       if (this.props.gainedData.length === 0) {
          this.setState({
             gainedChartCount: "Click The Chart",
