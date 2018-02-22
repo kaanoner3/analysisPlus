@@ -12,8 +12,6 @@ import {
    ScrollView,
    Image,
    TouchableOpacity,
-   Linking,
-   LinkingIOS
 } from "react-native"
 import { HomeScreenHeader, CustomRefreshControll } from "components"
 import { images } from "resources"
@@ -38,7 +36,7 @@ class HomeScreen extends Component {
       this.renderBackgroundImage = this.renderBackgroundImage.bind(this)
       this.renderNavButtons = this.renderNavButtons.bind(this)
       this.settingButtonPress = this.settingButtonPress.bind(this)
-      this.linkingPress = this.linkingPress.bind(this)
+      this.searchButtonPressed = this.searchButtonPressed.bind(this)
 
       this.state = {
          loading: true,
@@ -80,8 +78,14 @@ class HomeScreen extends Component {
          </ImageBackground>
       )
    }
-   linkingPress() {
-      Linking.openURL('instagram://user?username=fatihkahveci35').catch(err => console.error("An error occurred", err))
+   searchButtonPressed() {
+       this.props.navigator.showModal({
+        screen: 'SearchModal', 
+        title: 'Search', 
+      //  passProps: {navigator: this.props.navigator},
+        animationType: 'slide-up' 
+      });
+      
    }
    settingButtonPress() {
       this.props.navigator.push({
@@ -95,7 +99,7 @@ class HomeScreen extends Component {
             <TouchableOpacity onPress={this.settingButtonPress}>
                <Image source={images.headerSettingsIcon} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.linkingPress}>
+            <TouchableOpacity onPress={this.searchButtonPressed}>
                <Image source={images.headerSearchIcon} />
             </TouchableOpacity>
          </View>

@@ -1,3 +1,3 @@
 import axios from "./axios"
-
-export { axios }
+import notificationHandler from "./notificationHandler"
+export { axios, notificationHandler }

@@ -5,6 +5,7 @@ import StaticHeader from "./StaticHeader"
 import InstagramUser from "./InstagramUser"
 import PremiumButton from "./PremiumButton"
 import InteractionUser from "./InteractionUser"
+import InstagramSearchUser from "./InstagramSearchUser"
 module.exports = {
    CustomRefreshControll,
    HomeScreenHeader,
@@ -12,5 +13,6 @@ module.exports = {
    StaticHeader,
    InstagramUser,
    PremiumButton,
-   InteractionUser
+   InteractionUser,
+   InstagramSearchUser
 }

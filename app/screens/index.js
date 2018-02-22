@@ -18,6 +18,7 @@ import InteractionDetailScreen from "./InteractionDetailScreen"
 import PremiumServiceScreen from "./PremiumServiceScreen"
 import App from "../../bootstrap/App"
 import SettingScreen from  "./SettingScreen"
+import SearchModal from "./searchModal"
 
 export default function registerScreens(store = null, Provider = null) {
    Navigation.registerComponent("LoginScreen", () => LoginScreen, store, Provider)
@@ -39,6 +40,7 @@ export default function registerScreens(store = null, Provider = null) {
    )
    Navigation.registerComponent("PremiumServiceScreen", () => PremiumServiceScreen, store, Provider)
    Navigation.registerComponent('SettingScreen', () => SettingScreen, store, Provider)
+   Navigation.registerComponent('SearchModal', () => SearchModal, store, Provider)
 }
 
 // Export them for ease of import.
@@ -51,6 +53,7 @@ export {
    UserDetailScreen,
    InteractionDetailScreen,
    PremiumServiceScreen,
-   SettingScreen
+   SettingScreen,
+   SearchModal
    // App
 }

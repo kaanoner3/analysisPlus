@@ -14,6 +14,7 @@ import { connect } from "react-redux"
 import { getRelationshipStatus } from "services"
 import { ralationshipAnalysis } from "ducks/instagramUsers"
 import { userDetailRequest } from "ducks/userDetail"
+import axios from "utils/axios"
 
 class InstagramUser extends Component {
    constructor(props) {
@@ -45,23 +46,19 @@ class InstagramUser extends Component {
             }
          })
          .catch(error => {
-            console.log('realationshi',error)
+            console.log("realationshi", error)
          })
    }
-   pushInstagramUserDetail(username) {
-      Linking.openURL("instagram://user?username=" + username).catch(err =>
-         console.error("An error occurred", err)
-      )
-
-      /*
-      this.props.userDetailRequest(user_id, this.props.token)
-      this.props.navigator.push({
-         screen: "UserDetailScreen",
-         backButtonTitle: "Back",
-         backButtonHidden: false,
-         passProps: {}
+   pushInstagramUserDetail(username, id) {
+      const params = { username, id }
+      axios.post("/api/user-visit", params)
+      Linking.canOpenURL("instagram://user?username=" + username).then(response => {
+         if (response === true) {
+            Linking.openURL("instagram://user?username=" + username).catch(err =>
+               console.error("An error occurred", err)
+            )
+         }
       })
-      */
    }
    renderRelationship() {
       if (this.props.userType === "not_follow_me") {
@@ -287,7 +284,7 @@ class InstagramUser extends Component {
                      flexDirection: "row",
                      alignItems: "center"
                   }}
-                  onPress={() => this.pushInstagramUserDetail(this.props.data.username)}
+                  onPress={() => this.pushInstagramUserDetail(this.props.data.username, this.props.data.id)}
                >
                   <View style={{ flex: 1 }}>
                      <View style={{ flexDirection: "row" }}>
