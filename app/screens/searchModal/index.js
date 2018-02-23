@@ -62,17 +62,13 @@ class SearchModal extends Component {
    }
    renderResults() {
       return (
-         <View style={{ flex:1 }}>
+         <View style={{ flex: 1 }}>
             <FlatList data={this.state.userList} renderItem={this.renderUserlist} />
          </View>
       )
    }
    renderUserSearches() {
-      return (
-         <View style={{ backgroundColor: "blue" }}>
-            <Text>reneder seractg usersasde</Text>
-         </View>
-      )
+      return <View style={{ marginTop: 10 }} />
    }
    renderItem({ item, index }) {
       switch (item) {
@@ -90,7 +86,7 @@ class SearchModal extends Component {
    }
    renderSearchBar() {
       return (
-         <View style={{ marginTop: 10, backgroundColor: "#152341" }}>
+         <View style={{ paddingTop: 30, backgroundColor: "#152341" }}>
             <View style={styles.inputView}>
                <Image style={styles.searchIcon} source={images.headerSearchIcon} />
                <TextInput
@@ -104,7 +100,6 @@ class SearchModal extends Component {
                               "https://www.instagram.com/web/search/topsearch/?context=blended&query=" + text
                            )
                            .then(response => {
-                              console.log(response)
                               this.setState({ userList: response.data.users })
                            })
                   }}
@@ -112,12 +107,24 @@ class SearchModal extends Component {
                   autoCorrect={false}
                />
             </View>
+            <View style={{ borderWidth: 1, marginTop: 20, borderColor: "rgba(255,255,255,0.1)" }} />
          </View>
       )
    }
    renderHeader() {
       return (
          <View style={{ height: 107 }}>
+            <TouchableOpacity
+            style={{height:60,width:40,position: "absolute", left: 20, top: 20}}
+               onPress={() => {
+                  this.props.navigator.pop({
+                     animated: true,
+                     animationType: "fade"
+                  })
+               }}
+            >
+               <Image style={{ marginTop:10 }} source={images.headerBackButton} />
+            </TouchableOpacity>
             <Text
                style={{
                   color: "white",

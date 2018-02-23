@@ -5,12 +5,10 @@ class InstagramSearchUser extends Component {
    constructor() {
       super()
    }
-   componentWillMount() {
-      console.log(this.props.data)
-   }
+
    render() {
       return (
-         <View style={{marginTop: 15}}>
+         <View style={{marginTop: 10}}>
             <TouchableOpacity style={{flexDirection:'row',paddingLeft: 20}}>
                <Image
                   style={{ height: 48, width: 48, borderRadius: 24 }}
