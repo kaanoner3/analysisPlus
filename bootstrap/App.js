@@ -17,47 +17,12 @@ import registerScreens from "../app/screens"
 // Config object.
 import { Provider, dispatch } from "react-redux"
 import { startHomeScreen, startLoginScreen } from "services/appStartHelper";
-
+import OneSignal from 'react-native-onesignal';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.app_token = "";
     registerScreens(store,Provider)
-    store.subscribe(this.onStoreUpdate.bind(this));
 
-    revive((err, result) => {
-      this.app_token = result.app_token;
-      if (err || result === false) {
-        store.dispatch(switchToLogin());
-      } else {
-        store.dispatch(switchToUser());
-      }
-    });
-    
-  }
-
-  onStoreUpdate() {
-    // Get the decided
-    const { startLogin,startHome,appState } = store.getState().app;
-    // If new app state is different from the previous one, restart.
-    // TODO: make sure 'restarting' does not cause memory leaks.
-    if (this.currentAppState != appState) {
-      this.currentAppState = appState;
-      //this.startApp(appState);
-    }
-  }
-
-  startApp(appState) {
-    let action = appState.substr(0, 1).toUpperCase() + appState.substr(1);
-    return this[`start${action}`]();
-  }
-
-  startLogin() {
-  //  startLoginScreen();
-  }
-
-  startUser() {
- //   startHomeScreen(this.app_token);
   }
 }

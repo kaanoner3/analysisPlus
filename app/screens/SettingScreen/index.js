@@ -1,11 +1,12 @@
 import React, { Component } from "react"
-import { View, Text, Image, TouchableOpacity, Switch,ScrollView } from "react-native"
+import { View, Text, Image, TouchableOpacity, Switch, ScrollView } from "react-native"
 import styles from "./styles"
 import { connect } from "react-redux"
 import { StaticHeader } from "components"
 import { images } from "resources"
 import InstagramLogin from "react-native-instagram-login"
 import { doInstagramLogin, changeUser } from "ducks/auth"
+import { deleteUser } from "ducks/user"
 import Cookie from "react-native-cookie"
 
 const instagram = {
@@ -37,7 +38,10 @@ class SettingScreen extends Component {
                      <Image style={styles.addAccImage} source={images.nonSelectedAcc} />
                   )}
                   <Text style={styles.addAccText}>{data.username}</Text>
-                  <TouchableOpacity style={styles.logoutButton}>
+                  <TouchableOpacity
+                     onPress={() => this.props.deleteUser(data.instagram_id)}
+                     style={styles.logoutButton}
+                  >
                      <Text style={styles.logoutText}>Logout</Text>
                   </TouchableOpacity>
                </TouchableOpacity>
@@ -50,45 +54,44 @@ class SettingScreen extends Component {
          <View style={styles.containerView}>
             <StaticHeader title="Settings" navigator={this.props.navigator} />
             <ScrollView>
-            <Text style={styles.sectionHeaderText}>ACCOUNTS</Text>
-            <View style={styles.accContainer}>
-
-               {this.renderAccounts()}
-               <TouchableOpacity
-                  style={styles.addAccButton}
-                  onPress={() => {
-                     Cookie.clear().then(() => {
-                        this.refs.instagramLogin.show()
-                     })
-                  }}
-               >
-                  <Image style={styles.addAccImage} source={images.addAcc} />
-                  <Text style={styles.addAccText}>Add Account</Text>
-               </TouchableOpacity>
-            </View>
-            <Text style={styles.sectionHeaderText}>NOTIFICATIONS</Text>
-            <View style={styles.accContainer}>
-               <View style={styles.notificationView}>
-                  <Text style={styles.addAccText}>When someone unfollows me</Text>
-                  <Switch />
+               <Text style={styles.sectionHeaderText}>ACCOUNTS</Text>
+               <View style={styles.accContainer}>
+                  {this.renderAccounts()}
+                  <TouchableOpacity
+                     style={styles.addAccButton}
+                     onPress={() => {
+                        Cookie.clear().then(() => {
+                           this.refs.instagramLogin.show()
+                        })
+                     }}
+                  >
+                     <Image style={styles.addAccImage} source={images.addAcc} />
+                     <Text style={styles.addAccText}>Add Account</Text>
+                  </TouchableOpacity>
                </View>
-               <View style={styles.notificationView}>
-                  <Text style={styles.addAccText}>When someone blocks me</Text>
-                  <Switch />
+               <Text style={styles.sectionHeaderText}>NOTIFICATIONS</Text>
+               <View style={styles.accContainer}>
+                  <View style={styles.notificationView}>
+                     <Text style={styles.addAccText}>When someone unfollows me</Text>
+                     <Switch />
+                  </View>
+                  <View style={styles.notificationView}>
+                     <Text style={styles.addAccText}>When someone blocks me</Text>
+                     <Switch />
+                  </View>
                </View>
-            </View>
-            <Text style={styles.sectionHeaderText}>ANALYSIS+</Text>
-            <View style={styles.accContainer}>
-               <View style={styles.notificationView}>
-                  <Text style={styles.addAccText}>Review us on Appstore</Text>
+               <Text style={styles.sectionHeaderText}>ANALYSIS+</Text>
+               <View style={styles.accContainer}>
+                  <View style={styles.notificationView}>
+                     <Text style={styles.addAccText}>Review us on Appstore</Text>
+                  </View>
+                  <View style={styles.notificationView}>
+                     <Text style={styles.addAccText}>Report a problem</Text>
+                  </View>
+                  <View style={styles.notificationView}>
+                     <Text style={styles.addAccText}>Term of use</Text>
+                  </View>
                </View>
-               <View style={styles.notificationView}>
-                  <Text style={styles.addAccText}>Report a problem</Text>
-               </View>
-               <View style={styles.notificationView}>
-                  <Text style={styles.addAccText}>Term of use</Text>
-               </View>
-            </View>
             </ScrollView>
             <InstagramLogin
                ref="instagramLogin"
@@ -113,4 +116,4 @@ const mapStateToProps = (state, ownProps) => {
    }
 }
 
-export default connect(mapStateToProps, { doInstagramLogin, changeUser })(SettingScreen)
+export default connect(mapStateToProps, { doInstagramLogin, changeUser, deleteUser })(SettingScreen)

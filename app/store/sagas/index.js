@@ -1,5 +1,5 @@
 import { fork, all } from "redux-saga/effects"
-import { login, changeUser } from "./auth"
+import { login, changeUser,deleteUser } from "./auth"
 import { getProfileData } from "./profile"
 import { getUserList } from "./instagramUsers"
 import { userDetail } from "./userDetail"
@@ -16,6 +16,7 @@ export default function* root() {
       fork(chartStatistic),
       fork(gainedFollowersStatistic),
       fork(lostedFollowersStatistic),
-      fork(changeUser)
+      fork(changeUser),
+      fork(deleteUser)
    ])
 }
