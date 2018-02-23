@@ -36,7 +36,7 @@ export default function(state = initialState, action = {}) {
          const userList = Object.assign([], state.existingUsers)
          const index = userList.findIndex(x => x.instagram_id == instagram_id)
          userList.splice(index,1)
-         console.log('reducer',userList)
+         
          return {
             ...state,
             existingUsers: userList

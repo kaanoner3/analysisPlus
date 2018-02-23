@@ -104,12 +104,10 @@ export function* deleteUser() {
       try {
          const { instagram_id } = yield take(ACTION_DELETE_USER)
          const state = store.getState()
-         console.log("sagaaa")
-         console.log(state.user.existingUsers)
+
          const users = state.user.existingUsers
         
          if (users.length > 0) {
-             console.log('usssseeer 1',users[0])
             const { instagram_token, username, password } = users[0]
             const result = { username, password }
             const loginResponse = yield call(SignInService, instagram_token, result)
