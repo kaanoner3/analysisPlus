@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { View, Text, Image, TouchableOpacity } from "react-native"
-
+import styles from "./styles"
 class InstagramSearchUser extends Component {
    constructor() {
       super()
@@ -9,16 +9,16 @@ class InstagramSearchUser extends Component {
    render() {
       return (
          <View style={{marginTop: 10}}>
-            <TouchableOpacity style={{flexDirection:'row',paddingLeft: 20}}>
+            <TouchableOpacity style={styles.buttonView}>
                <Image
-                  style={{ height: 48, width: 48, borderRadius: 24 }}
+                  style={styles.profilPic}
                   source={{ uri: this.props.data.profile_pic_url }}
                />
-               <View style={{ flexDirection: "column", marginLeft: 10 }}>
-                  <Text style={{ color: "white", fontSize: 16, fontWeight: "bold", fontFamily: "Circular" }}>
+               <View style={styles.nameView}>
+                  <Text style={styles.fullnameText}>
                      {this.props.data.full_name}
                   </Text>
-                  <Text style={{ color: "rgba(255,255,255,0.4)", fontSize: 13, fontWeight: "400", fontFamily: "Circular",marginTop:5 }}>@{this.props.data.username}</Text>
+                  <Text style={styles.usernameText}>@{this.props.data.username}</Text>
                </View>
             </TouchableOpacity>
          </View>
@@ -27,4 +27,3 @@ class InstagramSearchUser extends Component {
 }
 
 export default InstagramSearchUser
-const styles = {}

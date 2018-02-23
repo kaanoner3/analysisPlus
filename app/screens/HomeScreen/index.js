@@ -79,11 +79,8 @@ class HomeScreen extends Component {
       )
    }
    searchButtonPressed() {
-       this.props.navigator.showModal({
+       this.props.navigator.push({
         screen: 'SearchModal', 
-        title: 'Search', 
-      //  passProps: {navigator: this.props.navigator},
-        animationType: 'slide-up' 
       });
       
    }

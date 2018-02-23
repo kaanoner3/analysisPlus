@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, Text, Image, TouchableOpacity, Switch } from "react-native"
+import { View, Text, Image, TouchableOpacity, Switch,ScrollView } from "react-native"
 import styles from "./styles"
 import { connect } from "react-redux"
 import { StaticHeader } from "components"
@@ -49,8 +49,10 @@ class SettingScreen extends Component {
       return (
          <View style={styles.containerView}>
             <StaticHeader title="Settings" navigator={this.props.navigator} />
+            <ScrollView>
             <Text style={styles.sectionHeaderText}>ACCOUNTS</Text>
             <View style={styles.accContainer}>
+
                {this.renderAccounts()}
                <TouchableOpacity
                   style={styles.addAccButton}
@@ -87,6 +89,7 @@ class SettingScreen extends Component {
                   <Text style={styles.addAccText}>Term of use</Text>
                </View>
             </View>
+            </ScrollView>
             <InstagramLogin
                ref="instagramLogin"
                clientId={instagram.client_id}

@@ -14,7 +14,7 @@ import { connect } from "react-redux"
 import styles from "./styles"
 import { images } from "resources"
 import axios from "utils/axios"
-
+import { Navigation } from "react-native-navigation"
 class SearchModal extends Component {
    constructor(props) {
       super(props)
@@ -26,8 +26,8 @@ class SearchModal extends Component {
       this.renderSearchBar = this.renderSearchBar.bind(this)
       this.renderResults = this.renderResults.bind(this)
       this.renderUserSearches = this.renderUserSearches.bind(this)
-      this.userService = this.userService.bind(this)
       this.renderUserlist = this.renderUserlist.bind(this)
+      this.backButton = this.backButton.bind(this)
    }
    renderContent() {
       return (
@@ -80,10 +80,6 @@ class SearchModal extends Component {
             return this.renderResults()
       }
    }
-   userService() {
-      console.log("asjkfıpsakfıpsjaıpfjaspı")
-      axios.get("https://www.instagram.com/web/search/topsearch/?context=blended&query=" + this.state.input)
-   }
    renderSearchBar() {
       return (
          <View style={{ paddingTop: 30, backgroundColor: "#152341" }}>
@@ -111,19 +107,20 @@ class SearchModal extends Component {
          </View>
       )
    }
+   backButton() {
+    this.props.navigator.pop({
+        animated: true,
+        animationType: "fade"
+    })
+   }
    renderHeader() {
       return (
          <View style={{ height: 107 }}>
             <TouchableOpacity
-            style={{height:60,width:40,position: "absolute", left: 20, top: 20}}
-               onPress={() => {
-                  this.props.navigator.pop({
-                     animated: true,
-                     animationType: "fade"
-                  })
-               }}
+               style={{ height: 60, width: 40, position: "absolute", left: 20, top: 20 }}
+               onPress={this.backButton}
             >
-               <Image style={{ marginTop:10 }} source={images.headerBackButton} />
+               <Image style={{ marginTop: 10 }} source={images.headerBackButton} />
             </TouchableOpacity>
             <Text
                style={{
