@@ -1,5 +1,7 @@
 import SignInService from "./signInService"
+import InstagramSelf from "./Instagram"
 export default {
-    SignInService
+    SignInService,
+    InstagramSelf
 }
-export { SignInService }
+export { SignInService,InstagramSelf }

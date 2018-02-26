@@ -35,4 +35,5 @@ export default {
   addAcc: require("./addAcc.png"),
   selectedAcc: require("./selectedAcc.png"),
   nonSelectedAcc: require("./nonSelectAcc.png"),
+  close: require("./close.png"),
 };

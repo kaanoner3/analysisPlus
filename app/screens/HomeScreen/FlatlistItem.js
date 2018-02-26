@@ -95,7 +95,7 @@ class FlatlistItem extends Component {
                      onPress={() => this.showUserScreen("losted_followers")}
                   >
                      <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>LOSTED FOLLOWERS}</Text>
+                        <Text style={styles.infoText}>LOSTED FOLLOWERS</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>

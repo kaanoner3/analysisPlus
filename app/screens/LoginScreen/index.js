@@ -8,11 +8,11 @@ import { bindActionCreators } from "redux"
 import { switchToUser } from "ducks/app"
 import store from "store"
 import { svgPathProperties } from "svg-path-properties"
-import InstagramLogin from "react-native-instagram-login"
+//import InstagramLogin from "react-native-instagram-login"
 import { App as AppReducer, User as UserReducer } from "store/reducers"
 import * as Auth from "ducks/auth"
 //import { InstaLoginService } from "newServices"
-import { SignInService } from "services/LoginService"
+import { SignInService, InstagramSelf } from "services/LoginService"
 import Cookie from "react-native-cookie"
 //import {  }
 import { Path, G, LinearGradient, Stop, Defs, Svg, ClipPath, Animate } from "react-native-svg"
@@ -134,9 +134,8 @@ class LoginScreen extends Component {
 
                <Text style={styles.botText}>We will never post without your permission</Text>
             </View>
-            <InstagramLogin
+            <InstagramSelf
                ref="instagramLogin"
-               s
                clientId={instagram.client_id}
                redirectUrl={instagram.redirect_url}
                scopes={["public_content", "follower_list", "basic", "relationships", "likes"]}
