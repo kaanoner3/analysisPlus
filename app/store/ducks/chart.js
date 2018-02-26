@@ -2,12 +2,18 @@ const initialState = {
    errorMessage: null,
    isFetching: null,
    chartStatisticData: null,
+ 
    chartData: [],
    gainedData: [],
    lostedData: [],
+  
    lostedFetching: false,
    gainedFetching: false,
-   followersFetching:false 
+   followersFetching: false,
+  
+   followersFlag: false,
+   gainedFlag: false,
+   lostedFlag: false
 }
 
 export const CHART_STATISTIC_REQUEST = "chart/CHART_STATISTIC_REQUEST"
@@ -27,14 +33,14 @@ export default function(state = initialState, action = {}) {
       case CHART_STATISTIC_REQUEST: {
          return {
             ...state,
-            isFetching: true,
             followersFetching: true
          }
       }
       case FOLLOWERS_CHART_STATISTIC_FAIL: {
          return {
             ...state,
-            followersFlag: true
+            followersFlag: true,
+            followersFetching: false
          }
       }
       case FOLLOWERS_CHART_STATISTIC_SUCCESS: {
@@ -42,7 +48,7 @@ export default function(state = initialState, action = {}) {
          return {
             ...state,
             chartData: data,
-            isFetching: false,
+
             followersFlag: false,
             followersFetching: false
          }
@@ -58,7 +64,6 @@ export default function(state = initialState, action = {}) {
          return {
             ...state,
             gainedData: data,
-            isFetching: false,
             gainedFlag: false,
             gainedFetching: false
          }
@@ -67,6 +72,7 @@ export default function(state = initialState, action = {}) {
          return {
             ...state,
             errorMessage: action.errorMessage,
+            gainedFetching: false,
             gainedFlag: true
          }
       }
@@ -81,7 +87,6 @@ export default function(state = initialState, action = {}) {
          return {
             ...state,
             lostedData: data,
-            isFetching: false,
             lostedFetching: false,
             lostedFlag: false
          }
@@ -90,7 +95,8 @@ export default function(state = initialState, action = {}) {
          return {
             ...state,
             errorMessage: action.errorMessage,
-            lostedFlag: true
+            lostedFlag: true,
+            lostedFetching: false
          }
       }
       default:

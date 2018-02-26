@@ -11,7 +11,7 @@ import {
    Dimensions,
    ScrollView,
    Image,
-   TouchableOpacity,
+   TouchableOpacity
 } from "react-native"
 import { HomeScreenHeader, CustomRefreshControll } from "components"
 import { images } from "resources"
@@ -66,7 +66,10 @@ class HomeScreen extends Component {
    renderBackgroundImage() {
       return (
          <ImageBackground style={styles.imageBackgound}>
-            <Image source={images.bgTest} style={styles.backgroundUserImage} />
+            <Image
+               source={{ uri: this.props.userData.user.profile_picture }}
+               style={styles.backgroundUserImage}
+            />
             <View style={styles.bottomView} />
             <LinearGradient
                colors={["#5D4ED3", "#059ED9", "#059ED9"]}
@@ -79,10 +82,9 @@ class HomeScreen extends Component {
       )
    }
    searchButtonPressed() {
-       this.props.navigator.push({
-        screen: 'SearchModal', 
-      });
-      
+      this.props.navigator.push({
+         screen: "SearchModal"
+      })
    }
    settingButtonPress() {
       this.props.navigator.push({

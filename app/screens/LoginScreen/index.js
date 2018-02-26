@@ -28,7 +28,8 @@ import {
    TextInput,
    AsyncStorage,
    Animated,
-   ART
+   ART,
+   ActivityIndicator
 } from "react-native"
 
 const screenWidth = Dimensions.get("window").width
@@ -126,10 +127,27 @@ class LoginScreen extends Component {
                <Text style={styles.upText}>Start analyzing your profile</Text>
 
                <TouchableOpacity style={{ flex: 1 }} onPress={() => this.refs.instagramLogin.show()}>
-                  <View style={styles.buttonView}>
-                     <Image style={{ height: 18, width: 18 }} source={images.logoInstagram} />
-                     <Text style={styles.loginText}>Login with Instagram</Text>
-                  </View>
+                  {this.props.isFetching === false ? (
+                     <View style={styles.buttonView}>
+                        <Image style={{ height: 18, width: 18 }} source={images.logoInstagram} />
+                        <Text style={styles.loginText}>Login with Instagram</Text>
+                     </View>
+                  ) : (
+                     <View
+                        style={{
+                           height: 54,
+                           backgroundColor: "white",
+                           borderRadius: 100,
+                           alignItems: "center",
+                           flexDirection: "column",
+                           alignSelf: "center",
+                           paddingHorizontal: 20,
+                           width: screenWidth-40
+                        }}
+                     >
+                        <ActivityIndicator style={{marginTop:12}} color="#059ED9" size="large" />
+                     </View>
+                  )}
                </TouchableOpacity>
 
                <Text style={styles.botText}>We will never post without your permission</Text>
@@ -151,7 +169,7 @@ class LoginScreen extends Component {
 
 const mapStateToProps = (state, ownProps) => {
    return {
-      //   token: state.token
+      isFetching: state.auth.isFetching
    }
 }
 

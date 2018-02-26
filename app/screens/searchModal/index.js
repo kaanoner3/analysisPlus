@@ -19,7 +19,6 @@ class SearchModal extends Component {
    constructor(props) {
       super(props)
       this.state = { input: "", userList: [] }
-      console.log(props)
       this.renderContent = this.renderContent.bind(this)
       this.renderItem = this.renderItem.bind(this)
       this.renderHeader = this.renderHeader.bind(this)

@@ -7,11 +7,42 @@ export const PROFILE_DATA_FETCH_FAIL = "profile/PROFILE_DATA_FETCH_FAIL"
 export const PROFILE_DATA_DIFF_STATISTIC = "profile/PROFILE_DATA_DIFF_STATISTIC"
 
 const initialState = {
-   accessToken: null,
-   errorMessage: null,
+   error: false,
    isFetching: null,
-   profileData: null,
-   diff: null
+   profileData: {
+      user: {
+         bio: "",
+         counts: {
+            media: 0,
+            follows: 0,
+            followed_by: 0
+         },
+         full_name: "",
+         id: "",
+         profile_picture: "",
+         username: ""
+      },
+      statistic: {
+         deleted_comments: 0,
+         gained_followers: 0,
+         losted_followers: 0,
+         not_follow_by_me: 0,
+         not_follow_me: 0,
+         profile_visitors: 0,
+         stalkers: 0,
+         user_blocking_me: 0
+      }
+   },
+   diff: {
+      not_follow_by_me: 0,
+      not_follow_me: 0,
+      gained_followers: 0,
+      losted_followers: 0,
+      deleted_comments: 0,
+      profile_visitors: 0,
+      stalkers: 0,
+      user_blocking_me: 0
+   }
 }
 
 // REDUCER
@@ -28,13 +59,15 @@ export default function(state = initialState, action = {}) {
          return {
             ...state,
             profileData: { user: { ...user }, statistic: { ...statistic } },
+            error: false,
             isFetching: false
          }
       }
       case PROFILE_DATA_FETCH_FAIL: {
          return {
             ...state,
-            error: action.error
+            error: action.error,
+            isFetching: false
          }
       }
       case PROFILE_DATA_DIFF_STATISTIC: {

@@ -9,7 +9,8 @@ export const CHANGE_USER = "auth/CHANGE_USER"
 
 const initialState = {
    errorMessage: null,
-   main_token: null
+   main_token: null,
+   isFetching: false
 }
 
 // REDUCER

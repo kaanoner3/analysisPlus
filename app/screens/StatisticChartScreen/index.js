@@ -56,21 +56,35 @@ class StatisticChartScreen extends Component {
    componentDidMount() {
       if (this.props.gainedData.length === 0) {
          this.setState({
-            gainedChartCount: "Click The Chart",
-            followersChartCount: "Click The Chart",
+            gainedChartCount: "Click The Chart"
+         })
+      } else {
+         this.setState({
+            gainedChartCount: this.props.gainedData.gainedChartData[this.props.gainedData.day.length - 1].y
+         })
+      }
+      if (this.props.chartData.length === 0) {
+         this.setState({
+            followersChartCount: "Click The Chart"
+         })
+      } else {
+         this.setState({
+            followersChartCount: this.props.chartData.followersChartData[this.props.chartData.day.length - 1]
+               .y
+         })
+      }
+      if (this.props.lostedData.length === 0) {
+         this.setState({
             lostedChartCount: "Click The Chart"
          })
       } else {
          this.setState({
-            gainedChartCount: this.props.gainedData.gainedChartData[this.props.gainedData.day.length - 1].y,
-            followersChartCount: this.props.chartData.followersChartData[this.props.chartData.day.length - 1]
-               .y,
             lostedChartCount: this.props.lostedData.lostedChartData[this.props.lostedData.day.length - 1].y
          })
       }
    }
    renderLostedFollowersChart() {
-      if (this.state.ShouldrenderFollowerChart === true && this.props.lostedFetching === false) {
+      if (this.state.ShouldrenderFollowerChart === true && this.props.lostedFetching === false && this.props.lostedErrorFlag === false) {
          return (
             <View style={styles.chartContainer}>
                <View style={styles.infoView}>
@@ -270,7 +284,7 @@ class StatisticChartScreen extends Component {
       }
    }
    renderGainedFollowersChart() {
-      if (this.state.ShouldrenderFollowerChart === true && this.props.gainedFetching === false) {
+      if (this.state.ShouldrenderFollowerChart === true && this.props.gainedFetching === false && this.props.gainedErrorFlag === false) {
          return (
             <View style={styles.chartContainer}>
                <View style={styles.infoView}>
@@ -470,7 +484,7 @@ class StatisticChartScreen extends Component {
       }
    }
    renderFollowerChart() {
-      if (this.state.ShouldrenderFollowerChart === true && this.props.followersFetching === false) {
+      if (this.state.ShouldrenderFollowerChart === true && this.props.followersFetching === false && this.props.followersErrorFlag === false) {
          return (
             <View style={styles.chartContainer}>
                <View style={styles.infoView}>
@@ -729,12 +743,18 @@ const mapStateToProps = (state, ownProps) => {
    return {
       isFetching: state.chart.isFetching,
       token: state.user.token,
+   
       chartData: state.chart.chartData,
       gainedData: state.chart.gainedData,
       lostedData: state.chart.lostedData,
+    
       lostedFetching: state.chart.lostedFetching,
       gainedFetching: state.chart.gainedFetching,
-      followersFetching: state.chart.followersFetching
+      followersFetching: state.chart.followersFetching,
+
+      lostedErrorFlag: state.chart.lostedFlag,
+      gainedErrorFlag: state.chart.gainedFlag,
+      followersErrorFlag: state.chart.followersFlag,
    }
 }
 

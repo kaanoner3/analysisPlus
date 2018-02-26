@@ -40,68 +40,72 @@ class FlatlistItem extends Component {
          <View style={[styles.flatlistContainerView, { paddingBottom: 100 }]}>
             <View style={{ flexDirection: "row" }}>
                <View style={styles.contentLeftItem}>
-                  <TouchableOpacity
-                     activeOpacity={1}
-                     onPress={() => this.showUserScreen("not_follow_me")}
-                  >
+                  <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen("not_follow_me")}>
                      <View style={{ height: 96 / 2 }}>
                         <Text style={styles.infoText}>USERS NOT FOLLOW ME</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
-                           {this.props.profileData === null ? 0 : this.props.profileData.statistic.not_follow_me}
+                           {this.props.profileData.statistic.not_follow_me}
                         </Text>
-                        {this.props.profileData === null ? <View></View> : renderDiffArrow(this.props.statisticDiff.not_follow_me)}
+                        {this.props.profileData === null ? (
+                           <View />
+                        ) : (
+                           renderDiffArrow(this.props.statisticDiff.not_follow_me)
+                        )}
                      </View>
                   </TouchableOpacity>
                </View>
                <View style={styles.contentRightItem}>
-                  <TouchableOpacity
-                     activeOpacity={1}
-                     onPress={() => this.showUserScreen("not_follow_by_me")}
-                  >
+                  <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen("not_follow_by_me")}>
                      <View style={{ height: 96 / 2 }}>
                         <Text style={styles.infoText}>USERS NOT FOLLOWED BY ME</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
-                           {this.props.profileData === null ? 0 : this.props.profileData.statistic.not_follow_by_me}
+                           {this.props.profileData.statistic.not_follow_by_me}
                         </Text>
-                        {this.props.profileData === null ? <View></View> :renderDiffArrow(this.props.statisticDiff.not_follow_by_me)}
+                        {this.props.profileData === null ? (
+                           <View />
+                        ) : (
+                           renderDiffArrow(this.props.statisticDiff.not_follow_by_me)
+                        )}
                      </View>
                   </TouchableOpacity>
                </View>
             </View>
             <View style={{ flexDirection: "row" }}>
                <View style={styles.contentLeftItem}>
-                  <TouchableOpacity
-                     activeOpacity={1}
-                     onPress={() => this.showUserScreen("gained_followers")}
-                  >
+                  <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen("gained_followers")}>
                      <View style={{ height: 96 / 2 }}>
                         <Text style={styles.infoText}>GAINED FALLOWERS</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
-                           {this.props.profileData === null ? 0 : this.props.profileData.statistic.gained_followers}
+                           {this.props.profileData.statistic.gained_followers}
                         </Text>
-                        {this.props.profileData === null ? <View></View> :renderDiffArrow(this.props.statisticDiff.gained_followers)}
+                        {this.props.profileData === null ? (
+                           <View />
+                        ) : (
+                           renderDiffArrow(this.props.statisticDiff.gained_followers)
+                        )}
                      </View>
                   </TouchableOpacity>
                </View>
                <View style={styles.contentRightItem}>
-                  <TouchableOpacity
-                     activeOpacity={1}
-                     onPress={() => this.showUserScreen("losted_followers")}
-                  >
+                  <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen("losted_followers")}>
                      <View style={{ height: 96 / 2 }}>
                         <Text style={styles.infoText}>LOSTED FOLLOWERS</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
-                           {this.props.profileData === null ? 0 : this.props.profileData.statistic.losted_followers}
+                           {this.props.profileData.statistic.losted_followers}
                         </Text>
-                        {this.props.profileData === null ? <View></View> :renderDiffArrow(this.props.statisticDiff.losted_followers)}
+                        {this.props.profileData === null ? (
+                           <View />
+                        ) : (
+                           renderDiffArrow(this.props.statisticDiff.losted_followers)
+                        )}
                      </View>
                   </TouchableOpacity>
                </View>
@@ -109,34 +113,36 @@ class FlatlistItem extends Component {
 
             <View style={{ flexDirection: "row" }}>
                <View style={styles.contentLeftItem}>
-                  <TouchableOpacity
-                     activeOpacity={1}
-                     onPress={() => this.showUserScreen("profile_visitors")}
-                  >
+                  <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen("profile_visitors")}>
                      <View style={{ height: 96 / 2 }}>
                         <Text style={styles.infoText}>PROFILE VISITORS</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
-                           {this.props.profileData === null ? 0 : this.props.profileData.statistic.profile_visitors}
+                           {this.props.profileData.statistic.profile_visitors}
                         </Text>
-                        {this.props.profileData === null ? <View></View> :renderDiffArrow(this.props.statisticDiff.profile_visitors)}
+                        {this.props.profileData === null ? (
+                           <View />
+                        ) : (
+                           renderDiffArrow(this.props.statisticDiff.profile_visitors)
+                        )}
                      </View>
                   </TouchableOpacity>
                </View>
                <View style={styles.contentRightItem}>
-                  <TouchableOpacity
-                     activeOpacity={1}
-                     onPress={() => this.showUserScreen("user_blocking_me")}
-                  >
+                  <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen("user_blocking_me")}>
                      <View style={{ height: 96 / 2 }}>
                         <Text style={styles.infoText}>USER BLOCKING ME</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
-                           {this.props.profileData === null ? 0 : this.props.profileData.statistic.user_blocking_me}
+                           {this.props.profileData.statistic.user_blocking_me}
                         </Text>
-                        {this.props.profileData === null ? <View></View> :renderDiffArrow(this.props.statisticDiff.user_blocking_me)}
+                        {this.props.profileData === null ? (
+                           <View />
+                        ) : (
+                           renderDiffArrow(this.props.statisticDiff.user_blocking_me)
+                        )}
                      </View>
                   </TouchableOpacity>
                </View>
@@ -152,10 +158,12 @@ class FlatlistItem extends Component {
                         <Text style={styles.infoText}>STALKERS</Text>
                      </View>
                      <View style={styles.statisticView}>
-                        <Text style={styles.statisticText}>
-                           {this.props.profileData === null ? 0 : this.props.profileData.statistic.stalkers}
-                        </Text>
-                        {this.props.profileData === null ? <View></View> :renderDiffArrow(this.props.statisticDiff.stalkers)}
+                        <Text style={styles.statisticText}>{this.props.profileData.statistic.stalkers}</Text>
+                        {this.props.profileData === null ? (
+                           <View />
+                        ) : (
+                           renderDiffArrow(this.props.statisticDiff.stalkers)
+                        )}
                      </View>
                   </TouchableOpacity>
                </View>
@@ -170,9 +178,13 @@ class FlatlistItem extends Component {
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
-                           {this.props.profileData === null ? 0 : this.props.profileData.statistic.deleted_comments}
+                           {this.props.profileData.statistic.deleted_comments}
                         </Text>
-                        {this.props.profileData === null ? <View></View> :renderDiffArrow(this.props.statisticDiff.deleted_comments)}
+                        {this.props.profileData === null ? (
+                           <View />
+                        ) : (
+                           renderDiffArrow(this.props.statisticDiff.deleted_comments)
+                        )}
                      </View>
                   </TouchableOpacity>
                </View>
