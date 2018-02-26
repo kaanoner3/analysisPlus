@@ -48,7 +48,6 @@ export default function(state = initialState, action = {}) {
          return {
             ...state,
             chartData: data,
-
             followersFlag: false,
             followersFetching: false
          }

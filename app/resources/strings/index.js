@@ -1,3 +1,14 @@
-import tr from "./tr";
+import tr from "./tr"
+import en from "./en"
+import I18n from "react-native-i18n"
+import DeviceInfo from "react-native-device-info"
 
-export default tr;
+I18n.fallbacks = false
+
+I18n.translations = {
+   en,
+   tr
+}
+I18n.locale = DeviceInfo.getDeviceLocale().slice(0, 2)
+
+export default I18n
