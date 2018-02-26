@@ -701,7 +701,7 @@ class StatisticChartScreen extends Component {
             <AnimatedHeader ref="animated_Header" title="Graphics" />
 
             <ScrollView
-               style={{ flex: 1, paddingTop: 20 }}
+               style={{ flex: 1 }}
                scrollEventThrottle={1}
                onScroll={Animated.event([
                   {

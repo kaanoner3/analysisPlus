@@ -6,7 +6,7 @@ import { images } from "resources"
 const HEADER_MAX_HEIGHT = 107
 const HEADER_MIN_HEIGHT = 64
 const HEADERX_MIN_HEIGHT = 84
-const HEADERX_MAX_HEIGHT = 131
+const HEADERX_MAX_HEIGHT = 147
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
 const screenHeight = Dimensions.get("window").height
 
@@ -55,7 +55,7 @@ class AnimatedHeader extends Component {
                style={
                   this.state.headerX === false
                      ? { flexDirection: "column", }
-                     : { flexDirection: "column", paddingTop: 24 }
+                     : { flexDirection: "column", paddingTop: 30 }
                }
             >
                <Animated.Text style={[styles.animatedText, { opacity: textOpacity }]}>

@@ -25,7 +25,7 @@ const styles = {
         justifyContent: "flex-start"
     },
     headerXContainer: {
-        height: 127,
+        height: 147,
         paddingTop: 24,
         flexDirection: "column",
         justifyContent: "flex-start",
@@ -41,6 +41,8 @@ const styles = {
     titleXView: {
         marginTop: 46,
         flexDirection: "row",
+        position:'absolute',
+         top: 38,
         justifyContent: "flex-start"
     },
 

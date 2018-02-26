@@ -34,7 +34,7 @@ export default function(state = initialState, action = {}) {
       case PROFILE_DATA_FETCH_FAIL: {
          return {
             ...state,
-            error: action.errorMessage
+            error: action.error
          }
       }
       case PROFILE_DATA_DIFF_STATISTIC: {
