@@ -29,8 +29,6 @@ const styles = {
         paddingTop: 24,
         flexDirection: "column",
         justifyContent: "flex-start",
-        position: "absolute",
-        zIndex: 1,
         overflow: "hidden",
         backgroundColor: "#151515",
         width: Dimensions.get("window").width
