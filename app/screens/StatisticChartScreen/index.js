@@ -19,7 +19,7 @@ import { connect } from "react-redux"
 import { chartStatisticRequest, gainedChartStatisticRequest, lostedChartStatisticRequest } from "ducks/chart"
 import { AnimatedHeader } from "components"
 import styles from "./styles"
-import {images,languages} from "resources"
+import { images, languages } from "resources"
 
 const screenWidth = Dimensions.get("window").width
 
@@ -85,7 +85,11 @@ class StatisticChartScreen extends Component {
       }
    }
    renderLostedFollowersChart() {
-      if (this.state.ShouldrenderFollowerChart === true && this.props.lostedFetching === false && this.props.lostedErrorFlag === false) {
+      if (
+         this.state.ShouldrenderFollowerChart === true &&
+         this.props.lostedFetching === false &&
+         this.props.lostedErrorFlag === false
+      ) {
          return (
             <View style={styles.chartContainer}>
                <View style={styles.infoView}>
@@ -285,7 +289,11 @@ class StatisticChartScreen extends Component {
       }
    }
    renderGainedFollowersChart() {
-      if (this.state.ShouldrenderFollowerChart === true && this.props.gainedFetching === false && this.props.gainedErrorFlag === false) {
+      if (
+         this.state.ShouldrenderFollowerChart === true &&
+         this.props.gainedFetching === false &&
+         this.props.gainedErrorFlag === false
+      ) {
          return (
             <View style={styles.chartContainer}>
                <View style={styles.infoView}>
@@ -438,7 +446,7 @@ class StatisticChartScreen extends Component {
                                  : styles.activeTextStyle
                            }
                         >
-                          {languages.t("graphic_weekly")}
+                           {languages.t("graphic_weekly")}
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
@@ -485,7 +493,11 @@ class StatisticChartScreen extends Component {
       }
    }
    renderFollowerChart() {
-      if (this.state.ShouldrenderFollowerChart === true && this.props.followersFetching === false && this.props.followersErrorFlag === false) {
+      if (
+         this.state.ShouldrenderFollowerChart === true &&
+         this.props.followersFetching === false &&
+         this.props.followersErrorFlag === false
+      ) {
          return (
             <View style={styles.chartContainer}>
                <View style={styles.infoView}>
@@ -530,12 +542,17 @@ class StatisticChartScreen extends Component {
                               }
                            }
                         ]}
+                        animate={{
+                           duration: 1000
+                        }}
                      >
                         <VictoryArea
                            name="area"
+                           /*
                            animate={{
                               duration: 1000
                            }}
+                           */
                            style={{
                               data: {
                                  stroke: "#00FF72",
@@ -547,11 +564,13 @@ class StatisticChartScreen extends Component {
                         />
                         <VictoryScatter
                            style={{ data: { fill: "#00FF72" } }}
-                           size={5}
+                           size={7}
                            name="scatter"
+                           /*
                            animate={{
                               delay: 2000
                            }}
+                           */
                         />
                      </VictoryGroup>
                      <VictoryAxis
@@ -659,7 +678,7 @@ class StatisticChartScreen extends Component {
                                  : styles.activeTextStyle
                            }
                         >
-                          {languages.t("graphic_weekly")}
+                           {languages.t("graphic_weekly")}
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
@@ -680,7 +699,7 @@ class StatisticChartScreen extends Component {
                                  : styles.activeTextStyle
                            }
                         >
-                          {languages.t("graphic_monthly")}
+                           {languages.t("graphic_monthly")}
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
@@ -744,18 +763,18 @@ const mapStateToProps = (state, ownProps) => {
    return {
       isFetching: state.chart.isFetching,
       token: state.user.token,
-   
+
       chartData: state.chart.chartData,
       gainedData: state.chart.gainedData,
       lostedData: state.chart.lostedData,
-    
+
       lostedFetching: state.chart.lostedFetching,
       gainedFetching: state.chart.gainedFetching,
       followersFetching: state.chart.followersFetching,
 
       lostedErrorFlag: state.chart.lostedFlag,
       gainedErrorFlag: state.chart.gainedFlag,
-      followersErrorFlag: state.chart.followersFlag,
+      followersErrorFlag: state.chart.followersFlag
    }
 }
 
