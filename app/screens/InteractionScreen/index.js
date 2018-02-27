@@ -7,7 +7,7 @@ import {
     Animated,
     TouchableOpacity
 } from "react-native"
-import { images } from "resources"
+import { images,languages } from "resources"
 import styles from "./styles"
 import { AnimatedHeader } from "components"
 import InteractionContent from "./interactionContent"
@@ -56,13 +56,13 @@ class InteractionScreen extends Component {
                 >
                     <View style={{ flex: 1, paddingBottom: 120 }}>
                         <Text style={styles.sectionText}>
-                            MY BEST FOLLOWERS
+                           {languages.t("interaction_my_best_followers")}
                         </Text>
                         <View style={styles.sectionView}>
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
-                                contentText="Most Likes to Me"
+                                contentText={languages.t("interaction_most_likes_to_me")}
                                 contentIcon={images.ghost1}
                                 navigator={this.props.navigator} 
                                 serviceType="most-likes-to-me"                                                                                               
@@ -70,7 +70,7 @@ class InteractionScreen extends Component {
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
-                                contentText="Most Comments to Me"
+                                contentText={languages.t("interaction_most_comments_to_me")}
                                 contentIcon={images.ghost2}
                                 navigator={this.props.navigator}
                                 serviceType="most-comments-to-me"                                                                                                
@@ -78,27 +78,27 @@ class InteractionScreen extends Component {
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
-                                contentText="Most Likes and Comments to Me"
+                                contentText={languages.t("interaction_most_likes_and_comments_to_me")}
                                 contentIcon={images.ghost3}
                                 navigator={this.props.navigator}
                                 serviceType="most-likes-and-comments-to-me"                                                                                                                 
                             />
                         </View>
                         <Text style={styles.sectionText}>
-                            MY BEST FOLLOWERS
+                            {languages.t("interaction_ghost_followers")}
                         </Text>
                         <View style={styles.sectionView}>
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
-                                contentText="Least Likes Given"
+                                contentText={languages.t("interaction_least_likes_given")}
                                 contentIcon={images.ghost1}                 
                                 navigator={this.props.navigator} 
                                 serviceType="least-likes-given"                                                                               
                             />
                             <InteractionContent
                                 style={styles.interactionStyle}
-                                contentText="Least Comments Left"
+                                contentText={languages.t("interaction_least_comments_left")}
                                 contentIcon={images.ghost2}  
                                 navigator={this.props.navigator}
                                 serviceType="least-comments-left"                                                                               
@@ -106,18 +106,18 @@ class InteractionScreen extends Component {
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
-                                contentText="No Comments or Likes"
+                                contentText={languages.t("interaction_no_comments_or_likes")}
                                 contentIcon={images.ghost3}  
                                 navigator={this.props.navigator} 
                                 serviceType="no-comments-or-likes"                                                                                                                               
                             />
                         </View>
-                        <Text style={styles.sectionText}>DISCOVER</Text>
+                        <Text style={styles.sectionText}>{languages.t("interaction_discover")}</Text>
                         <View style={styles.sectionView}>
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
-                                contentText="My Recent Favourite Users"
+                                contentText={languages.t("interaction_my_favourite_users")}
                                 contentIcon={images.discover1}
                                 navigator={this.props.navigator} 
                                 serviceType="my-recent-favourite-users"                                               
@@ -125,7 +125,7 @@ class InteractionScreen extends Component {
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
-                                contentText="My Best Friends"
+                                contentText={languages.t("interaction_my_best_friends")}
                                 contentIcon={images.discover2}
                                 navigator={this.props.navigator}
                                 serviceType="my-best-friends"                                                
@@ -133,7 +133,7 @@ class InteractionScreen extends Component {
                             <InteractionContent
                                 onPress={this.showInteractionDetail}
                                 style={styles.interactionStyle}
-                                contentText="Users I Like But Don't Follow"
+                                contentText={languages.t("interaction_users_i_like_butdont_follow")}
                                 contentIcon={images.discover3}   
                                 navigator={this.props.navigator}
                                 serviceType="user-i-like-but-dont-follow"                               

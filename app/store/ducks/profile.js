@@ -12,6 +12,7 @@ const initialState = {
    profileData: {
       user: {
          bio: "",
+         backgroundPic:"",
          counts: {
             media: 0,
             follows: 0,
@@ -55,10 +56,13 @@ export default function(state = initialState, action = {}) {
          }
       }
       case PROFILE_DATA_FETCH_SUCCESS: {
-         const { user, statistic } = action.data
+         const { user, statistic, lastest_media } = action.data
          return {
             ...state,
-            profileData: { user: { ...user }, statistic: { ...statistic } },
+            profileData: {
+               user: { ...user, backgroundPic: lastest_media.images.standard_resolution.url },
+               statistic: { ...statistic }
+            },
             error: false,
             isFetching: false
          }

@@ -105,7 +105,9 @@ const styles = {
         top: 0,
         left: 0,
         right: 0,
-        resizeMode: "center"
+        height:500,
+        width,
+        resizeMode: "cover",
     },
     absolute: {
         position: "absolute",

@@ -19,6 +19,7 @@ import { connect } from "react-redux"
 import { chartStatisticRequest, gainedChartStatisticRequest, lostedChartStatisticRequest } from "ducks/chart"
 import { AnimatedHeader } from "components"
 import styles from "./styles"
+import {images,languages} from "resources"
 
 const screenWidth = Dimensions.get("window").width
 
@@ -88,7 +89,7 @@ class StatisticChartScreen extends Component {
          return (
             <View style={styles.chartContainer}>
                <View style={styles.infoView}>
-                  <Text style={styles.infoText}>LOSTED FOLLOWERS</Text>
+                  <Text style={styles.infoText}>{languages.t("graphic_lostedFollowers")}</Text>
                   <Text style={styles.infoValue}>{this.state.lostedChartCount}</Text>
                </View>
                <VictoryChart
@@ -237,7 +238,7 @@ class StatisticChartScreen extends Component {
                                  : styles.activeTextStyle
                            }
                         >
-                           WEEKLY
+                           {languages.t("graphic_weekly")}
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
@@ -256,7 +257,7 @@ class StatisticChartScreen extends Component {
                                  : styles.activeTextStyle
                            }
                         >
-                           MONTHLY
+                           {languages.t("graphic_monthly")}
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
@@ -272,7 +273,7 @@ class StatisticChartScreen extends Component {
                                  : styles.activeTextStyle
                            }
                         >
-                           YEARLY
+                           {languages.t("graphic_yearly")}
                         </Text>
                      </TouchableOpacity>
                   </View>
@@ -288,7 +289,7 @@ class StatisticChartScreen extends Component {
          return (
             <View style={styles.chartContainer}>
                <View style={styles.infoView}>
-                  <Text style={styles.infoText}>GAINED FOLLOWERS</Text>
+                  <Text style={styles.infoText}>{languages.t("graphic_gainedFollowers")}</Text>
                   <Text style={styles.infoValue}>{this.state.gainedChartCount}</Text>
                </View>
                <VictoryChart
@@ -437,7 +438,7 @@ class StatisticChartScreen extends Component {
                                  : styles.activeTextStyle
                            }
                         >
-                           WEEKLY
+                          {languages.t("graphic_weekly")}
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
@@ -456,7 +457,7 @@ class StatisticChartScreen extends Component {
                                  : styles.activeTextStyle
                            }
                         >
-                           MONTHLY
+                           {languages.t("graphic_monthly")}
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
@@ -472,7 +473,7 @@ class StatisticChartScreen extends Component {
                                  : styles.activeTextStyle
                            }
                         >
-                           YEARLY
+                           {languages.t("graphic_yearly")}
                         </Text>
                      </TouchableOpacity>
                   </View>
@@ -488,7 +489,7 @@ class StatisticChartScreen extends Component {
          return (
             <View style={styles.chartContainer}>
                <View style={styles.infoView}>
-                  <Text style={styles.infoText}>TOTAL FOLLOWERS</Text>
+                  <Text style={styles.infoText}>{languages.t("graphic_totalFollowers")}</Text>
                   <Text style={styles.infoValue}>{this.state.followersChartCount}</Text>
                </View>
                <View style={{}}>
@@ -658,7 +659,7 @@ class StatisticChartScreen extends Component {
                                  : styles.activeTextStyle
                            }
                         >
-                           WEEKLY
+                          {languages.t("graphic_weekly")}
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
@@ -679,7 +680,7 @@ class StatisticChartScreen extends Component {
                                  : styles.activeTextStyle
                            }
                         >
-                           MONTHLY
+                          {languages.t("graphic_monthly")}
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
@@ -697,7 +698,7 @@ class StatisticChartScreen extends Component {
                                  : styles.activeTextStyle
                            }
                         >
-                           YEARLY
+                           {languages.t("graphic_yearly")}
                         </Text>
                      </TouchableOpacity>
                   </View>
@@ -712,7 +713,7 @@ class StatisticChartScreen extends Component {
    render() {
       return (
          <View style={{ flex: 1, backgroundColor: "#152341" }}>
-            <AnimatedHeader ref="animated_Header" title="Graphics" />
+            <AnimatedHeader ref="animated_Header" title={languages.t("tab_graphic")} />
 
             <ScrollView
                style={{ flex: 1 }}

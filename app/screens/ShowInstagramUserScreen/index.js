@@ -1,24 +1,17 @@
 import React, { Component } from "react"
-import {
-   View,
-   Text,
-   Image,
-   TouchableOpacity,
-   FlatList,
-   ActivityIndicator,
-   Dimensions
-} from "react-native"
+import { View, Text, Image, TouchableOpacity, FlatList, ActivityIndicator, Dimensions } from "react-native"
 import { StaticHeader, InstagramUser } from "components"
 import styles from "./styles"
 import { getUserDataRequest, addDataToUserlist } from "ducks/instagramUsers"
 import { connect } from "react-redux"
-
-
+import {languages} from "resources"
 class ShowInstagramUserScreen extends Component {
    constructor() {
       super()
       this.renderInstagramUser = this.renderInstagramUser.bind(this)
       this.page = 0
+
+      this.headerText = ""
    }
    pushInstagramUserDetail() {
       this.props.navigator.push({
@@ -28,7 +21,10 @@ class ShowInstagramUserScreen extends Component {
          passProps: {}
       })
    }
-   componentWillMount() {}
+   componentWillMount() {
+      this.headerText = "header_" + this.props.serviceType
+      console.log(this.headerText)
+   }
    renderInstagramUser({ item }) {
       return (
          <InstagramUser
@@ -44,7 +40,7 @@ class ShowInstagramUserScreen extends Component {
       if (this.props.isFetching === false) {
          return (
             <View style={{ flex: 1, backgroundColor: "#152341" }}>
-               <StaticHeader title={this.props.serviceType} navigator={this.props.navigator} />
+               <StaticHeader title={languages.t(this.headerText)} navigator={this.props.navigator} />
                <View style={{ flex: 1 }}>
                   <FlatList
                      renderItem={this.renderInstagramUser}
@@ -59,7 +55,7 @@ class ShowInstagramUserScreen extends Component {
                            temp = temp + 1
                         }
                         if (this.page < temp) {
-                            this.props.addDataToUserlist(this.page)
+                           this.props.addDataToUserlist(this.page)
                         }
                      }}
                   />
@@ -87,6 +83,4 @@ const mapStateToProps = (state, ownProps) => {
       isFetching: state.instagramUsers.isFetching
    }
 }
-export default connect(mapStateToProps, { getUserDataRequest, addDataToUserlist })(
-   ShowInstagramUserScreen
-)
+export default connect(mapStateToProps, { getUserDataRequest, addDataToUserlist })(ShowInstagramUserScreen)

@@ -1,7 +1,7 @@
 import images from "./images";
-import strings from "./strings";
+import languages from "./languages";
 
 module.exports = {
   images,
-  strings
+  languages
 };

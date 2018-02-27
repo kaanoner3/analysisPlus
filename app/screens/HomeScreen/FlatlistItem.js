@@ -14,7 +14,7 @@ import {
    TouchableOpacity
 } from "react-native"
 import styles from "./styles"
-import { images } from "resources"
+import { images,languages } from "resources"
 import { connect } from "react-redux"
 import { renderDiffArrow } from "services"
 import { getUserDataRequest } from "ducks/instagramUsers"
@@ -42,7 +42,7 @@ class FlatlistItem extends Component {
                <View style={styles.contentLeftItem}>
                   <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen("not_follow_me")}>
                      <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>USERS NOT FOLLOW ME</Text>
+                        <Text style={styles.infoText}>{languages.t("home_user_not_follow_me")}</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
@@ -59,7 +59,7 @@ class FlatlistItem extends Component {
                <View style={styles.contentRightItem}>
                   <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen("not_follow_by_me")}>
                      <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>USERS NOT FOLLOWED BY ME</Text>
+                        <Text style={styles.infoText}>{languages.t("home_user_not_follow_by_me")}</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
@@ -78,7 +78,7 @@ class FlatlistItem extends Component {
                <View style={styles.contentLeftItem}>
                   <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen("gained_followers")}>
                      <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>GAINED FALLOWERS</Text>
+                        <Text style={styles.infoText}>{languages.t("home_gained_followers")}</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
@@ -95,7 +95,7 @@ class FlatlistItem extends Component {
                <View style={styles.contentRightItem}>
                   <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen("losted_followers")}>
                      <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>LOSTED FOLLOWERS</Text>
+                        <Text style={styles.infoText}>{languages.t("home_losted_followers")}</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
@@ -115,7 +115,7 @@ class FlatlistItem extends Component {
                <View style={styles.contentLeftItem}>
                   <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen("profile_visitors")}>
                      <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>PROFILE VISITORS</Text>
+                        <Text style={styles.infoText}>{languages.t("home_profile_visitors")}</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
@@ -132,7 +132,7 @@ class FlatlistItem extends Component {
                <View style={styles.contentRightItem}>
                   <TouchableOpacity activeOpacity={1} onPress={() => this.showUserScreen("user_blocking_me")}>
                      <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>USER BLOCKING ME</Text>
+                        <Text style={styles.infoText}>{languages.t("home_user_blocking_me")}</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>
@@ -155,7 +155,7 @@ class FlatlistItem extends Component {
                      onPress={() => this.showUserScreen("stalkers")}
                   >
                      <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>STALKERS</Text>
+                        <Text style={styles.infoText}>{languages.t("home_stalkers")}</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>{this.props.profileData.statistic.stalkers}</Text>
@@ -174,7 +174,7 @@ class FlatlistItem extends Component {
                      onPress={() => this.showUserScreen("deleted_comment")}
                   >
                      <View style={{ height: 96 / 2 }}>
-                        <Text style={styles.infoText}>DELETED COMMENT</Text>
+                        <Text style={styles.infoText}>{languages.t("home_deleted_comment")}</Text>
                      </View>
                      <View style={styles.statisticView}>
                         <Text style={styles.statisticText}>

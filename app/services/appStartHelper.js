@@ -1,30 +1,30 @@
 import { Navigation } from "react-native-navigation";
-import { images } from "resources";
+import { images,languages } from "resources"
 
 export function startHomeScreen(token) {
   Navigation.startTabBasedApp({
     tabs: [
       {
         screen: "HomeScreen",
-        label: "Home",
+        label: languages.t("tab_home"),
         icon: images.tabIndex0,
         selectedIcon: images.tabIndex0Active
       },
       {
         screen: "InteractionScreen",
-        label: "Interaction",
+        label: languages.t("tab_interaction"),
         icon: images.tabIndex1,
         selectedIcon: images.tabIndex1Active
       },
       {
         screen: "PremiumServiceScreen",
-        label: "Engagement",
+        label: languages.t("tab_engagement"),
         icon: images.tabIndex2,
         selectedIcon: images.tabIndex2Active
       },
       {
         screen: "StatisticChartScreen",
-        label: "Graphic",
+        label: languages.t("tab_graphic"),
         icon: images.tabIndex3,
         selectedIcon: images.tabIndex3Active
       }
@@ -35,7 +35,9 @@ export function startHomeScreen(token) {
       tabBarTranslucent: false,
       tabBarSelectedLabelColor: "#059ED9",
       tabBarTextFontFamily: "Circular",
-      tabBarLabelColor:'rgba(255,255,255,0.3)'
+      tabBarLabelColor:'rgba(255,255,255,0.3)',
+      tabBarButtonColor:'rgba(255,255,255,0.3)',
+      tabBarSelectedButtonColor:"rgba(5,158,217,1)"
     },
     appStyle: {
       orientation: "portrait",
