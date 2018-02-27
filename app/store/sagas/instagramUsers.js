@@ -18,7 +18,7 @@ export function* getUserList() {
         */
          yield put(getUserDataSuccess(responseData.data))
       } catch (error) {
-         console.log(error)
+         console.log('zııırt',error)
          yield put(getUserDataFail(error))
       }
    }

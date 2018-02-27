@@ -36,4 +36,6 @@ export default {
   selectedAcc: require("./selectedAcc.png"),
   nonSelectedAcc: require("./nonSelectAcc.png"),
   close: require("./close.png"),
+  errorImage: require("./errorImage.png"),
+
 };

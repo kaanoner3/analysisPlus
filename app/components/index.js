@@ -6,6 +6,8 @@ import InstagramUser from "./InstagramUser"
 import PremiumButton from "./PremiumButton"
 import InteractionUser from "./InteractionUser"
 import InstagramSearchUser from "./InstagramSearchUser"
+import ErrorPage from "./ErrorPage"
+
 module.exports = {
    CustomRefreshControll,
    HomeScreenHeader,
@@ -14,5 +16,6 @@ module.exports = {
    InstagramUser,
    PremiumButton,
    InteractionUser,
-   InstagramSearchUser
+   InstagramSearchUser,
+   ErrorPage
 }

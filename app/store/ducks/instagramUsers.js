@@ -10,7 +10,8 @@ export const ADD_DATA_TO_USER_LIST = "instagramUser/ADD_DATA_TO_USER_LIST"
 
 const initialState = {
    errorMessage: null,
-   isFetching: null
+   isFetching: null,
+   errorPage: false
 }
 
 // REDUCER
@@ -36,7 +37,7 @@ export default function(state = initialState, action = {}) {
          const { page } = action
          const copyUserList = Object.assign([], state.userList)
          const copyFlatlistData = Object.assign([], state.flatlistData)
-         const extraData = copyUserList.slice(page * 20, (page+1) * 20)
+         const extraData = copyUserList.slice(page * 20, (page + 1) * 20)
          const newflatlistData = copyFlatlistData.concat(extraData)
          return {
             ...state,
@@ -44,9 +45,18 @@ export default function(state = initialState, action = {}) {
          }
       }
       case USER_DATA_FETCH_FAIL: {
+         const { error } = action
+         console.log("faaail reducer", error.response.status)
+         if (error.response.status === 500) {
+            errorPage = true
+         } else {
+            errorPage = false
+         }
          return {
             ...state,
-            errorMessage: action.errorMessage
+            errorMessage: action.errorMessage,
+            errorPage,
+            isFetching: false
          }
       }
       case USER_RELATIONSHIP_TO_OTHER_REQUEST: {
@@ -77,10 +87,7 @@ export default function(state = initialState, action = {}) {
          } else if (data.outgoing_status === "follows" && data.incoming_status === "requsted_by") {
             currentUser["relationship"] = "follows_requested_by"
             newUserList.splice(index, 1, currentUser)
-         } else if (
-            data.outgoing_status === "requested" &&
-            data.incoming_status === "followed_by"
-         ) {
+         } else if (data.outgoing_status === "requested" && data.incoming_status === "followed_by") {
             currentUser["relationship"] = "requested_followed_by"
             newUserList.splice(index, 1, currentUser)
          } else if (data.outgoing_status === "follows" && data.incoming_status === "requsted_by") {
@@ -108,10 +115,10 @@ export function getUserDataSuccess(data) {
    return { type: USER_DATA_FETCH_SUCCESS, data }
 }
 
-export function getUserDataFail(errorMessage) {
+export function getUserDataFail(error) {
    return {
       type: USER_DATA_FETCH_FAIL,
-      error: errorMessage
+      error
    }
 }
 export function ralationshipAnalysis(data, user_id) {

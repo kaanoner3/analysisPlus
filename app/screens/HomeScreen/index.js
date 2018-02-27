@@ -14,7 +14,7 @@ import {
    TouchableOpacity
 } from "react-native"
 import { HomeScreenHeader, CustomRefreshControll } from "components"
-import { images,strings } from "resources"
+import { images, strings } from "resources"
 import styles from "./styles"
 import LinearGradient from "react-native-linear-gradient"
 import { connect } from "react-redux"
@@ -64,23 +64,7 @@ class HomeScreen extends Component {
       })
    }
    renderBackgroundImage() {
-       console.log(this.props.userData.user.backgroundPic)
       return (
-          <ImageBackground style={styles.imageBackgound}>
-        <Image
-        source={{ uri: this.props.userData.user.backgroundPic }}
-        style={styles.backgroundUserImage}
-     />
-     <View style={styles.bottomView} />
-     <LinearGradient
-     colors={["#5D4ED3", "#059ED9", "#059ED9"]}
-     style={styles.linearGradient}
-     startPoint={{ x: 0.0, y: 0.0 }}
-     endPoint={{ x: 0.3, y: 0.3 }}
-     locations={[0, 0.3, 0]}
-  />
-  </ImageBackground>
-          /*
          <ImageBackground style={styles.imageBackgound}>
             <Image
                source={{ uri: this.props.userData.user.backgroundPic }}
@@ -95,7 +79,6 @@ class HomeScreen extends Component {
                locations={[0, 0.3, 0]}
             />
          </ImageBackground>
-         */
       )
    }
    searchButtonPressed() {
