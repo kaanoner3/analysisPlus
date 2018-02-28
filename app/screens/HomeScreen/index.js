@@ -11,7 +11,9 @@ import {
    Dimensions,
    ScrollView,
    Image,
-   TouchableOpacity
+   TouchableOpacity,
+   Alert,
+   AsyncStorage
 } from "react-native"
 import { HomeScreenHeader, CustomRefreshControll } from "components"
 import { images, strings } from "resources"
@@ -20,6 +22,8 @@ import LinearGradient from "react-native-linear-gradient"
 import { connect } from "react-redux"
 import { getProfileDataRequest } from "ducks/profile"
 import FlatlistItem from "./FlatlistItem"
+import OneSignal from "react-native-onesignal"
+import notificationHandler, { getNotificationData, setNotificationData } from "utils/notificationHandler"
 
 const flatlistData = [{ flData: 1 }]
 
@@ -28,7 +32,6 @@ class HomeScreen extends Component {
    static navigatorStyle = {
       navBarHidden: true
    }
-
    constructor() {
       super()
       this.renderList = this.renderList.bind(this)
@@ -37,15 +40,21 @@ class HomeScreen extends Component {
       this.renderNavButtons = this.renderNavButtons.bind(this)
       this.settingButtonPress = this.settingButtonPress.bind(this)
       this.searchButtonPressed = this.searchButtonPressed.bind(this)
+      this.onOpened = this.onOpened.bind(this)
 
       this.state = {
          loading: true,
          scrollY: new Animated.Value(0),
          headerX: false
       }
-      this.state.scrollY.addListener(scrolly => {})
+   }
+
+   onOpened(result) {
+      setNotificationData(result)
+      notificationHandler(this.props.navigator)
    }
    componentWillMount() {
+      OneSignal.addEventListener("opened", this.onOpened)
       this.props.getProfileDataRequest(this.props.token)
       if (height === 812) {
          this.setState({ headerX: true })
@@ -53,9 +62,15 @@ class HomeScreen extends Component {
          this.setState({ headerX: false })
       }
    }
+   componentWillUnmount() {
+      OneSignal.removeEventListener("opened", this.onOpened)
+   }
    componentDidMount() {
       this.setState({})
       this.handleRefresh()
+      setTimeout(() => {
+         notificationHandler(this.props.navigator)
+      }, 1000)
    }
    showUserScreen(index) {
       this.props.navigator.push({

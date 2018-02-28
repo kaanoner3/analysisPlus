@@ -1,28 +1,56 @@
-// Base component class.
 import { Component } from "react"
-
-// Navigation handler.
+import OneSignal from "react-native-onesignal"
 import { Navigation } from "react-native-navigation"
-
-// Store instance.
+import { AsyncStorage } from "react-native"
+import registerScreens from "./../app/screens"
+import { Provider } from "react-redux"
 import store from "store"
+import { setNotificationData } from "utils/notificationHandler"
 import { images } from "resources"
-
-// Root-level reducer.
-import { switchToUser, switchToLogin } from "ducks/app"
-import { setUserIdentity } from "ducks/user"
-// AsyncStorage helper.
-import { revive } from "services/LoginStorageService"
-import registerScreens from "../app/screens"
-// Config object.
-import { Provider, dispatch } from "react-redux"
-import { startHomeScreen, startLoginScreen } from "services/appStartHelper";
-import OneSignal from 'react-native-onesignal';
+import { Alert } from "react-native"
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    registerScreens(store,Provider)
+   constructor(props) {
+      super(props)
+      registerScreens(store, Provider)
 
-  }
+      console.disableYellowBox = true
+      /* ONE SIGNAL */
+
+      const onRegistered = notifData => {
+
+         //console.log('Device had been registered for push notifications!', notifData);
+         AsyncStorage.setItem("oneSignalId", JSON.stringify(notifData))
+         //alert(notifData);
+      }
+
+      const onOpened = openResult => {
+
+         setNotificationData(openResult)
+         /*
+         console.log("Message: ", openResult.notification.payload.body)
+         console.log("Data: ", openResult.notification.payload.additionalData)
+         console.log("isActive: ", openResult.notification.isAppInFocus)
+         console.log("openResult: ", openResult)
+         */
+      }
+
+      const onIds = device => {
+
+         AsyncStorage.setItem("oneSignalId", device.userId)
+      }
+
+      const onReceived = notification => {
+
+         console.log("Notification received: ", notification)
+         AsyncStorage.getItem("oneSignalId").then(data => {
+            console.log("get async data", data)
+         })
+      }
+
+      OneSignal.addEventListener("registered", onRegistered)
+      OneSignal.addEventListener("received", onReceived)
+      OneSignal.addEventListener("opened", onOpened)
+      OneSignal.addEventListener("ids", onIds)
+   }
 }

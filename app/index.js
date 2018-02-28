@@ -8,19 +8,21 @@ import { setNotificationData } from 'utils/notificationHandler';
 import { images  } from 'resources';
 
 console.disableYellowBox = true;
-
 /* ONE SIGNAL */
-
+console.log("appp start")
 
 const onRegistered = notifData => {
+  Alert.alert("onRegistered")
+
   //console.log('Device had been registered for push notifications!', notifData);
   AsyncStorage.setItem('oneSignalId', JSON.stringify(notifData));
   //alert(notifData);
 };
 
 const onOpened = (openResult) => {
-  setNotificationData(openResult);
+  Alert.alert("openResult")
 
+  setNotificationData(openResult);
   /*console.log('Message: ', openResult.notification.payload.body);
   console.log('Data: ', openResult.notification.payload.additionalData);
   console.log('isActive: ', openResult.notification.isAppInFocus);
@@ -28,10 +30,14 @@ const onOpened = (openResult) => {
 }
 
 const onIds = (device) => {
+  Alert.alert("device")
+
   AsyncStorage.setItem('oneSignalId', device.userId);
 }
 
 const onReceived = notification => {
+  Alert.alert("onrecieved")
+
   console.log('Notification received: ', notification);
   AsyncStorage.getItem('oneSignalId')
   .then((data) => {
