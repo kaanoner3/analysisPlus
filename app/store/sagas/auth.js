@@ -8,6 +8,8 @@ import { startHomeScreen, startLoginScreen } from "services/appStartHelper"
 import { switchToUser } from "ducks/app"
 import { setToken } from "utils/axios"
 import store from "store"
+import { persist as persistStore } from "store"
+
 //import { switchToUser, changeAppState } from "ducks/app";
 import {
    revive, //get
@@ -138,6 +140,7 @@ export function* deleteUser() {
             yield call(setToken, tokenData.data.access_token)
             yield call(startHomeScreen)
          } else {
+            persistStore.purge()
             yield call(startLoginScreen)
          }
          /*

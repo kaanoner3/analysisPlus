@@ -4,10 +4,10 @@ import styles from "./styles"
 import { connect } from "react-redux"
 import { StaticHeader } from "components"
 import { images } from "resources"
-import InstagramLogin from "react-native-instagram-login"
 import { doInstagramLogin, changeUser } from "ducks/auth"
 import { deleteUser } from "ducks/user"
 import Cookie from "react-native-cookie"
+import { SignInService, InstagramSelf } from "services/LoginService"
 
 const instagram = {
    client_id: "65dcfc61b3564f14a9144181b08c6b1a",
@@ -93,7 +93,7 @@ class SettingScreen extends Component {
                   </View>
                </View>
             </ScrollView>
-            <InstagramLogin
+            <InstagramSelf
                ref="instagramLogin"
                clientId={instagram.client_id}
                scopes={["public_content", "follower_list", "basic", "relationships", "likes"]}

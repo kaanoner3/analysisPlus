@@ -14,7 +14,7 @@ export function getNotificationData() {
 export default function notificationHandler(navigator) {
    if (notificationData.notification) {
       const data = notificationData.notification.payload.additionalData
-    
+      
       switch (data.notification_type) {
          case "notification_match":
             navigator.push({
