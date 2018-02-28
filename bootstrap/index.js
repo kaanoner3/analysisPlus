@@ -2,7 +2,6 @@
 import App from "./App"
 
 // Import screen components to get them registered.
-import "screens"
 
 // Apply Axios bootstrap.
 

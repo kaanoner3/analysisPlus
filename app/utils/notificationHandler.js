@@ -1,4 +1,6 @@
 import { Alert } from "react-native"
+import {  changeUser } from "ducks/auth"
+import store from "store"
 
 let notificationData = {}
 
@@ -7,14 +9,13 @@ export function setNotificationData(data) {
 }
 
 export function getNotificationData() {
-
    return notificationData
 }
 
 export default function notificationHandler(navigator) {
    if (notificationData.notification) {
       const data = notificationData.notification.payload.additionalData
-      
+
       switch (data.notification_type) {
          case "notification_match":
             navigator.push({
@@ -22,8 +23,16 @@ export default function notificationHandler(navigator) {
                passProps: {}
             })
             break
-         case "notification_message":
-            // messages
+         case "notification_withId":
+            const currentId = store.getState().auth.data.instagram_id
+            console.log("currentID", currentId)
+            console.log("coming id", data.notification_withId)
+            if (currentId !== data.notification_withId) {
+               const user = store
+                  .getState()
+                  .user.existingUsers.find(x => x.instagram_id == data.notification_withId)
+                  console.log(user)
+            }
 
             break
 

@@ -41,17 +41,6 @@ class HomeScreen extends Component {
       this.settingButtonPress = this.settingButtonPress.bind(this)
       this.searchButtonPressed = this.searchButtonPressed.bind(this)
       this.onOpened = this.onOpened.bind(this)
-   
-      AsyncStorage.getAllKeys((err, keys) => {
-        AsyncStorage.multiGet(keys, (err, stores) => {
-          stores.map((result, i, store) => {
-            // get at each store's key/value so you can work with it
-            let key = store[i][0];
-            let value = store[i][1];
-            console.log('asyncdata', key, value)
-          });
-        });
-      });
 
       this.state = {
          loading: true,
