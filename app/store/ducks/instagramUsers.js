@@ -46,7 +46,6 @@ export default function(state = initialState, action = {}) {
       }
       case USER_DATA_FETCH_FAIL: {
          const { error } = action
-         console.log("faaail reducer", error.response.status)
          if (error.response.status === 500) {
             errorPage = true
          } else {

@@ -20,7 +20,6 @@ class InstagramSearchUser extends Component {
       })
    }
    render() {
-       console.log(this.props.data)
       return (
          <View style={{ marginTop: 10 }}>
             <TouchableOpacity
