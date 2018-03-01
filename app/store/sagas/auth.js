@@ -68,6 +68,7 @@ export function* changeUser() {
       try {
          const { instagram_token, username, password } = yield take(CHANGE_USER)
          const result = { username, password }
+         console.log(result,instagram_token)
          const loginResponse = yield call(SignInService, instagram_token, result)
          const tokenData = yield call(
             accessTokenService,

@@ -50,6 +50,7 @@ class HomeScreen extends Component {
    }
 
    onOpened(result) {
+      console.log("homepage", result)
       setNotificationData(result)
       notificationHandler(this.props.navigator)
    }
