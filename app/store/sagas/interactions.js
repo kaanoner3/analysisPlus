@@ -12,8 +12,9 @@ import store from "store"
 export function* interactionDetail() {
    while (true) {
       try {
-         const { token, serviceType } = yield take(INTERACTION_DETAIL_REQUEST)
-         const responseData = yield call(getInteractionDetail, token, serviceType)
+         const { serviceType } = yield take(INTERACTION_DETAIL_REQUEST)
+         const responseData = yield call(getInteractionDetail, serviceType)
+         console.log('dataa',responseData)
          yield put(interactionDetailSuccess(responseData.data))
       } catch (error) {
          console.log(error)

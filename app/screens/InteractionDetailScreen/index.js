@@ -1,15 +1,7 @@
 import React, { Component } from "react"
-import {
-   Text,
-   View,
-   Image,
-   Dimensions,
-   TouchableOpacity,
-   ActivityIndicator,
-   FlatList
-} from "react-native"
+import { Text, View, Image, Dimensions, TouchableOpacity, ActivityIndicator, FlatList } from "react-native"
 import styles from "./styles"
-import { images } from "resources"
+import { images,languages } from "resources"
 import { StaticHeader, InteractionUser } from "components"
 import { addDataToInteractionlist } from "ducks/interactions"
 import { connect } from "react-redux"
@@ -25,8 +17,12 @@ class InteractionDetailScreen extends Component {
       this.hideBackButton = false
       this.state = { headerX: false }
       this.page = 0
+      this.headerText = ""
    }
    componentWillMount() {
+      this.headerText = "interaction_" + this.props.serviceType
+      console.log(this.headerText)
+
       if (height === 812) {
          this.setState({ headerX: true })
       } else {
@@ -54,7 +50,7 @@ class InteractionDetailScreen extends Component {
       if (this.props.isFetching === false) {
          return (
             <View style={{ flex: 1, backgroundColor: "#152341" }}>
-               <StaticHeader title={this.props.serviceType} navigator={this.props.navigator} />
+               <StaticHeader title={languages.t(this.headerText)} navigator={this.props.navigator} />
                <View style={{ flex: 1 }}>
                   <FlatList
                      renderItem={this.renderFlatlistItem}

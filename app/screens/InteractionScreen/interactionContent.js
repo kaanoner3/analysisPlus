@@ -13,7 +13,7 @@ class InteractionContent extends Component {
       this.buttonPress = this.buttonPress.bind(this)
    }
    buttonPress() {
-      this.props.interactionDetailRequest(this.props.token, this.props.serviceType)
+      this.props.interactionDetailRequest(this.props.serviceType)
       this.props.navigator.push({
          screen: "InteractionDetailScreen",
          passProps: { serviceType: this.props.serviceType }

@@ -2,7 +2,7 @@ import { Alert } from "react-native"
 import { changeUser } from "ducks/auth"
 import store from "store"
 import { connect } from "react-redux"
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from "redux"
 
 let notificationData = {}
 
@@ -23,9 +23,13 @@ export default function notificationHandler(navigator) {
             break
          case "notification_match":
             const currentId = store.getState().auth.data.instagram_id
-            if (currentId !== data.instagram_id) {
-               const user = store.getState().user.existingUsers.find(x => x.instagram_id == data.instagram_id)
-               store.dispatch(changeUser(user.instagram_token, user.username, user.password)) 
+            if (data.instagram_id.length > 0) {
+               if (currentId !== data.instagram_id) {
+                  const user = store
+                     .getState()
+                     .user.existingUsers.find(x => x.instagram_id == data.instagram_id)
+                  store.dispatch(changeUser(user.instagram_token, user.username, user.password))
+               }
             }
             break
          case "notification_custom_visitor":

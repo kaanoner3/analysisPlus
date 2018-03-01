@@ -40,8 +40,8 @@ export default function(state = initialState, action = {}) {
    }
 }
 
-export function interactionDetailRequest(token, serviceType) {
-   return { type: INTERACTION_DETAIL_REQUEST, token, serviceType }
+export function interactionDetailRequest(serviceType) {
+   return { type: INTERACTION_DETAIL_REQUEST, serviceType }
 }
 export function interactionDetailSuccess(data) {
    return { type: INTERACTION_DETAIL_SUCCESS, data }

@@ -289,7 +289,7 @@ class InteractionUser extends Component {
                   }}
                >
                   <Text style={{ color: "white", alignSelf: "center", marginTop: 4 }}>
-                     {this.props.index}
+                     {this.props.index+1}
                   </Text>
                </View>
                <View style={styles.dataView}>
@@ -401,7 +401,7 @@ class InteractionUser extends Component {
 }
 const mapStateToProps = (state, ownProps) => {
    return {
-      token: state.auth.accessToken,
+      token: state.auth.data.instagram_token,
       userList: state.instagramUsers.userList
    }
 }
