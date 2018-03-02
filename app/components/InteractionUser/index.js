@@ -37,10 +37,7 @@ class InteractionUser extends Component {
             this.setState({ relationStyle: 3 })
          } else if (data.outgoing_status === "follows" && data.incoming_status === "requsted_by") {
             this.setState({ relationStyle: 4 })
-         } else if (
-            data.outgoing_status === "requested" &&
-            data.incoming_status === "followed_by"
-         ) {
+         } else if (data.outgoing_status === "requested" && data.incoming_status === "followed_by") {
             this.setState({ relationStyle: 5 })
          } else if (data.outgoing_status === "follows" && data.incoming_status === "requsted_by") {
             this.setState({ relationStyle: 6 })
@@ -52,13 +49,16 @@ class InteractionUser extends Component {
    pushInstagramUserDetail(username, id) {
       const params = { username, id }
       axios.post("/api/user-visit", params)
-      Linking.canOpenURL("instagram://user?username=" + username).then(response => {
-         if (response === true) {
-            Linking.openURL("instagram://user?username=" + username).catch(err =>
-               console.error("An error occurred", err)
-            )
-         }
-      })
+      Linking.canOpenURL("instagram://user?username=" + username)
+         .then(supported => {
+            console.log(supported)
+            if (!supported) {
+               console.log("Can't handle url: ")
+            } else {
+               return Linking.openURL("instagram://user?username=" + username)
+            }
+         })
+         .catch(err => console.error("An error occurred", err))
    }
    renderRelationship() {
       if (this.props.userType === "not_follow_me") {
@@ -289,7 +289,7 @@ class InteractionUser extends Component {
                   }}
                >
                   <Text style={{ color: "white", alignSelf: "center", marginTop: 4 }}>
-                     {this.props.index+1}
+                     {this.props.index + 1}
                   </Text>
                </View>
                <View style={styles.dataView}>
@@ -299,7 +299,9 @@ class InteractionUser extends Component {
                         flexDirection: "row",
                         alignItems: "center"
                      }}
-                     onPress={() => this.pushInstagramUserDetail(this.props.data.username,this.props.data.id)}
+                     onPress={() =>
+                        this.pushInstagramUserDetail(this.props.data.username, this.props.data.id)
+                     }
                   >
                      <View style={{ flex: 1 }}>
                         <View style={{ flexDirection: "row" }}>
@@ -311,7 +313,7 @@ class InteractionUser extends Component {
                               <Text style={styles.nameText}>{this.props.data.full_name}</Text>
                               <Text style={styles.usernameText}>{this.props.data.username}</Text>
                               {this.renderRelationship()}
-                              <View style={{ marginTop: 5, flexDirection: "row",alignItems:'center' }}>
+                              <View style={{ marginTop: 5, flexDirection: "row", alignItems: "center" }}>
                                  <Image
                                     style={{ height: 12, width: 12, resizeMode: "contain" }}
                                     source={images.ghost1}
@@ -357,7 +359,9 @@ class InteractionUser extends Component {
                         flexDirection: "row",
                         alignItems: "center"
                      }}
-                     onPress={() => this.pushInstagramUserDetail(this.props.data.username,this.props.data.id)}
+                     onPress={() =>
+                        this.pushInstagramUserDetail(this.props.data.username, this.props.data.id)
+                     }
                   >
                      <View style={{ flex: 1 }}>
                         <View style={{ flexDirection: "row" }}>
@@ -369,7 +373,7 @@ class InteractionUser extends Component {
                               <Text style={styles.nameText}>{this.props.data.full_name}</Text>
                               <Text style={styles.usernameText}>{this.props.data.username}</Text>
                               {this.renderRelationship()}
-                              <View style={{ marginTop: 5, flexDirection: "row",alignItems:'center' }}>
+                              <View style={{ marginTop: 5, flexDirection: "row", alignItems: "center" }}>
                                  <Image
                                     style={{ height: 12, width: 12, resizeMode: "contain" }}
                                     source={images.ghost1}
@@ -378,8 +382,7 @@ class InteractionUser extends Component {
                                     style={{
                                        color: "rgba(255,255,255,0.4)",
                                        fontSize: 13,
-                                       marginLeft: 5,
-                                       
+                                       marginLeft: 5
                                     }}
                                  >
                                     {this.props.data.count}
@@ -395,7 +398,6 @@ class InteractionUser extends Component {
       }
    }
    render() {
-      
       return <View style={styles.containerView}>{this.renderList()}</View>
    }
 }
@@ -405,6 +407,4 @@ const mapStateToProps = (state, ownProps) => {
       userList: state.instagramUsers.userList
    }
 }
-export default connect(mapStateToProps, { ralationshipAnalysis, userDetailRequest })(
-   InteractionUser
-)
+export default connect(mapStateToProps, { ralationshipAnalysis, userDetailRequest })(InteractionUser)

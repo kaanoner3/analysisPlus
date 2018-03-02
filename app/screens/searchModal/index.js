@@ -115,6 +115,7 @@ class SearchModal extends Component {
    renderHeader() {
       return (
          <View style={{ height: 107 }}>
+         
             <TouchableOpacity
                style={{ height: 60, width: 40, position: "absolute", left: 20, top: 20 }}
                onPress={this.backButton}

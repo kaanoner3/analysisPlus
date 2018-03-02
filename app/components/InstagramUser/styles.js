@@ -82,7 +82,6 @@ const styles = {
     },
     relationshipContainer: {
         flexDirection: "row",
-        marginRight: 20,
         backgroundColor: "transparent",
         marginTop: 5,
         

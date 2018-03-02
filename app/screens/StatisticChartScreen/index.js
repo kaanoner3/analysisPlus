@@ -542,17 +542,10 @@ class StatisticChartScreen extends Component {
                               }
                            }
                         ]}
-                        animate={{
-                           duration: 1000
-                        }}
+      
                      >
                         <VictoryArea
                            name="area"
-                           /*
-                           animate={{
-                              duration: 1000
-                           }}
-                           */
                            style={{
                               data: {
                                  stroke: "#00FF72",
@@ -561,16 +554,15 @@ class StatisticChartScreen extends Component {
                                  strokeLinecap: "round"
                               }
                            }}
+                           animate={{
+                              duration: 1000
+                           }}
                         />
                         <VictoryScatter
                            style={{ data: { fill: "#00FF72" } }}
                            size={7}
                            name="scatter"
-                           /*
-                           animate={{
-                              delay: 2000
-                           }}
-                           */
+      
                         />
                      </VictoryGroup>
                      <VictoryAxis

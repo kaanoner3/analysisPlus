@@ -52,13 +52,16 @@ class InstagramUser extends Component {
    pushInstagramUserDetail(username, id) {
       const params = { username, id }
       axios.post("/api/user-visit", params)
-      Linking.canOpenURL("instagram://user?username=" + username).then(response => {
-         if (response === true) {
-            Linking.openURL("instagram://user?username=" + username).catch(err =>
-               console.error("An error occurred", err)
-            )
-         }
-      })
+      Linking.canOpenURL("instagram://user?username=" + username)
+         .then(supported => {
+            console.log(supported)
+            if (!supported) {
+               console.log("Can't handle url: ")
+            } else {
+               return Linking.openURL("instagram://user?username=" + username)
+            }
+         })
+         .catch(err => console.error("An error occurred", err))
    }
    renderRelationship() {
       if (this.props.userType === "not_follow_me") {
@@ -68,7 +71,6 @@ class InstagramUser extends Component {
                   style={{
                      borderRadius: 100,
                      borderColor: "#5AD24E",
-                     marginLeft: 10,
                      flexDirection: "row"
                   }}
                >
@@ -118,7 +120,7 @@ class InstagramUser extends Component {
                            style={{
                               borderRadius: 100,
                               borderColor: "#5AD24E",
-                              marginLeft: 10,
+
                               flexDirection: "row"
                            }}
                         >
@@ -145,7 +147,7 @@ class InstagramUser extends Component {
                            style={{
                               borderRadius: 100,
                               borderColor: "#5AD24E",
-                              marginLeft: 10,
+
                               flexDirection: "row"
                            }}
                         >
@@ -162,7 +164,7 @@ class InstagramUser extends Component {
                            style={{
                               borderRadius: 100,
                               borderColor: "#5AD24E",
-                              marginLeft: 10,
+
                               flexDirection: "row"
                            }}
                         >
@@ -193,7 +195,7 @@ class InstagramUser extends Component {
                            style={{
                               borderRadius: 100,
                               borderColor: "#5AD24E",
-                              marginLeft: 10,
+
                               flexDirection: "row"
                            }}
                         >
@@ -210,7 +212,7 @@ class InstagramUser extends Component {
                            style={{
                               borderRadius: 100,
                               borderColor: "#5AD24E",
-                              marginLeft: 10,
+
                               flexDirection: "row"
                            }}
                         >
@@ -241,7 +243,6 @@ class InstagramUser extends Component {
                            style={{
                               borderRadius: 100,
                               borderColor: "#5AD24E",
-                              marginLeft: 10,
                               flexDirection: "row"
                            }}
                         >
