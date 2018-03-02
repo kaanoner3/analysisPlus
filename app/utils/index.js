@@ -1,3 +1,5 @@
 import axios from "./axios"
 import notificationHandler from "./notificationHandler"
-export { axios, notificationHandler }
+import * as transactionHandler from "./transactionHandler"
+
+export { axios, notificationHandler, transactionHandler }

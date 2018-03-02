@@ -24,7 +24,7 @@ import { getProfileDataRequest } from "ducks/profile"
 import FlatlistItem from "./FlatlistItem"
 import OneSignal from "react-native-onesignal"
 import notificationHandler, { getNotificationData, setNotificationData } from "utils/notificationHandler"
-
+import {createPurchaseInstance} from "utils/transactionHandler"
 const flatlistData = [{ flData: 1 }]
 
 const { width, height } = Dimensions.get("window")
@@ -61,6 +61,7 @@ class HomeScreen extends Component {
       } else {
          this.setState({ headerX: false })
       }
+      createPurchaseInstance()
    }
    componentWillUnmount() {
       OneSignal.removeEventListener("opened", this.onOpened)
