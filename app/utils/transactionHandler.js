@@ -9,7 +9,7 @@ import store from "store"
 export async function createPurchaseInstance() {
     console.log('girrrdiiii')
     console.log(InAppUtils)
-   var products = ["com.iznet.analysis.subscription.1month", "com.iznet.analysis.subscription.3month"]
+   var products = ["com.iznet.analysis.subscription.1month"]
 
    InAppUtils.loadProducts(products, (error, products) => {
       console.log("products:", products)
