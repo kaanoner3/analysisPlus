@@ -43,6 +43,9 @@
 		8C27D3142045405D00E7A8FA /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C27D30F2045403900E7A8FA /* libRNI18n.a */; };
 		8C27D3152045413700E7A8FA /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C27D2B1204448BA00E7A8FA /* libRNDeviceInfo.a */; };
 		8C381F88204966760064843B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C381F87204966760064843B /* StoreKit.framework */; };
+		8C382016204D294B0064843B /* libSMXCrashlytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C382013204D293C0064843B /* libSMXCrashlytics.a */; };
+		8C382069204D33E80064843B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C382067204D33E80064843B /* Fabric.framework */; };
+		8C38206A204D33E80064843B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C382068204D33E80064843B /* Crashlytics.framework */; };
 		8CDE3E6C203EB93D00B6A811 /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDE3E6B203EB91900B6A811 /* libRCTOneSignal.a */; };
 		8CDE3E76203EBA0000B6A811 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE3E75203EBA0000B6A811 /* NotificationService.m */; };
 		8CDE3E7A203EBA0000B6A811 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8CDE3E72203EBA0000B6A811 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -290,6 +293,20 @@
 			remoteGlobalIDString = 46E6943D1B289730000B634E;
 			remoteInfo = InAppUtilsTests;
 		};
+		8C382012204D293C0064843B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C38200D204D293B0064843B /* SMXCrashlytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D8D9DB831C6D03DB009FBC0E;
+			remoteInfo = SMXCrashlytics;
+		};
+		8C382014204D293C0064843B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C38200D204D293B0064843B /* SMXCrashlytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6463C84C1EBA12A60095B8CD;
+			remoteInfo = "SMXCrashlytics-tvOS";
+		};
 		8CBD2F222010D582004757C1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B374ADA5712F45219032DD47 /* RNCookieManager.xcodeproj */;
@@ -488,8 +505,12 @@
 		6CD309E281464567A0AB423D /* libReactNativeNavigation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeNavigation.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		89400197F76F409A911A8DC1 /* libSMXCrashlytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSMXCrashlytics.a; sourceTree = "<group>"; };
 		8C27D2DC2045403900E7A8FA /* RNI18n.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/ios/RNI18n.xcodeproj"; sourceTree = "<group>"; };
 		8C381F87204966760064843B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		8C38200D204D293B0064843B /* SMXCrashlytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SMXCrashlytics.xcodeproj; path = "../node_modules/react-native-fabric/ios/SMXCrashlytics.xcodeproj"; sourceTree = "<group>"; };
+		8C382067204D33E80064843B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Crashlytics/Fabric.framework; sourceTree = "<group>"; };
+		8C382068204D33E80064843B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Crashlytics/Crashlytics.framework; sourceTree = "<group>"; };
 		8CDE3E6D203EB95300B6A811 /* AnalysisRNApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = AnalysisRNApp.entitlements; path = AnalysisRNApp/AnalysisRNApp.entitlements; sourceTree = "<group>"; };
 		8CDE3E72203EBA0000B6A811 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CDE3E74203EBA0000B6A811 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
@@ -525,7 +546,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C382016204D294B0064843B /* libSMXCrashlytics.a in Frameworks */,
 				8C381F88204966760064843B /* StoreKit.framework in Frameworks */,
+				8C38206A204D33E80064843B /* Crashlytics.framework in Frameworks */,
 				8C27D3152045413700E7A8FA /* libRNDeviceInfo.a in Frameworks */,
 				8C27D3142045405D00E7A8FA /* libRNI18n.a in Frameworks */,
 				8CDE3E6C203EB93D00B6A811 /* libRCTOneSignal.a in Frameworks */,
@@ -545,6 +568,7 @@
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
+				8C382069204D33E80064843B /* Fabric.framework in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				7361C10671DC4838936F3EFE /* libRNCookieManager.a in Frameworks */,
 				341682209CB7470580898766 /* libInAppUtils.a in Frameworks */,
@@ -733,6 +757,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				8C38200D204D293B0064843B /* SMXCrashlytics.xcodeproj */,
 				8C27D2DC2045403900E7A8FA /* RNI18n.xcodeproj */,
 				FF047DE71FE7C34200C80EA9 /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -823,6 +848,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8C38200E204D293B0064843B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8C382013204D293C0064843B /* libSMXCrashlytics.a */,
+				8C382015204D293C0064843B /* libSMXCrashlytics.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		8CBD2F1E2010D582004757C1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -872,6 +906,7 @@
 				1062C3105FA44D55A5B92FD3 /* libRNDeviceInfo.a */,
 				C76D2AC2869F44BC8152925A /* libRNDeviceInfo-tvOS.a */,
 				50227DC4C1BC4AE1ABBC24F8 /* libInAppUtils.a */,
+				89400197F76F409A911A8DC1 /* libSMXCrashlytics.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -887,6 +922,8 @@
 		FF047DE51FE7B78300C80EA9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C382068204D33E80064843B /* Crashlytics.framework */,
+				8C382067204D33E80064843B /* Fabric.framework */,
 				8C381F87204966760064843B /* StoreKit.framework */,
 				8CDE3E81203EBA4C00B6A811 /* SystemConfiguration.framework */,
 				8CDE3E7F203EBA4400B6A811 /* UIKit.framework */,
@@ -951,6 +988,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				8CDE3E7E203EBA0000B6A811 /* Embed App Extensions */,
+				8C38200C204D288F0064843B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1158,6 +1196,10 @@
 				{
 					ProductGroup = FF047E411FE7C61400C80EA9 /* Products */;
 					ProjectRef = 015FDF5F5DC44280AAA7F665 /* RNSVG.xcodeproj */;
+				},
+				{
+					ProductGroup = 8C38200E204D293B0064843B /* Products */;
+					ProjectRef = 8C38200D204D293B0064843B /* SMXCrashlytics.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1389,6 +1431,20 @@
 			remoteRef = 8C381F8520495FD70064843B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		8C382013204D293C0064843B /* libSMXCrashlytics.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSMXCrashlytics.a;
+			remoteRef = 8C382012204D293C0064843B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8C382015204D293C0064843B /* libSMXCrashlytics.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSMXCrashlytics.a;
+			remoteRef = 8C382014204D293C0064843B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		8CBD2F232010D582004757C1 /* libRNCookieManager.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1605,6 +1661,19 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		8C38200C204D288F0064843B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 7c433b8dfd097e57d463ec2fb69a8d0ba41de2b8 00b30b7ceeb13cb058df165724f23ae9d64bd762bac6a979dd889911bd2871eb";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1704,12 +1773,14 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
+					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 				);
 				INFOPLIST_FILE = AnalysisRNAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1744,12 +1815,14 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
+					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 				);
 				INFOPLIST_FILE = AnalysisRNAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1777,6 +1850,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = M782KS8AC9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Crashlytics",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
@@ -1787,6 +1865,7 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
+					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 				);
 				INFOPLIST_FILE = AnalysisRNApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1812,6 +1891,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M782KS8AC9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Crashlytics",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
@@ -1822,6 +1906,7 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
+					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 				);
 				INFOPLIST_FILE = AnalysisRNApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1862,11 +1947,13 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
+					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 				);
 				INFOPLIST_FILE = "AnalysisRNApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1911,11 +1998,13 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
+					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 				);
 				INFOPLIST_FILE = "AnalysisRNApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1958,6 +2047,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.AnalysisRNApp-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1986,6 +2076,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2110,6 +2201,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.iznet.analysis.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2146,6 +2238,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

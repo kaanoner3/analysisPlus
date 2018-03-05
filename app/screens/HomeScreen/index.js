@@ -24,7 +24,10 @@ import { getProfileDataRequest } from "ducks/profile"
 import FlatlistItem from "./FlatlistItem"
 import OneSignal from "react-native-onesignal"
 import notificationHandler, { getNotificationData, setNotificationData } from "utils/notificationHandler"
-import {createPurchaseInstance} from "utils/transactionHandler"
+import { createPurchaseInstance } from "utils/transactionHandler"
+import axios from "utils/axios"
+import { buyItem } from "utils/transactionHandler"
+
 const flatlistData = [{ flData: 1 }]
 
 const { width, height } = Dimensions.get("window")
@@ -54,6 +57,7 @@ class HomeScreen extends Component {
       notificationHandler(this.props.navigator)
    }
    componentWillMount() {
+      //createPurchaseInstance(this.props.navigator)
       OneSignal.addEventListener("opened", this.onOpened)
       this.props.getProfileDataRequest(this.props.token)
       if (height === 812) {
@@ -61,7 +65,6 @@ class HomeScreen extends Component {
       } else {
          this.setState({ headerX: false })
       }
-      createPurchaseInstance()
    }
    componentWillUnmount() {
       OneSignal.removeEventListener("opened", this.onOpened)
@@ -69,9 +72,6 @@ class HomeScreen extends Component {
    componentDidMount() {
       this.setState({})
       this.handleRefresh()
-      setTimeout(() => {
-         notificationHandler(this.props.navigator)
-      }, 1000)
    }
    showUserScreen(index) {
       this.props.navigator.push({

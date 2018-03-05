@@ -15,6 +15,7 @@
       "react-native": "0.51.0",
       "react-native-cookie": "^0.2.0",
       "react-native-device-info": "^0.17.1",
+      "react-native-fabric": "^0.5.1",
       "react-native-i18n": "^2.0.12",
       "react-native-in-app-utils": "^6.0.0",
       "react-native-instagram-login": "^1.0.4",
