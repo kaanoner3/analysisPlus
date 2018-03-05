@@ -38,7 +38,7 @@ const styles = {
     },
     botActiveText: {
         fontWeight: "bold",
-        fontSize: 16,
+        fontSize: 13,
         color: "rgba(0,0,0,0.4)",
         fontFamily: "Circular"
     },

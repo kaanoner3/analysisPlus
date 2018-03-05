@@ -20,7 +20,7 @@ const styles = {
     },
     topContent: {
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",//backgroundColor:'yellow'
     },
     swiperContainer: {
         height: 70,
@@ -63,8 +63,9 @@ const styles = {
     purchaseButtonText: {
         fontSize: 16,
         color: "white",
-        marginHorizontal: 39,
-        alignSelf: "center"
+        alignSelf: "center",
+        fontFamily:'Circular',
+        marginVertical:11
     },
     purchaseButton: {
         width: width - 220,
@@ -72,7 +73,7 @@ const styles = {
         backgroundColor: "#5AD24E",
         borderRadius: 100,
         alignItems: "center",
-        flexDirection: "row",
+        flexDirection: "column",
         marginTop: 20
     },
     subscriptionInfoText: {
