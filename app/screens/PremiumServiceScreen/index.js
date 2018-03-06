@@ -8,7 +8,7 @@ import axios from "utils/axios"
 
 const { height, width } = Dimensions.get("window")
 
-const buttons = [];
+const buttons = []
 const testData = [
    {
       apple_store_id: "com.iznet.analysis.subscription.1month",
@@ -63,21 +63,20 @@ class PremiumServiceScreen extends Component {
       // console.log(index)
       return (
          <PremiumButton
-            ref={(premiumButton)=>{buttons[index] = premiumButton}}
+            ref={premiumButton => {
+               buttons[index] = premiumButton
+            }}
             activeButton={index === this.state.focusIndex ? true : false}
             premiumCost={"₺ 14,90"}
             premiumDuration="1 Week"
             onClick={() => {
-                buttons.forEach((button, buttonIndex) => {
-                    if (buttonIndex === index)
-                    {
-                        button.setState({isActive: true})
-                    }
-                    else
-                    {
-                        button.setState({isActive: false})
-                    }
-                });
+               buttons.forEach((button, buttonIndex) => {
+                  if (buttonIndex === index) {
+                     button.setState({ isActive: true })
+                  } else {
+                     button.setState({ isActive: false })
+                  }
+               })
             }}
          />
       )

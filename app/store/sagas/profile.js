@@ -5,6 +5,8 @@ import { PROFILE_DATA_FETCH_REQEUST, calculateDiff } from "../ducks/profile"
 import store from "store"
 import { setUser } from "../ducks/user"
 import { Crashlytics } from "react-native-fabric"
+import { transactionHandler } from 'utils';
+
 //var { Crashlytics } = fabric
 
 export function* getProfileData() {
@@ -12,6 +14,7 @@ export function* getProfileData() {
       try {
          const { token } = yield take(PROFILE_DATA_FETCH_REQEUST)
          const responseData = yield call(getProfileDataService, token)
+         yield call(transactionHandler.handleUnfinishedTransactions)
          Crashlytics.setUserIdentifier(String(responseData.data.user.id))
          yield put(calculateDiff(responseData.data.statistic))
          yield put(getProfileDataSuccess(responseData.data))

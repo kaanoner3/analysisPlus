@@ -11,7 +11,7 @@ const instance = axios.create({
 })
 instance.defaults.headers.common.Authorization = ""
 instance.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded"
-instance.defaults.timeout = 10000
+instance.defaults.timeout = 30000
 
 instance.interceptors.response.use(undefined, error => {
    // Do something with request error

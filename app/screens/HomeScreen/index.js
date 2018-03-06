@@ -57,7 +57,6 @@ class HomeScreen extends Component {
       notificationHandler(this.props.navigator)
    }
    componentWillMount() {
-      //createPurchaseInstance(this.props.navigator)
       OneSignal.addEventListener("opened", this.onOpened)
       this.props.getProfileDataRequest(this.props.token)
       if (height === 812) {
@@ -103,15 +102,18 @@ class HomeScreen extends Component {
       })
    }
    settingButtonPress() {
+    createPurchaseInstance(this.props.navigator)
+       /*
       this.props.navigator.push({
          screen: "SettingScreen",
          passProps: {}
       })
+      */
    }
    renderNavButtons() {
       return (
          <View style={this.state.headerX === false ? styles.headerButtonView : styles.headerButtonXView}>
-            <TouchableOpacity onPress={this.settingButtonPress}>
+            <TouchableOpacity onPress={() => this.settingButtonPress()}>
                <Image source={images.headerSettingsIcon} />
             </TouchableOpacity>
             <TouchableOpacity onPress={this.searchButtonPressed}>

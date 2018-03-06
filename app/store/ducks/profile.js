@@ -12,7 +12,7 @@ const initialState = {
    profileData: {
       user: {
          bio: "",
-         backgroundPic:"",
+         backgroundPic: "",
          counts: {
             media: 0,
             follows: 0,
@@ -22,6 +22,10 @@ const initialState = {
          id: "",
          profile_picture: "",
          username: ""
+      },
+      vipData: {
+         isVip: false,
+         vipData: null
       },
       statistic: {
          deleted_comments: 0,
@@ -56,12 +60,19 @@ export default function(state = initialState, action = {}) {
          }
       }
       case PROFILE_DATA_FETCH_SUCCESS: {
-         const { user, statistic, lastest_media } = action.data
+         const { instagram_user, statistic, lastest_media, user } = action.data
+         console.log("reducer", instagram_user)
+         if (user.vip_time > 0) {
+            isVip = true
+         } else {
+            isVip = false
+         }
          return {
             ...state,
             profileData: {
-               user: { ...user, backgroundPic: lastest_media.images.standard_resolution.url },
-               statistic: { ...statistic }
+               user: { ...instagram_user, backgroundPic: lastest_media.images.standard_resolution.url },
+               statistic: { ...statistic },
+               vipData: { ...user, isVip }
             },
             error: false,
             isFetching: false
