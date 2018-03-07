@@ -39,7 +39,6 @@ const styles = {
         width: sliderItemWidth,
         textAlign: "center",
         fontFamily: "Circular",
-        fontWeight: "bold",
         fontSize: 16
     },
     swiperDotView: {
@@ -65,6 +64,7 @@ const styles = {
         color: "white",
         alignSelf: "center",
         fontFamily:'Circular',
+        fontWeight:'bold',
         marginVertical:11
     },
     purchaseButton: {

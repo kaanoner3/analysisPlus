@@ -61,7 +61,6 @@ export default function(state = initialState, action = {}) {
       }
       case PROFILE_DATA_FETCH_SUCCESS: {
          const { instagram_user, statistic, lastest_media, user } = action.data
-         console.log("reducer", instagram_user)
          if (user.vip_time > 0) {
             isVip = true
          } else {

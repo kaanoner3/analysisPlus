@@ -17,7 +17,7 @@
       "react-native-device-info": "^0.17.1",
       "react-native-fabric": "^0.5.1",
       "react-native-i18n": "^2.0.12",
-      "react-native-in-app-utils": "^6.0.0",
+      "react-native-in-app-utils": "https://github.com/yusufyildirim/react-native-in-app-utils/tarball/master",
       "react-native-instagram-login": "^1.0.4",
       "react-native-linear-gradient": "^2.3.0",
       "react-native-navigation": "^1.1.311",

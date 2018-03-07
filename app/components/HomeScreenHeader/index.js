@@ -119,7 +119,7 @@ class HomeScreenHeader extends Component {
       this.interval2 = setInterval(() => {
          temp += 1
          strokeDashoffset = temp * 6.5
-         strokeDashoffset = Math.min(strokeDashoffset, 10000)
+         strokeDashoffset = Math.min(strokeDashoffset, 1000000)
          strokeDashoffset = Math.max(strokeDashoffset, 0)
          // this.setState({ offset: 0 + strokeDashoffset })
 
