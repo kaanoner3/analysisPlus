@@ -45,7 +45,7 @@ class ShowInstagramUserScreen extends Component {
    renderBlurContent() {
       return (
          <View style={styles.absolute}>
-            <BlurView style={styles.absolute} blurType="light" blurAmount={5} />
+            <BlurView style={styles.absolute} blurType="dark" blurAmount={10} />
             <View style={{ flexDirection: "column", alignItems: "center", marginTop: 200 }}>
                <TouchableOpacity
                   style={styles.upgradeButton}
