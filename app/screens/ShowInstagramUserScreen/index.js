@@ -12,6 +12,7 @@ class ShowInstagramUserScreen extends Component {
       super()
       this.renderInstagramUser = this.renderInstagramUser.bind(this)
       this.renderBlurContent = this.renderBlurContent.bind(this)
+      this.isContentVip = this.isContentVip.bind(this)
 
       this.page = 0
 
@@ -66,8 +67,15 @@ class ShowInstagramUserScreen extends Component {
          </View>
       )
    }
+   isContentVip() {
+      console.log(this.props.serviceType, this.props.isVip)
+      if (this.props.serviceType === "losted_followers" && this.props.isVip === false) {
+         return this.renderBlurContent()
+      } else {
+         return <View />
+      }
+   }
    render() {
-      console.log("reeeeender", this.props.isVip)
       if (this.props.isFetching === false) {
          if (this.props.errorPage === false) {
             return (
@@ -92,7 +100,7 @@ class ShowInstagramUserScreen extends Component {
                         }}
                      />
                      {/*bunu ayrı bir fonksiyona al bir suru kritere gore olabilir*/}
-                     {this.props.isVip === true ? this.renderBlurContent() : <View />}
+                     {this.isContentVip()}
                   </View>
                </View>
             )
