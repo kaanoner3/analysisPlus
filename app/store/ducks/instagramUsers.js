@@ -26,11 +26,17 @@ export default function(state = initialState, action = {}) {
       case USER_DATA_FETCH_SUCCESS: {
          const { data } = action
          const sliceData = data.slice(0, 20)
+         if (data) {
+            errorPage = false
+         } else {
+            errorPage = true
+         }
          return {
             ...state,
             userList: action.data,
             flatlistData: sliceData,
-            isFetching: false
+            isFetching: false,
+            errorPage
          }
       }
       case ADD_DATA_TO_USER_LIST: {

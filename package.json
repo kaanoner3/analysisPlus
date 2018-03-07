@@ -13,6 +13,7 @@
       "moment": "^2.20.0",
       "react": "16.0.0",
       "react-native": "0.51.0",
+      "react-native-blur": "^3.2.2",
       "react-native-cookie": "^0.2.0",
       "react-native-device-info": "^0.17.1",
       "react-native-fabric": "^0.5.1",

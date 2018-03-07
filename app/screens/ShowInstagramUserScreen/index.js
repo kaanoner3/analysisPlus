@@ -1,14 +1,18 @@
 import React, { Component } from "react"
 import { View, Text, Image, TouchableOpacity, FlatList, ActivityIndicator, Dimensions } from "react-native"
-import { StaticHeader, InstagramUser,ErrorPage } from "components"
+import { StaticHeader, InstagramUser, ErrorPage } from "components"
 import styles from "./styles"
 import { getUserDataRequest, addDataToUserlist } from "ducks/instagramUsers"
 import { connect } from "react-redux"
-import { languages } from "resources"
+import { languages, images } from "resources"
+import { BlurView, VibrancyView } from "react-native-blur"
+
 class ShowInstagramUserScreen extends Component {
    constructor() {
       super()
       this.renderInstagramUser = this.renderInstagramUser.bind(this)
+      this.renderBlurContent = this.renderBlurContent.bind(this)
+
       this.page = 0
 
       this.headerText = ""
@@ -27,17 +31,43 @@ class ShowInstagramUserScreen extends Component {
    }
    renderInstagramUser({ item }) {
       return (
-         <InstagramUser
-            data={item}
-            userType={this.props.serviceType}
-            //onPress={() => this.pushInstagramUserDetail()}
-            navigator={this.props.navigator}
-         />
+         <View>
+            <InstagramUser
+               data={item}
+               userType={this.props.serviceType}
+               //onPress={() => this.pushInstagramUserDetail()}
+               navigator={this.props.navigator}
+            />
+         </View>
       )
    }
-
+   renderBlurContent() {
+      return (
+         <View style={styles.absolute}>
+            <BlurView style={styles.absolute} blurType="light" blurAmount={5} />
+            <View style={{ flexDirection: "column", alignItems: "center", marginTop: 200 }}>
+               <TouchableOpacity
+                  style={styles.upgradeButton}
+                  onPress={() => {
+                     this.props.navigator.push({
+                        screen: "PremiumServiceScreen",
+                        backButtonTitle: "Back",
+                        backButtonHidden: false,
+                        passProps: {}
+                     })
+                  }}
+               >
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                     <Image style={{ height: 26, width: 20, marginVertical: 14 }} source={images.lockLogo} />
+                     <Text style={styles.buttonText}>UPGRADE PREMIUM</Text>
+                  </View>
+               </TouchableOpacity>
+            </View>
+         </View>
+      )
+   }
    render() {
-       console.log('reeeeender',this.props.errorPage)
+      console.log("reeeeender", this.props.isVip)
       if (this.props.isFetching === false) {
          if (this.props.errorPage === false) {
             return (
@@ -61,6 +91,8 @@ class ShowInstagramUserScreen extends Component {
                            }
                         }}
                      />
+                     {/*bunu ayrı bir fonksiyona al bir suru kritere gore olabilir*/}
+                     {this.props.isVip === true ? this.renderBlurContent() : <View />}
                   </View>
                </View>
             )
@@ -86,7 +118,8 @@ const mapStateToProps = (state, ownProps) => {
       flatlistData: state.instagramUsers.flatlistData,
       userList: state.instagramUsers.userList,
       isFetching: state.instagramUsers.isFetching,
-      errorPage: state.instagramUsers.errorPage
+      errorPage: state.instagramUsers.errorPage,
+      isVip: state.profile.profileData.vipData.isVip
    }
 }
 export default connect(mapStateToProps, { getUserDataRequest, addDataToUserlist })(ShowInstagramUserScreen)

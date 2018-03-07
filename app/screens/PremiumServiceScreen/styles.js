@@ -80,7 +80,8 @@ const styles = {
         fontSize: 11,
         color: "rgba(255,255,255,0.3)",
         marginHorizontal: 15,
-        marginTop: 30
+        marginTop: 30,
+        textAlign:'center'
     }
 }
 
