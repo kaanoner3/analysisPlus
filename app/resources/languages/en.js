@@ -42,7 +42,7 @@ export default {
    login_neverPostText: "We will never post without your permission",
 
    premium_week: "Week",
-   premium_buynow: "Buy Now",
+   premium_buynow: "BUY NOW",
    premium_save: "Save",
    premium_swiper1: "Manage your company accounts as you wish",
    premium_swiper2: "Track your followers of your business account",
@@ -64,5 +64,7 @@ export default {
    noti_blocksMe: "When someone blocks me",
    noti_review: "Review us on AppStore",
    noti_report: "Report a Problem",
-   noti_term: "Term of Use"
+   noti_term: "Term of Use",
+
+   upgradePremium: "UPGRADE PREMIUM"
 }

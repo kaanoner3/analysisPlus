@@ -38,7 +38,7 @@ export default {
    interaction_users_i_like_butdont_follow: "Beğendiğim Fakat Takip Etmediğim Kullanıcılar",
 
    premium_week: "Hafta",
-   premium_buynow: "Satın Al",
+   premium_buynow: "SATIN AL",
    premium_save: "Kar Et",
    premium_swiper1: "Şirket hesaplarını dilediğin gibi yönet",//degiscek
    premium_swiper2: "Hesabınızın takipçilerini takip edin",//degiscek
