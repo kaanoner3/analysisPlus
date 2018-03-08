@@ -24,7 +24,7 @@ class InstagramSearchUser extends Component {
          <View style={{ marginTop: 10 }}>
             <TouchableOpacity
                style={styles.buttonView}
-               onPress={this.pushInstagramUserDetail(this.props.data.username, this.props.data.pk)}
+               onPress={()=>this.pushInstagramUserDetail(this.props.data.username, this.props.data.pk)}
             >
                <Image style={styles.profilPic} source={{ uri: this.props.data.profile_pic_url }} />
                <View style={styles.nameView}>

@@ -66,7 +66,7 @@ class SettingScreen extends Component {
                      }}
                   >
                      <Image style={styles.addAccImage} source={images.addAcc} />
-                     <Text style={styles.addAccText}>{languages.t("noti_addAccount")}</Text>
+                     <Text style={styles.addAccText}>{languages.t("noti_addAcount")}</Text>
                   </TouchableOpacity>
                </View>
                <Text style={styles.sectionHeaderText}>{languages.t("noti_notifications")}</Text>
