@@ -12,7 +12,7 @@ import {
 import { StaticHeader, InstagramSearchUser } from "components"
 import { connect } from "react-redux"
 import styles from "./styles"
-import { images } from "resources"
+import { images,languages } from "resources"
 import axios from "utils/axios"
 import { Navigation } from "react-native-navigation"
 class SearchModal extends Component {
@@ -140,7 +140,7 @@ class SearchModal extends Component {
                   marginTop: 66
                }}
             >
-               Search
+               {languages.t("search_text")}
             </Text>
          </View>
       )

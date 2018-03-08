@@ -1,7 +1,7 @@
 import styles from "./styles"
 import React, { Component } from "react"
 import { Navigation } from "react-native-navigation"
-import { images, strings } from "resources"
+import { images, languages } from "resources"
 import axios from "axios"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
@@ -124,13 +124,13 @@ class LoginScreen extends Component {
             <Image style={styles.loginScreenBg} source={images.loginScreenBg} />
             {this.renderBottomBackground()}
             <View style={styles.buttonContent}>
-               <Text style={styles.upText}>Start analyzing your profile</Text>
+               <Text style={styles.upText}>{languages.t("login_upText")}</Text>
 
                <TouchableOpacity style={{ flex: 1 }} onPress={() => this.refs.instagramLogin.show()}>
                   {this.props.isFetching === false ? (
                      <View style={styles.buttonView}>
                         <Image style={{ height: 18, width: 18 }} source={images.logoInstagram} />
-                        <Text style={styles.loginText}>Login with Instagram</Text>
+                        <Text style={styles.loginText}>{languages.t("login_loginText")}</Text>
                      </View>
                   ) : (
                      <View
@@ -150,7 +150,7 @@ class LoginScreen extends Component {
                   )}
                </TouchableOpacity>
 
-               <Text style={styles.botText}>We will never post without your permission</Text>
+               <Text style={styles.botText}>{languages.t("login_neverPostText")}</Text>
             </View>
             <InstagramSelf
                ref="instagramLogin"

@@ -10,7 +10,6 @@ export default {
    home_followers: "FOLLOWERS",
    home_following: "FOLLOWING",
 
-
    header_losted_followers: "Losted Followers",
    header_gained_followers: "Gained Followers",
    header_profile_visitors: "Profile Visitors",
@@ -38,14 +37,32 @@ export default {
    interaction_my_best_friends: "My Best Friends",
    interaction_users_i_like_butdont_follow: "Users I Like but Don't Follow",
 
+   login_upText: "Start analyze your profile",
+   login_loginText: "Login with Instagram",
+   login_neverPostText: "We will never post without your permission",
+
    premium_week: "Week",
    premium_buynow: "Buy Now",
    premium_save: "Save",
+   premium_swiper1: "Manage your company accounts as you wish",
+   premium_swiper2: "Track your followers of your business account",
+   premium_swiper3: "Analyze your business account",
 
+   search_text: "Search",
    graphic_weekly: "Weekly",
    graphic_monthly: "Monthly",
    graphic_yearly: "Yearly",
    graphic_totalFollowers: "TOTAL FOLLOWERS",
    graphic_gainedFollowers: "GAINED FOLLOWERS",
-   graphic_lostedFollowers: "LOSTED FOLLOWERS"
+   graphic_lostedFollowers: "LOSTED FOLLOWERS",
+
+   noti_notifications: "NOTIFICATIONS",
+   noti_addAcount: "Add Account",
+   noti_logout: "Logout",
+   noti_accounts: "ACCOUNTS",
+   noti_unfollowMe: "When someone unfollows me",
+   noti_blocksMe: "When someone blocks me",
+   noti_review: "Review us on AppStore",
+   noti_report: "Report a Problem",
+   noti_term: "Term of Use"
 }

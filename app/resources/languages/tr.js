@@ -40,11 +40,32 @@ export default {
    premium_week: "Hafta",
    premium_buynow: "Satın Al",
    premium_save: "Kar Et",
+   premium_swiper1: "Şirket hesaplarını dilediğin gibi yönet",//degiscek
+   premium_swiper2: "Hesabınızın takipçilerini takip edin",//degiscek
+   premium_swiper3: "Hesabınızı analiz edin", //degiscek
 
+
+   login_upText: "Start analyze your profile",
+   login_loginText: "Login with Instagram",
+   login_neverPostText: "We will never post without your permission",
+
+   search_text: "Ara",
    graphic_weekly: "Haftalık",
    graphic_monthly: "Aylık",
    graphic_yearly: "Yıllık",
    graphic_totalFollowers: "TOPLAM TAKİPÇİLER",
    graphic_gainedFollowers: "KAZANILAN TAKİPÇİLER",
-   graphic_lostedFollowers: "KAYBEDİLEN TAKİPÇİLER"
+   graphic_lostedFollowers: "KAYBEDİLEN TAKİPÇİLER",
+
+   noti_notifications: "BİLDİRİMLER",
+   noti_addAcount: "Hesap Ekle",
+   noti_logout: "Çıkış Yap",
+   noti_accounts: "HESAPLAR",
+   noti_unfollowMe: "Biri beni takipten çıktığında",
+   noti_blocksMe: "Biri beni blokladığında",
+   noti_review: "Bizi AppStore'da oyla",
+   noti_report: "Problem Bildir",
+   noti_term: "Term of Use",
+
+   upgradePremium: "PREMIUMA'A YUKSELT"
 }

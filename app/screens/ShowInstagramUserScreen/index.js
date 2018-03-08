@@ -60,7 +60,7 @@ class ShowInstagramUserScreen extends Component {
                >
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                      <Image style={{ height: 26, width: 20, marginVertical: 14 }} source={images.lockLogo} />
-                     <Text style={styles.buttonText}>UPGRADE PREMIUM</Text>
+                     <Text style={styles.buttonText}>{languages.t("upgradePremium")}</Text>
                   </View>
                </TouchableOpacity>
             </View>

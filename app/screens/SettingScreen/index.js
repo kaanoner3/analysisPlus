@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, Switch, ScrollView } from "react-n
 import styles from "./styles"
 import { connect } from "react-redux"
 import { StaticHeader } from "components"
-import { images } from "resources"
+import { images, languages } from "resources"
 import { doInstagramLogin, changeUser } from "ducks/auth"
 import { deleteUser } from "ducks/user"
 import Cookie from "react-native-cookie"
@@ -42,7 +42,7 @@ class SettingScreen extends Component {
                      onPress={() => this.props.deleteUser(data.instagram_id)}
                      style={styles.logoutButton}
                   >
-                     <Text style={styles.logoutText}>Logout</Text>
+                     <Text style={styles.logoutText}>{languages.t("noti_logout")}</Text>
                   </TouchableOpacity>
                </TouchableOpacity>
             )
@@ -54,7 +54,7 @@ class SettingScreen extends Component {
          <View style={styles.containerView}>
             <StaticHeader title="Settings" navigator={this.props.navigator} />
             <ScrollView>
-               <Text style={styles.sectionHeaderText}>ACCOUNTS</Text>
+               <Text style={styles.sectionHeaderText}>{languages.t("noti_accounts")}</Text>
                <View style={styles.accContainer}>
                   {this.renderAccounts()}
                   <TouchableOpacity
@@ -66,30 +66,30 @@ class SettingScreen extends Component {
                      }}
                   >
                      <Image style={styles.addAccImage} source={images.addAcc} />
-                     <Text style={styles.addAccText}>Add Account</Text>
+                     <Text style={styles.addAccText}>{languages.t("noti_addAccount")}</Text>
                   </TouchableOpacity>
                </View>
-               <Text style={styles.sectionHeaderText}>NOTIFICATIONS</Text>
+               <Text style={styles.sectionHeaderText}>{languages.t("noti_notifications")}</Text>
                <View style={styles.accContainer}>
                   <View style={styles.notificationView}>
-                     <Text style={styles.addAccText}>When someone unfollows me</Text>
+                     <Text style={styles.addAccText}>{languages.t("noti_unfollowMe")}</Text>
                      <Switch />
                   </View>
                   <View style={styles.notificationView}>
-                     <Text style={styles.addAccText}>When someone blocks me</Text>
+                     <Text style={styles.addAccText}>{languages.t("noti_blocksMe")}</Text>
                      <Switch />
                   </View>
                </View>
                <Text style={styles.sectionHeaderText}>ANALYSIS+</Text>
                <View style={styles.accContainer}>
                   <View style={styles.notificationView}>
-                     <Text style={styles.addAccText}>Review us on Appstore</Text>
+                     <Text style={styles.addAccText}>{languages.t("noti_review")}</Text>
                   </View>
                   <View style={styles.notificationView}>
-                     <Text style={styles.addAccText}>Report a problem</Text>
+                     <Text style={styles.addAccText}>{languages.t("noti_report")}</Text>
                   </View>
                   <View style={styles.notificationView}>
-                     <Text style={styles.addAccText}>Term of use</Text>
+                     <Text style={styles.addAccText}>{languages.t("noti_term")}</Text>
                   </View>
                </View>
             </ScrollView>

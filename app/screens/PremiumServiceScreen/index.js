@@ -7,7 +7,7 @@ import Swiper from "react-native-swiper"
 import axios from "utils/axios"
 import { NativeModules } from "react-native"
 import { getProductList } from "services"
-
+import { languages } from "resources"
 import { transactionHandler } from "utils"
 
 const { height, width } = Dimensions.get("window")
@@ -70,8 +70,8 @@ class PremiumServiceScreen extends Component {
       const item = this.state.inAppItems[this.state.subscriptionIndex]
       console.log(item)
       if (item) {
-          console.log("if")
-          transactionHandler.buyItem(item, "subscription", this.props.navigators)
+         console.log("if")
+         transactionHandler.buyItem(item, "subscription", this.props.navigators)
       }
    }
    renderPremiumSubscription({ item, index }) {
@@ -150,17 +150,17 @@ class PremiumServiceScreen extends Component {
             >
                <View style={styles.swiperTextView}>
                   <Text style={styles.sliderTextStyle} numberOfLines={3} ellipsizeMode="clip">
-                     Manage your company accounts as you wish
+                  {languages.t("premium_swiper1")}
                   </Text>
                </View>
                <View style={styles.swiperTextView}>
                   <Text style={styles.sliderTextStyle} numberOfLines={3} ellipsizeMode="clip">
-                     Track your followers of your business account
+                  {languages.t("premium_swiper2")}
                   </Text>
                </View>
                <View style={styles.swiperTextView}>
                   <Text style={styles.sliderTextStyle} numberOfLines={3} ellipsizeMode="clip">
-                     Analyze your business account
+                  {languages.t("premium_swiper3")}
                   </Text>
                </View>
             </Swiper>
@@ -187,7 +187,7 @@ class PremiumServiceScreen extends Component {
                   ListFooterComponent={
                      <View style={{ flexDirection: "column", alignItems: "center" }}>
                         <TouchableOpacity style={styles.purchaseButton} onPress={() => this.buyButtonPress()}>
-                           <Text style={styles.purchaseButtonText}>BUY NOW</Text>
+                           <Text style={styles.purchaseButtonText}>{languages.t("premium_buynow")}</Text>
                         </TouchableOpacity>
                      </View>
                   }
