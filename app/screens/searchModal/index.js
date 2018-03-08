@@ -89,7 +89,7 @@ class SearchModal extends Component {
                   placeholder="Search"
                   placeholderTextColor="rgba(255,255,255,0.4)"
                   onChangeText={text => {
-                     if (text.length > 3)
+                     if (text.length > 2) {
                         axios
                            .get(
                               "https://www.instagram.com/web/search/topsearch/?context=blended&query=" + text
@@ -97,6 +97,15 @@ class SearchModal extends Component {
                            .then(response => {
                               this.setState({ userList: response.data.users })
                            })
+                     } else if (text.length === 0) {
+                        axios
+                           .get(
+                              "https://www.instagram.com/web/search/topsearch/?context=blended&query=" + text
+                           )
+                           .then(response => {
+                              this.setState({ userList: response.data.users })
+                           })
+                     }
                   }}
                   autoCapitalize="none"
                   autoCorrect={false}
@@ -107,10 +116,10 @@ class SearchModal extends Component {
       )
    }
    backButton() {
-    this.props.navigator.pop({
-        animated: true,
-        animationType: "fade"
-    })
+      this.props.navigator.pop({
+         animated: true,
+         animationType: "fade"
+      })
    }
    renderHeader() {
       return (

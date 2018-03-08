@@ -5,8 +5,13 @@ import { AnimatedHeader, PremiumButton } from "components"
 import styles from "./styles"
 import Swiper from "react-native-swiper"
 import axios from "utils/axios"
+import { NativeModules } from "react-native"
+import { getProductList } from "services"
+
+import { transactionHandler } from "utils"
 
 const { height, width } = Dimensions.get("window")
+const { InAppUtils } = NativeModules
 
 const buttons = []
 const testData = [
@@ -46,10 +51,12 @@ class PremiumServiceScreen extends Component {
    constructor() {
       super()
 
-      this.state = { headerX: false, focusIndex: 1 }
+      this.state = { headerX: false, subscriptionIndex: 1, loading: false, inAppItems: [] }
+      this.products = []
 
       this.renderPremiumSubscription = this.renderPremiumSubscription.bind(this)
       this.renderSwiper = this.renderSwiper.bind(this)
+      this.buyButtonPress = this.buyButtonPress.bind(this)
    }
    componentWillMount() {
       if (height === 812) {
@@ -58,21 +65,31 @@ class PremiumServiceScreen extends Component {
          this.setState({ headerX: false })
       }
    }
+   buyButtonPress() {
+      console.log(this.state.subscriptionIndex)
+      const item = this.state.inAppItems[this.state.subscriptionIndex]
+      console.log(item)
+      if (item) {
+          console.log("if")
+          transactionHandler.buyItem(item, "subscription", this.props.navigators)
+      }
+   }
    renderPremiumSubscription({ item, index }) {
-      // console.log(item)
-      // console.log(index)
       return (
          <PremiumButton
+            key={index}
             ref={premiumButton => {
                buttons[index] = premiumButton
             }}
-            activeButton={index === this.state.focusIndex ? true : false}
+            activeButton={index === this.state.subscriptionIndex ? true : false}
             premiumCost={"₺ 14,90"}
             premiumDuration="1 Week"
             onClick={() => {
                buttons.forEach((button, buttonIndex) => {
                   if (buttonIndex === index) {
-                     button.setState({ isActive: true })
+                     this.setState({ subscriptionIndex: buttonIndex }, () => {
+                        console.log(this.state.subscriptionIndex)
+                     })
                   } else {
                      button.setState({ isActive: false })
                   }
@@ -81,7 +98,38 @@ class PremiumServiceScreen extends Component {
          />
       )
    }
-   componentDidMount() {}
+   componentDidMount() {
+      console.log("did mount")
+      transactionHandler.handleUnfinishedTransactions(this.props.navigator)
+      this.setState({ loading: true }, () => {
+         getProductList()
+            .then(({ data }) => {
+               this.products = data.map(value => value.apple_store_id)
+
+               InAppUtils.loadProducts(this.products, (error, products) => {
+                  if (error) {
+                  }
+
+                  if (products) {
+                     console.log(products)
+                     const inAppItems = data.map((value, key) => ({
+                        ...value,
+                        ...products.filter(product => {
+                           return product.identifier === value.apple_store_id
+                        })[0]
+                     }))
+                     this.setState({ inAppItems })
+                  }
+                  this.setState({ loading: false })
+               })
+            })
+            .catch(() => {
+               this.setState({ loading: false })
+               alert("Beklenmedik bir hata oluştu.")
+            })
+      })
+      //loading
+   }
    renderSwiper() {
       return (
          <View style={styles.swiperContainer}>
@@ -120,6 +168,7 @@ class PremiumServiceScreen extends Component {
       )
    }
    render() {
+      console.log(this.state)
       return (
          <View style={styles.container}>
             <View style={styles.topContent}>
@@ -137,7 +186,7 @@ class PremiumServiceScreen extends Component {
                   renderItem={this.renderPremiumSubscription}
                   ListFooterComponent={
                      <View style={{ flexDirection: "column", alignItems: "center" }}>
-                        <TouchableOpacity style={styles.purchaseButton}>
+                        <TouchableOpacity style={styles.purchaseButton} onPress={() => this.buyButtonPress()}>
                            <Text style={styles.purchaseButtonText}>BUY NOW</Text>
                         </TouchableOpacity>
                      </View>
@@ -153,8 +202,8 @@ class PremiumServiceScreen extends Component {
                      of the current period, and identify the cost of the renewal. Subscriptions may be managed
                      by the user and auto-renewal may be turned off by going to the user’s Account Settings
                      after purchase. Any unused portion of a free trial period, if offered, will be forteited
-                     when the user purchases a subscription to that publication, where applicable. 
-                     Terms of Use .
+                     when the user purchases a subscription to that publication, where applicable. Terms of
+                     Use .
                   </Text>
                </ScrollView>
             </View>

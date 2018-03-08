@@ -16,6 +16,7 @@ import getChartStatisticFollowersData from "./getChartStatisticFollowersData"
 import getChartStatisticGainedData from "./getChartStatisticGainedData"
 import getChartStatisticLostedData from "./getChartStatisticLostedData"
 import validatePurchase from "./validatePurchase"
+import getProductList from "./getProductList"
 
 export default {
    LoginStorageService,
@@ -35,7 +36,8 @@ export default {
    getChartStatisticFollowersData,
    getChartStatisticGainedData,
    getChartStatisticLostedData,
-   validatePurchase
+   validatePurchase,
+   getProductList
 }
 
 export {
@@ -56,5 +58,6 @@ export {
    getChartStatisticFollowersData,
    getChartStatisticGainedData,
    getChartStatisticLostedData,
-   validatePurchase
+   validatePurchase,
+   getProductList
 }

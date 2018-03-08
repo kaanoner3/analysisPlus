@@ -14,7 +14,6 @@ export function* interactionDetail() {
       try {
          const { serviceType } = yield take(INTERACTION_DETAIL_REQUEST)
          const responseData = yield call(getInteractionDetail, serviceType)
-         console.log('dataa',responseData)
          yield put(interactionDetailSuccess(responseData.data))
       } catch (error) {
          console.log(error)

@@ -102,21 +102,18 @@ class HomeScreen extends Component {
       })
    }
    settingButtonPress() {
-    createPurchaseInstance(this.props.navigator)
-       /*
       this.props.navigator.push({
          screen: "SettingScreen",
          passProps: {}
       })
-      */
    }
    renderNavButtons() {
       return (
          <View style={this.state.headerX === false ? styles.headerButtonView : styles.headerButtonXView}>
-            <TouchableOpacity onPress={() => this.settingButtonPress()}>
+            <TouchableOpacity style={{width:30,height:30,alignItems:'center'}} onPress={() => this.settingButtonPress()}>
                <Image source={images.headerSettingsIcon} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.searchButtonPressed}>
+            <TouchableOpacity style={{width:30,height:30,alignItems:'center'}} onPress={this.searchButtonPressed}>
                <Image source={images.headerSearchIcon} />
             </TouchableOpacity>
          </View>

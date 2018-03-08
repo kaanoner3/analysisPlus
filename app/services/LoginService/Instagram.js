@@ -83,6 +83,11 @@ export default class InstagramSelf extends Component {
 
    render() {
       const { clientId, redirectUrl, scopes } = this.props
+      console.log(
+         `https://api.instagram.com/oauth/authorize/?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=token&scope=${scopes.join(
+            "+"
+         )}`
+      )
       return (
          <Modal
             animationType={"slide"}

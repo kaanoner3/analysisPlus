@@ -2,15 +2,15 @@ const initialState = {
    errorMessage: null,
    isFetching: null,
    chartStatisticData: null,
- 
+
    chartData: [],
    gainedData: [],
    lostedData: [],
-  
+
    lostedFetching: false,
    gainedFetching: false,
    followersFetching: false,
-  
+
    followersFlag: false,
    gainedFlag: false,
    lostedFlag: false
@@ -45,11 +45,19 @@ export default function(state = initialState, action = {}) {
       }
       case FOLLOWERS_CHART_STATISTIC_SUCCESS: {
          const data = action.formattedData
-         return {
-            ...state,
-            chartData: data,
-            followersFlag: false,
-            followersFetching: false
+         if (data !== undefined) {
+            return {
+               ...state,
+               chartData: data,
+               followersFlag: false,
+               followersFetching: false
+            }
+         } else {
+            return {
+               ...state,
+               followersFlag: false,
+               followersFetching: false
+            }
          }
       }
       case GAINED_CHART_STATISTIC_REQUEST: {
@@ -60,11 +68,19 @@ export default function(state = initialState, action = {}) {
       }
       case GAINED_CHART_STATISTIC_SUCCESS: {
          const data = action.formattedData
-         return {
-            ...state,
-            gainedData: data,
-            gainedFlag: false,
-            gainedFetching: false
+         if (data !== undefined) {
+            return {
+               ...state,
+               gainedData: data,
+               gainedFlag: false,
+               gainedFetching: false
+            }
+         } else {
+            return {
+               ...state,
+               gainedFlag: false,
+               gainedFetching: false
+            }
          }
       }
       case GAINED_CHART_STATISTIC_FAIL: {
@@ -83,11 +99,19 @@ export default function(state = initialState, action = {}) {
       }
       case LOSTED_CHART_STATISTIC_SUCCESS: {
          const data = action.formattedData
-         return {
-            ...state,
-            lostedData: data,
-            lostedFetching: false,
-            lostedFlag: false
+         if (data !== undefined) {
+            return {
+               ...state,
+               lostedData: data,
+               lostedFetching: false,
+               lostedFlag: false
+            }
+         } else {
+            return {
+               ...state,
+               lostedFetching: false,
+               lostedFlag: false
+            }
          }
       }
       case LOSTED_CHART_STATISTIC_FAIL: {

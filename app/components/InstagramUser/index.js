@@ -54,7 +54,6 @@ class InstagramUser extends Component {
       axios.post("/api/user-visit", params)
       Linking.canOpenURL("instagram://user?username=" + username)
          .then(supported => {
-            console.log(supported)
             if (!supported) {
                console.log("Can't handle url: ")
             } else {
