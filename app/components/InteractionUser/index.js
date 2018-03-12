@@ -285,12 +285,14 @@ class InteractionUser extends Component {
                      borderRadius: 100,
                      backgroundColor: "#059ED9",
                      marginLeft: 20,
-                     marginTop: 27
+                     marginTop: 27,
+                     flexDirection: "row",
+                     alignItems: "center"
                   }}
                >
-                  <Text style={{ color: "white", alignSelf: "center", marginTop: 4 }}>
-                     {this.props.index + 1}
-                  </Text>
+                  <View style={{ flexDirection: "column", alignItems: "center", flex: 1 }}>
+                     <Text style={{ color: "white", alignSelf: "center" }}>{this.props.index + 1}</Text>
+                  </View>
                </View>
                <View style={styles.dataView}>
                   <TouchableOpacity
@@ -345,12 +347,14 @@ class InteractionUser extends Component {
                      borderRadius: 100,
                      backgroundColor: "#192A4F",
                      marginLeft: 20,
-                     marginTop: 27
+                     marginTop: 27,
+                     flexDirection: "row",
+                     alignItems: "center"
                   }}
                >
-                  <Text style={{ color: "white", alignSelf: "center", marginTop: 4 }}>
-                     {this.props.index}
-                  </Text>
+                  <View style={{ flexDirection: "column", alignItems: "center", flex: 1 }}>
+                     <Text style={{ color: "white", alignSelf: "center" }}>{this.props.index + 1}</Text>
+                  </View>
                </View>
                <View style={styles.dataView}>
                   <TouchableOpacity

@@ -22,7 +22,7 @@ class InteractionContent extends Component {
    render() {
       return (
          <View style={[{ flexDirection: "column", alignItems: "flex-start" }, this.props.style]}>
-            <TouchableOpacity style={{ flexDirection: "row" }} onPress={this.buttonPress}>
+            <TouchableOpacity style={{ flexDirection: "row",width:Dimensions.get('window').width }} onPress={this.buttonPress}>
                <Image style={contentStyles.contentIcon} source={this.props.contentIcon} />
                <Text style={contentStyles.contentText}>{this.props.contentText}</Text>
             </TouchableOpacity>
