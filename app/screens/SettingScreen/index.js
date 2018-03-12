@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, Text, Image, TouchableOpacity, Switch, ScrollView } from "react-native"
+import { View, Text, Image, TouchableOpacity, Switch, ScrollView, Linking } from "react-native"
 import styles from "./styles"
 import { connect } from "react-redux"
 import { StaticHeader } from "components"
@@ -11,6 +11,7 @@ import Cookie from "react-native-cookie"
 import { SignInService, InstagramSelf } from "services/LoginService"
 import OneSignal from "react-native-onesignal"
 import axios from "utils/axios"
+import DeviceInfo from "react-native-device-info"
 
 const instagram = {
    client_id: "65dcfc61b3564f14a9144181b08c6b1a",
@@ -101,7 +102,7 @@ class SettingScreen extends Component {
                               const params = new FormData()
                               params.append("notification_blocked_me", this.state.blocks_me)
                               params.append("notification_losted_follower", this.state.unfollow_me)
-                              axios.post("api/user/settings-update", params).then(resp=>console.log(resp))
+                              axios.post("api/user/settings-update", params).then(resp => console.log(resp))
                            })
                         }}
                         value={this.state.unfollow_me}
@@ -116,7 +117,7 @@ class SettingScreen extends Component {
                               const params = new FormData()
                               params.append("notification_blocked_me", this.state.blocks_me)
                               params.append("notification_losted_follower", this.state.unfollow_me)
-                              axios.post("api/user/settings-update", params).then(resp=>console.log(resp))
+                              axios.post("api/user/settings-update", params).then(resp => console.log(resp))
                            })
                         }}
                         value={this.state.blocks_me}
@@ -129,9 +130,22 @@ class SettingScreen extends Component {
                   <View style={styles.notificationView}>
                      <Text style={styles.addAccText}>{languages.t("noti_review")}</Text>
                   </View>
-                  <View style={styles.notificationView}>
-                     <Text style={styles.addAccText}>{languages.t("noti_report")}</Text>
-                  </View>
+                  <TouchableOpacity
+                     onPress={() => {
+                         console.log(this.props.currentUserId,DeviceInfo.getReadableVersion())
+                         
+                        Linking.openURL(
+                           `mailto:info@analysisapp.com?subject=ID:${
+                              this.props.currentUserId
+                           } || App Version: iOS/${DeviceInfo.getReadableVersion()} - İletişim&body=Mesajınız`
+                        )
+                        
+                     }}
+                  >
+                     <View style={styles.notificationView}>
+                        <Text style={styles.addAccText}>{languages.t("noti_report")}</Text>
+                     </View>
+                  </TouchableOpacity>
                   <View style={styles.notificationView}>
                      <Text style={styles.addAccText}>{languages.t("noti_term")}</Text>
                   </View>
@@ -156,7 +170,8 @@ const mapStateToProps = (state, ownProps) => {
    return {
       userList: state.user.existingUsers,
       currentUserId: state.profile.profileData.user.id,
-      clientId: state.auth.data.clientID
+      clientId: state.auth.data.clientID,
+
    }
 }
 
