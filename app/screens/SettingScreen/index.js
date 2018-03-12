@@ -33,7 +33,6 @@ class SettingScreen extends Component {
       axios
          .get("api/user/settings")
          .then(resp => {
-            console.log(resp)
             this.setState({
                unfollow_me: resp.data.notification_losted_follower,
                blocks_me: resp.data.notification_blocked_me
@@ -132,14 +131,13 @@ class SettingScreen extends Component {
                   </View>
                   <TouchableOpacity
                      onPress={() => {
-                         console.log(this.props.currentUserId,DeviceInfo.getReadableVersion())
-                         
                         Linking.openURL(
-                           `mailto:info@analysisapp.com?subject=ID:${
+                           `mailto:info@analysisplusapp.com?subject=Database id:${
+                              this.props.dbID
+                           } || instagram_ID:${
                               this.props.currentUserId
                            } || App Version: iOS/${DeviceInfo.getReadableVersion()} - İletişim&body=Mesajınız`
                         )
-                        
                      }}
                   >
                      <View style={styles.notificationView}>
@@ -170,8 +168,8 @@ const mapStateToProps = (state, ownProps) => {
    return {
       userList: state.user.existingUsers,
       currentUserId: state.profile.profileData.user.id,
-      clientId: state.auth.data.clientID,
-
+      dbID: state.profile.profileData.vipData.id,
+      clientId: state.auth.data.clientID
    }
 }
 

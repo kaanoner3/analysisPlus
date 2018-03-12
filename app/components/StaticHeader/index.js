@@ -24,7 +24,6 @@ class StaticHeader extends Component {
       }
    }
    componentWillReceiveProps(nextProps) {
-      console.log("statiiiic", nextProps)
       if (nextProps.notiBlockData && nextProps.notiUnfollowData) {
          this.unfollow = nextProps.notiUnfollowData
          this.blocks = nextProps.notiBlockData

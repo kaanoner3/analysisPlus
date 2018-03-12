@@ -15,6 +15,7 @@ export function* getProfileData() {
       try {
          const { token } = yield take(PROFILE_DATA_FETCH_REQEUST)
          const responseData = yield call(getProfileDataService, token)
+         console.log(responseData)
          yield call(transactionHandler.handleUnfinishedTransactions)
          Crashlytics.setUserIdentifier(String(responseData.data.user.id))
 
