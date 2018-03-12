@@ -5,9 +5,12 @@ import { connect } from "react-redux"
 import { StaticHeader } from "components"
 import { images, languages } from "resources"
 import { doInstagramLogin, changeUser } from "ducks/auth"
+import { setSettings, getSettings } from "ducks/settings"
 import { deleteUser } from "ducks/user"
 import Cookie from "react-native-cookie"
 import { SignInService, InstagramSelf } from "services/LoginService"
+import OneSignal from "react-native-onesignal"
+import axios from "utils/axios"
 
 const instagram = {
    client_id: "65dcfc61b3564f14a9144181b08c6b1a",
@@ -19,9 +22,23 @@ class SettingScreen extends Component {
       super()
       this.renderAccounts = this.renderAccounts.bind(this)
       this.changeUser = this.changeUser.bind(this)
+
+      this.state = { unfollow_me: false, blocks_me: false }
    }
    changeUser(instagram_token, username, password) {
       this.props.changeUser(instagram_token, username, password)
+   }
+   componentWillMount() {
+      axios
+         .get("api/user/settings")
+         .then(resp => {
+            console.log(resp)
+            this.setState({
+               unfollow_me: resp.data.notification_losted_follower,
+               blocks_me: resp.data.notification_blocked_me
+            })
+         })
+         .catch(error => console.log(error))
    }
    renderAccounts() {
       if (this.props.userList.length > 0) {
@@ -52,7 +69,12 @@ class SettingScreen extends Component {
    render() {
       return (
          <View style={styles.containerView}>
-            <StaticHeader title="Settings" navigator={this.props.navigator} />
+            <StaticHeader
+               title="Settings"
+               notiBlockData={this.state.blocks_me}
+               notiUnfollowData={this.state.unfollow_me}
+               navigator={this.props.navigator}
+            />
             <ScrollView>
                <Text style={styles.sectionHeaderText}>{languages.t("noti_accounts")}</Text>
                <View style={styles.accContainer}>
@@ -73,11 +95,33 @@ class SettingScreen extends Component {
                <View style={styles.accContainer}>
                   <View style={styles.notificationView}>
                      <Text style={styles.addAccText}>{languages.t("noti_unfollowMe")}</Text>
-                     <Switch />
+                     <Switch
+                        onValueChange={res => {
+                           this.setState({ unfollow_me: res }, () => {
+                              const params = new FormData()
+                              params.append("notification_blocked_me", this.state.blocks_me)
+                              params.append("notification_losted_follower", this.state.unfollow_me)
+                              axios.post("api/user/settings-update", params).then(resp=>console.log(resp))
+                           })
+                        }}
+                        value={this.state.unfollow_me}
+                        onTintColor="#059ED9"
+                     />
                   </View>
                   <View style={styles.notificationView}>
                      <Text style={styles.addAccText}>{languages.t("noti_blocksMe")}</Text>
-                     <Switch />
+                     <Switch
+                        onValueChange={res => {
+                           this.setState({ blocks_me: res }, () => {
+                              const params = new FormData()
+                              params.append("notification_blocked_me", this.state.blocks_me)
+                              params.append("notification_losted_follower", this.state.unfollow_me)
+                              axios.post("api/user/settings-update", params).then(resp=>console.log(resp))
+                           })
+                        }}
+                        value={this.state.blocks_me}
+                        onTintColor="#059ED9" //maliiiiiiye sor
+                     />
                   </View>
                </View>
                <Text style={styles.sectionHeaderText}>ANALYSIS+</Text>
@@ -116,4 +160,10 @@ const mapStateToProps = (state, ownProps) => {
    }
 }
 
-export default connect(mapStateToProps, { doInstagramLogin, changeUser, deleteUser })(SettingScreen)
+export default connect(mapStateToProps, {
+   doInstagramLogin,
+   changeUser,
+   deleteUser,
+   setSettings,
+   getSettings
+})(SettingScreen)

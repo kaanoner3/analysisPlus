@@ -11,6 +11,7 @@ import notificationHandler, { getNotificationData, setNotificationData } from "u
 import { createPurchaseInstance } from "utils/transactionHandler"
 import axios from "utils/axios"
 import { buyItem } from "utils/transactionHandler"
+import { getSettings, setSettings } from "ducks/settings"
 import {
    Platform,
    StyleSheet,
@@ -188,7 +189,7 @@ const mapStateToProps = (state, ownProps) => {
    return {
       token: state.user.token,
       userData: state.profile.profileData,
-      isFetching: state.profile.isFetching
+      isFetching: state.profile.isFetching,
    }
 }
 export default connect(mapStateToProps, { getProfileDataRequest })(HomeScreen)
