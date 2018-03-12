@@ -8,40 +8,38 @@ import store from "store"
 import { setNotificationData } from "utils/notificationHandler"
 import { images } from "resources"
 import { Alert } from "react-native"
-
+import axios from "utils/axios"
 export default class App extends Component {
    constructor(props) {
       super(props)
       registerScreens(store, Provider)
 
       console.disableYellowBox = true
-      /* ONE SIGNAL */
-
+      
+      OneSignal.checkPermissions(resp => {
+         console.log("CHECK PERM", resp)
+      })
       const onRegistered = notifData => {
-
          //console.log('Device had been registered for push notifications!', notifData);
          AsyncStorage.setItem("oneSignalId", JSON.stringify(notifData))
          //alert(notifData);
       }
 
       const onOpened = openResult => {
-
          setNotificationData(openResult)
-         /*
-         console.log("Message: ", openResult.notification.payload.body)
-         console.log("Data: ", openResult.notification.payload.additionalData)
-         console.log("isActive: ", openResult.notification.isAppInFocus)
-         console.log("openResult: ", openResult)
-         */
+         
+         //console.log("Message: ", openResult.notification.payload.body)
+         //console.log("Data: ", openResult.notification.payload.additionalData)
+         //console.log("isActive: ", openResult.notification.isAppInFocus)
+         //console.log("openResult: ", openResult)
+         
       }
 
       const onIds = device => {
-
          AsyncStorage.setItem("oneSignalId", device.userId)
       }
 
       const onReceived = notification => {
-
          console.log("Notification received: ", notification)
          AsyncStorage.getItem("oneSignalId").then(data => {
             console.log("get async data", data)
@@ -52,5 +50,6 @@ export default class App extends Component {
       OneSignal.addEventListener("received", onReceived)
       OneSignal.addEventListener("opened", onOpened)
       OneSignal.addEventListener("ids", onIds)
+      
    }
 }

@@ -66,11 +66,8 @@ class PremiumServiceScreen extends Component {
       }
    }
    buyButtonPress() {
-      console.log(this.state.subscriptionIndex)
       const item = this.state.inAppItems[this.state.subscriptionIndex]
-      console.log(item)
       if (item) {
-         console.log("if")
          transactionHandler.buyItem(item, "subscription", this.props.navigators)
       }
    }
@@ -88,7 +85,6 @@ class PremiumServiceScreen extends Component {
                buttons.forEach((button, buttonIndex) => {
                   if (buttonIndex === index) {
                      this.setState({ subscriptionIndex: buttonIndex }, () => {
-                        console.log(this.state.subscriptionIndex)
                      })
                   } else {
                      button.setState({ isActive: false })
@@ -99,19 +95,16 @@ class PremiumServiceScreen extends Component {
       )
    }
    componentDidMount() {
-      console.log("did mount")
       transactionHandler.handleUnfinishedTransactions(this.props.navigator)
       this.setState({ loading: true }, () => {
          getProductList()
             .then(({ data }) => {
                this.products = data.map(value => value.apple_store_id)
-
                InAppUtils.loadProducts(this.products, (error, products) => {
                   if (error) {
                   }
 
                   if (products) {
-                     console.log(products)
                      const inAppItems = data.map((value, key) => ({
                         ...value,
                         ...products.filter(product => {
@@ -168,7 +161,6 @@ class PremiumServiceScreen extends Component {
       )
    }
    render() {
-      console.log(this.state)
       return (
          <View style={styles.container}>
             <View style={styles.topContent}>

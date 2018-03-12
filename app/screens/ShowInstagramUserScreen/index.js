@@ -28,7 +28,6 @@ class ShowInstagramUserScreen extends Component {
    }
    componentWillMount() {
       this.headerText = "header_" + this.props.serviceType
-      console.log(this.headerText)
    }
    renderInstagramUser({ item }) {
       return (
@@ -68,8 +67,7 @@ class ShowInstagramUserScreen extends Component {
       )
    }
    isContentVip() {
-      console.log(this.props.serviceType, this.props.isVip)
-      if (this.props.serviceType === "losted_followers" && this.props.isVip === false) {
+      if (this.props.serviceType === "gained_followers" && this.props.isVip === false) {
          return this.renderBlurContent()
       } else {
          return <View />

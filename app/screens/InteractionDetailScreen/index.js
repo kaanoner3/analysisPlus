@@ -21,8 +21,6 @@ class InteractionDetailScreen extends Component {
    }
    componentWillMount() {
       this.headerText = "interaction_" + this.props.serviceType
-      console.log(this.headerText)
-
       if (height === 812) {
          this.setState({ headerX: true })
       } else {

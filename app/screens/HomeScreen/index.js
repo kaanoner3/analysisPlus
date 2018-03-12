@@ -1,4 +1,16 @@
 import React, { Component } from "react"
+import { HomeScreenHeader, CustomRefreshControll } from "components"
+import { images, strings } from "resources"
+import styles from "./styles"
+import LinearGradient from "react-native-linear-gradient"
+import { connect } from "react-redux"
+import { getProfileDataRequest } from "ducks/profile"
+import FlatlistItem from "./FlatlistItem"
+import OneSignal from "react-native-onesignal"
+import notificationHandler, { getNotificationData, setNotificationData } from "utils/notificationHandler"
+import { createPurchaseInstance } from "utils/transactionHandler"
+import axios from "utils/axios"
+import { buyItem } from "utils/transactionHandler"
 import {
    Platform,
    StyleSheet,
@@ -15,18 +27,6 @@ import {
    Alert,
    AsyncStorage
 } from "react-native"
-import { HomeScreenHeader, CustomRefreshControll } from "components"
-import { images, strings } from "resources"
-import styles from "./styles"
-import LinearGradient from "react-native-linear-gradient"
-import { connect } from "react-redux"
-import { getProfileDataRequest } from "ducks/profile"
-import FlatlistItem from "./FlatlistItem"
-import OneSignal from "react-native-onesignal"
-import notificationHandler, { getNotificationData, setNotificationData } from "utils/notificationHandler"
-import { createPurchaseInstance } from "utils/transactionHandler"
-import axios from "utils/axios"
-import { buyItem } from "utils/transactionHandler"
 
 const flatlistData = [{ flData: 1 }]
 
@@ -58,6 +58,18 @@ class HomeScreen extends Component {
    }
    componentWillMount() {
       OneSignal.addEventListener("opened", this.onOpened)
+      //api/user/update her uygulama acıldıgında atıyoz
+      AsyncStorage.getItem("oneSignalId", (err, result) => {
+         if (result) {
+            const params = new FormData()
+            params.append("player_id", result)
+            params.append("device_os", "ios")
+            axios
+               .post("api/user/update", params)
+               .then()
+               .catch(error => console.log(error))
+         }
+      })
       this.props.getProfileDataRequest(this.props.token)
       if (height === 812) {
          this.setState({ headerX: true })
@@ -110,10 +122,16 @@ class HomeScreen extends Component {
    renderNavButtons() {
       return (
          <View style={this.state.headerX === false ? styles.headerButtonView : styles.headerButtonXView}>
-            <TouchableOpacity style={{width:30,height:30,alignItems:'center'}} onPress={() => this.settingButtonPress()}>
+            <TouchableOpacity
+               style={{ width: 30, height: 30, alignItems: "center" }}
+               onPress={() => this.settingButtonPress()}
+            >
                <Image source={images.headerSettingsIcon} />
             </TouchableOpacity>
-            <TouchableOpacity style={{width:30,height:30,alignItems:'center'}} onPress={this.searchButtonPressed}>
+            <TouchableOpacity
+               style={{ width: 30, height: 30, alignItems: "center" }}
+               onPress={this.searchButtonPressed}
+            >
                <Image source={images.headerSearchIcon} />
             </TouchableOpacity>
          </View>

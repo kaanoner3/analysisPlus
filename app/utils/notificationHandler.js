@@ -7,7 +7,6 @@ import { bindActionCreators } from "redux"
 let notificationData = {}
 
 export function setNotificationData(data) {
-   console.log("set notification", data)
    notificationData = data
 }
 
