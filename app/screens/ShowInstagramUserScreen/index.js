@@ -35,7 +35,6 @@ class ShowInstagramUserScreen extends Component {
             <InstagramUser
                data={item}
                userType={this.props.serviceType}
-               //onPress={() => this.pushInstagramUserDetail()}
                navigator={this.props.navigator}
             />
          </View>

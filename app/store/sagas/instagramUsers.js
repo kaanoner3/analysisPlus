@@ -10,12 +10,6 @@ export function* getUserList() {
       try {
          const action = yield take(USER_DATA_FETCH_REQUEST)
          const responseData = yield call(getUserDataService, action.serviceType)
-         //servis ekle relationship datasını koy sonra putla.
-         /*
-         console.log("saga data", responseData.data, "   serviceType", action.serviceType)
-         const { accessToken } = store.getState().auth
-         const objectWithRelation = yield call(addRelationToObject, responseData.data, accessToken)
-        */
          yield put(getUserDataSuccess(responseData.data))
       } catch (error) {
          console.log('zııırt',error)
