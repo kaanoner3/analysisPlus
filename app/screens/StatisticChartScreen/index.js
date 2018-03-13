@@ -1,5 +1,13 @@
 import React, { Component } from "react"
-import { View, Text, Dimensions, ScrollView, Animated, TouchableOpacity } from "react-native"
+import {
+   View,
+   Text,
+   Dimensions,
+   ScrollView,
+   Animated,
+   TouchableOpacity,
+   ActivityIndicator
+} from "react-native"
 import {
    VictoryBar,
    VictoryChart,
@@ -30,6 +38,10 @@ class StatisticChartScreen extends Component {
       this.renderFollowerChart = this.renderFollowerChart.bind(this)
       this.renderGainedFollowersChart = this.renderGainedFollowersChart.bind(this)
       this.renderLostedFollowersChart = this.renderLostedFollowersChart.bind(this)
+
+      this.lostedHeight = 0
+      this.gainedHeight = 0
+      this.followerHeight = 0
 
       this.serviceType = "weekly"
       this.state = {
@@ -91,7 +103,13 @@ class StatisticChartScreen extends Component {
          this.props.lostedErrorFlag === false
       ) {
          return (
-            <View style={styles.chartContainer}>
+            <View
+               style={styles.chartContainer}
+               onLayout={event => {
+                  let height = event.nativeEvent.layout.height
+                  this.lostedHeight = height
+               }}
+            >
                <View style={styles.infoView}>
                   <Text style={styles.infoText}>{languages.t("graphic_lostedFollowers")}</Text>
                   <Text style={styles.infoValue}>{this.state.lostedChartCount}</Text>
@@ -265,11 +283,11 @@ class StatisticChartScreen extends Component {
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
-         onPress={() => {
-            this.setState({ lostedActiveChart: 2 })
-            this.props.lostedChartStatisticRequest("yearly")
-         }}
-style={
+                        onPress={() => {
+                           this.setState({ lostedActiveChart: 2 })
+                           this.props.lostedChartStatisticRequest("yearly")
+                        }}
+                        style={
                            this.state.lostedActiveChart !== 2 ? styles.buttonStyle : styles.activeButtonStyle
                         }
                      >
@@ -288,7 +306,20 @@ style={
             </View>
          )
       } else {
-         return <View style={{ flex: 1 }} />
+         return (
+            <View
+               style={{
+                  height: this.lostedHeight,
+                  alignItems: "center",
+                  flexDirection: "row",
+                  backgroundColor: "#192A4F"
+               }}
+            >
+               <View style={{ flexDirection: "column", justifyContent: "center", flex: 1 }}>
+                  <ActivityIndicator style={{ alignSelf: "center" }} color="white" size="large" />
+               </View>
+            </View>
+         )
       }
    }
    renderGainedFollowersChart() {
@@ -298,7 +329,13 @@ style={
          this.props.gainedErrorFlag === false
       ) {
          return (
-            <View style={styles.chartContainer}>
+            <View
+               style={styles.chartContainer}
+               onLayout={event => {
+                  let height = event.nativeEvent.layout.height
+                  this.gainedHeight = height
+               }}
+            >
                <View style={styles.infoView}>
                   <Text style={styles.infoText}>{languages.t("graphic_gainedFollowers")}</Text>
                   <Text style={styles.infoValue}>{this.state.gainedChartCount}</Text>
@@ -495,7 +532,20 @@ style={
             </View>
          )
       } else {
-         return <View style={{ flex: 1 }} />
+         return (
+            <View
+               style={{
+                  height: this.gainedHeight,
+                  alignItems: "center",
+                  flexDirection: "row",
+                  backgroundColor: "#192A4F"
+               }}
+            >
+               <View style={{ flexDirection: "column", justifyContent: "center", flex: 1 }}>
+                  <ActivityIndicator style={{ alignSelf: "center" }} color="white" size="large" />
+               </View>
+            </View>
+         )
       }
    }
    renderFollowerChart() {
@@ -505,7 +555,13 @@ style={
          this.props.followersErrorFlag === false
       ) {
          return (
-            <View style={styles.chartContainer}>
+            <View
+               style={styles.chartContainer}
+               onLayout={event => {
+                  let height = event.nativeEvent.layout.height
+                  this.followerHeight = height
+               }}
+            >
                <View style={styles.infoView}>
                   <Text style={styles.infoText}>{languages.t("graphic_totalFollowers")}</Text>
                   <Text style={styles.infoValue}>{this.state.followersChartCount}</Text>
@@ -720,7 +776,20 @@ style={
             </View>
          )
       } else {
-         return <View style={{ flex: 1 }} />
+         return (
+            <View
+               style={{
+                  height: this.followerHeight,
+                  alignItems: "center",
+                  flexDirection: "row",
+                  backgroundColor: "#192A4F"
+               }}
+            >
+               <View style={{ flexDirection: "column", justifyContent: "center", flex: 1 }}>
+                  <ActivityIndicator style={{ alignSelf: "center" }} color="white" size="large" />
+               </View>
+            </View>
+         )
       }
    }
 
