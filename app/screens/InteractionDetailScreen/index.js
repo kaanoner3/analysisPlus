@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import { Text, View, Image, Dimensions, TouchableOpacity, ActivityIndicator, FlatList } from "react-native"
 import styles from "./styles"
-import { images,languages } from "resources"
-import { StaticHeader, InteractionUser } from "components"
+import { images, languages } from "resources"
+import { StaticHeader, InteractionUser,ErrorPage } from "components"
 import { addDataToInteractionlist } from "ducks/interactions"
 import { connect } from "react-redux"
 
@@ -46,30 +46,34 @@ class InteractionDetailScreen extends Component {
    }
    render() {
       if (this.props.isFetching === false) {
-         return (
-            <View style={{ flex: 1, backgroundColor: "#152341" }}>
-               <StaticHeader title={languages.t(this.headerText)} navigator={this.props.navigator} />
-               <View style={{ flex: 1 }}>
-                  <FlatList
-                     renderItem={this.renderFlatlistItem}
-                     data={this.props.flatlistData}
-                     style={{ flex: 1 }}
-                     ItemSeparatorComponent={() => <View style={styles.itemSepStyle} />}
-                     onEndReachedThreshold={0.5}
-                     onEndReached={() => {
-                        this.page = this.page + 1
-                        let temp = Math.floor(this.props.interactionList.length / 20)
-                        if (20 * temp < this.props.interactionList.length) {
-                           temp = temp + 1
-                        }
-                        if (this.page < temp) {
-                           this.props.addDataToInteractionlist(this.page)
-                        }
-                     }}
-                  />
+         if (this.props.errorPage === false) {
+            return (
+               <View style={{ flex: 1, backgroundColor: "#152341" }}>
+                  <StaticHeader title={languages.t(this.headerText)} navigator={this.props.navigator} />
+                  <View style={{ flex: 1 }}>
+                     <FlatList
+                        renderItem={this.renderFlatlistItem}
+                        data={this.props.flatlistData}
+                        style={{ flex: 1 }}
+                        ItemSeparatorComponent={() => <View style={styles.itemSepStyle} />}
+                        onEndReachedThreshold={0.5}
+                        onEndReached={() => {
+                           this.page = this.page + 1
+                           let temp = Math.floor(this.props.interactionList.length / 20)
+                           if (20 * temp < this.props.interactionList.length) {
+                              temp = temp + 1
+                           }
+                           if (this.page < temp) {
+                              this.props.addDataToInteractionlist(this.page)
+                           }
+                        }}
+                     />
+                  </View>
                </View>
-            </View>
-         )
+            )
+         } else {
+            return <ErrorPage />
+         }
       } else {
          return (
             <View style={{ flex: 1, backgroundColor: "#152341", alignItems: "center" }}>
@@ -88,7 +92,8 @@ const mapStateToProps = (state, ownProps) => {
    return {
       flatlistData: state.interactions.flatlistData,
       interactionList: state.interactions.interactionList,
-      isFetching: state.interactions.isFetching
+      isFetching: state.interactions.isFetching,
+      errorPage: state.interactions.errorPage
    }
 }
 export default connect(mapStateToProps, { addDataToInteractionlist })(InteractionDetailScreen)

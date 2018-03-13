@@ -36,7 +36,6 @@ class SettingScreen extends Component {
    componentWillMount() {
       this.deviceInfo = DeviceInfo.getSystemVersion()
       this.bundleId = DeviceInfo.getBundleId()
-      console.log("device infooolar", this.deviceInfo)
       axios
          .get("api/user/settings")
          .then(resp => {
@@ -48,12 +47,11 @@ class SettingScreen extends Component {
          .catch(error => console.log(error))
    }
    reviewAppStore() {
-      if (parseInt(this.deviceInfo) < 10.3) {
+      if (parseInt(this.deviceInfo) > 10.3) {
          if (StoreReview.isAvailable) {
             StoreReview.requestReview()
          }
       } else {
-         console.log(this.bundleId)
          let RatingTracker = new RatingRequestor(this.bundleId)
          RatingTracker.showRatingDialog()
          /*

@@ -5,7 +5,8 @@ export const ADD_DATA_TO_INTERACTION_LIST = "interactionDetail/ADD_DATA_TO_INTER
 const initialState = {
    errorMessage: null,
    isFetching: null,
-   relationshipToSelf: null
+   relationshipToSelf: null,
+   errorPage: false
 }
 export default function(state = initialState, action = {}) {
    switch (action.type) {
@@ -17,11 +18,17 @@ export default function(state = initialState, action = {}) {
       case INTERACTION_DETAIL_SUCCESS: {
          const { data } = action
          const sliceData = data.slice(0, 20)
+         if (data) {
+            errorPage = false
+         } else {
+            errorPage = true
+         }
          return {
             ...state,
             interactionList: data,
             flatlistData: sliceData,
-            isFetching: false
+            isFetching: false,
+            errorPage
          }
       }
       case ADD_DATA_TO_INTERACTION_LIST: {
@@ -33,6 +40,20 @@ export default function(state = initialState, action = {}) {
          return {
             ...state,
             flatlistData: newflatlistData
+         }
+      }
+      case INTERACTION_DETAIL_FAIL: {
+         const { errorMessage } = action
+         if (errorMessage.response.status !== 200) {
+            errorPage = true
+         } else {
+            errorPage = false
+         }
+         return {
+            ...state,
+            errorMessage: errorMessage,
+            errorPage,
+            isFetching: false
          }
       }
       default:
@@ -48,7 +69,7 @@ export function interactionDetailSuccess(data) {
 }
 
 export function interactionDetailfail(errorMessage) {
-   return { type: INTERACTION_MEDIA_DATA_SUCCESS, errorMessage }
+   return { type: INTERACTION_DETAIL_FAIL, errorMessage }
 }
 export function addDataToInteractionlist(page) {
    return { type: ADD_DATA_TO_INTERACTION_LIST, page }

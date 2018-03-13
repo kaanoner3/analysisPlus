@@ -17,6 +17,7 @@ export function* interactionDetail() {
          yield put(interactionDetailSuccess(responseData.data))
       } catch (error) {
          console.log(error)
+         yield put(interactionDetailfail(error))
       }
    }
 }

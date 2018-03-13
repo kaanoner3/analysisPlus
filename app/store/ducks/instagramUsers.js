@@ -52,7 +52,7 @@ export default function(state = initialState, action = {}) {
       }
       case USER_DATA_FETCH_FAIL: {
          const { error } = action
-         if (error.response.status === 500) {
+         if (error.response.status !== 200) {
             errorPage = true
          } else {
             errorPage = false
