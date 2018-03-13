@@ -12,6 +12,8 @@ import { SignInService, InstagramSelf } from "services/LoginService"
 import OneSignal from "react-native-onesignal"
 import axios from "utils/axios"
 import DeviceInfo from "react-native-device-info"
+import * as StoreReview from "react-native-store-review"
+import RatingRequestor from "react-native-rating-requestor"
 
 const instagram = {
    client_id: "65dcfc61b3564f14a9144181b08c6b1a",
@@ -23,13 +25,18 @@ class SettingScreen extends Component {
       super()
       this.renderAccounts = this.renderAccounts.bind(this)
       this.changeUser = this.changeUser.bind(this)
-
+      this.reviewAppStore = this.reviewAppStore.bind(this)
       this.state = { unfollow_me: false, blocks_me: false }
+      this.deviceInfo = undefined
+      this.bundleId = undefined
    }
    changeUser(instagram_token, username, password) {
       this.props.changeUser(instagram_token, username, password)
    }
    componentWillMount() {
+      this.deviceInfo = DeviceInfo.getSystemVersion()
+      this.bundleId = DeviceInfo.getBundleId()
+      console.log("device infooolar", this.deviceInfo)
       axios
          .get("api/user/settings")
          .then(resp => {
@@ -39,6 +46,37 @@ class SettingScreen extends Component {
             })
          })
          .catch(error => console.log(error))
+   }
+   reviewAppStore() {
+      if (parseInt(this.deviceInfo) < 10.3) {
+         if (StoreReview.isAvailable) {
+            StoreReview.requestReview()
+         }
+      } else {
+         console.log(this.bundleId)
+         let RatingTracker = new RatingRequestor(this.bundleId)
+         RatingTracker.showRatingDialog()
+         /*
+         RatingTracker.handlePositiveEvent(function(didAppear, userDecision) {
+               console.log(didAppear,userDecision)
+            if (didAppear) {
+               switch (userDecision) {
+                  case "decline":
+                     console.log("User declined to rate")
+                     break
+                  case "delay":
+                     console.log("User delayed rating, will be asked later")
+                     break
+                  case "accept":
+                     console.log("User accepted invitation to rate, redirected to app store")
+                     break
+               }
+            } else {
+               console.log("Request popup did not pop up. May appear on future positive events.")
+            }
+         })
+         */
+      }
    }
    renderAccounts() {
       if (this.props.userList.length > 0) {
@@ -126,9 +164,11 @@ class SettingScreen extends Component {
                </View>
                <Text style={styles.sectionHeaderText}>ANALYSIS+</Text>
                <View style={styles.accContainer}>
-                  <View style={styles.notificationView}>
-                     <Text style={styles.addAccText}>{languages.t("noti_review")}</Text>
-                  </View>
+                  <TouchableOpacity onPress={() => this.reviewAppStore()}>
+                     <View style={styles.notificationView}>
+                        <Text style={styles.addAccText}>{languages.t("noti_review")}</Text>
+                     </View>
+                  </TouchableOpacity>
                   <TouchableOpacity
                      onPress={() => {
                         Linking.openURL(
