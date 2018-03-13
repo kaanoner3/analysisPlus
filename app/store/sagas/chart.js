@@ -110,6 +110,47 @@ export function* chartStatistic() {
                return formattedValues
             })
          }
+         if (serviceType === "yearly") {
+            var day = []
+            var month = []
+            var year = []
+            var count = []
+            var indexArray = []
+            var followersChartData = []
+
+            formattedData = dates.map((value, index) => {
+               var date = value.date
+               var splitValue = date.split(".")
+               if (index % 72 === 0 || index === 0) {
+                  day.push(parseInt(splitValue[0]))
+                  month.push(parseInt(splitValue[1]))
+                  year.push(parseInt(splitValue[2]))
+                  count.push(value.count)
+               }
+               if (index === arrayLength - 1) {
+                  var countLegth = count.length
+
+                  domainYMax = Math.max(...count)
+                  domainYMin = Math.min(...count)
+
+                  for (var i = 0; i < countLegth; i++) {
+                     followersChartData.push({
+                        x: i + 1,
+                        y: count[i]
+                     })
+                  }
+               }
+
+               var formattedValues = {
+                  day,
+                  month,
+                  year,
+                  followersChartData,
+                  domainY: { maxValue: domainYMax, minValue: domainYMin }
+               }
+               return formattedValues
+            })
+         }
          yield put(followersChartStatisticSuccess(formattedData[dates.length - 1]))
       } catch (error) {
          yield put(followersChartStatisticFail(error))
@@ -207,6 +248,47 @@ export function* gainedFollowersStatistic() {
                return formattedValues
             })
          }
+         if (serviceType === "yearly") {
+            var day = []
+            var month = []
+            var year = []
+            var count = []
+            var indexArray = []
+            var gainedChartData = []
+
+            gainedFormatted = dates.map((value, index) => {
+               var date = value.date
+               var splitValue = date.split(".")
+               if (index % 72 === 0 || index === 0) {
+                  day.push(parseInt(splitValue[0]))
+                  month.push(parseInt(splitValue[1]))
+                  year.push(parseInt(splitValue[2]))
+                  count.push(value.count)
+               }
+               if (index === arrayLength - 1) {
+                  var countLegth = count.length
+
+                  domainYMax = Math.max(...count)
+                  domainYMin = Math.min(...count)
+
+                  for (var i = 0; i < countLegth; i++) {
+                     gainedChartData.push({
+                        x: i + 1,
+                        y: count[i]
+                     })
+                  }
+               }
+
+               var formattedValues = {
+                  day,
+                  month,
+                  year,
+                  gainedChartData,
+                  domainY: { maxValue: domainYMax, minValue: domainYMin }
+               }
+               return formattedValues
+            })
+         }
          yield put(gainedChartStatisticSuccess(gainedFormatted[dates.length - 1]))
       } catch (error) {
          yield put(gainedChartStatisticFail(error))
@@ -275,6 +357,47 @@ export function* lostedFollowersStatistic() {
                var date = value.date
                var splitValue = date.split(".")
                if (index % 7 === 0 || index === 0) {
+                  day.push(parseInt(splitValue[0]))
+                  month.push(parseInt(splitValue[1]))
+                  year.push(parseInt(splitValue[2]))
+                  count.push(value.count)
+               }
+               if (index === arrayLength - 1) {
+                  var countLegth = count.length
+
+                  domainYMax = Math.max(...count)
+                  domainYMin = Math.min(...count)
+
+                  for (var i = 0; i < countLegth; i++) {
+                     lostedChartData.push({
+                        x: i + 1,
+                        y: count[i]
+                     })
+                  }
+               }
+
+               var formattedValues = {
+                  day,
+                  month,
+                  year,
+                  lostedChartData,
+                  domainY: { maxValue: domainYMax, minValue: domainYMin }
+               }
+               return formattedValues
+            })
+         }
+         if (serviceType === "yearly") {
+            var day = []
+            var month = []
+            var year = []
+            var count = []
+            var indexArray = []
+            var lostedChartData = []
+
+            lostedFormatted = dates.map((value, index) => {
+               var date = value.date
+               var splitValue = date.split(".")
+               if (index % 72 === 0 || index === 0) {
                   day.push(parseInt(splitValue[0]))
                   month.push(parseInt(splitValue[1]))
                   year.push(parseInt(splitValue[2]))

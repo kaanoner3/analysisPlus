@@ -170,7 +170,7 @@ class SettingScreen extends Component {
                   <TouchableOpacity
                      onPress={() => {
                         Linking.openURL(
-                           `mailto:info@analysisplusapp.com?subject=Database id:${
+                           `mailto:info@analysisplusapp.com?subject=id:${
                               this.props.dbID
                            } || instagram_ID:${
                               this.props.currentUserId

@@ -265,8 +265,11 @@ class StatisticChartScreen extends Component {
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
-                        //onPress={this.props.lostedChartStatisticRequest('yearly')}
-                        style={
+         onPress={() => {
+            this.setState({ lostedActiveChart: 2 })
+            this.props.lostedChartStatisticRequest("yearly")
+         }}
+style={
                            this.state.lostedActiveChart !== 2 ? styles.buttonStyle : styles.activeButtonStyle
                         }
                      >
@@ -469,7 +472,10 @@ class StatisticChartScreen extends Component {
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
-                        //onPress={this.props.gainedChartStatisticRequest('yearly')}
+                        onPress={() => {
+                           this.setState({ gainedActiveChart: 2 })
+                           this.props.gainedChartStatisticRequest("yearly")
+                        }}
                         style={
                            this.state.gainedActiveChart !== 2 ? styles.buttonStyle : styles.activeButtonStyle
                         }
@@ -542,7 +548,6 @@ class StatisticChartScreen extends Component {
                               }
                            }
                         ]}
-      
                      >
                         <VictoryArea
                            name="area"
@@ -558,12 +563,7 @@ class StatisticChartScreen extends Component {
                               duration: 1000
                            }}
                         />
-                        <VictoryScatter
-                           style={{ data: { fill: "#00FF72" } }}
-                           size={7}
-                           name="scatter"
-      
-                        />
+                        <VictoryScatter style={{ data: { fill: "#00FF72" } }} size={7} name="scatter" />
                      </VictoryGroup>
                      <VictoryAxis
                         dependentAxis
@@ -695,7 +695,10 @@ class StatisticChartScreen extends Component {
                         </Text>
                      </TouchableOpacity>
                      <TouchableOpacity
-                        // onPress={this.props.chartStatisticRequest('yearly')}
+                        onPress={() => {
+                           this.setState({ followersActiveChart: 2 })
+                           this.props.chartStatisticRequest("yearly")
+                        }}
                         style={
                            this.state.followersActiveChart !== 2
                               ? styles.buttonStyle
