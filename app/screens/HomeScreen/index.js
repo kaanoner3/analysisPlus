@@ -59,6 +59,7 @@ class HomeScreen extends Component {
    }
    componentWillMount() {
       OneSignal.addEventListener("opened", this.onOpened)
+     
       //api/user/update her uygulama acıldıgında atıyoz
       AsyncStorage.getItem("oneSignalId", (err, result) => {
          if (result) {
@@ -71,7 +72,9 @@ class HomeScreen extends Component {
                .catch(error => console.log(error))
          }
       })
+     
       this.props.getProfileDataRequest(this.props.token)
+      
       if (height === 812) {
          this.setState({ headerX: true })
       } else {

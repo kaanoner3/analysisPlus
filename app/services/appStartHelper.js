@@ -17,7 +17,7 @@ export function startHomeScreen(token) {
         selectedIcon: images.tabIndex1Active
       },
       {
-        screen: "PremiumServiceScreen",
+        screen: "InteractionScreen",
         label: languages.t("tab_engagement"),
         icon: images.tabIndex2,
         selectedIcon: images.tabIndex2Active

@@ -1,6 +1,4 @@
 import { actionChannel } from "redux-saga/effects"
-
-// ACTION TYPES
 export const USER_DATA_FETCH_REQUEST = "instagramUser/USER_DATA_FETCH_REQUEST"
 export const USER_DATA_FETCH_SUCCESS = "instagramUser/USER_DATA_FETCH_SUCCESS"
 export const USER_DATA_FETCH_FAIL = "instagramUser/USER_DATA_FETCH_FAIL"
@@ -25,7 +23,12 @@ export default function(state = initialState, action = {}) {
       }
       case USER_DATA_FETCH_SUCCESS: {
          const { data } = action
-         const sliceData = data.slice(0, 20)
+         const sliceData = []
+         if (Object.keys(data).length === 0 && data.constructor === Object) {
+         } else {
+            sliceData = data.slice(0, 20)
+         }
+
          if (data) {
             errorPage = false
          } else {

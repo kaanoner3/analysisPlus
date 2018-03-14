@@ -46,7 +46,8 @@ const testData = [
 class PremiumServiceScreen extends Component {
    static navigatorStyle = {
       statusBarTextColorSchemeSingleScreen: "light",
-      navBarHidden: true
+      navBarHidden: true,
+      tabBarHidden:true
    }
    constructor() {
       super()
@@ -186,7 +187,7 @@ class PremiumServiceScreen extends Component {
                />
             </View>
             <View style={{ flex: 1, paddingTop: 10 }}>
-               <ScrollView style={{ height: 120 }} horizontal={false}>
+               <ScrollView style={{ height: 120, }} horizontal={false}>
                   <Text style={styles.subscriptionInfoText}>
                      Payment will be chatged to iTunes Account at confirmation of purchase. Subscription
                      automatically renews unless auto-renew is turnet off at least 24-hours before the end of

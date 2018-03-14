@@ -5,7 +5,7 @@ const styles = {
       flex: 1,
       paddingLeft: 20,
       marginTop: 20,
-      backgroundColor: "#192A4F"
+      backgroundColor: "#192A4F",
    },
    typeButtonText: {
       backgroundColor: "transparent",

@@ -18,7 +18,6 @@ export function* getProfileData() {
          //         yield call(transactionHandler.handleUnfinishedTransactions)
          Crashlytics.setUserIdentifier(String(responseData.data.user.id))
          const currentStatistic = store.getState().profile.profileData.statistic
-         console.log("sagaaaa", currentStatistic.deleted_comments)
          if (
             currentStatistic.not_follow_me !== 0 ||
             currentStatistic.not_follow_by_me !== 0 ||

@@ -17,7 +17,13 @@ export default function(state = initialState, action = {}) {
          }
       case INTERACTION_DETAIL_SUCCESS: {
          const { data } = action
-         const sliceData = data.slice(0, 20)
+         const sliceData = []
+      
+         if (Object.keys(data).length === 0 && data.constructor === Object) {
+         } else {
+            sliceData = data.slice(0, 20)
+         }
+        
          if (data) {
             errorPage = false
          } else {

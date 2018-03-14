@@ -137,7 +137,7 @@ class SettingScreen extends Component {
                               const params = new FormData()
                               params.append("notification_blocked_me", this.state.blocks_me)
                               params.append("notification_losted_follower", this.state.unfollow_me)
-                              axios.post("api/user/settings-update", params).then(resp => console.log(resp))
+                              axios.post("api/user/settings-update", params).then()
                            })
                         }}
                         value={this.state.unfollow_me}
@@ -152,7 +152,7 @@ class SettingScreen extends Component {
                               const params = new FormData()
                               params.append("notification_blocked_me", this.state.blocks_me)
                               params.append("notification_losted_follower", this.state.unfollow_me)
-                              axios.post("api/user/settings-update", params).then(resp => console.log(resp))
+                              axios.post("api/user/settings-update", params).then()
                            })
                         }}
                         value={this.state.blocks_me}

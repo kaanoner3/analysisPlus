@@ -17,7 +17,6 @@ export default class App extends Component {
       console.disableYellowBox = true
       
       OneSignal.checkPermissions(resp => {
-         console.log("CHECK PERM", resp)
       })
       const onRegistered = notifData => {
          //console.log('Device had been registered for push notifications!', notifData);
