@@ -1,7 +1,5 @@
 const initialState = {
    errorMessage: null,
-   isFetching: null,
-   chartStatisticData: null,
 
    chartData: [],
    gainedData: [],

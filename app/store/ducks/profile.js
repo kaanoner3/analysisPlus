@@ -85,7 +85,13 @@ export default function(state = initialState, action = {}) {
          }
       }
       case PROFILE_DATA_DIFF_STATISTIC: {
-         if (state.profileData === null) {
+         if (
+            state.profileData.statistic.gained_followers === 0 &&
+            state.profileData.statistic.losted_followers === 0 &&
+            state.profileData.statistic.not_follow_by_me === 0 &&
+            state.profileData.statistic.not_follow_me === 0
+         ) {
+            console.log("ilk iiiiiif",state.profileData.statistic.not_follow_by_me)
             return {
                ...state,
                diff: {
@@ -101,6 +107,7 @@ export default function(state = initialState, action = {}) {
             }
          } else {
             const copyState = Object.assign({}, state.profileData)
+            console.log("dif reducer", state.profileData)
             return {
                ...state,
                diff: {
