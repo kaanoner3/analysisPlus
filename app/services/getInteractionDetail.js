@@ -16,6 +16,18 @@ async function getUsers(type) {
          this.response = axios.get("/api/user/most-interactionted-me")
          return this.response
       }
+      case "no_comments_or_likes": {
+         this.response = axios.get("/api/user/least-interactionted-me")
+         return this.response
+      }
+      case "least_comments_left": {
+         this.response = axios.get("/api/user/least-commented-me")
+         return this.response
+      }
+      case "least_likes_given": {
+         this.response = axios.get("/api/user/least-liked-me")
+         return this.response
+      }
       default:
          return null
    }
