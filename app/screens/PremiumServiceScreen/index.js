@@ -1,6 +1,6 @@
 import { images, strings } from "resources"
 import React, { Component } from "react"
-import { View, Image, TouchableOpacity, Text, Dimensions, ScrollView, FlatList } from "react-native"
+import { View, Image, TouchableOpacity, Text, Dimensions, ScrollView, FlatList, Alert } from "react-native"
 import { AnimatedHeader, PremiumButton } from "components"
 import styles from "./styles"
 import Swiper from "react-native-swiper"
@@ -47,7 +47,7 @@ class PremiumServiceScreen extends Component {
    static navigatorStyle = {
       statusBarTextColorSchemeSingleScreen: "light",
       navBarHidden: true,
-      tabBarHidden:true
+      tabBarHidden: true
    }
    constructor() {
       super()
@@ -70,6 +70,8 @@ class PremiumServiceScreen extends Component {
       const item = this.state.inAppItems[this.state.subscriptionIndex]
       if (item) {
          transactionHandler.buyItem(item, "subscription", this.props.navigators)
+      } else {
+         Alert.alert("Satın alma basarısız lütfen sonra tekrar deneyiniz.")
       }
    }
    renderPremiumSubscription({ item, index }) {
@@ -80,13 +82,12 @@ class PremiumServiceScreen extends Component {
                buttons[index] = premiumButton
             }}
             activeButton={index === this.state.subscriptionIndex ? true : false}
-            premiumCost={"₺ 14,90"}
-            premiumDuration="1 Week"
+            premiumCost={item.priceString}
+            premiumDuration={item.description.substring(0,7)}
             onClick={() => {
                buttons.forEach((button, buttonIndex) => {
                   if (buttonIndex === index) {
-                     this.setState({ subscriptionIndex: buttonIndex }, () => {
-                     })
+                     this.setState({ subscriptionIndex: buttonIndex }, () => {})
                   } else {
                      button.setState({ isActive: false })
                   }
@@ -144,17 +145,17 @@ class PremiumServiceScreen extends Component {
             >
                <View style={styles.swiperTextView}>
                   <Text style={styles.sliderTextStyle} numberOfLines={3} ellipsizeMode="clip">
-                  {languages.t("premium_swiper1")}
+                     {languages.t("premium_swiper1")}
                   </Text>
                </View>
                <View style={styles.swiperTextView}>
                   <Text style={styles.sliderTextStyle} numberOfLines={3} ellipsizeMode="clip">
-                  {languages.t("premium_swiper2")}
+                     {languages.t("premium_swiper2")}
                   </Text>
                </View>
                <View style={styles.swiperTextView}>
                   <Text style={styles.sliderTextStyle} numberOfLines={3} ellipsizeMode="clip">
-                  {languages.t("premium_swiper3")}
+                     {languages.t("premium_swiper3")}
                   </Text>
                </View>
             </Swiper>
@@ -162,6 +163,7 @@ class PremiumServiceScreen extends Component {
       )
    }
    render() {
+      console.log("reeenederr",this.state.inAppItems)
       return (
          <View style={styles.container}>
             <View style={styles.topContent}>
@@ -173,7 +175,8 @@ class PremiumServiceScreen extends Component {
                {this.renderSwiper()}
                <FlatList
                   style={{}}
-                  data={testData}
+                  data={this.state.inAppItems}
+                  //data={testData}
                   extraData={this.state}
                   scrollEnabled={false}
                   renderItem={this.renderPremiumSubscription}
@@ -187,7 +190,7 @@ class PremiumServiceScreen extends Component {
                />
             </View>
             <View style={{ flex: 1, paddingTop: 10 }}>
-               <ScrollView style={{ height: 120, }} horizontal={false}>
+               <ScrollView style={{ height: 120 }} horizontal={false}>
                   <Text style={styles.subscriptionInfoText}>
                      Payment will be chatged to iTunes Account at confirmation of purchase. Subscription
                      automatically renews unless auto-renew is turnet off at least 24-hours before the end of
