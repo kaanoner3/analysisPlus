@@ -83,7 +83,7 @@ class PremiumServiceScreen extends Component {
             }}
             activeButton={index === this.state.subscriptionIndex ? true : false}
             premiumCost={item.priceString}
-            premiumDuration={item.description.substring(0,7)}
+            premiumDuration={item.description.substring(0, 7)}
             onClick={() => {
                buttons.forEach((button, buttonIndex) => {
                   if (buttonIndex === index) {
@@ -163,34 +163,36 @@ class PremiumServiceScreen extends Component {
       )
    }
    render() {
-      console.log("reeenederr",this.state.inAppItems)
+      console.log("reeenederr", this.state.inAppItems)
       return (
          <View style={styles.container}>
-            <View style={styles.topContent}>
-               <Image
-                  style={this.state.headerX === false ? styles.logoStyle : styles.logoXStyle}
-                  source={images.premiumLogo}
-               />
-               <Text style={styles.premiumText}>PREMIUM</Text>
-               {this.renderSwiper()}
-               <FlatList
-                  style={{}}
-                  data={this.state.inAppItems}
-                  //data={testData}
-                  extraData={this.state}
-                  scrollEnabled={false}
-                  renderItem={this.renderPremiumSubscription}
-                  ListFooterComponent={
-                     <View style={{ flexDirection: "column", alignItems: "center" }}>
-                        <TouchableOpacity style={styles.purchaseButton} onPress={() => this.buyButtonPress()}>
-                           <Text style={styles.purchaseButtonText}>{languages.t("premium_buynow")}</Text>
-                        </TouchableOpacity>
-                     </View>
-                  }
-               />
-            </View>
-            <View style={{ flex: 1, paddingTop: 10 }}>
-               <ScrollView style={{ height: 120 }} horizontal={false}>
+            <ScrollView style={{}} horizontal={false}>
+               <View style={styles.topContent}>
+                  <Image
+                     style={this.state.headerX === false ? styles.logoStyle : styles.logoXStyle}
+                     source={images.premiumLogo}
+                  />
+                  <Text style={styles.premiumText}>PREMIUM</Text>
+                  {this.renderSwiper()}
+                  <FlatList
+                     style={{}}
+                     data={this.state.inAppItems}
+                     extraData={this.state}
+                     scrollEnabled={false}
+                     renderItem={this.renderPremiumSubscription}
+                     ListFooterComponent={
+                        <View style={{ flexDirection: "column", alignItems: "center" }}>
+                           <TouchableOpacity
+                              style={styles.purchaseButton}
+                              onPress={() => this.buyButtonPress()}
+                           >
+                              <Text style={styles.purchaseButtonText}>{languages.t("premium_buynow")}</Text>
+                           </TouchableOpacity>
+                        </View>
+                     }
+                  />
+               </View>
+               <View style={{ flex: 1, paddingTop: 10 }}>
                   <Text style={styles.subscriptionInfoText}>
                      Payment will be chatged to iTunes Account at confirmation of purchase. Subscription
                      automatically renews unless auto-renew is turnet off at least 24-hours before the end of
@@ -201,8 +203,8 @@ class PremiumServiceScreen extends Component {
                      when the user purchases a subscription to that publication, where applicable. Terms of
                      Use .
                   </Text>
-               </ScrollView>
-            </View>
+               </View>
+            </ScrollView>
          </View>
       )
    }
