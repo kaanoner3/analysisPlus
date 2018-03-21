@@ -35,8 +35,8 @@ export async function handleUnfinishedTransactions(navigator) {
 
                switch (transaction.state) {
                   case "purchased":
-                     // InAppUtils.finishPurchase(transaction.identifier, (error) => { });
-                     //Crashlytics.recordError("Unfinished transaction detected!")
+                     InAppUtils.finishPurchase(transaction.identifier, error => {})
+                     Crashlytics.recordError("Unfinished transaction detected!")
 
                      serviceCalls.push(
                         validatePurchase(transaction.receipt, transaction.productIdentifier, "unfinished")
@@ -45,28 +45,26 @@ export async function handleUnfinishedTransactions(navigator) {
                               InAppUtils.finishPurchase(transaction.identifier, error => {
                                  if (!error) {
                                     console.log("Transaction finished without errors")
-                                    //  Crashlytics.recordError("Unfinished transaction validated!")
+                                    Crashlytics.recordError("Unfinished transaction validated!")
                                  } else {
-                                    //  Crashlytics.recordError("Unfinished transaction validation failed.")
+                                    Crashlytics.recordError("Unfinished transaction validation failed.")
                                  }
                               })
                            })
                            .catch(error => {
                               if (error.response) {
-                                 /*if (error.response.status == 500) {
-                        InAppUtils.finishPurchase(transaction.identifier, error => {
-                          if (!error) {
-                            console.log('Transaction finished without errors');
-                            Crashlytics.recordError(
-                              'Unfinished transaction validated! (500)',
-                            );
-                          } else {
-                            Crashlytics.recordError(
-                              'Unfinished transaction validation failed. (500)',
-                            );
-                          }
-                        });
-                      }*/
+                                 if (error.response.status == 500) {
+                                    InAppUtils.finishPurchase(transaction.identifier, error => {
+                                       if (!error) {
+                                          console.log("Transaction finished without errors")
+                                          Crashlytics.recordError("Unfinished transaction validated! (500)")
+                                       } else {
+                                          Crashlytics.recordError(
+                                             "Unfinished transaction validation failed. (500)"
+                                          )
+                                       }
+                                    })
+                                 }
                               }
                            })
                      )
@@ -97,6 +95,7 @@ export function buyItem(item, type, navigator) {
                if (validResponse.status === 200) {
                   InAppUtils.finishPurchase(validResponse.transactionIdentifier, error => {
                      if (!error) {
+                        //alert koyulabilir
                         console.log("transaction finished without errors")
                      } else {
                         console.log("finish", error)

@@ -1,6 +1,16 @@
 import { images, strings } from "resources"
 import React, { Component } from "react"
-import { View, Image, TouchableOpacity, Text, Dimensions, ScrollView, FlatList, Alert } from "react-native"
+import {
+   View,
+   Image,
+   TouchableOpacity,
+   Text,
+   Dimensions,
+   ScrollView,
+   FlatList,
+   Alert,
+   ActivityIndicator
+} from "react-native"
 import { AnimatedHeader, PremiumButton } from "components"
 import styles from "./styles"
 import Swiper from "react-native-swiper"
@@ -75,26 +85,38 @@ class PremiumServiceScreen extends Component {
       }
    }
    renderPremiumSubscription({ item, index }) {
-      return (
-         <PremiumButton
-            key={index}
-            ref={premiumButton => {
-               buttons[index] = premiumButton
-            }}
-            activeButton={index === this.state.subscriptionIndex ? true : false}
-            premiumCost={item.priceString}
-            premiumDuration={item.description.substring(0, 7)}
-            onClick={() => {
-               buttons.forEach((button, buttonIndex) => {
-                  if (buttonIndex === index) {
-                     this.setState({ subscriptionIndex: buttonIndex }, () => {})
-                  } else {
-                     button.setState({ isActive: false })
-                  }
-               })
-            }}
-         />
-      )
+      if (this.state.loading === false) {
+         return (
+            <PremiumButton
+               key={index}
+               ref={premiumButton => {
+                  buttons[index] = premiumButton
+               }}
+               activeButton={index === this.state.subscriptionIndex ? true : false}
+               premiumCost={item.priceString}
+               premiumDuration={item.description.substring(0, 7)}
+               onClick={() => {
+                  buttons.forEach((button, buttonIndex) => {
+                     if (buttonIndex === index) {
+                        this.setState({ subscriptionIndex: buttonIndex }, () => {})
+                     } else {
+                        button.setState({ isActive: false })
+                     }
+                  })
+               }}
+            />
+         )
+      } else {
+         return (
+            <View style={{ flex: 1, backgroundColor: "#152341", alignItems: "center" }}>
+               <ActivityIndicator
+                  style={{ top: Dimensions.get("window").height / 2 }}
+                  color="white"
+                  size="large"
+               />
+            </View>
+         )
+      }
    }
    componentDidMount() {
       transactionHandler.handleUnfinishedTransactions(this.props.navigator)
@@ -163,7 +185,7 @@ class PremiumServiceScreen extends Component {
       )
    }
    render() {
-      console.log("reeenederr", this.state.inAppItems)
+      console.log("reeenederr", this.state.inAppItems, this.state.loading)
       return (
          <View style={styles.container}>
             <ScrollView style={{}} horizontal={false}>
