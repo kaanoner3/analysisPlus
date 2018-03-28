@@ -18,12 +18,12 @@ export default function(state = initialState, action = {}) {
       case INTERACTION_DETAIL_SUCCESS: {
          const { data } = action
          const sliceData = []
-      
+
          if (Object.keys(data).length === 0 && data.constructor === Object) {
          } else {
             sliceData = data.slice(0, 20)
          }
-        
+
          if (data) {
             errorPage = false
          } else {
@@ -50,11 +50,16 @@ export default function(state = initialState, action = {}) {
       }
       case INTERACTION_DETAIL_FAIL: {
          const { errorMessage } = action
-         if (errorMessage.response.status !== 200) {
-            errorPage = true
+         if (errorMessage.response !== undefined) {
+            if (errorMessage.response.status !== 200) {
+               errorPage = true
+            } else {
+               errorPage = false
+            }
          } else {
-            errorPage = false
+            errorPage = true
          }
+
          return {
             ...state,
             errorMessage: errorMessage,

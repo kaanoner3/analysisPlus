@@ -55,11 +55,16 @@ export default function(state = initialState, action = {}) {
       }
       case USER_DATA_FETCH_FAIL: {
          const { error } = action
-         if (error.response.status !== 200) {
-            errorPage = true
+         if (error.response !== undefined) {
+            if (error.response.status !== 200) {
+               errorPage = true
+            } else {
+               errorPage = false
+            }
          } else {
-            errorPage = false
+            errorPage = true
          }
+
          return {
             ...state,
             errorMessage: action.errorMessage,
