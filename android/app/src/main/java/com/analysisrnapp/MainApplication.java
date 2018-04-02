@@ -3,6 +3,7 @@ package com.analysisrnapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.smixx.fabric.FabricPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -32,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFirebasePackage(),
             new BlurViewPackage(),
             new FabricPackage(),
             new RNDeviceInfo(),

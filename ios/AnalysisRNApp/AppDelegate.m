@@ -14,6 +14,7 @@
 #import <React/RCTLinkingManager.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+@import Firebase;
 
 @implementation AppDelegate
 @synthesize oneSignal = _oneSignal;
@@ -21,6 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
+  [FIRApp configure];
 
   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
                                                          appId:@"9a9c1f0b-9d8c-4a7c-90d0-f6f2a20a93b9"

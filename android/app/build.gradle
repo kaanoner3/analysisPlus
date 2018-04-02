@@ -137,6 +137,9 @@ android {
 }
 
 dependencies {
+    compile(project(':react-native-firebase')) {
+        transitive = false
+    }
     compile project(':react-native-blur')
     compile project(':react-native-fabric')
     compile project(':react-native-device-info')

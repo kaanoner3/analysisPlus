@@ -17,6 +17,7 @@
       "react-native-cookie": "^0.2.0",
       "react-native-device-info": "^0.17.1",
       "react-native-fabric": "^0.5.1",
+      "react-native-firebase": "^3.3.1",
       "react-native-i18n": "^2.0.12",
       "react-native-in-app-utils": "https://github.com/yusufyildirim/react-native-in-app-utils/tarball/master",
       "react-native-instagram-login": "^1.0.4",
