@@ -66,5 +66,6 @@ export default {
    noti_report: "Report a Problem",
    noti_term: "Term of Use",
 
-   upgradePremium: "UPGRADE PREMIUM"
+   upgradePremium: "UPGRADE PREMIUM",
+   error_page_text: "An unexpected error has occurred."
 }

@@ -67,5 +67,6 @@ export default {
    noti_report: "Problem Bildir",
    noti_term: "Term of Use",
 
-   upgradePremium: "PREMIUMA'A YUKSELT"
+   upgradePremium: "PREMIUMA'A YUKSELT",
+   error_page_text: "Beklenmedik bir hata oluştu."
 }

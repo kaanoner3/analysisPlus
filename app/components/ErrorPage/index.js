@@ -13,7 +13,7 @@ class ErrorPage extends Component {
          <View style={styles.container} >
             <Image style={styles.image} source={images.errorImage} />
             <Text style={styles.textOpps}>Oops</Text>
-            <Text style={styles.errorText}>beklenmedik bir hata olustu</Text>
+            <Text style={styles.errorText}>{languages.t("error_page_text")}</Text>
          </View>
       )
    }
