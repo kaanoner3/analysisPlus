@@ -17,7 +17,6 @@
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -50,6 +49,7 @@
 		8C38206A204D33E80064843B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C382068204D33E80064843B /* Crashlytics.framework */; };
 		8C3820BE204FFF400064843B /* libInAppUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C38208C204FFF2A0064843B /* libInAppUtils.a */; };
 		8C3FBBAE20725DEA006968E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3FBB7520725DEA006968E8 /* GoogleService-Info.plist */; };
+		8C3FBCC520765B57006968E8 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C3FBCC420765B57006968E8 /* Images-2.xcassets */; };
 		8CDE3E6C203EB93D00B6A811 /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDE3E6B203EB91900B6A811 /* libRCTOneSignal.a */; };
 		8CDE3E76203EBA0000B6A811 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE3E75203EBA0000B6A811 /* NotificationService.m */; };
 		8CDE3E7A203EBA0000B6A811 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8CDE3E72203EBA0000B6A811 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -520,7 +520,6 @@
 		13B07F961A680F5B00A75B9A /* AnalysisRNApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnalysisRNApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = AnalysisRNApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = AnalysisRNApp/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = AnalysisRNApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AnalysisRNApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AnalysisRNApp/main.m; sourceTree = "<group>"; };
@@ -551,6 +550,7 @@
 		8C382068204D33E80064843B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Crashlytics/Crashlytics.framework; sourceTree = "<group>"; };
 		8C382082204FFF2A0064843B /* InAppUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InAppUtils.xcodeproj; path = "../node_modules/react-native-in-app-utils/InAppUtils.xcodeproj"; sourceTree = "<group>"; };
 		8C3FBB7520725DEA006968E8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8C3FBCC420765B57006968E8 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "AnalysisRNApp/Images-2.xcassets"; sourceTree = "<group>"; };
 		8CDE3E6D203EB95300B6A811 /* AnalysisRNApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = AnalysisRNApp.entitlements; path = AnalysisRNApp/AnalysisRNApp.entitlements; sourceTree = "<group>"; };
 		8CDE3E72203EBA0000B6A811 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CDE3E74203EBA0000B6A811 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
@@ -746,8 +746,8 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				8C3FBB7520725DEA006968E8 /* GoogleService-Info.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				8C3FBCC420765B57006968E8 /* Images-2.xcassets */,
 			);
 			name = AnalysisRNApp;
 			sourceTree = "<group>";
@@ -1733,7 +1733,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				8C3FBCC520765B57006968E8 /* Images-2.xcassets in Resources */,
 				942DF53339DE48E7A3DDB32C /* lineto-circular-pro-bold.ttf in Resources */,
 				778E2974C0594F51AC4574EF /* lineto-circular-pro-book.ttf in Resources */,
 				C00DDEDDD02C4859884EF301 /* lineto-circular-pro-bookItalic.ttf in Resources */,
@@ -1921,18 +1921,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13B07FB21A68108700A75B9A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = AnalysisRNApp;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2024,6 +2012,7 @@
 			baseConfigurationReference = 1E1282828F2B4668B6EB1A4E /* Pods-AnalysisRNApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = AnalysisRNApp/AnalysisRNApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2069,6 +2058,7 @@
 			baseConfigurationReference = 1D78C884FF81B2551799BF83 /* Pods-AnalysisRNApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = AnalysisRNApp/AnalysisRNApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
