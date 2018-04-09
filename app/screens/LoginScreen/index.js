@@ -71,11 +71,16 @@ class LoginScreen extends Component {
       this.renderBottomBackground = this.renderBottomBackground.bind(this)
       this.handleLoginSucces = this.handleLoginSucces.bind(this)
 
+      this.params = new FormData()
+
+
       //    this.animateEntrance = this.animateEntrance.bind(this);
       //    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
    }
 
    componentWillMount() {
+
+      
       if (screenHeight === 812) {
          this.validHeight = screenHeight / 2
          this.setState({ headerX: true })
@@ -88,6 +93,8 @@ class LoginScreen extends Component {
    handleLoginSucces({ token }) {}
    loginButtonPress() {
       store.dispatch(AppReducer.switchToUser())
+
+      
    }
 
    renderBottomBackground() {
@@ -142,10 +149,10 @@ class LoginScreen extends Component {
                            flexDirection: "column",
                            alignSelf: "center",
                            paddingHorizontal: 20,
-                           width: screenWidth-40
+                           width: screenWidth - 40
                         }}
                      >
-                        <ActivityIndicator style={{marginTop:12}} color="#059ED9" size="large" />
+                        <ActivityIndicator style={{ marginTop: 12 }} color="#059ED9" size="large" />
                      </View>
                   )}
                </TouchableOpacity>
